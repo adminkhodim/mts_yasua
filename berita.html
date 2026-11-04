@@ -1606,7 +1606,7 @@
 
       // Update URL Hash
       if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, null, `#${data.slug || data.id}`);
+        window.history.replaceState(null, null, `/berita/${data.slug || data.id}`);
       }
 
       // Scroll ke atas halaman membaca
@@ -1626,7 +1626,7 @@
 
       // Bersihkan URL Hash
       if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.pathname + window.location.search);
+        window.history.replaceState(null, null, '/berita');
       }
 
       // Scroll kembali ke atas daftar berita
@@ -1647,7 +1647,8 @@
     function shareDetailWhatsApp() {
       const item = newsMasterList.find(n => n.id === currentOpenNewsId);
       const title = item ? item.judul : 'Berita MTs YASUA Pilangwetan';
-      const shareUrl = `${window.location.origin}${window.location.pathname}#${currentOpenNewsId || ''}`;
+      const slug = (item && item.slug) ? item.slug : (currentOpenNewsId || '');
+      const shareUrl = `${window.location.origin}/berita/${slug}`;
       const message = `*${title}*\n\nBaca kabar resmi selengkapnya dari MTs YASUA Pilangwetan:\n${shareUrl}`;
       const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
       window.open(waUrl, '_blank');
@@ -1655,7 +1656,9 @@
 
     // Salin Tautan Berita
     function copyDetailLink() {
-      const shareUrl = `${window.location.origin}${window.location.pathname}#${currentOpenNewsId || ''}`;
+      const item = newsMasterList.find(n => n.id === currentOpenNewsId);
+      const slug = (item && item.slug) ? item.slug : (currentOpenNewsId || '');
+      const shareUrl = `${window.location.origin}/berita/${slug}`;
       const copyBtnText = document.getElementById('detailCopyLinkText');
       
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1707,10 +1710,15 @@
 
     // Cek URL Query / Hash saat halaman dimuat (Deep Link Auto-Open langsung ke mode baca artikel penuh)
     function checkUrlHash() {
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      let targetFromPath = null;
+      if (pathSegments.length >= 2 && pathSegments[0] === 'berita') {
+        targetFromPath = decodeURIComponent(pathSegments[1]);
+      }
       const params = new URLSearchParams(window.location.search);
       const queryTarget = params.get('slug') || params.get('id');
       const hash = window.location.hash.replace('#', '').trim();
-      const target = queryTarget || hash;
+      const target = targetFromPath || queryTarget || hash;
 
       if (target) {
         const found = newsMasterList.find(n => 

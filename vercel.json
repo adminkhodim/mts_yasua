@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/berita/:slug+",
+      "destination": "/api/og?slug=:slug"
+    },
+    {
       "source": "/app/:slug*",
       "destination": "/app.html"
     },
