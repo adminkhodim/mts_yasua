@@ -1367,16 +1367,17 @@
 
       function renderDynamicTeachers(teachers) {
         // 1. Sinkronisasi Profil Pimpinan / Kepala Madrasah
-        const pimpinan = teachers.find((t) => t.kategori === 'pimpinan');
+        const pimpinan = teachers.find((t) => String(t.kategori || '').toLowerCase() === 'pimpinan');
         if (pimpinan) {
           const kepalaImg = document.querySelector('#kepalaMadrasahCard img');
           const kepalaTagNama = document.getElementById('kepalaMadrasahTagNama');
           const kepalaNama = document.getElementById('kepalaMadrasahNama');
           const kepalaDeskripsi = document.getElementById('kepalaMadrasahDeskripsi');
+          const namaPimpinan = pimpinan.nama || pimpinan.nama_lengkap;
 
           if (kepalaImg && pimpinan.foto_url) kepalaImg.src = pimpinan.foto_url;
-          if (kepalaTagNama && pimpinan.nama_lengkap) kepalaTagNama.textContent = pimpinan.nama_lengkap;
-          if (kepalaNama && pimpinan.nama_lengkap) kepalaNama.textContent = pimpinan.nama_lengkap;
+          if (kepalaTagNama && namaPimpinan) kepalaTagNama.textContent = namaPimpinan;
+          if (kepalaNama && namaPimpinan) kepalaNama.textContent = namaPimpinan;
           if (kepalaDeskripsi && pimpinan.deskripsi) kepalaDeskripsi.textContent = pimpinan.deskripsi;
         }
 
@@ -1384,9 +1385,9 @@
         const grid = document.getElementById('teachersGridContainer');
         if (!grid) return;
 
-        // Hanya tampilkan guru yang aktif
+        // Hanya tampilkan guru yang aktif dan bukan pimpinan
         const activeTeachers = teachers.filter(
-          (t) => t.kategori !== 'pimpinan' && (t.status_aktif === true || String(t.status_aktif).toLowerCase() === 'true')
+          (t) => String(t.kategori || '').toLowerCase() !== 'pimpinan' && (t.status_aktif === true || String(t.status_aktif).toLowerCase() === 'true')
         );
 
         if (activeTeachers.length === 0) return;
@@ -1396,7 +1397,9 @@
 
         grid.innerHTML = activeTeachers
           .map((t) => {
-            const bidang = t.badge_bidang || 'Pendidik';
+            const namaGuru = t.nama || t.nama_lengkap || 'Pendidik MTs YASUA';
+            const mapelGuru = t.mapel || t.mata_pelajaran || '';
+            const bidang = t.badge || t.badge_bidang || 'Pendidik';
             let badgeColor = 'bg-brand-primary/90';
             if (bidang.includes('Bahasa')) badgeColor = 'bg-blue-600/90';
             else if (bidang.includes('TIK') || bidang.includes('Digital')) badgeColor = 'bg-emerald-700/90';
@@ -1405,12 +1408,14 @@
             else if (bidang.includes('Sosial') || bidang.includes('Keagamaan')) badgeColor = 'bg-purple-600/90';
 
             const foto = t.foto_url || 'guru_1.webp';
+            const jabatan = t.jabatan || (mapelGuru ? 'Guru ' + mapelGuru : 'Guru Bidang Studi');
+            const pendidikan = t.pendidikan || t.pendidikan_terakhir || 'Sarjana Pendidikan';
 
             return `
               <div class="bg-white rounded-3xl p-5 border border-emerald-100 shadow-md hover-lift flex flex-col justify-between group">
                 <div>
                   <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-4 relative">
-                    <img src="${foto}" alt="${t.nama_lengkap}"
+                    <img src="${foto}" alt="${namaGuru}"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy" onerror="this.src='logo.png'">
                     <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeColor} text-white text-[10px] font-bold backdrop-blur-xs">
@@ -1418,10 +1423,10 @@
                     </span>
                   </div>
                   <h3 class="font-extrabold text-slate-900 text-base leading-snug group-hover:text-brand-primary transition-colors">
-                    ${t.nama_lengkap}
+                    ${namaGuru}
                   </h3>
                   <p class="text-xs font-bold text-amber-700 mt-1">
-                    ${t.jabatan || ('Guru ' + (t.mata_pelajaran || ''))}
+                    ${jabatan}
                   </p>
                   <p class="text-xs text-slate-500 mt-2 leading-relaxed">
                     ${t.deskripsi || ''}
@@ -1429,7 +1434,7 @@
                 </div>
                 <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
                   <span class="flex items-center gap-1 font-semibold text-emerald-800">
-                    <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-primary"></i> ${t.pendidikan_terakhir || 'Sarjana Pendidikan'}
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-primary"></i> ${pendidikan}
                   </span>
                   <span class="bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded font-bold">Aktif Mengajar</span>
                 </div>
