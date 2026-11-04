@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile App Safe-Area & Base Reset */
+* {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  background-color: #F4FBF7;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom, 16px));
+  min-height: 100vh;
+}
+
+.arabic-font {
+  font-family: 'Amiri', serif;
+}
+
+/* Pull to refresh & overscroll prevention */
+html, body {
+  overscroll-behavior-y: contain;
+}

@@ -23,76 +23,19 @@
   <meta name="application-name" content="MTs YASUA">
   <meta name="format-detection" content="telephone=no">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Tailwind Theme Configuration -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#033324',
-              primary: '#065F46',
-              medium: '#0D7B58',
-              light: '#10B981',
-              pale: '#ECFDF5',
-              surface: '#F4FBF7',
-              accent: '#F59E0B',
-              accentHover: '#D97706',
-              gold: '#FBBF24'
-            }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-            arabic: ['Amiri', 'serif']
-          },
-          boxShadow: {
-            'glow-green': '0 10px 30px -10px rgba(6, 95, 70, 0.35)',
-            'glow-gold': '0 10px 25px -5px rgba(245, 158, 11, 0.4)'
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Compiled Production Tailwind CSS -->
+  <link rel="stylesheet" href="app.min.css">
 
   <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Search & PWA Controller -->
   <script src="search.js" defer></script>
   <script src="pwa.js" defer></script>
-
-  <style>
-    /* Mobile App Safe-Area & Base Reset */
-    * {
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-
-    body {
-      background-color: #F4FBF7;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      padding-bottom: calc(5rem + env(safe-area-inset-bottom, 16px));
-      min-height: 100vh;
-    }
-
-    .arabic-font {
-      font-family: 'Amiri', serif;
-    }
-
-    /* Pull to refresh & overscroll prevention */
-    html, body {
-      overscroll-behavior-y: contain;
-    }
-  </style>
 </head>
 
 <body class="is-pwa-standalone text-slate-800">
@@ -533,7 +476,7 @@
         <!-- 1. Navigasi Bulan -->
         <div class="flex items-center justify-between bg-slate-50 p-1.5 rounded-xl border border-slate-200/70">
           <button onclick="changeCalMonth(-1)" class="w-8 h-8 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-primary rounded-lg flex items-center justify-center shadow-2xs transition active:scale-90 border border-slate-200/60 cursor-pointer">
-            <i class="fa-solid fa-chevron-left text-xs"></i>
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
           </button>
           <div class="text-center px-2">
             <span id="cal-month-year-text" class="text-sm font-black text-brand-dark block leading-tight">
@@ -544,7 +487,7 @@
             </span>
           </div>
           <button onclick="changeCalMonth(1)" class="w-8 h-8 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-primary rounded-lg flex items-center justify-center shadow-2xs transition active:scale-90 border border-slate-200/60 cursor-pointer">
-            <i class="fa-solid fa-chevron-right text-xs"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
           </button>
         </div>
 
@@ -555,7 +498,7 @@
               Hari Ini
             </span>
             <div id="selected-date-tag" class="bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10 text-[9.5px] font-semibold text-emerald-200 truncate max-w-[75%]">
-              <i class="fa-solid fa-book-quran text-amber-300 mr-1"></i> Kegiatan Normal
+              <i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> Kegiatan Normal
             </div>
           </div>
           <div id="selected-date-title" class="text-sm font-extrabold text-white tracking-wide leading-tight pt-0.5">
@@ -2589,15 +2532,15 @@
 
       if (tag) {
         if (holiday) {
-          tag.innerHTML = '<i class="fa-solid fa-moon text-amber-300 mr-1"></i> ' + holiday;
+          tag.innerHTML = '<i data-lucide="moon" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> ' + holiday; if (window.lucide) window.lucide.createIcons();
         } else if (agenda) {
-          tag.innerHTML = '<i class="fa-solid fa-bell text-amber-300 mr-1"></i> ' + agenda.title;
+          tag.innerHTML = '<i data-lucide="bell" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> ' + agenda.title; if (window.lucide) window.lucide.createIcons();
         } else if (dayOfWeek === 1 || dayOfWeek === 4) {
-          tag.innerHTML = '<i class="fa-solid fa-star text-emerald-300 mr-1"></i> Sunnah Puasa Senin-Kamis';
+          tag.innerHTML = '<i data-lucide="star" class="w-3.5 h-3.5 text-emerald-300 mr-1 inline"></i> Sunnah Puasa Senin-Kamis'; if (window.lucide) window.lucide.createIcons();
         } else if ([13, 14, 15].includes(hijri.day)) {
-          tag.innerHTML = '<i class="fa-solid fa-star text-emerald-300 mr-1"></i> Sunnah Puasa Ayyamul Bidh';
+          tag.innerHTML = '<i data-lucide="star" class="w-3.5 h-3.5 text-emerald-300 mr-1 inline"></i> Sunnah Puasa Ayyamul Bidh'; if (window.lucide) window.lucide.createIcons();
         } else {
-          tag.innerHTML = '<i class="fa-solid fa-book-quran text-amber-300 mr-1"></i> Kegiatan KBM Normal';
+          tag.innerHTML = '<i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> Kegiatan KBM Normal'; if (window.lucide) window.lucide.createIcons();
         }
       }
     }
@@ -2614,11 +2557,12 @@
         return;
       }
 
+      setTimeout(() => { if (window.lucide) window.lucide.createIcons(); }, 10);
       container.innerHTML = events.map(e => {
         const isPhbi = e.type === 'phbi';
         return '<div class="p-2.5 rounded-xl border ' + (isPhbi ? 'bg-amber-50/60 border-amber-200/80 text-amber-950' : 'bg-emerald-50/60 border-emerald-200/80 text-emerald-950') + ' flex items-start gap-2.5">' +
           '<div class="w-7 h-7 rounded-lg ' + (isPhbi ? 'bg-amber-200 text-amber-800' : 'bg-emerald-200 text-emerald-800') + ' flex items-center justify-center font-bold text-xs shrink-0">' +
-            '<i class="fa-solid ' + (isPhbi ? 'fa-moon' : 'fa-calendar-check') + '"></i>' +
+            '<i data-lucide="' + (isPhbi ? 'moon' : 'calendar-check') + '" class="w-3.5 h-3.5"></i>' +
           '</div>' +
           '<div class="min-w-0 flex-1">' +
             '<div class="flex items-center justify-between gap-1">' +
