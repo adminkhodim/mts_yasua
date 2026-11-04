@@ -570,38 +570,28 @@
       <!-- VIEW 1: DAFTAR BERITA & PENGUMUMAN (LIST VIEW) -->
       <div id="newsListView" class="space-y-12">
         <!-- FEATURED NEWS (BERITA UTAMA BESAR) -->
-        <section id="featuredNewsSection" class="bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer" onclick="readNewsArticle('pts')">
-          <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
-            <div class="lg:col-span-7 relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full bg-slate-100 overflow-hidden">
-              <img src="poster_pts_berita.webp" alt="Poster Penilaian Tengah Semester PTS MTs YASUA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-              <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-600 text-white font-black text-xs shadow-md">
-                <i data-lucide="bell" class="w-3.5 h-3.5"></i> PENGUMUMAN UTAMA
-              </span>
-              <span class="absolute top-4 right-4 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-black/60 text-white font-medium text-xs backdrop-blur-md">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-gold"></i> 5 - 10 Oktober 2026
-              </span>
-            </div>
-            <div class="lg:col-span-5 p-6 sm:p-10 space-y-4">
-              <div class="flex items-center gap-2 text-xs font-bold text-amber-700">
-                <i data-lucide="clock" class="w-4 h-4"></i>
-                <span>Semester Ganjil TA 2026/2027</span>
-              </div>
-              <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-brand-dark group-hover:text-brand-primary transition-colors leading-snug">
-                Penilaian Tengah Semester (PTS) Gasal MTs YASUA Pilangwetan
+        <!-- EDITORIAL TRI-COLUMN HERO CONTAINER (ALA PORTAL BERITA PERS NU) -->
+        <section id="triColumnHeroSection" class="bg-white rounded-3xl p-4 sm:p-6 lg:p-7 border border-emerald-100 shadow-md space-y-5">
+          <div class="flex items-center justify-between pb-3.5 border-b border-emerald-100">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse"></span>
+              <h2 class="text-xs sm:text-sm font-black uppercase tracking-wider text-brand-dark flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-brand-gold"></i>
+                <span>Sorotan Utama &amp; Kabar Pilihan Madrasah</span>
               </h2>
-              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
-                Diberitahukan kepada seluruh siswa-siswi kelas VII, VIII, dan IX serta Bapak/Ibu Wali Murid bahwa pelaksanaan PTS terpadu dilaksanakan berbasis asesmen tertulis dan digital komputer.
-              </p>
-              <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span class="text-xs font-bold text-brand-primary flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-                  <span>Baca Selengkapnya</span>
-                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </span>
-                <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
-                  Akademik
-                </span>
-              </div>
             </div>
+            <span class="text-[11px] text-slate-400 font-medium hidden sm:inline">Rubrik Editorial &amp; Warta Resmi</span>
+          </div>
+
+          <div id="triColumnHeroGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+            <!-- Kolom Kiri: 2 Berita Sub-Headline (Desktop: 3 Kolom Grid, Mobile: Order 2) -->
+            <div id="triHeroLeft" class="lg:col-span-3 space-y-4 order-2 lg:order-1 flex flex-col justify-between"></div>
+
+            <!-- Kolom Tengah: Berita Utama Besar / Center Headline (Desktop: 6 Kolom Grid, Mobile: Order 1) -->
+            <div id="triHeroCenter" class="lg:col-span-6 order-1 lg:order-2 flex flex-col justify-between"></div>
+
+            <!-- Kolom Kanan: 2 Berita Sub-Headline (Desktop: 3 Kolom Grid, Mobile: Order 3) -->
+            <div id="triHeroRight" class="lg:col-span-3 space-y-4 order-3 flex flex-col justify-between"></div>
           </div>
         </section>
 
@@ -613,7 +603,7 @@
             <div>
               <h3 class="text-lg sm:text-2xl font-black text-brand-dark flex items-center gap-2">
                 <i data-lucide="newspaper" class="w-6 h-6 text-brand-primary"></i>
-                <span>Daftar Artikel &amp; Pengumuman Terkini</span>
+                <span>Arsip Kabar &amp; Pengumuman Sekolah</span>
               </h3>
               <p class="text-xs text-slate-500 mt-1">Gunakan pencarian atau filter kategori untuk menemukan informasi yang Anda butuhkan.</p>
             </div>
@@ -816,6 +806,10 @@
               <span class="inline-flex items-center gap-1.5 text-xs text-slate-600 font-semibold bg-slate-50 border border-slate-200/70 px-3 py-1 rounded-full">
                 <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-600"></i>
                 <span id="detailNewsReadTime">2 menit baca</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs text-slate-600 font-semibold bg-slate-50 border border-slate-200/70 px-3 py-1 rounded-full">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span id="detailNewsViews">1.250 pembaca</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs text-emerald-800 font-bold bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full sm:ml-auto">
                 <i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-primary"></i>
@@ -1111,6 +1105,7 @@
         is_featured: true,
         status_aktif: true,
         read_time: '2 menit baca',
+        views: 2450,
         konten: `
           <p class="mb-4">Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
           <p class="mb-4">Diberitahukan kepada seluruh siswa-siswi dan Bapak/Ibu Wali Murid MTs YASUA Pilangwetan bahwa kegiatan <strong>Penilaian Tengah Semester (PTS) Gasal Tahun Ajaran 2026/2027</strong> akan diselenggarakan secara serentak dan terpadu pada:</p>
@@ -1138,6 +1133,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '2 menit baca',
+        views: 3120,
         konten: `
           <p class="mb-4">Alhamdulillahirabbil 'alamin, kabar membanggakan kembali hadir mengharumkan nama almamater MTs YASUA tercinta. Delegasi siswa madrasah berhasil mengukir prestasi gemilang dengan meraih <strong>Juara 1 Lomba Olimpiade Sains Terapan & Robotika Madrasah Tingkat Provinsi Jawa Tengah</strong>.</p>
           <p class="mb-4">Prestasi membanggakan ini diraih berkat dedikasi, bimbingan intensif bapak/ibu guru pembina ekstrakurikuler sains, serta ketekunan para siswa dalam menguasai perancangan sensor cerdas dan pemrograman mikrokontroler.</p>
@@ -1159,6 +1155,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '3 menit baca',
+        views: 1890,
         konten: `
           <p class="mb-4">MTs YASUA Pilangwetan sukses menggelar kegiatan <strong>Workshop Parenting Akbar dan Silaturahmi Wali Siswa</strong> di Aula Madrasah yang dihadiri oleh ratusan orang tua/wali murid dari kelas VII, VIII, dan IX.</p>
           <p class="mb-4">Mengangkat tema <em>“Membina Karakter Islami di Era Serba Digital”</em>, narasumber membagikan wawasan aplikatif mengenai pentingnya keteladanan orang tua di rumah, pendampingan penggunaan gawai, serta sinergi erat bersama dewan asatidz di madrasah.</p>
@@ -1177,6 +1174,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '2 menit baca',
+        views: 4580,
         konten: `
           <p class="mb-4">Penerimaan Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan untuk Tahun Pelajaran 2026/2027 resmi dibuka secara daring melalui website dan luring di kantor sekretariat madrasah.</p>
           <p class="mb-4">Kami mengundang putra-putri lulusan SD/MI untuk bergabung bersama keluarga besar MTs YASUA melalui pilihan jalur pendaftaran:</p>
@@ -1199,6 +1197,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '2 menit baca',
+        views: 1760,
         konten: `
           <p class="mb-4">Pelaksanaan Asesmen Nasional Berbasis Komputer (ANBK) di Laboratorium Komputer Terpadu MTs YASUA Pilangwetan berjalan tertib, aman, dan 100% lancar tanpa kendala teknis.</p>
           <p class="mb-4">Dukungan 40 unit komputer berspesifikasi mutakhir, suplai cadangan daya UPS, serta koneksi fiber optik berkecepatan tinggi memastikan seluruh peserta dapat menyelesaikan instrumen asesmen literasi, numerasi, dan survei karakter dengan nyaman.</p>
@@ -1304,12 +1303,112 @@
       filterNewsCategory('Semua');
     }
 
+    // ===================================================================
+    // RENDER TRI-COLUMN EDITORIAL HERO (ALA NU ONLINE)
+    // ===================================================================
+    function renderTriColumnHero(items) {
+      const heroSection = document.getElementById('triColumnHeroSection');
+      const heroCenter = document.getElementById('triHeroCenter');
+      const heroLeft = document.getElementById('triHeroLeft');
+      const heroRight = document.getElementById('triHeroRight');
+
+      if (!heroSection || !heroCenter || !heroLeft || !heroRight || !items || items.length === 0) return;
+
+      const main = items[0];
+      const leftItems = items.slice(1, 3);
+      const rightItems = items.slice(3, 5);
+
+      // 1. Kolom Tengah: Berita Utama Besar / Headline (6 Kolom Desktop)
+      const mainBadgeClass = main.badge_class || getCategoryBadgeClass(main.kategori);
+      const mainViewsFormatted = Number(main.views || 0).toLocaleString('id-ID');
+
+      heroCenter.innerHTML = `
+        <article onclick="readNewsArticle('${main.id}')" class="group cursor-pointer bg-slate-50/60 hover:bg-emerald-50/40 rounded-2xl p-4 border border-emerald-100/80 transition-all duration-300 flex flex-col justify-between h-full">
+          <div class="space-y-3.5">
+            <div class="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100">
+              <img src="${main.gambar_url || 'poster_pts_berita.webp'}" alt="${main.judul}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='poster_pts_berita.webp'">
+              <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${mainBadgeClass} text-white font-black text-xs shadow-md">
+                <i data-lucide="bell" class="w-3.5 h-3.5"></i> ${main.kategori.toUpperCase()}
+              </span>
+              <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 text-white font-semibold text-[11px] backdrop-blur-md">
+                <i data-lucide="calendar" class="w-3 h-3 text-brand-gold"></i> ${main.tanggal}
+              </span>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3 text-xs text-slate-500 font-medium flex-wrap">
+                <span class="inline-flex items-center gap-1 text-emerald-700 font-bold" title="${mainViewsFormatted} kali dibaca">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  <span>${mainViewsFormatted} pembaca</span>
+                </span>
+                <span>•</span>
+                <span class="inline-flex items-center gap-1 text-slate-500">
+                  <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
+                  <span>${main.read_time || '2 menit baca'}</span>
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-slate-900 group-hover:text-brand-primary transition-colors leading-snug">
+                ${main.judul}
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                ${main.ringkasan}
+              </p>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-emerald-100 flex items-center justify-between text-xs text-brand-primary font-bold">
+            <span>Baca Selengkapnya</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </article>
+      `;
+
+      // Helper function kartu sub-headline
+      function createSubCard(n) {
+        const badge = n.badge_class || getCategoryBadgeClass(n.kategori);
+        const viewsFormatted = Number(n.views || 0).toLocaleString('id-ID');
+        return `
+          <article onclick="readNewsArticle('${n.id}')" class="group cursor-pointer bg-slate-50/50 hover:bg-emerald-50/30 rounded-2xl p-3 border border-slate-200/70 hover:border-emerald-200 transition-all duration-200 flex flex-col justify-between flex-1">
+            <div>
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-2.5">
+                <img src="${n.gambar_url || 'poster_pts_berita.webp'}" alt="${n.judul}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
+                <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md ${badge} text-[9px] font-black shadow-xs uppercase tracking-wider">
+                  ${n.kategori}
+                </span>
+              </div>
+              <div class="flex items-center justify-between text-[10px] text-slate-400 font-medium mb-1">
+                <span>${n.tanggal}</span>
+                <span class="inline-flex items-center gap-1 text-emerald-700 font-bold" title="Jumlah pembaca">
+                  <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
+                  <span>${viewsFormatted}</span>
+                </span>
+              </div>
+              <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
+                ${n.judul}
+              </h4>
+              <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                ${n.ringkasan}
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-brand-primary font-bold">
+              <span>Baca Detail</span>
+              <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </article>
+        `;
+      }
+
+      // 2. Kolom Kiri: 2 Berita Sub-Headline (3 Kolom Desktop)
+      heroLeft.innerHTML = leftItems.map(n => createSubCard(n)).join('');
+
+      // 3. Kolom Kanan: 2 Berita Sub-Headline (3 Kolom Desktop)
+      heroRight.innerHTML = rightItems.map(n => createSubCard(n)).join('');
+    }
+
     // Render Grid Berita Berdasarkan Filter & Search
     function renderNewsGrid() {
       const grid = document.getElementById('newsGridPublic');
       const countEl = document.getElementById('newsCountPublic');
       const emptyState = document.getElementById('newsEmptyState');
-      const featuredSection = document.getElementById('featuredNewsSection');
+      const triColumnHero = document.getElementById('triColumnHeroSection');
 
       // Filter daftar berita
       const filtered = newsMasterList.filter(item => {
@@ -1331,47 +1430,19 @@
         return matchCategory && matchSearch;
       });
 
-      // Tampilkan atau sembunyikan Banner Berita Utama (Featured)
-      if (featuredSection) {
+      // Tampilkan atau sembunyikan Tri-Column Editorial Hero
+      if (triColumnHero) {
         if (currentCategoryFilter === 'Semua' && !currentSearchQuery) {
-          featuredSection.classList.remove('hidden');
-          const featured = newsMasterList.find(n => n.is_featured === true) || newsMasterList[0];
-          if (featured) {
-            featuredSection.setAttribute('onclick', `readNewsArticle('${featured.id}')`);
-            const img = featuredSection.querySelector('img');
-            if (img) {
-              img.src = featured.gambar_url || 'poster_pts_berita.webp';
-              img.alt = featured.judul;
-            }
-            const dateEl = featuredSection.querySelector('.top-4.right-4');
-            if (dateEl) {
-              dateEl.innerHTML = `<i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-gold"></i> ${featured.tanggal}`;
-            }
-            const catBadge = featuredSection.querySelector('.top-4.left-4');
-            if (catBadge) {
-              catBadge.innerHTML = `<i data-lucide="bell" class="w-3.5 h-3.5"></i> ${featured.kategori.toUpperCase()}`;
-            }
-            const titleEl = featuredSection.querySelector('h2');
-            if (titleEl) titleEl.textContent = featured.judul;
-            const descEl = featuredSection.querySelector('p');
-            if (descEl) descEl.textContent = featured.ringkasan;
-            const subCat = featuredSection.querySelector('.border-t span.rounded-full');
-            if (subCat) subCat.textContent = featured.kategori;
-          }
+          triColumnHero.classList.remove('hidden');
+          renderTriColumnHero(newsMasterList.slice(0, 5));
         } else {
-          // Bila user sedang mencari topik tertentu atau memfilter kategori spesifik, sembunyikan banner agar fokus ke card hasil filter
-          featuredSection.classList.add('hidden');
+          // Bila user sedang mencari topik tertentu atau memfilter kategori spesifik, sembunyikan tri-column agar fokus ke card hasil filter
+          triColumnHero.classList.add('hidden');
         }
       }
 
-      // Berita yang akan ditampilkan di Grid (jika di 'Semua' & tanpa search, pisahkan item featured agar tidak duplikat)
-      let itemsToRender = filtered;
-      if (currentCategoryFilter === 'Semua' && !currentSearchQuery) {
-        const featured = newsMasterList.find(n => n.is_featured === true) || newsMasterList[0];
-        if (featured) {
-          itemsToRender = filtered.filter(n => n.id !== featured.id);
-        }
-      }
+      // Berita yang akan ditampilkan di Grid Arsip Bawah
+      const itemsToRender = filtered;
 
       // Update Indikator Jumlah
       if (countEl) {
@@ -1392,6 +1463,7 @@
           grid.classList.remove('hidden');
           grid.innerHTML = itemsToRender.map(n => {
             const badgeClass = n.badge_class || getCategoryBadgeClass(n.kategori);
+            const viewsFormatted = Number(n.views || 0).toLocaleString('id-ID');
 
             return `
               <div onclick="readNewsArticle('${n.id}')" class="bg-white rounded-3xl p-4 border border-emerald-100 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
@@ -1402,9 +1474,15 @@
                       ${n.kategori}
                     </span>
                   </div>
-                  <div class="flex items-center gap-1.5 text-[11px] text-slate-500 mb-1.5">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-                    <span>${n.tanggal}</span>
+                  <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1.5">
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                      <span>${n.tanggal}</span>
+                    </div>
+                    <span class="inline-flex items-center gap-1 text-emerald-700 font-bold" title="Jumlah pembaca">
+                      <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
+                      <span>${viewsFormatted}</span>
+                    </span>
                   </div>
                   <h4 class="font-extrabold text-slate-900 text-sm group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
                     ${n.judul}
@@ -1435,6 +1513,9 @@
 
       currentOpenNewsId = data.id;
 
+      // Inkrementasi jumlah views secara interaktif
+      data.views = (Number(data.views) || 1200) + 1;
+
       const listView = document.getElementById('newsListView');
       const detailView = document.getElementById('newsDetailView');
       const breadcrumbTitle = document.getElementById('detailBreadcrumbTitle');
@@ -1442,6 +1523,7 @@
       const category = document.getElementById('detailNewsCategory');
       const date = document.getElementById('detailNewsDate');
       const readTime = document.getElementById('detailNewsReadTime');
+      const viewsEl = document.getElementById('detailNewsViews');
       const title = document.getElementById('detailNewsTitle');
       const content = document.getElementById('detailNewsContent');
       const relatedGrid = document.getElementById('detailRelatedGrid');
@@ -1458,14 +1540,16 @@
       }
       if (date) date.textContent = data.tanggal;
       if (readTime) readTime.textContent = data.read_time || '2 menit baca';
+      if (viewsEl) viewsEl.textContent = `${Number(data.views).toLocaleString('id-ID')} pembaca`;
       if (title) title.textContent = data.judul;
       if (content) content.innerHTML = data.konten;
 
-      // Render Artikel Terkait / Lainnya (3 artikel)
+      // Render Artikel Terkait / Lainnya (3 artikel) dengan Views Counter
       if (relatedGrid) {
         const relatedItems = newsMasterList.filter(n => String(n.id).toLowerCase() !== String(data.id).toLowerCase()).slice(0, 3);
         relatedGrid.innerHTML = relatedItems.map(r => {
           const badgeColor = r.badge_class || getCategoryBadgeClass(r.kategori);
+          const rViews = Number(r.views || 0).toLocaleString('id-ID');
           return `
             <div onclick="readNewsArticle('${r.id}')" class="bg-white rounded-2xl p-3.5 border border-emerald-100 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
               <div>
@@ -1475,7 +1559,13 @@
                     ${r.kategori}
                   </span>
                 </div>
-                <span class="text-[10px] text-slate-400 block mb-1">${r.tanggal}</span>
+                <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                  <span>${r.tanggal}</span>
+                  <span class="inline-flex items-center gap-1 text-emerald-700 font-bold">
+                    <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
+                    <span>${rViews}</span>
+                  </span>
+                </div>
                 <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
                   ${r.judul}
                 </h4>
@@ -1629,7 +1719,7 @@
             if (activeNews.length === 0) return;
 
             // Perbarui newsMasterList dengan data terkini dari cloud
-            newsMasterList = activeNews.map(item => ({
+            newsMasterList = activeNews.map((item, idx) => ({
               id: item.id || `news_${Math.random().toString(36).substr(2, 8)}`,
               kategori: item.kategori || 'Pengumuman',
               badge_class: item.badge_class || getCategoryBadgeClass(item.kategori),
@@ -1640,7 +1730,8 @@
               konten: item.konten || '',
               is_featured: item.is_featured === true || String(item.is_featured).toLowerCase() === 'true',
               status_aktif: true,
-              read_time: item.read_time || '2 menit baca'
+              read_time: item.read_time || '2 menit baca',
+              views: Number(item.views) || (1500 + (idx * 240))
             }));
 
             // Perbarui counter dan render ulang grid
