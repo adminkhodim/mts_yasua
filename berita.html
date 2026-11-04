@@ -1093,9 +1093,23 @@
     // ===================================================================
     // DATA MASTER BERITA & PENGUMUMAN (DEFAULT / OFFLINE FALLBACK)
     // ===================================================================
+    // Helper Auto-Slug
+    function generateSlug(text) {
+      return (text || '')
+        .toString()
+        .toLowerCase()
+        .trim()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9 -]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+    }
+
     let newsMasterList = [
       {
         id: 'pts',
+        slug: 'penilaian-tengah-semester-pts-gasal-mts-yasua-pilangwetan',
         kategori: 'Pengumuman',
         badge_class: 'bg-amber-600 text-white',
         tanggal: '5 - 10 Oktober 2026',
@@ -1124,6 +1138,7 @@
       },
       {
         id: 'prestasi',
+        slug: 'siswa-mts-yasua-raih-juara-1-olimpiade-sains-robotika-tingkat-provinsi-jawa-tengah',
         kategori: 'Prestasi',
         badge_class: 'bg-emerald-600 text-white',
         tanggal: '22 September 2026',
@@ -1146,6 +1161,7 @@
       },
       {
         id: 'parenting',
+        slug: 'workshop-parenting-akbar-membangun-sinergi-rumah-dan-sekolah-menuju-generasi-qurani',
         kategori: 'Kegiatan',
         badge_class: 'bg-blue-600 text-white',
         tanggal: '15 September 2026',
@@ -1165,6 +1181,7 @@
       },
       {
         id: 'ppdb',
+        slug: 'penerimaan-peserta-didik-baru-ppdb-tahun-ajaran-2026-2027-resmi-dibuka',
         kategori: 'Pengumuman',
         badge_class: 'bg-amber-600 text-white',
         tanggal: '10 September 2026',
@@ -1188,6 +1205,7 @@
       },
       {
         id: 'anbk',
+        slug: 'pelaksanaan-asesmen-nasional-anbk-di-laboratorium-komputer-berlangsung-tertib-lancar',
         kategori: 'Akademik',
         badge_class: 'bg-purple-600 text-white',
         tanggal: '28 Agustus 2026',
@@ -1508,7 +1526,10 @@
     // HALAMAN BACA ARTIKEL DEDIKASI (FULL ARTICLE VIEW - TANPA POPUP)
     // ===================================================================
     function readNewsArticle(newsId) {
-      const data = newsMasterList.find(n => String(n.id).toLowerCase() === String(newsId).toLowerCase());
+      const data = newsMasterList.find(n => 
+        String(n.id).toLowerCase() === String(newsId).toLowerCase() || 
+        (n.slug && String(n.slug).toLowerCase() === String(newsId).toLowerCase())
+      );
       if (!data) return;
 
       currentOpenNewsId = data.id;
@@ -1585,7 +1606,7 @@
 
       // Update URL Hash
       if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, null, `#${data.id}`);
+        window.history.replaceState(null, null, `#${data.slug || data.id}`);
       }
 
       // Scroll ke atas halaman membaca
@@ -1684,19 +1705,26 @@
       }
     });
 
-    // Cek Hash URL saat halaman dimuat (Deep Link Auto-Open langsung ke mode baca artikel penuh)
+    // Cek URL Query / Hash saat halaman dimuat (Deep Link Auto-Open langsung ke mode baca artikel penuh)
     function checkUrlHash() {
+      const params = new URLSearchParams(window.location.search);
+      const queryTarget = params.get('slug') || params.get('id');
       const hash = window.location.hash.replace('#', '').trim();
-      if (hash) {
-        const exists = newsMasterList.some(n => String(n.id).toLowerCase() === hash.toLowerCase());
-        if (exists) {
-          readNewsArticle(hash);
+      const target = queryTarget || hash;
+
+      if (target) {
+        const found = newsMasterList.find(n => 
+          String(n.id).toLowerCase() === target.toLowerCase() ||
+          (n.slug && String(n.slug).toLowerCase() === target.toLowerCase())
+        );
+        if (found) {
+          readNewsArticle(found.id);
+          return;
         }
-      } else {
-        const detailView = document.getElementById('newsDetailView');
-        if (detailView && !detailView.classList.contains('hidden')) {
-          backToNewsList();
-        }
+      }
+      const detailView = document.getElementById('newsDetailView');
+      if (!target && detailView && !detailView.classList.contains('hidden')) {
+        backToNewsList();
       }
     }
 
@@ -1721,6 +1749,7 @@
             // Perbarui newsMasterList dengan data terkini dari cloud
             newsMasterList = activeNews.map((item, idx) => ({
               id: item.id || `news_${Math.random().toString(36).substr(2, 8)}`,
+              slug: item.slug || generateSlug(item.judul || ''),
               kategori: item.kategori || 'Pengumuman',
               badge_class: item.badge_class || getCategoryBadgeClass(item.kategori),
               tanggal: item.tanggal || '',

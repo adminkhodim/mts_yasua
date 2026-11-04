@@ -1,4 +1,18 @@
+# OS generated files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Temporary and log files
 *.tmp
+*.log
+scratch/
+
+# Deployment & tooling
 .vercel
+node_modules/
+
+# Local Environment Credentials
+.env
+.env.local
+.clasprc.json

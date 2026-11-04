@@ -36,6 +36,12 @@ Website resmi madrasah untuk **MTs. YASUA Pilangwetan, Kebonagung, Demak**, dira
    - **Schema.org Structured Data**: JSON-LD standar Google Search Console bertipe `MiddleSchool` (`EducationalOrganization`) dengan NPSN resmi: **20364357**.
    - **Vercel Production Headers**: Konfigurasi caching statis 1 tahun dan security headers di [`vercel.json`](file:///c:/Users/pc/Documents/APP/mts_yasua/vercel.json).
 
+6. **Portal Administrasi Madrasah ([`admin.html`](file:///c:/Users/pc/Documents/APP/mts_yasua/admin.html)) & Backend (`backend/`):**
+   - **Full Cloud CMS**: Pengelolaan Dewan Guru, Hero Slider 5 Foto, Banner Promosi 3:1, Berita & Pengumuman, dan Ticker Pengumuman.
+   - **Rich Text Mini Editor & Auto-Slug**: Form artikel berita dilengkapi toolbar format visual instan (Tebal, Miring, Sub-Judul, Poin, Kutipan), live word counter & reading time, serta generator slug ramah SEO.
+   - **Sinkronisasi Google Sheets & Drive**: Seluruh aset foto terunggah otomatis ke Google Drive madrasah dan database tersimpan di Google Sheets secara gratis tanpa biaya server.
+   - **Folder [`backend/`](file:///c:/Users/pc/Documents/APP/mts_yasua/backend/)**: Berisi kode controller Google Apps Script ([`Code.js`](file:///c:/Users/pc/Documents/APP/mts_yasua/backend/Code.js)), manifest konfigurasi, dan panduan teknis deployment.
+
 ---
 
 ## 🚀 Cara Menjalankan
