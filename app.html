@@ -1651,8 +1651,8 @@
         return `
           <div class="bg-white rounded-2xl border border-emerald-100/90 shadow-2xs overflow-hidden flex flex-col">
             <div class="relative h-32 w-full bg-slate-100 overflow-hidden">
-              <img src="${item.gambar || 'logo-mts.png'}" alt="${item.judul}"
-                onerror="this.src='logo-mts.png'"
+              <img src="${item.gambar || 'logo.png'}" alt="${item.judul}"
+                onerror="this.src='logo.png'"
                 class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
               <div class="absolute top-2 left-2 flex items-center gap-1.5">
@@ -1722,7 +1722,7 @@
                 peraih: item.peraih || item.Peraih || item.nama || '',
                 penyelenggara: item.penyelenggara || item.Penyelenggara || '',
                 deskripsi: item.deskripsi || item.Deskripsi || '',
-                gambar: item.gambar || item.Gambar || item.image || 'logo-mts.png'
+                gambar: item.gambar || item.Gambar || item.image || 'logo.png'
               }));
               renderAppPrestasiList();
             }

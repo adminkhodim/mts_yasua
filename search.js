@@ -486,9 +486,7 @@
         const highlightedTitle = highlightText(escapeHtml(item.title), query);
         const highlightedSnippet = highlightText(escapeHtml(item.snippet), query);
 
-        const clickHandler = item.action === 'openBrochure'
-          ? `closeSearchModal(); if (typeof openBrochureModal === 'function') openBrochureModal();`
-          : `window.location.href = '${item.url}'`;
+        const clickHandler = `navigateSearchResult('${item.url}', '${item.action || ''}')`;
 
         html += `
           <div onclick="${clickHandler}"
@@ -535,9 +533,7 @@
     // Take first 5 items from pool
     const suggestions = pool.slice(0, 5);
     suggestions.forEach((item, index) => {
-      const clickHandler = item.action === 'openBrochure'
-        ? `closeSearchModal(); if (typeof openBrochureModal === 'function') openBrochureModal();`
-        : `window.location.href = '${item.url}'`;
+      const clickHandler = `navigateSearchResult('${item.url}', '${item.action || ''}')`;
 
       html += `
         <div onclick="${clickHandler}"
@@ -580,6 +576,23 @@
   }
 
   // Global Trigger Functions
+  window.navigateSearchResult = function (url, action) {
+    if (typeof window.closeSearchModal === 'function') window.closeSearchModal();
+    if (action === 'openBrochure' && typeof window.openBrochureModal === 'function') {
+      window.openBrochureModal();
+      return;
+    }
+    if (typeof window.switchAppTab === 'function') {
+      const cleanUrl = (url || '').split('#')[0].replace(/\.html$/, '').replace(/^\/+/, '');
+      const validTabs = ['beranda', 'berita', 'kalender', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni'];
+      if (validTabs.includes(cleanUrl)) {
+        window.switchAppTab(cleanUrl);
+        return;
+      }
+    }
+    window.location.href = url;
+  };
+
   window.openSearchModal = function () {
     injectSearchModal();
     const modal = document.getElementById('siteSearchModal');
