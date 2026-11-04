@@ -4,47 +4,52 @@ const path = require('path');
 const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getNews";
 const SITE_DOMAIN = "https://www.mtsyasua.sch.id";
 
-// Dataset Berita Bawaan Madrasah (Akselerasi Instan < 5ms)
+// In-Memory Cache untuk menghindari cold-start GAS
+let globalNewsCache = null;
+let lastCacheFetchTime = 0;
+const CACHE_LIFETIME_MS = 60 * 1000; // 1 Menit
+
+// Dataset Berita Bawaan Terkini (Akselerasi Instan 0ms)
 const STATIC_NEWS = [
   {
-    id: 'pts',
-    alt_id: 'NEWS-001',
-    slug: 'penilaian-tengah-semester-pts-gasal-mts-yasua-pilangwetan',
-    judul: 'Penilaian Tengah Semester (PTS) Gasal MTs YASUA Pilangwetan',
-    ringkasan: 'Diberitahukan kepada seluruh siswa-siswi kelas VII, VIII, dan IX serta Bapak/Ibu Wali Murid bahwa pelaksanaan PTS terpadu dilaksanakan berbasis asesmen tertulis dan digital komputer.',
-    gambar_url: 'poster_pts_berita.jpg'
+    id: 'NEWS-001',
+    alt_id: 'adiwiyata',
+    slug: 'bergerak-bersama-mts-yasua-pilangwetan-matangkan-kesiapan-menuju-madrasah-adiwiyata',
+    judul: 'Bergerak Bersama, MTs Yasua Pilangwetan Matangkan Kesiapan Menuju Madrasah Adiwiyata',
+    ringkasan: 'Komitmen seluruh civitas akademika madrasah dalam mewujudkan lingkungan belajar yang hijau, asri, bersih, dan berwawasan lingkungan.',
+    gambar_url: 'https://lh3.googleusercontent.com/d/1FZjGhGErRl_Kiym4XhhmIfPtltuPDii7'
   },
   {
-    id: 'prestasi',
-    alt_id: 'NEWS-002',
-    slug: 'siswa-mts-yasua-raih-juara-1-olimpiade-sains-robotika-tingkat-provinsi-jawa-tengah',
-    judul: 'Siswa MTs YASUA Raih Juara 1 Olimpiade Sains & Robotika Tingkat Provinsi Jawa Tengah',
-    ringkasan: 'Kabar membanggakan diraih delegasi siswa madrasah dalam ajang bergengsi sains dan teknologi terapan.',
-    gambar_url: 'foto-upacara.jpg'
+    id: 'NEWS-002',
+    alt_id: 'asmaulhusna',
+    slug: 'awali-hari-dengan-keberkahan-lantunan-asmaulhusna-doa-dan-murojaah-menggema-setiap-pagi-di-mts-yasua',
+    judul: 'Awali Hari dengan Keberkahan: Lantunan Asmaulhusna, Doa, dan Murojaah Menggema Setiap Pagi di MTs Yasua',
+    ringkasan: 'Pembiasaan karakter islami santri melalui lantunan doa, asmaulhusna, dan murojaah hafalan Al-Qur\'an sebelum memulai jam pembelajaran.',
+    gambar_url: 'https://www.mtsyasua.sch.id/foto-upacara.jpg'
   },
   {
-    id: 'parenting',
-    alt_id: 'NEWS-003',
-    slug: 'workshop-parenting-akbar-membangun-sinergi-rumah-dan-sekolah-menuju-generasi-qurani',
-    judul: "Workshop Parenting Akbar: Membangun Sinergi Rumah dan Sekolah Menuju Generasi Qur'ani",
-    ringkasan: 'Silaturahmi wali murid dan komite madrasah mendiskusikan bimbingan moral anak di era serba digital.',
-    gambar_url: 'foto-kajian-santriwati.jpg'
+    id: 'NEWS-003',
+    alt_id: 'pembelajaran-inovatif',
+    slug: 'hadirkan-pembelajaran-menarik-dan-inovatif-guru-mts-yasua-sukses-tingkatkan-antusiasme-belajar-siswa',
+    judul: 'Hadirkan Pembelajaran Menarik dan Inovatif, Guru MTs Yasua Sukses Tingkatkan Antusiasme Belajar Siswa',
+    ringkasan: 'Penerapan metode pembelajaran interaktif berbasis teknologi digital dan media visual yang menyenangkan di ruang kelas madrasah.',
+    gambar_url: 'https://lh3.googleusercontent.com/d/1J-IAdpO8om28ePlE2YcwcCt9LseViKiW'
   },
   {
-    id: 'ppdb',
-    alt_id: 'NEWS-004',
-    slug: 'penerimaan-peserta-didik-baru-ppdb-tahun-ajaran-2026-2027-resmi-dibuka',
+    id: 'NEWS-004',
+    alt_id: 'ppdb',
+    slug: 'penerimaan-peserta-didik-baru-ppdb-tahun-ajaran-20262027-resmi-dibuka',
     judul: 'Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Resmi Dibuka',
     ringkasan: 'Tersedia jalur prestasi beasiswa tahfidz serta jalur reguler bagi lulusan SD/MI se-Kabupaten Demak.',
-    gambar_url: 'foto-gedung.jpg'
+    gambar_url: 'https://www.mtsyasua.sch.id/foto-gedung.jpg'
   },
   {
-    id: 'anbk',
-    alt_id: 'NEWS-005',
-    slug: 'pelaksanaan-asesmen-nasional-anbk-di-laboratorium-komputer-berlangsung-tertib-lancar',
-    judul: 'Pelaksanaan Asesmen Nasional (ANBK) di Laboratorium Komputer Berlangsung Tertib & Lancar',
-    ringkasan: 'Infrastruktur jaringan komputer mandiri memastikan 100% peserta mengerjakan asesmen tanpa kendala.',
-    gambar_url: 'foto-labkom.jpg'
+    id: 'NEWS-005',
+    alt_id: 'shalat-zuhur',
+    slug: 'bentuk-karakter-religius-dan-disiplin-siswa-siswi-mts-yasua-konsisten-jalankan-shalat-zuhur-berjamaah',
+    judul: 'Bentuk Karakter Religius dan Disiplin, Siswa-Siswi MTs Yasua Konsisten Jalankan Shalat Zuhur Berjamaah',
+    ringkasan: 'Kedisiplinan ibadah shalat berjamaah tepat waktu sebagai fondasi pembentukan akhlakul karimah seluruh santri madrasah.',
+    gambar_url: 'https://www.mtsyasua.sch.id/foto-sholat-santri.jpg'
   }
 ];
 
@@ -92,11 +97,38 @@ function resolveImageUrl(rawImg, host) {
   return `${baseHost}/${img}`;
 }
 
+async function fetchFromGasWithCache() {
+  const now = Date.now();
+  if (globalNewsCache && (now - lastCacheFetchTime < CACHE_LIFETIME_MS)) {
+    return globalNewsCache;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 7500); // 7.5s toleransi GAS
+    const res = await fetch(GAS_API_URL, { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (res.ok) {
+      const json = await res.json();
+      if (json && json.status === 'success' && Array.isArray(json.data)) {
+        globalNewsCache = json.data;
+        lastCacheFetchTime = now;
+        return globalNewsCache;
+      }
+    }
+  } catch (err) {
+    console.warn('[OG Resolver] GAS fetch error:', err.message);
+  }
+
+  return globalNewsCache;
+}
+
 async function findNewsItem(slug) {
   if (!slug) return null;
   const search = slug.toString().toLowerCase().trim();
 
-  // 1. Cek di dataset lokal terlebih dahulu (Instan)
+  // 1. Cek di dataset lokal terlebih dahulu (Instan 0ms)
   const local = STATIC_NEWS.find(n => 
     (n.slug && n.slug.toLowerCase() === search) ||
     (n.id && n.id.toLowerCase() === search) ||
@@ -104,25 +136,14 @@ async function findNewsItem(slug) {
   );
   if (local) return local;
 
-  // 2. Fetch dari Google Apps Script jika tidak ditemukan di data lokal
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 2500);
-    const res = await fetch(GAS_API_URL, { signal: controller.signal });
-    clearTimeout(timeout);
-
-    if (res.ok) {
-      const json = await res.json();
-      if (json && json.status === 'success' && Array.isArray(json.data)) {
-        const found = json.data.find(n => 
-          (n.slug && String(n.slug).toLowerCase() === search) ||
-          (n.id && String(n.id).toLowerCase() === search)
-        );
-        if (found) return found;
-      }
-    }
-  } catch (err) {
-    console.warn('[OG Resolver] Google Apps Script fetch timed out or error:', err.message);
+  // 2. Cek di cache/live GAS
+  const liveList = await fetchFromGasWithCache();
+  if (Array.isArray(liveList)) {
+    const found = liveList.find(n => 
+      (n.slug && String(n.slug).toLowerCase() === search) ||
+      (n.id && String(n.id).toLowerCase() === search)
+    );
+    if (found) return found;
   }
 
   return null;
@@ -133,7 +154,6 @@ module.exports = async function handler(req, res) {
   const host = req.headers['x-forwarded-host'] || req.headers.host || 'www.mtsyasua.sch.id';
 
   try {
-    // Baca template berita.html
     const htmlPath = path.join(process.cwd(), 'berita.html');
     let html = fs.readFileSync(htmlPath, 'utf8');
 
@@ -146,13 +166,14 @@ module.exports = async function handler(req, res) {
       const image = resolveImageUrl(newsItem.gambar_url || newsItem.gambar, host);
       const url = `https://${host}/berita/${canonicalSlug}`;
 
-      // Hapus metadata Open Graph & Twitter lama agar tidak duplikat
+      // Hapus metadata lama
       html = html
         .replace(/<title>[\s\S]*?<\/title>/i, '')
         .replace(/<meta\s+name=["']description["'][^>]*>/gi, '')
         .replace(/<link\s+rel=["']canonical["'][^>]*>/gi, '')
         .replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/gi, '')
-        .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, '');
+        .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, '')
+        .replace(/<link\s+rel=["']image_src["'][^>]*>/gi, '');
 
       const dynamicMetaTags = `
   <title>${escapeHtml(title)}</title>
@@ -189,11 +210,9 @@ module.exports = async function handler(req, res) {
     return res.status(200).send(html);
   } catch (err) {
     console.error('[OG Serverless Error]:', err);
-    // Fallback: kirim berita.html standar jika terjadi error tak terduga
     const fallbackPath = path.join(process.cwd(), 'berita.html');
     const fallbackHtml = fs.readFileSync(fallbackPath, 'utf8');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.status(200).send(fallbackHtml);
   }
 };
-

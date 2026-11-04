@@ -3,7 +3,7 @@
  * Progressive Web App (PWA) Offline Cache & Fast Loading
  */
 
-const CACHE_NAME = 'mts-yasua-cache-v1.5';
+const CACHE_NAME = 'mts-yasua-cache-v1.6';
 const OFFLINE_URL = '/app';
 
 // Critical core assets to pre-cache on install
