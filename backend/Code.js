@@ -30,9 +30,9 @@ function setupDatabase() {
   if (!sheetTeachers) {
     sheetTeachers = ss.insertSheet(CONFIG.SHEET_TEACHERS);
     const headers = [
-      'id', 'urutan', 'nama', 'nip', 'kategori', 'jabatan',
-      'mapel', 'badge', 'pendidikan', 'deskripsi', 'foto_url',
-      'status_aktif', 'created_at', 'updated_at'
+      'id', 'nama_lengkap', 'nip_nuptk', 'jabatan', 'mata_pelajaran',
+      'badge_bidang', 'pendidikan_terakhir', 'deskripsi', 'foto_url',
+      'kategori', 'urutan', 'status_aktif', 'created_at', 'updated_at'
     ];
     sheetTeachers.appendRow(headers);
     sheetTeachers.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
@@ -658,29 +658,36 @@ function fetchAllTeachers() {
 function addNewTeacher(teacherData) {
   const sheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID).getSheetByName(CONFIG.SHEET_TEACHERS);
   const data = sheet.getDataRange().getValues();
+  const headers = data[0];
   const nextNum = data.length;
   const newId = 'GURU-' + String(nextNum).padStart(3, '0');
   const now = new Date().toISOString();
 
-  const newRow = [
-    newId,
-    Number(teacherData.urutan) || nextNum,
-    teacherData.nama || '',
-    teacherData.nip || '-',
-    teacherData.kategori || 'Guru Mapel',
-    teacherData.jabatan || 'Tenaga Pendidik',
-    teacherData.mapel || '',
-    teacherData.badge || 'Pengampu',
-    teacherData.pendidikan || '',
-    teacherData.deskripsi || '',
-    teacherData.foto_url || '',
-    teacherData.status_aktif !== undefined ? teacherData.status_aktif : true,
-    now,
-    now
-  ];
+  // Normalisasi data dengan toleransi alias key
+  const normalized = {
+    id: newId,
+    nama_lengkap: teacherData.nama_lengkap || teacherData.nama || '',
+    nip_nuptk: teacherData.nip_nuptk || teacherData.nip || '-',
+    jabatan: teacherData.jabatan || 'Guru Mapel',
+    mata_pelajaran: teacherData.mata_pelajaran || teacherData.mapel || '',
+    badge_bidang: teacherData.badge_bidang || teacherData.badge || 'Pengampu',
+    pendidikan_terakhir: teacherData.pendidikan_terakhir || teacherData.pendidikan || 'Sarjana Pendidikan',
+    deskripsi: teacherData.deskripsi || '',
+    foto_url: teacherData.foto_url || '',
+    kategori: teacherData.kategori || 'guru_mapel',
+    urutan: Number(teacherData.urutan) || nextNum,
+    status_aktif: teacherData.status_aktif !== undefined ? teacherData.status_aktif : true,
+    created_at: now,
+    updated_at: now
+  };
+
+  // Bangun baris baru secara dinamis mengikuti urutan kolom header riil di Spreadsheet
+  const newRow = headers.map(h => {
+    return normalized[h] !== undefined ? normalized[h] : (teacherData[h] || '');
+  });
 
   sheet.appendRow(newRow);
-  return { id: newId, ...teacherData };
+  return { id: newId, ...normalized };
 }
 
 function updateTeacherData(id, updatedData) {
@@ -688,20 +695,37 @@ function updateTeacherData(id, updatedData) {
   const data = sheet.getDataRange().getValues();
   const headers = data[0];
 
+  // Mapping alias kunci agar kompatibel ganda jika frontend mengirim 'nama' atau 'nama_lengkap'
+  const keyAliases = {
+    nama: 'nama_lengkap',
+    nip: 'nip_nuptk',
+    mapel: 'mata_pelajaran',
+    badge: 'badge_bidang',
+    pendidikan: 'pendidikan_terakhir'
+  };
+
+  const payload = { ...updatedData };
+  for (const alias in keyAliases) {
+    const targetKey = keyAliases[alias];
+    if (payload[alias] !== undefined && payload[targetKey] === undefined) {
+      payload[targetKey] = payload[alias];
+    }
+  }
+
   for (let i = 1; i < data.length; i++) {
     if (String(data[i][0]) === String(id)) {
       const rowIdx = i + 1;
-      for (const key in updatedData) {
+      for (const key in payload) {
         const colIdx = headers.indexOf(key);
         if (colIdx !== -1) {
-          sheet.getRange(rowIdx, colIdx + 1).setValue(updatedData[key]);
+          sheet.getRange(rowIdx, colIdx + 1).setValue(payload[key]);
         }
       }
       const updatedCol = headers.indexOf('updated_at');
       if (updatedCol !== -1) {
         sheet.getRange(rowIdx, updatedCol + 1).setValue(new Date().toISOString());
       }
-      return { id: id, ...updatedData };
+      return { id: id, ...payload };
     }
   }
   throw new Error('Guru dengan ID ' + id + ' tidak ditemukan');

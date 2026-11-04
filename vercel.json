@@ -6,12 +6,12 @@
       "destination": "/api/og?slug=:slug"
     },
     {
-      "source": "/app/:slug*",
-      "destination": "/app.html"
+      "source": "/app/(.*)",
+      "destination": "/app"
     },
     {
       "source": "/app",
-      "destination": "/app.html"
+      "destination": "/app"
     }
   ],
   "headers": [

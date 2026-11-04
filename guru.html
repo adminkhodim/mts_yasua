@@ -1366,28 +1366,35 @@
         });
 
       function renderDynamicTeachers(teachers) {
-        // 1. Sinkronisasi Profil Pimpinan / Kepala Madrasah
-        const pimpinan = teachers.find((t) => String(t.kategori || '').toLowerCase() === 'pimpinan');
-        if (pimpinan) {
+        // 1. Sinkronisasi Profil Kepala Madrasah (Pimpinan Utama)
+        const kepala = teachers.find((t) => 
+          (t.jabatan && t.jabatan.toLowerCase().includes('kepala madrasah')) ||
+          (t.urutan === 1 || t.urutan === '1') ||
+          (t.id === 'GURU-001')
+        ) || teachers[0];
+
+        if (kepala) {
           const kepalaImg = document.querySelector('#kepalaMadrasahCard img');
           const kepalaTagNama = document.getElementById('kepalaMadrasahTagNama');
           const kepalaNama = document.getElementById('kepalaMadrasahNama');
           const kepalaDeskripsi = document.getElementById('kepalaMadrasahDeskripsi');
-          const namaPimpinan = pimpinan.nama || pimpinan.nama_lengkap;
+          const namaKepala = kepala.nama_lengkap || kepala.nama || 'Muthohar, S.Pd.';
 
-          if (kepalaImg && pimpinan.foto_url) kepalaImg.src = pimpinan.foto_url;
-          if (kepalaTagNama && namaPimpinan) kepalaTagNama.textContent = namaPimpinan;
-          if (kepalaNama && namaPimpinan) kepalaNama.textContent = namaPimpinan;
-          if (kepalaDeskripsi && pimpinan.deskripsi) kepalaDeskripsi.textContent = pimpinan.deskripsi;
+          if (kepalaImg && kepala.foto_url) kepalaImg.src = kepala.foto_url;
+          if (kepalaTagNama) kepalaTagNama.textContent = namaKepala;
+          if (kepalaNama) kepalaNama.textContent = namaKepala;
+          if (kepalaDeskripsi && kepala.deskripsi) kepalaDeskripsi.textContent = kepala.deskripsi;
         }
 
-        // 2. Sinkronisasi Grid Guru Mapel & Staf Tendik
+        // 2. Sinkronisasi Grid Dewan Guru (Termasuk Waka Kurikulum, Waka Sarpras, Waka Humas, Waka Kesiswaan, Guru Mapel, Tendik)
         const grid = document.getElementById('teachersGridContainer');
         if (!grid) return;
 
-        // Hanya tampilkan guru yang aktif dan bukan pimpinan
+        const kepalaId = kepala ? kepala.id : 'GURU-001';
+
+        // Tampilkan semua guru/tendik aktif kecuali Kepala Madrasah yang sudah berada di kartu utama
         const activeTeachers = teachers.filter(
-          (t) => String(t.kategori || '').toLowerCase() !== 'pimpinan' && (t.status_aktif === true || String(t.status_aktif).toLowerCase() === 'true')
+          (t) => t.id !== kepalaId && (t.status_aktif === true || String(t.status_aktif).toLowerCase() === 'true')
         );
 
         if (activeTeachers.length === 0) return;
@@ -1397,19 +1404,25 @@
 
         grid.innerHTML = activeTeachers
           .map((t) => {
-            const namaGuru = t.nama || t.nama_lengkap || 'Pendidik MTs YASUA';
-            const mapelGuru = t.mapel || t.mata_pelajaran || '';
-            const bidang = t.badge || t.badge_bidang || 'Pendidik';
+            const namaGuru = t.nama_lengkap || t.nama || 'Pendidik MTs YASUA';
+            const mapelGuru = t.mata_pelajaran || t.mapel || '';
+            const bidang = t.badge_bidang || t.badge || 'Pendidik';
             let badgeColor = 'bg-brand-primary/90';
             if (bidang.includes('Bahasa')) badgeColor = 'bg-blue-600/90';
-            else if (bidang.includes('TIK') || bidang.includes('Digital')) badgeColor = 'bg-emerald-700/90';
+            else if (bidang.includes('TIK') || bidang.includes('Digital') || bidang.includes('Komputer')) badgeColor = 'bg-emerald-700/90';
             else if (bidang.includes('Sains') || bidang.includes('Matematika')) badgeColor = 'bg-amber-600/90';
-            else if (bidang.includes('Karakter') || bidang.includes('Kebangsaan')) badgeColor = 'bg-red-600/90';
-            else if (bidang.includes('Sosial') || bidang.includes('Keagamaan')) badgeColor = 'bg-purple-600/90';
+            else if (bidang.includes('Karakter') || bidang.includes('Kebangsaan') || bidang.includes('Wali')) badgeColor = 'bg-rose-600/90';
+            else if (bidang.includes('Sosial') || bidang.includes('Keagamaan') || bidang.includes('Agama')) badgeColor = 'bg-purple-600/90';
+            else if (bidang.includes('Pimpinan') || bidang.includes('Kebudayaan') || bidang.includes('Asing')) badgeColor = 'bg-teal-700/90';
 
             const foto = t.foto_url || 'guru_1.webp';
-            const jabatan = t.jabatan || (mapelGuru ? 'Guru ' + mapelGuru : 'Guru Bidang Studi');
-            const pendidikan = t.pendidikan || t.pendidikan_terakhir || 'Sarjana Pendidikan';
+            let subJabatan = t.jabatan || '';
+            if (mapelGuru && !subJabatan.toLowerCase().includes(mapelGuru.toLowerCase()) && !mapelGuru.includes('guru_mapel')) {
+              subJabatan = subJabatan ? `${subJabatan} • ${mapelGuru}` : `Guru ${mapelGuru}`;
+            }
+            if (!subJabatan) subJabatan = 'Tenaga Pendidik';
+
+            const pendidikan = t.pendidikan_terakhir || t.pendidikan || 'Sarjana Pendidikan';
 
             return `
               <div class="bg-white rounded-3xl p-5 border border-emerald-100 shadow-md hover-lift flex flex-col justify-between group">
@@ -1418,7 +1431,7 @@
                     <img src="${foto}" alt="${namaGuru}"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy" onerror="this.src='logo.png'">
-                    <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeColor} text-white text-[10px] font-bold backdrop-blur-xs">
+                    <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeColor} text-white text-[10px] font-bold backdrop-blur-xs shadow-xs">
                       ${bidang}
                     </span>
                   </div>
@@ -1426,10 +1439,10 @@
                     ${namaGuru}
                   </h3>
                   <p class="text-xs font-bold text-amber-700 mt-1">
-                    ${jabatan}
+                    ${subJabatan}
                   </p>
-                  <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                    ${t.deskripsi || ''}
+                  <p class="text-xs text-slate-500 mt-2 leading-relaxed line-clamp-3">
+                    ${t.deskripsi || 'Membimbing dan mendidik santri berlandaskan nilai-nilai islami.'}
                   </p>
                 </div>
                 <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">

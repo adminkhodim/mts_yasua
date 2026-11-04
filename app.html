@@ -2713,17 +2713,24 @@
         .then(res => res.json())
         .then(json => {
           if (json.status === 'success' && Array.isArray(json.data) && json.data.length > 0) {
-            const pimpinan = json.data.find(t => t.kategori === 'pimpinan');
-            if (pimpinan) {
+            const kepala = json.data.find(t => 
+              (t.jabatan && t.jabatan.toLowerCase().includes('kepala madrasah')) ||
+              (t.urutan === 1 || t.urutan === '1') ||
+              (t.id === 'GURU-001')
+            ) || json.data[0];
+
+            if (kepala) {
               const kImg = document.getElementById('appKepalaFoto');
               const kNama = document.getElementById('appKepalaNama');
               const kJabatan = document.getElementById('appKepalaJabatan');
-              if (kImg && pimpinan.foto_url) kImg.src = pimpinan.foto_url;
-              if (kNama && pimpinan.nama_lengkap) kNama.textContent = pimpinan.nama_lengkap;
-              if (kJabatan && pimpinan.jabatan) kJabatan.textContent = pimpinan.jabatan;
+              if (kImg && kepala.foto_url) kImg.src = kepala.foto_url;
+              if (kNama) kNama.textContent = kepala.nama_lengkap || kepala.nama || 'Muthohar, S.Pd.';
+              if (kJabatan) kJabatan.textContent = kepala.jabatan || 'Kepala Madrasah';
             }
 
-            const active = json.data.filter(t => t.kategori !== 'pimpinan' && (t.status_aktif === true || String(t.status_aktif).toLowerCase() === 'true'));
+            const kepalaId = kepala ? kepala.id : 'GURU-001';
+            // Tampilkan seluruh Waka dan Guru Mapel aktif
+            const active = json.data.filter(t => t.id !== kepalaId && (t.status_aktif === true || String(t.status_aktif).toLowerCase() === 'true'));
             if (active.length > 0) {
               active.sort((a, b) => (Number(a.urutan) || 0) - (Number(b.urutan) || 0));
               appTeachersData = active.map(t => {
