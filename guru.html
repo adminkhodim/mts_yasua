@@ -40,38 +40,86 @@
   <meta name="twitter:card" content="summary">
   <meta property="og:site_name" content="MTs YASUA Pilangwetan">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#033324',
-              primary: '#065F46',
-              medium: '#0D7B58',
-              light: '#10B981',
-              pale: '#ECFDF5',
-              surface: '#F4FBF7',
-              accent: '#F59E0B',
-              accentHover: '#D97706',
-              gold: '#FBBF24'
-            }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-            arabic: ['Amiri', 'serif']
-          },
-          boxShadow: {
-            'glow-green': '0 10px 30px -10px rgba(6, 95, 70, 0.35)',
-            'glow-gold': '0 10px 25px -5px rgba(245, 158, 11, 0.4)'
+  <!-- Structured Data: JSON-LD for Teachers Directory -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Dewan Guru & Tenaga Pendidik MTs YASUA Pilangwetan",
+    "description": "Profil pengajar profesional, berdedikasi tinggi, dan berakhlakul karimah di MTs YASUA Pilangwetan Demak.",
+    "numberOfItems": 10,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Person",
+          "name": "Muthohar, S.Pd.",
+          "jobTitle": "Kepala Madrasah",
+          "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "MTs YASUA Pilangwetan"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Person",
+          "name": "Hj. Thoibah Roudlotul Jannah, S.Ag.",
+          "jobTitle": "Waka Kurikulum",
+          "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "MTs YASUA Pilangwetan"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Person",
+          "name": "Hj. Inna Mawaddah, S.Ag.",
+          "jobTitle": "Waka Sarpras",
+          "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "MTs YASUA Pilangwetan"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Person",
+          "name": "Ahmad Wawahib, S.Pd.",
+          "jobTitle": "Waka Humas",
+          "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "MTs YASUA Pilangwetan"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "Person",
+          "name": "Aidiyah, S.Pd.",
+          "jobTitle": "Waka Kesiswaan",
+          "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "MTs YASUA Pilangwetan"
           }
         }
       }
-    }
+    ]
+  }
   </script>
+
+  <!-- Compiled Production Tailwind CSS (High-Performance Sub-Second Load) -->
+  <link rel="stylesheet" href="site.min.css">
 
   <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
