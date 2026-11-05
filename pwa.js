@@ -220,7 +220,7 @@
       const dock = document.createElement('nav');
       dock.id = 'mobileBottomDock';
       dock.className =
-        'lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(6,95,70,0.07)] px-2 pt-1.5 pb-[calc(0.4rem+env(safe-area-inset-bottom,0px))] transition-transform duration-300';
+        'lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(6,95,70,0.07)] px-2 pt-1.5 pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom,16px))] transition-transform duration-300';
       dock.innerHTML = `
         <div class="max-w-md mx-auto grid grid-cols-5 items-center text-center">
           <!-- 1. Beranda -->
@@ -482,45 +482,84 @@
 
     if (isIOS) {
       content.innerHTML = `
-        <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200/80 mb-2">
-          <p class="font-bold text-amber-900 text-xs">Pengguna iPhone / iPad (Safari):</p>
-          <p class="text-[11.5px] text-amber-800 mt-0.5">Apple Safari memerlukan 3 langkah mudah berikut untuk menambahkan ke layar utama:</p>
+        <div class="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200/80 mb-3">
+          <p class="font-black text-brand-dark text-xs sm:text-sm flex items-center gap-1.5">
+            <span>🍎</span> Panduan Pasang di iPhone / iPad (Safari)
+          </p>
+          <p class="text-[11px] text-slate-600 mt-1 leading-relaxed">
+            Hanya butuh 3 langkah singkat tanpa App Store untuk menyimpan MTs YASUA ke layar utama:
+          </p>
         </div>
-        <ol class="space-y-2.5 pl-1">
-          <li class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-100 text-brand-primary font-black text-xs flex items-center justify-center shrink-0">1</span>
-            <span>Ketuk tombol <strong>Bagikan (Share)</strong> <svg class="inline-block w-4 h-4 text-blue-600 align-text-bottom" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg> di bilah bawah layar Safari.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-100 text-brand-primary font-black text-xs flex items-center justify-center shrink-0">2</span>
-            <span>Gulir menu dan pilih <strong>"Tambahkan ke Layar Utama" (Add to Home Screen)</strong>.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-100 text-brand-primary font-black text-xs flex items-center justify-center shrink-0">3</span>
-            <span>Ketuk <strong>"Tambah" (Add)</strong> di pojok kanan atas. Ikon MTs YASUA akan langsung terpasang di layar HP Anda!</span>
-          </li>
-        </ol>
+        <div class="space-y-2.5 text-xs text-slate-700">
+          <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+            <span class="w-6 h-6 rounded-full bg-brand-primary text-white font-black text-xs flex items-center justify-center shrink-0 shadow-2xs">1</span>
+            <div class="flex-1">
+              <p class="font-bold text-slate-900">Ketuk Tombol Bagikan (Share)</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Ikon kotak dengan panah ke atas di bilah bawah Safari HP Anda.</p>
+            </div>
+            <div class="w-7 h-7 rounded-lg bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+            <span class="w-6 h-6 rounded-full bg-brand-primary text-white font-black text-xs flex items-center justify-center shrink-0 shadow-2xs">2</span>
+            <div class="flex-1">
+              <p class="font-bold text-slate-900">Pilih 'Tambahkan ke Layar Utama'</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Gulir ke bawah menu share dan pilih <em>Add to Home Screen</em>.</p>
+            </div>
+            <div class="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 text-brand-primary flex items-center justify-center shrink-0 font-bold text-sm">
+              +
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+            <span class="w-6 h-6 rounded-full bg-brand-primary text-white font-black text-xs flex items-center justify-center shrink-0 shadow-2xs">3</span>
+            <div class="flex-1">
+              <p class="font-bold text-slate-900">Ketuk 'Tambah' (Add)</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Di pojok kanan atas. Ikon MTs YASUA akan langsung terpasang di Homescreen!</p>
+            </div>
+            <div class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0 font-bold text-xs">
+              OK
+            </div>
+          </div>
+        </div>
       `;
     } else {
       content.innerHTML = `
-        <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200/80 mb-2">
-          <p class="font-bold text-emerald-900 text-xs">Cara Pasang di HP Android / Komputer:</p>
-          <p class="text-[11.5px] text-emerald-800 mt-0.5">Pasang aplikasi mandiri tanpa perlu unduh dari Play Store:</p>
+        <div class="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200/80 mb-3">
+          <p class="font-black text-brand-dark text-xs sm:text-sm flex items-center gap-1.5">
+            <span>🤖</span> Panduan Pasang di HP Android / Komputer
+          </p>
+          <p class="text-[11px] text-slate-600 mt-1 leading-relaxed">
+            Pasang aplikasi langsung dari browser Google Chrome atau Samsung Internet:
+          </p>
         </div>
-        <ol class="space-y-2.5 pl-1">
-          <li class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-100 text-brand-primary font-black text-xs flex items-center justify-center shrink-0">1</span>
-            <span>Ketuk menu titik tiga (<strong>&vellip;</strong>) di pojok kanan atas browser Google Chrome / Samsung Internet.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-100 text-brand-primary font-black text-xs flex items-center justify-center shrink-0">2</span>
-            <span>Pilih <strong>"Instal Aplikasi"</strong> atau <strong>"Tambahkan ke Layar Utama"</strong>.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-100 text-brand-primary font-black text-xs flex items-center justify-center shrink-0">3</span>
-            <span>Ikon resmi MTs YASUA siap dibuka kapanpun secepat aplikasi bawaan HP!</span>
-          </li>
-        </ol>
+        <div class="space-y-2.5 text-xs text-slate-700">
+          <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+            <span class="w-6 h-6 rounded-full bg-brand-primary text-white font-black text-xs flex items-center justify-center shrink-0 shadow-2xs">1</span>
+            <div class="flex-1">
+              <p class="font-bold text-slate-900">Buka Menu Browser</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Ketuk ikon titik tiga (<strong>&vellip;</strong>) di pojok kanan atas layar.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+            <span class="w-6 h-6 rounded-full bg-brand-primary text-white font-black text-xs flex items-center justify-center shrink-0 shadow-2xs">2</span>
+            <div class="flex-1">
+              <p class="font-bold text-slate-900">Pilih 'Instal Aplikasi'</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Atau pilih opsi 'Tambahkan ke Layar Utama'.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+            <span class="w-6 h-6 rounded-full bg-brand-primary text-white font-black text-xs flex items-center justify-center shrink-0 shadow-2xs">3</span>
+            <div class="flex-1">
+              <p class="font-bold text-slate-900">Aplikasi Siap Digunakan</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Buka secepat aplikasi asli dengan perlindungan data offline!</p>
+            </div>
+          </div>
+        </div>
       `;
     }
 
@@ -917,6 +956,123 @@
     }, 4500);
   }
 
+
+  // ===================================================================
+  // 10. Offline Mutation Queue & Connectivity Resilience Engine
+  // ===================================================================
+  const QUEUE_STORAGE_KEY = 'mts_offline_mutation_queue';
+
+  window.mtsOfflineQueue = {
+    getQueue: function () {
+      try {
+        const stored = localStorage.getItem(QUEUE_STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+      } catch (e) {
+        return [];
+      }
+    },
+    enqueue: function (mutation) {
+      try {
+        const queue = this.getQueue();
+        const item = {
+          id: mutation.id || ('mut_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6)),
+          url: mutation.url,
+          method: mutation.method || 'POST',
+          headers: mutation.headers || {},
+          body: mutation.body || null,
+          title: mutation.title || 'Formulir',
+          timestamp: Date.now()
+        };
+        queue.push(item);
+        localStorage.setItem(QUEUE_STORAGE_KEY, JSON.stringify(queue));
+        showToast('Data disimpan secara offline. Akan dikirim otomatis saat internet aktif.');
+        return item.id;
+      } catch (e) {
+        console.error('[PWA OfflineQueue] Failed to enqueue:', e);
+        return null;
+      }
+    },
+    remove: function (id) {
+      try {
+        let queue = this.getQueue();
+        queue = queue.filter((m) => m.id !== id);
+        localStorage.setItem(QUEUE_STORAGE_KEY, JSON.stringify(queue));
+      } catch (e) {}
+    },
+    clear: function () {
+      localStorage.removeItem(QUEUE_STORAGE_KEY);
+    },
+    drainQueue: async function () {
+      if (!navigator.onLine) return;
+      const queue = this.getQueue();
+      if (!queue || queue.length === 0) return;
+
+      console.log('[PWA OfflineQueue] Draining queue, items:', queue.length);
+      showToast('Menyinkronkan ' + queue.length + ' data offline ke server...');
+
+      for (const item of queue) {
+        try {
+          const res = await fetch(item.url, {
+            method: item.method,
+            headers: item.headers,
+            body: item.body
+          });
+          if (res.ok) {
+            this.remove(item.id);
+            console.log('[PWA OfflineQueue] Synchronized:', item.id);
+          }
+        } catch (err) {
+          console.warn('[PWA OfflineQueue] Sync failed for item:', item.id, err);
+          break;
+        }
+      }
+
+      if (this.getQueue().length === 0) {
+        showToast('✅ Semua data offline berhasil disinkronkan ke server!');
+      }
+    }
+  };
+
+  // Connectivity status indicator banner
+  function initConnectivityListeners() {
+    function createOfflineBanner() {
+      if (document.getElementById('pwaGlobalOfflineBanner')) return;
+      const banner = document.createElement('div');
+      banner.id = 'pwaGlobalOfflineBanner';
+      banner.className =
+        'fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-amber-600 to-rose-600 text-white text-xs font-semibold py-1.5 px-3 shadow-md flex items-center justify-center gap-2 transform -translate-y-full transition-transform duration-300';
+      banner.innerHTML = `
+        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 4.243a9 9 0 01-5.657-2.828m0 0l2.828-2.829m-2.828 2.829L3 21m3.343-5.657a5 5 0 010-7.071m0 0l2.829 2.829m0 0a1 1 0 011.414 0l1.414 1.414"/></svg>
+        <span>Mode Offline Aktif — Menampilkan data tersimpan di perangkat.</span>
+      `;
+      document.body.appendChild(banner);
+    }
+
+    function handleOnline() {
+      const banner = document.getElementById('pwaGlobalOfflineBanner');
+      if (banner) {
+        banner.classList.add('-translate-y-full');
+      }
+      showToast('🌐 Koneksi internet pulih. Menyinkronkan data...');
+      window.mtsOfflineQueue.drainQueue();
+    }
+
+    function handleOffline() {
+      createOfflineBanner();
+      const banner = document.getElementById('pwaGlobalOfflineBanner');
+      if (banner) {
+        banner.classList.remove('-translate-y-full');
+      }
+    }
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    if (!navigator.onLine) {
+      handleOffline();
+    }
+  }
+
   // Initialize
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
@@ -924,6 +1080,7 @@
       initMobileNav();
       initPrayerAndClockWidget();
       initAppBannerSlider();
+      initConnectivityListeners();
       if (window.lucide) window.lucide.createIcons();
     });
   } else {
@@ -931,6 +1088,7 @@
     initMobileNav();
     initPrayerAndClockWidget();
     initAppBannerSlider();
+      initConnectivityListeners();
     if (window.lucide) window.lucide.createIcons();
   }
 })();
