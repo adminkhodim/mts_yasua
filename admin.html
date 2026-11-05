@@ -42,6 +42,10 @@
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Cropper.js 1.6.2 (Pemotong & Penyesuai Foto Berita) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
@@ -4561,36 +4565,45 @@
         newsCropperInstance = null;
       }
 
+      function initCropper() {
+        if (typeof Cropper === 'undefined') {
+          console.error('Cropper.js belum selesai dimuat!');
+          showToast('Library pemotong gambar belum siap, silakan coba 2 detik lagi.', 'warning');
+          return;
+        }
+        if (newsCropperInstance) {
+          newsCropperInstance.destroy();
+          newsCropperInstance = null;
+        }
+        try {
+          newsCropperInstance = new Cropper(targetImg, {
+            aspectRatio: 16 / 9,
+            viewMode: 1,
+            autoCropArea: 0.95,
+            responsive: true,
+            restore: true,
+            checkCrossOrigin: true,
+            ready() {
+              setCropperRatio(16 / 9, document.getElementById('btnRatio169'));
+            }
+          });
+        } catch (err) {
+          console.error('Gagal inisialisasi Cropper:', err);
+        }
+      }
+
       // Atur Cross-Origin Anonymous untuk URL eksternal agar kanvas tidak tainted
-      if (src.startsWith('data:')) {
+      if (src.startsWith('data:') || src.startsWith('blob:')) {
         targetImg.removeAttribute('crossorigin');
       } else {
         targetImg.crossOrigin = 'anonymous';
       }
 
       targetImg.onload = function () {
-        if (typeof Cropper === 'undefined') {
-          console.warn('Cropper.js belum selesai dimuat');
-          return;
-        }
-        if (newsCropperInstance) {
-          newsCropperInstance.destroy();
-        }
-        newsCropperInstance = new Cropper(targetImg, {
-          aspectRatio: 16 / 9,
-          viewMode: 2,
-          autoCropArea: 0.95,
-          responsive: true,
-          restore: true,
-          checkCrossOrigin: true,
-          ready() {
-            setCropperRatio(16 / 9, document.getElementById('btnRatio169'));
-          }
-        });
+        setTimeout(initCropper, 80);
       };
 
       targetImg.onerror = function() {
-        // Fallback jika mode crossOrigin ditolak oleh server eksternal non-CORS
         if (targetImg.hasAttribute('crossorigin')) {
           targetImg.removeAttribute('crossorigin');
           targetImg.src = src;
@@ -4598,6 +4611,9 @@
       };
 
       targetImg.src = src;
+      if (targetImg.complete && targetImg.naturalWidth > 0) {
+        setTimeout(initCropper, 80);
+      }
     }
 
     function closeNewsCropper() {
@@ -4635,7 +4651,10 @@
     }
 
     function applyNewsCrop() {
-      if (!newsCropperInstance) return;
+      if (!newsCropperInstance) {
+        showToast('Pemotong gambar belum siap atau belum aktif.', 'warning');
+        return;
+      }
 
       try {
         const canvas = newsCropperInstance.getCroppedCanvas({
@@ -4646,7 +4665,7 @@
         });
 
         if (!canvas) {
-          showToast('Gagal memproses crop gambar.', 'error');
+          showToast('Gagal memproses pemotongan gambar.', 'error');
           return;
         }
 
