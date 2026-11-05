@@ -4513,7 +4513,13 @@
     }
 
     function updateNewsModalPreview() {
-      const img = document.getElementById('newsGambarUrl').value.trim() || 'poster_pts_berita.webp';
+      let img = document.getElementById('newsGambarUrl').value.trim() || 'poster_pts_berita.webp';
+      if (img.includes('drive.google.com') || img.includes('docs.google.com') || img.includes('googleusercontent.com')) {
+        const driveMatch = img.match(/(?:id=|d\/|open\?id=)([a-zA-Z0-9_-]{25,})/);
+        if (driveMatch && driveMatch[1]) {
+          img = 'https://lh3.googleusercontent.com/d/' + driveMatch[1];
+        }
+      }
       if (!uploadedNewsBase64) {
         document.getElementById('newsPhotoPreview').src = img;
       }
@@ -4526,19 +4532,25 @@
     let pendingCropSourceUrl = null;
 
     function openNewsCropper(customImageSrc) {
-      const src = customImageSrc || 
-                  uploadedNewsDataUrl || 
-                  document.getElementById('newsPhotoPreview').src;
+      let src = customImageSrc || 
+                uploadedNewsDataUrl || 
+                document.getElementById('newsPhotoPreview').src;
                   
       if (!src || src.includes('poster_pts_berita.webp')) {
         document.getElementById('newsFileInput').click();
         return;
       }
 
+      // Normalisasi tautan Google Drive agar mendukung CORS dan resolusi asli
+      if (src.includes('drive.google.com') || src.includes('docs.google.com') || src.includes('googleusercontent.com')) {
+        const driveMatch = src.match(/(?:id=|d\/|open\?id=)([a-zA-Z0-9_-]{25,})/);
+        if (driveMatch && driveMatch[1]) {
+          src = 'https://lh3.googleusercontent.com/d/' + driveMatch[1];
+        }
+      }
+
       pendingCropSourceUrl = src;
       const targetImg = document.getElementById('cropperImageTarget');
-      targetImg.src = src;
-
       const modal = document.getElementById('newsCropModal');
       modal.classList.remove('hidden');
 
@@ -4549,10 +4561,20 @@
         newsCropperInstance = null;
       }
 
+      // Atur Cross-Origin Anonymous untuk URL eksternal agar kanvas tidak tainted
+      if (src.startsWith('data:')) {
+        targetImg.removeAttribute('crossorigin');
+      } else {
+        targetImg.crossOrigin = 'anonymous';
+      }
+
       targetImg.onload = function () {
         if (typeof Cropper === 'undefined') {
           console.warn('Cropper.js belum selesai dimuat');
           return;
+        }
+        if (newsCropperInstance) {
+          newsCropperInstance.destroy();
         }
         newsCropperInstance = new Cropper(targetImg, {
           aspectRatio: 16 / 9,
@@ -4560,16 +4582,22 @@
           autoCropArea: 0.95,
           responsive: true,
           restore: true,
-          checkCrossOrigin: false,
+          checkCrossOrigin: true,
           ready() {
             setCropperRatio(16 / 9, document.getElementById('btnRatio169'));
           }
         });
       };
-      
-      if (targetImg.complete) {
-        targetImg.onload();
-      }
+
+      targetImg.onerror = function() {
+        // Fallback jika mode crossOrigin ditolak oleh server eksternal non-CORS
+        if (targetImg.hasAttribute('crossorigin')) {
+          targetImg.removeAttribute('crossorigin');
+          targetImg.src = src;
+        }
+      };
+
+      targetImg.src = src;
     }
 
     function closeNewsCropper() {
@@ -4609,29 +4637,34 @@
     function applyNewsCrop() {
       if (!newsCropperInstance) return;
 
-      const canvas = newsCropperInstance.getCroppedCanvas({
-        width: 1200,
-        height: 675,
-        imageSmoothingEnabled: true,
-        imageSmoothingQuality: 'high'
-      });
+      try {
+        const canvas = newsCropperInstance.getCroppedCanvas({
+          width: 1200,
+          height: 675,
+          imageSmoothingEnabled: true,
+          imageSmoothingQuality: 'high'
+        });
 
-      if (!canvas) {
-        showToast('Gagal memproses crop gambar.', 'error');
-        return;
+        if (!canvas) {
+          showToast('Gagal memproses crop gambar.', 'error');
+          return;
+        }
+
+        const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.90);
+        const base64Data = croppedDataUrl.split(',')[1];
+
+        document.getElementById('newsPhotoPreview').src = croppedDataUrl;
+        uploadedNewsDataUrl = croppedDataUrl;
+        uploadedNewsBase64 = base64Data;
+        if (!uploadedNewsName) uploadedNewsName = 'berita-crop.jpg';
+        uploadedNewsMime = 'image/jpeg';
+
+        closeNewsCropper();
+        showToast('Foto berita berhasil disesuaikan & di-crop!');
+      } catch (err) {
+        console.error('Gagal mengekspor hasil crop:', err);
+        showToast('Gagal memotong gambar karena proteksi keamanan (CORS) dari server asal gambar. Solusi: Unduh gambar lalu pilih file dari perangkat.', 'error');
       }
-
-      const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.90);
-      const base64Data = croppedDataUrl.split(',')[1];
-
-      document.getElementById('newsPhotoPreview').src = croppedDataUrl;
-      uploadedNewsDataUrl = croppedDataUrl;
-      uploadedNewsBase64 = base64Data;
-      if (!uploadedNewsName) uploadedNewsName = 'berita-crop.jpg';
-      uploadedNewsMime = 'image/jpeg';
-
-      closeNewsCropper();
-      showToast('Foto berita berhasil di-crop ke rasio 16:9!');
     }
 
     function handleNewsFileSelected(e) {
