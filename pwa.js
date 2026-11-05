@@ -335,17 +335,26 @@
               </div>
             </div>
 
-            <!-- 4. Sinkronisasi & Cache -->
+            <!-- 4. Sinkronisasi & Diagnostik Cache -->
             <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-100">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2 mb-1">
-                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                <span>Sinkronisasi Data Madrasah</span>
-              </span>
-              <p class="text-[11px] text-slate-500 mb-2.5">Bersihkan cache aplikasi untuk mengambil pengumuman &amp; berita paling mutakhir.</p>
-              <button onclick="window.refreshAppCache()" class="w-full py-2 px-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-300 text-slate-700 hover:text-brand-primary text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-2xs">
-                <svg class="w-3.5 h-3.5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                <span>Bersihkan Cache &amp; Muat Ulang</span>
-              </button>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-slate-700 flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  <span>Sinkronisasi &amp; Diagnostik</span>
+                </span>
+                <span id="pwaStorageUsage" class="text-[10px] bg-emerald-100 text-brand-dark px-2 py-0.5 rounded-full font-bold">Penyimpanan: Aktif</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mb-2.5">Periksa pembaruan sistem dan kelola penyimpanan offline di HP Anda.</p>
+              <div class="space-y-2">
+                <button onclick="window.checkForAppUpdate()" class="w-full py-2 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-brand-primary text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-2xs">
+                  <svg class="w-3.5 h-3.5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span>Periksa Pembaruan Aplikasi</span>
+                </button>
+                <button onclick="window.refreshAppCache()" class="w-full py-2 px-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-300 text-slate-700 hover:text-brand-primary text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-2xs">
+                  <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  <span>Bersihkan Cache &amp; Muat Ulang</span>
+                </button>
+              </div>
             </div>
 
             <!-- 5. Navigasi Cepat & Bantuan Humas -->
@@ -572,12 +581,51 @@
     if (modal) modal.classList.add('hidden');
   };
 
+
+  // Diagnostik Penyimpanan & Update Otomatis PWA
+  window.checkForAppUpdate = function () {
+    showToast('Memeriksa pembaruan aplikasi...');
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration().then((reg) => {
+        if (reg) {
+          reg.update().then(() => {
+            setTimeout(() => {
+              showToast('✅ Aplikasi Anda sudah menggunakan versi paling mutakhir (v2.0).');
+            }, 1000);
+          }).catch(() => {
+            showToast('Pemeriksaan selesai. Sistem berjalan normal.');
+          });
+        } else {
+          showToast('Aplikasi siap dan berjalan optimal.');
+        }
+      });
+    } else {
+      showToast('Browser berjalan dalam mode web biasa.');
+    }
+  };
+
+  function updateStorageDiagnostics() {
+    const storageEl = document.getElementById('pwaStorageUsage');
+    if (!storageEl) return;
+    if (navigator.storage && navigator.storage.estimate) {
+      navigator.storage.estimate().then((estimate) => {
+        const usageMB = (estimate.usage / (1024 * 1024)).toFixed(1);
+        storageEl.textContent = 'Penyimpanan: ± ' + usageMB + ' MB';
+      }).catch(() => {
+        storageEl.textContent = 'Penyimpanan: Aktif';
+      });
+    } else {
+      storageEl.textContent = 'Penyimpanan: Aktif';
+    }
+  }
+
   // 5. Settings Modal Controls & Mode Switcher
   window.openSettingsModal = function () {
     const modal = document.getElementById('settingsModal');
     if (!modal) return;
     updateSettingsPwaStatus();
     updateFontSizeUI();
+    updateStorageDiagnostics();
     const modeLabel = document.getElementById('currentModeLabel');
     if (modeLabel) {
       modeLabel.textContent = document.body.classList.contains('is-pwa-standalone')

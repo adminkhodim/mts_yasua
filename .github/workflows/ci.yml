@@ -1,0 +1,46 @@
+name: Production CI & Quality Gate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate Core JavaScript Syntax
+        run: |
+          node -c sw.js
+          node -c pwa.js
+          node -c search.js
+
+      - name: Verify Production Assets & Manifests
+        run: |
+          test -f manifest.webmanifest || (echo "Missing manifest.webmanifest" && exit 1)
+          test -f robots.txt || (echo "Missing robots.txt" && exit 1)
+          test -f sitemap.xml || (echo "Missing sitemap.xml" && exit 1)
+          test -f offline.html || (echo "Missing offline.html" && exit 1)
+          test -f vercel.json || (echo "Missing vercel.json" && exit 1)
+
+      - name: Validate Web App Manifest JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('manifest.webmanifest', 'utf8')); console.log('Manifest JSON is valid');"
+
+      - name: Validate Vercel Routing Configuration
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('vercel.json', 'utf8')); console.log('Vercel configuration is valid');"
+
+      - name: Compile and Verify Tailwind CSS Engine
+        run: |
+          npx -y tailwindcss@3.4.17 -i ./input-site.css -o ./site.min.css --minify
+          test -s site.min.css || (echo "site.min.css compilation failed or empty" && exit 1)
