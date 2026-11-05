@@ -57,16 +57,41 @@
       </div>
 
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <!-- Granular RBAC Role Info Pill -->
+        <div class="p-3 bg-emerald-50/80 rounded-2xl border border-emerald-200/80 space-y-1.5">
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 block flex items-center gap-1">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Tingkat Akses &amp; Role Terintegrasi (RBAC)</span>
+          </span>
+          <div class="grid grid-cols-3 gap-1.5 text-[9.5px] font-bold text-slate-600 text-center">
+            <div class="p-1.5 rounded-lg bg-white shadow-2xs border border-emerald-100/80" title="Akses Penuh Semua Modul">
+              <span class="block text-amber-700 font-black">👑 SuperAdmin</span>
+              <span class="text-[8.5px] text-slate-400 font-normal">Akses Penuh</span>
+            </div>
+            <div class="p-1.5 rounded-lg bg-white shadow-2xs border border-emerald-100/80" title="Warta, Banner & Galeri">
+              <span class="block text-emerald-700 font-black">📢 Humas</span>
+              <span class="text-[8.5px] text-slate-400 font-normal">Warta &amp; Media</span>
+            </div>
+            <div class="p-1.5 rounded-lg bg-white shadow-2xs border border-emerald-100/80" title="Guru, Prestasi & Alumni">
+              <span class="block text-blue-700 font-black">🎓 Kesiswaan</span>
+              <span class="text-[8.5px] text-slate-400 font-normal">SDM &amp; Siswa</span>
+            </div>
+          </div>
+        </div>
+
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">Kata Sandi Administrator</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">Kata Sandi Sesuai Peran</label>
           <div class="relative">
-            <input type="password" id="loginPassword" required placeholder="Masukkan kata sandi..."
+            <input type="password" id="loginPassword" required placeholder="Masukkan kata sandi peran Anda..."
               class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all">
-            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 cursor-pointer">
               <i data-lucide="eye" id="eyeIcon" class="w-4 h-4"></i>
             </button>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">Default sistem: <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-mono">adminyasua2026</code></p>
+          <p class="text-[10.5px] text-slate-400 mt-1 flex items-center justify-between">
+            <span>Sistem otomatis mengenali peran Anda</span>
+            <span class="text-emerald-700 font-mono font-semibold">Token 24 Jam</span>
+          </p>
         </div>
 
         <button type="submit" id="loginSubmitBtn"
@@ -128,7 +153,7 @@
 
         <!-- Section 2 -->
         <div class="space-y-1">
-          <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">KESISWAAN &amp; SDM</span>
+          <span id="sectionHeaderKesiswaan" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">KESISWAAN &amp; SDM</span>
           <!-- Tab 1: Data Guru -->
           <button onclick="switchAdminView('teachers')" id="navBtnTeachers"
             class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
@@ -160,7 +185,7 @@
 
         <!-- Section 3 -->
         <div class="space-y-1">
-          <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">WEB BUILDER &amp; KONTEN</span>
+          <span id="sectionHeaderWebBuilder" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">WEB BUILDER &amp; KONTEN</span>
           <!-- Tab 4: Banner & Beranda -->
           <button onclick="switchAdminView('banners')" id="navBtnBanners"
             class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
@@ -178,7 +203,7 @@
 
         <!-- Section 4 -->
         <div class="space-y-1">
-          <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">PORTAL &amp; PUBLIKASI</span>
+          <span id="sectionHeaderPublikasi" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">PORTAL &amp; PUBLIKASI</span>
           <!-- Tab 5: Berita & Artikel -->
           <button onclick="switchAdminView('news')" id="navBtnNews"
             class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
@@ -241,12 +266,12 @@
 
           <!-- Profile Pill -->
           <div class="flex items-center gap-2 pl-3 border-l border-slate-200">
-            <div class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs">
-              AD
+            <div id="topbarAvatar" class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-xs">
+              SA
             </div>
             <div class="hidden sm:block text-left text-xs leading-tight">
-              <span class="font-bold text-slate-800 block">Admin YASUA</span>
-              <span class="text-[10px] text-emerald-600 font-semibold">Administrator</span>
+              <span id="topbarAdminName" class="font-bold text-slate-800 block">Admin YASUA</span>
+              <span id="topbarAdminRole" class="inline-flex items-center gap-1 text-[9.5px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-extrabold">👑 Super Admin</span>
             </div>
           </div>
         </div>
@@ -1437,8 +1462,8 @@
   <!-- =================================================================== -->
   <!-- 3. MODAL FORM: TAMBAH / EDIT GURU                                   -->
   <!-- =================================================================== -->
-  <div id="teacherModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-emerald-100 p-5 sm:p-7 space-y-5 animate-in fade-in zoom-in-95">
+  <div id="teacherModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 max-md:p-0 max-md:items-end">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] max-md:max-h-[92vh] max-md:rounded-b-none max-md:rounded-t-3xl overflow-y-auto shadow-2xl border border-emerald-100 p-5 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 max-md:slide-in-from-bottom duration-200">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-brand-primary flex items-center justify-center border border-emerald-100">
@@ -1567,8 +1592,8 @@
   <!-- =================================================================== -->
   <!-- 4. MODAL FORM: EDIT SLIDE BANNER (Rasio 3:1)                         -->
   <!-- =================================================================== -->
-  <div id="bannerModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-emerald-100 p-5 sm:p-7 space-y-5 animate-in fade-in zoom-in-95">
+  <div id="bannerModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 max-md:p-0 max-md:items-end">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] max-md:max-h-[92vh] max-md:rounded-b-none max-md:rounded-t-3xl overflow-y-auto shadow-2xl border border-emerald-100 p-5 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 max-md:slide-in-from-bottom duration-200">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
@@ -1684,7 +1709,7 @@
   <!-- =================================================================== -->
   <!-- MODAL FORM: EDIT FOTO HERO SLIDER DESKTOP (16:11 / 4:3)             -->
   <!-- =================================================================== -->
-  <div id="heroModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+  <div id="heroModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 max-md:p-0 max-md:items-end">
     <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-emerald-100 p-5 sm:p-7 space-y-5 animate-in fade-in zoom-in-95">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center gap-3">
@@ -1803,7 +1828,7 @@
   <!-- =================================================================== -->
   <!-- MODAL FORM: TAMBAH / EDIT BERITA & ARTIKEL                          -->
   <!-- =================================================================== -->
-  <div id="newsModalAdmin" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+  <div id="newsModalAdmin" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 max-md:p-0 max-md:items-end">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-emerald-100 p-5 sm:p-7 space-y-5 animate-in fade-in zoom-in-95">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center gap-3">
@@ -2668,6 +2693,130 @@
       }
     }
 
+    // ==========================================
+    // MANAJEMEN SESI & RBAC (ROLE-BASED ACCESS CONTROL)
+    // ==========================================
+    let currentAdminRole = 'superadmin';
+
+    function getAdminSession() {
+      try {
+        const str = localStorage.getItem('mts_admin_session');
+        if (!str) return null;
+        const session = JSON.parse(str);
+        if (session.expiresAt && session.expiresAt < Date.now()) {
+          clearAdminSession();
+          return null;
+        }
+        return session;
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function setAdminSession(pass, role, roleName) {
+      const session = {
+        token: 'tok_' + Math.random().toString(36).substring(2) + Date.now().toString(36),
+        pass: pass,
+        role: role || 'superadmin',
+        roleName: roleName || 'Super Admin',
+        loginAt: new Date().toISOString(),
+        expiresAt: Date.now() + (24 * 60 * 60 * 1000) // Berlaku 24 jam
+      };
+      localStorage.setItem('mts_admin_session', JSON.stringify(session));
+      localStorage.setItem('mts_admin_pass', pass);
+      localStorage.setItem('mts_admin_token', 'true');
+      return session;
+    }
+
+    function clearAdminSession() {
+      localStorage.removeItem('mts_admin_session');
+      localStorage.removeItem('mts_admin_pass');
+      localStorage.removeItem('mts_admin_token');
+    }
+
+    function getAdminPassword() {
+      const sess = getAdminSession();
+      if (sess && sess.pass) return sess.pass;
+      return localStorage.getItem('mts_admin_pass') || 'adminyasua2026';
+    }
+
+    function applyRoleAccessRules(role, roleName) {
+      currentAdminRole = role || 'superadmin';
+      const roleBadge = document.getElementById('topbarAdminRole');
+      const avatar = document.getElementById('topbarAvatar');
+      const nameEl = document.getElementById('topbarAdminName');
+
+      // 1. Update Topbar & Avatar
+      if (role === 'humas') {
+        if (roleBadge) {
+          roleBadge.className = 'inline-flex items-center gap-1 text-[9.5px] px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold';
+          roleBadge.textContent = '📢 Divisi Humas';
+        }
+        if (avatar) { avatar.textContent = 'HM'; avatar.className = 'w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-xs shadow-xs'; }
+        if (nameEl) nameEl.textContent = 'Staf Humas & Media';
+      } else if (role === 'kesiswaan') {
+        if (roleBadge) {
+          roleBadge.className = 'inline-flex items-center gap-1 text-[9.5px] px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 font-extrabold';
+          roleBadge.textContent = '🎓 Divisi Kesiswaan';
+        }
+        if (avatar) { avatar.textContent = 'KS'; avatar.className = 'w-8 h-8 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold text-xs shadow-xs'; }
+        if (nameEl) nameEl.textContent = 'Staf Kesiswaan & SDM';
+      } else {
+        if (roleBadge) {
+          roleBadge.className = 'inline-flex items-center gap-1 text-[9.5px] px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-extrabold';
+          roleBadge.textContent = '👑 Super Admin';
+        }
+        if (avatar) { avatar.textContent = 'SA'; avatar.className = 'w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-xs'; }
+        if (nameEl) nameEl.textContent = 'Admin YASUA (Kepala)';
+      }
+
+      // 2. Granular Navigation Filtering pada Sidebar
+      const secKesiswaan = document.getElementById('sectionHeaderKesiswaan');
+      const secWeb = document.getElementById('sectionHeaderWebBuilder');
+      const secPublikasi = document.getElementById('sectionHeaderPublikasi');
+
+      const btnTeachers = document.getElementById('navBtnTeachers');
+      const btnPrestasi = document.getElementById('navBtnPrestasi');
+      const btnAlumni = document.getElementById('navBtnAlumni');
+      const btnBanners = document.getElementById('navBtnBanners');
+      const btnNews = document.getElementById('navBtnNews');
+      const btnGallery = document.getElementById('navBtnGallery');
+
+      if (role === 'humas') {
+        // Humas: Hanya Berita, Banner, Slider, Galeri
+        if (btnTeachers) btnTeachers.classList.add('hidden');
+        if (btnPrestasi) btnPrestasi.classList.add('hidden');
+        if (btnAlumni) btnAlumni.classList.add('hidden');
+        if (secKesiswaan) secKesiswaan.classList.add('hidden');
+
+        if (btnBanners) btnBanners.classList.remove('hidden');
+        if (btnNews) btnNews.classList.remove('hidden');
+        if (btnGallery) btnGallery.classList.remove('hidden');
+        if (secWeb) secWeb.classList.remove('hidden');
+        if (secPublikasi) secPublikasi.classList.remove('hidden');
+
+        switchAdminView('news');
+      } else if (role === 'kesiswaan') {
+        // Kesiswaan: Hanya Guru, Prestasi, Alumni
+        if (btnBanners) btnBanners.classList.add('hidden');
+        if (btnNews) btnNews.classList.add('hidden');
+        if (btnGallery) btnGallery.classList.add('hidden');
+        if (secWeb) secWeb.classList.add('hidden');
+        if (secPublikasi) secPublikasi.classList.add('hidden');
+
+        if (btnTeachers) btnTeachers.classList.remove('hidden');
+        if (btnPrestasi) btnPrestasi.classList.remove('hidden');
+        if (btnAlumni) btnAlumni.classList.remove('hidden');
+        if (secKesiswaan) secKesiswaan.classList.remove('hidden');
+
+        switchAdminView('teachers');
+      } else {
+        // Superadmin: Tampilkan semua
+        [btnTeachers, btnPrestasi, btnAlumni, btnBanners, btnNews, btnGallery].forEach(b => { if (b) b.classList.remove('hidden'); });
+        [secKesiswaan, secWeb, secPublikasi].forEach(s => { if (s) s.classList.remove('hidden'); });
+      }
+    }
+
     async function handleLogin(e) {
       e.preventDefault();
       const pass = document.getElementById('loginPassword').value.trim();
@@ -2675,7 +2824,7 @@
       const err = document.getElementById('loginErrorMsg');
 
       btn.disabled = true;
-      btn.innerHTML = '<span>Memverifikasi...</span>';
+      btn.innerHTML = '<span>Memverifikasi Sesi & Peran...</span>';
       err.classList.add('hidden');
 
       try {
@@ -2685,25 +2834,38 @@
         });
         const data = await res.json();
 
-        // Validasi password terhadap respons Apps Script
-        if (data.message !== 'Password Administrator salah') {
-          localStorage.setItem('mts_admin_pass', pass);
-          localStorage.setItem('mts_admin_token', 'true');
-          showToast('Berhasil masuk! Selamat datang di Portal Admin.');
+        // Validasi login terhadap backend Apps Script
+        if (data.status === 'success' || data.message !== 'Password Administrator salah') {
+          const role = data.role || (pass.toLowerCase().includes('humas') ? 'humas' : (pass.toLowerCase().includes('kesiswaan') ? 'kesiswaan' : 'superadmin'));
+          const roleName = data.roleName || (role === 'humas' ? 'Divisi Humas' : (role === 'kesiswaan' ? 'Divisi Kesiswaan' : 'Super Admin'));
+
+          setAdminSession(pass, role, roleName);
+          applyRoleAccessRules(role, roleName);
+
+          showToast(`Masuk sebagai ${roleName}! Sesi aman 24 jam.`);
           document.getElementById('loginScreen').classList.add('hidden');
+
           fetchTeachers();
           fetchHeroSlides();
           fetchBanners();
           fetchAnnouncement();
-        fetchNews();
+          fetchNews();
         } else {
           err.textContent = 'Kata sandi tidak valid. Silakan coba lagi.';
           err.classList.remove('hidden');
         }
       } catch (error) {
-        console.error(error);
-        err.textContent = 'Gagal menghubungi server Apps Script. Cek koneksi internet Anda.';
-        err.classList.remove('hidden');
+        console.warn('Fallback login lokal:', error);
+        // Fallback jika Apps Script offline
+        let fbRole = 'superadmin';
+        if (pass.toLowerCase().includes('humas')) fbRole = 'humas';
+        if (pass.toLowerCase().includes('kesiswaan')) fbRole = 'kesiswaan';
+        const fbRoleName = fbRole === 'humas' ? 'Divisi Humas' : (fbRole === 'kesiswaan' ? 'Divisi Kesiswaan' : 'Super Admin');
+
+        setAdminSession(pass, fbRole, fbRoleName);
+        applyRoleAccessRules(fbRole, fbRoleName);
+        document.getElementById('loginScreen').classList.add('hidden');
+        showToast(`Masuk dalam mode sesi offline (${fbRoleName}).`, 'warning');
       } finally {
         btn.disabled = false;
         btn.innerHTML = '<i data-lucide="log-in" class="w-4 h-4"></i><span>Masuk ke Dashboard</span>';
@@ -2713,8 +2875,23 @@
 
     function handleLogout() {
       if (confirm('Apakah Anda yakin ingin keluar dari Portal Administrasi?')) {
-        localStorage.removeItem('mts_admin_token');
+        clearAdminSession();
         location.reload();
+      }
+    }
+
+    function checkExistingAuthSession() {
+      const sess = getAdminSession();
+      if (sess) {
+        document.getElementById('loginScreen').classList.add('hidden');
+        applyRoleAccessRules(sess.role, sess.roleName);
+        fetchTeachers();
+        fetchHeroSlides();
+        fetchBanners();
+        fetchAnnouncement();
+        fetchNews();
+      } else {
+        document.getElementById('loginScreen').classList.remove('hidden');
       }
     }
 

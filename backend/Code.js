@@ -200,9 +200,39 @@ function doPost(e) {
     const action = payload.action;
     const adminPass = payload.admin_password || payload.password;
 
-    // Proteksi Password
-    if (adminPass !== getAdminPassword()) {
+    // Proteksi Password & Validasi Multi-Role (RBAC)
+    const auth = verifyAdminAuth(adminPass);
+    if (!auth.valid) {
       return createJsonResponse({ status: 'error', message: 'Password Administrator salah' });
+    }
+
+    // Action Login khusus untuk verifikasi role & token
+    if (action === 'login') {
+      return createJsonResponse({
+        status: 'success',
+        role: auth.role,
+        roleName: auth.roleName,
+        message: 'Login berhasil sebagai ' + auth.roleName
+      });
+    }
+
+    // Permission Guard Berdasarkan Role
+    const humasActions = [
+      'addNews', 'updateNews', 'deleteNews', 'uploadNewsPhoto',
+      'updateHeroSlide', 'saveAllHeroSlides', 'uploadHeroPhoto',
+      'saveAllBanners', 'uploadBannerPhoto', 'saveAnnouncement',
+      'toggleGalleryStatus', 'deleteGallery'
+    ];
+    const kesiswaanActions = [
+      'addTeacher', 'updateTeacher', 'deleteTeacher', 'uploadTeacherPhoto',
+      'togglePrestasiStatus', 'deletePrestasi', 'toggleAlumniStatus', 'deleteAlumni'
+    ];
+
+    if (auth.role === 'humas' && kesiswaanActions.includes(action)) {
+      return createJsonResponse({ status: 'error', message: 'Divisi Humas tidak memiliki izin untuk mengubah data ini' });
+    }
+    if (auth.role === 'kesiswaan' && humasActions.includes(action)) {
+      return createJsonResponse({ status: 'error', message: 'Divisi Kesiswaan tidak memiliki izin untuk mengubah data ini' });
     }
 
     let result;
@@ -777,6 +807,41 @@ function getAdminPassword() {
     if (data[i][0] === 'admin_password') return String(data[i][1]);
   }
   return CONFIG.DEFAULT_ADMIN_PASS;
+}
+
+function getSettingValue(key) {
+  const sheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID).getSheetByName(CONFIG.SHEET_SETTINGS);
+  if (!sheet) return null;
+  const data = sheet.getDataRange().getValues();
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0] === key) return String(data[i][1]);
+  }
+  return null;
+}
+
+function verifyAdminAuth(pass) {
+  if (!pass) return { valid: false };
+  const strPass = String(pass).trim();
+  const superPass = getAdminPassword();
+
+  // 1. Super Admin (Full Access ke seluruh modul)
+  if (strPass === superPass) {
+    return { valid: true, role: 'superadmin', roleName: 'Super Admin' };
+  }
+
+  // 2. Role Humas & Publikasi (Berita, Banner, Slider, Galeri)
+  const humasPass = getSettingValue('admin_password_humas') || 'humasyasua2026';
+  if (strPass === humasPass) {
+    return { valid: true, role: 'humas', roleName: 'Divisi Humas' };
+  }
+
+  // 3. Role Kesiswaan & SDM (Dewan Guru, Prestasi, Alumni, PPDB)
+  const kesiswaanPass = getSettingValue('admin_password_kesiswaan') || 'kesiswaanyasua2026';
+  if (strPass === kesiswaanPass) {
+    return { valid: true, role: 'kesiswaan', roleName: 'Divisi Kesiswaan' };
+  }
+
+  return { valid: false };
 }
 
 function createJsonResponse(data) {
