@@ -1355,6 +1355,16 @@
   </div>
 
   <script>
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  
     lucide.createIcons();
 
     function toggleMobileMenu() {
@@ -1466,7 +1476,7 @@
             const foto = t.foto_url || 'guru_1.webp';
             let subJabatan = t.jabatan || '';
             if (mapelGuru && !subJabatan.toLowerCase().includes(mapelGuru.toLowerCase()) && !mapelGuru.includes('guru_mapel')) {
-              subJabatan = subJabatan ? `${subJabatan} • ${mapelGuru}` : `Guru ${mapelGuru}`;
+              subJabatan = subJabatan ? `${escapeHtml(subJabatan)} • ${mapelGuru}` : `Guru ${mapelGuru}`;
             }
             if (!subJabatan) subJabatan = 'Tenaga Pendidik';
 
@@ -1476,18 +1486,18 @@
               <div class="bg-white rounded-3xl p-5 border border-emerald-100 shadow-md hover-lift flex flex-col justify-between group">
                 <div>
                   <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-4 relative">
-                    <img src="${foto}" alt="${namaGuru}"
+                    <img src="${foto}" alt="${escapeHtml(namaGuru)}"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy" onerror="this.src='logo.png'">
                     <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeColor} text-white text-[10px] font-bold backdrop-blur-xs shadow-xs">
-                      ${bidang}
+                      ${escapeHtml(bidang)}
                     </span>
                   </div>
                   <h3 class="font-extrabold text-slate-900 text-base leading-snug group-hover:text-brand-primary transition-colors">
-                    ${namaGuru}
+                    ${escapeHtml(namaGuru)}
                   </h3>
                   <p class="text-xs font-bold text-amber-700 mt-1">
-                    ${subJabatan}
+                    ${escapeHtml(subJabatan)}
                   </p>
                   <p class="text-xs text-slate-500 mt-2 leading-relaxed line-clamp-3">
                     ${t.deskripsi || 'Membimbing dan mendidik santri berlandaskan nilai-nilai islami.'}

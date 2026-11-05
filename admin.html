@@ -2585,6 +2585,16 @@
   <!-- 5. CONTROLLER SCRIPT                                                -->
   <!-- =================================================================== -->
   <script>
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  
     const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
 
     function getAdminPassword() {
@@ -3118,17 +3128,17 @@
                       isAktif ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-500'
                     }">${isAktif ? '● Aktif' : '○ Nonaktif'}</span>
                   </div>
-                  <h4 class="font-extrabold text-slate-900 text-sm leading-snug group-hover:text-brand-primary transition-colors truncate" title="${t.nama_lengkap}">
-                    ${t.nama_lengkap}
+                  <h4 class="font-extrabold text-slate-900 text-sm leading-snug group-hover:text-brand-primary transition-colors truncate" title="${escapeHtml(t.nama_lengkap)}">
+                    ${escapeHtml(t.nama_lengkap)}
                   </h4>
-                  <p class="text-[11px] text-amber-700 font-bold truncate mt-0.5">${t.jabatan || '-'}</p>
+                  <p class="text-[11px] text-amber-700 font-bold truncate mt-0.5">${escapeHtml(t.jabatan || '-')}</p>
                 </div>
               </div>
 
               <div class="text-[11px] text-slate-500 space-y-1 py-2 border-t border-slate-100">
-                <p><span class="font-semibold text-slate-700">Mapel:</span> ${t.mata_pelajaran || '-'}</p>
-                <p><span class="font-semibold text-slate-700">Pendidikan:</span> ${t.pendidikan_terakhir || '-'}</p>
-                <p class="line-clamp-2 text-slate-400 mt-1">${t.deskripsi || 'Tidak ada deskripsi profil.'}</p>
+                <p><span class="font-semibold text-slate-700">Mapel:</span> ${escapeHtml(t.mata_pelajaran || '-')}</p>
+                <p><span class="font-semibold text-slate-700">Pendidikan:</span> ${escapeHtml(t.pendidikan_terakhir || '-')}</p>
+                <p class="line-clamp-2 text-slate-400 mt-1">${escapeHtml(t.deskripsi || 'Tidak ada deskripsi profil.')}</p>
               </div>
             </div>
 
@@ -3145,7 +3155,7 @@
                   class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-bold transition-colors cursor-pointer" title="Edit Data">
                   <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
                 </button>
-                <button onclick="deleteTeacher('${t.id}', '${t.nama_lengkap}')"
+                <button onclick="deleteTeacher('${t.id}')"
                   class="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition-colors cursor-pointer" title="Hapus Data">
                   <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                 </button>
@@ -3385,7 +3395,9 @@
       }
     }
 
-    async function deleteTeacher(id, nama) {
+    async function deleteTeacher(id, optionalNama) {
+      const foundTeacher = allTeachers.find(t => String(t.id) === String(id));
+      const nama = optionalNama || (foundTeacher ? foundTeacher.nama_lengkap : 'guru ini');
       if (!confirm(`Apakah Anda yakin ingin menghapus data ${nama}? Baris pada Google Spreadsheet akan dihapus.`)) return;
 
       showToast(`Menghapus data ${nama}...`);
@@ -5010,7 +5022,9 @@
       }
     }
 
-    async function handleDeleteNews(id, title) {
+    async function handleDeleteNews(id, optionalTitle) {
+      const foundNews = allNews.find(n => String(n.id) === String(id));
+      const title = optionalTitle || (foundNews ? foundNews.judul : 'berita ini');
       if (!confirm(`Apakah Anda yakin ingin menghapus berita:\n"${title}"?`)) {
         return;
       }
