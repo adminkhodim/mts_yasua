@@ -2689,16 +2689,19 @@
     });
 
     function checkAuthState() {
-      const token = localStorage.getItem('mts_admin_token');
+      const session = getAdminSession();
       const loginScreen = document.getElementById('loginScreen');
-      if (token) {
+      if (session && session.token) {
         loginScreen.classList.add('hidden');
+        currentAdminRole = session.role || 'superadmin';
+        applyRoleAccessRules(session.role, session.roleName);
         fetchTeachers();
         fetchHeroSlides();
         fetchBanners();
         fetchAnnouncement();
         fetchNews();
       } else {
+        clearAdminSession();
         loginScreen.classList.remove('hidden');
       }
     }

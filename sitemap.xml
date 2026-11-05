@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Beranda Utama -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Mobile App PWA Dashboard -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/app</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Berita & Pengumuman -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/berita.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Penerimaan Peserta Didik Baru (PPDB) -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/ppdb.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Dewan Guru & Tenaga Kependidikan -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/guru.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Prestasi Siswa & Santri -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/prestasi.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Profil Madrasah & Sejarah -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/profil.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sambutan Kepala Madrasah -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/sambutan.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Program Unggulan & Kurikulum -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/program.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ekstrakurikuler -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/ekskul.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Kalender Akademik & Waktu Shalat -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/kalender.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Agenda Kegiatan -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/agenda.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Jejaring Alumni (IKAMAS) -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/alumni.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Galeri Dokumentasi -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/galeri.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Kemitraan & MoU -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/mou.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Kontak & Lokasi -->
+  <url>
+    <loc>https://www.mtsyasua.sch.id/kontak.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
