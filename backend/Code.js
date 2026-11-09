@@ -177,6 +177,14 @@ function doGet(e) {
         return createJsonResponse({ status: 'success', data: fetchAllSettings() });
       case 'initAuthSheets':
         return createJsonResponse(setupAuthDatabase());
+      case 'cleanupJunkSheets':
+        return createJsonResponse(cleanupJunkSheets());
+      case 'listAllSheets':
+        const ssAll = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+        return createJsonResponse({
+          status: 'success',
+          sheets: ssAll.getSheets().map(function(s) { return s.getName(); })
+        });
       case 'getRolesPermissions':
         return createJsonResponse({ status: 'success', data: fetchAllRolesPermissions() });
       case 'authWali':
@@ -1205,5 +1213,54 @@ function handleAuthAdmin(password) {
     token: 'tok_' + Math.random().toString(36).substring(2),
     permissions: ['ALL_CMS'],
     message: 'Otentikasi Administrator berhasil'
+  };
+}
+
+
+/**
+ * PEMBERSIHAN SHEET SAMPAH / SHEET DEFAULT TANPA NAMA
+ * Menghapus sheet seperti 'Sheet2', 'Sheet3', 'Sheet8', dll yang terbuat akibat kegagalan parameter
+ */
+function cleanupJunkSheets() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  const validSheets = [
+    CONFIG.SHEET_TEACHERS,
+    CONFIG.SHEET_BANNERS,
+    CONFIG.SHEET_HERO,
+    CONFIG.SHEET_NEWS,
+    CONFIG.SHEET_SETTINGS,
+    CONFIG.SHEET_USERS,
+    CONFIG.SHEET_ROLES_PERMISSIONS,
+    CONFIG.SHEET_STUDENTS,
+    CONFIG.SHEET_WALI_MAP,
+    CONFIG.SHEET_PRESENSI_GURU,
+    CONFIG.SHEET_MUTABAAH
+  ];
+
+  const allSheets = ss.getSheets();
+  const deleted = [];
+  const kept = [];
+
+  allSheets.forEach(function(sheet) {
+    const name = sheet.getName();
+    if (validSheets.indexOf(name) !== -1) {
+      kept.push(name);
+    } else if (/^Sheet\d+$/i.test(name) || name.indexOf('Sheet') === 0 || name.trim() === '') {
+      try {
+        ss.deleteSheet(sheet);
+        deleted.push(name);
+      } catch (e) {
+        console.error('Gagal hapus sheet: ' + name, e);
+      }
+    } else {
+      kept.push(name);
+    }
+  });
+
+  return {
+    status: 'success',
+    message: 'Pembersihan sheet duplikat/tanpa nama selesai!',
+    deletedSheets: deleted,
+    activeSheets: kept
   };
 }
