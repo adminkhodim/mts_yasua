@@ -2058,6 +2058,7 @@
     // =====================================================================
     const YASUAIdentity = {
       SESSION_KEY: 'mts_yasua_identity',
+      API_URL: 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec',
 
       init() {
         const session = this.getSession();
@@ -2097,10 +2098,19 @@
           const wSub = document.getElementById('wali-display-sub');
           const sName = document.getElementById('santri-nama');
           const sNisn = document.getElementById('santri-nisn');
-          if (wName) wName.textContent = session.waliName || 'Wali Santri';
-          if (wSub) wSub.textContent = 'NISN: ' + (session.nisn || '2026001');
-          if (sName) sName.textContent = session.santriName || 'Ahmad Zaki Al-Fatih';
-          if (sNisn) sNisn.textContent = 'NISN: ' + (session.nisn || '2026001');
+          const student = session.student || {};
+          const progress = session.progress || {};
+
+          if (wName) wName.textContent = session.waliName || student.wali_name || 'Wali Santri';
+          if (wSub) wSub.textContent = 'NISN: ' + (session.nisn || student.nisn || '2026001') + ' • Kelas ' + (student.kelas || '8-A');
+          if (sName) sName.textContent = session.santriName || student.name || 'Ahmad Zaki Al-Fatih';
+          if (sNisn) sNisn.textContent = 'NISN: ' + (session.nisn || student.nisn || '2026001');
+
+          // Perbarui badge mutabaah jika tersedia di DOM
+          const hafalanBadge = document.getElementById('wali-hafalan-badge');
+          if (hafalanBadge && progress.juz_aktif) {
+            hafalanBadge.textContent = progress.juz_aktif + ' (' + (progress.surah_terakhir || '') + ')';
+          }
         } else if (role === 'GURU' && session) {
           const gName = document.getElementById('guru-display-name');
           const gMapel = document.getElementById('guru-display-mapel');
@@ -2111,11 +2121,13 @@
         if (window.lucide) window.lucide.createIcons();
       },
 
-      handleLoginWali(e) {
+      async handleLoginWali(e) {
         e.preventDefault();
         const nisn = document.getElementById('inputWaliNisn').value.trim();
         const birth = document.getElementById('inputWaliBirth').value;
         const errEl = document.getElementById('auth-wali-error');
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
 
         if (!nisn) {
           errEl.textContent = 'Mohon masukkan NISN santri.';
@@ -2123,15 +2135,67 @@
           return;
         }
 
-        const session = {
+        errEl.classList.add('hidden');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline mr-1"></i> Memverifikasi...';
+          if (window.lucide) window.lucide.createIcons();
+        }
+
+        try {
+          // Request live ke endpoint Google Apps Script
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const res = await fetch(this.API_URL + '?action=authWali&nisn=' + encodeURIComponent(nisn) + '&birth=' + encodeURIComponent(birth), {
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+          const data = await res.json();
+
+          if (data.status === 'success') {
+            const session = {
+              role: 'WALI',
+              waliName: data.waliName || 'Wali Santri',
+              nisn: nisn,
+              santriName: data.student ? data.student.name : ('Santri NISN ' + nisn),
+              student: data.student,
+              progress: data.progress,
+              loginAt: new Date().toISOString()
+            };
+            this.setSession(session);
+            window.closeAuthModal('WALI');
+            if (typeof window.showToast === 'function') window.showToast('Selamat datang, ' + (data.waliName || 'Bpk/Ibu Wali Santri') + '!');
+            return;
+          } else if (data.status === 'error' && data.message) {
+            errEl.textContent = data.message;
+            errEl.classList.remove('hidden');
+            return;
+          }
+        } catch (fetchErr) {
+          console.warn('Live auth fallback to offline mode:', fetchErr);
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            if (window.lucide) window.lucide.createIcons();
+          }
+        }
+
+        // Offline / Graceful Fallback jika koneksi lambat
+        const fallbackSession = {
           role: 'WALI',
           waliName: 'Bpk/Ibu Wali Santri',
           nisn: nisn,
           santriName: nisn === '2026001' ? 'Ahmad Zaki Al-Fatih' : ('Santri NISN ' + nisn),
+          student: {
+            name: nisn === '2026001' ? 'Ahmad Zaki Al-Fatih' : ('Santri ' + nisn),
+            nisn: nisn,
+            kelas: '8-A',
+            program: 'Tahfidz & Sains'
+          },
           loginAt: new Date().toISOString()
         };
-
-        this.setSession(session);
+        this.setSession(fallbackSession);
         window.closeAuthModal('WALI');
         if (typeof window.showToast === 'function') window.showToast('Selamat datang di Portal Wali Murid!');
       },
@@ -2141,13 +2205,64 @@
         document.getElementById('inputWaliBirth').value = '2012-05-14';
       },
 
-      handleLoginGuru(e) {
+      async handleLoginGuru(e) {
         e.preventDefault();
         const raw = document.getElementById('selectGuruAccount').value;
         const pin = document.getElementById('inputGuruPin').value.trim();
         const errEl = document.getElementById('auth-guru-error');
         const [guruName, mapel] = raw.split('|');
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
 
+        if (!pin) {
+          errEl.textContent = 'Mohon masukkan PIN Asatidz.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+
+        errEl.classList.add('hidden');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline mr-1"></i> Memverifikasi...';
+          if (window.lucide) window.lucide.createIcons();
+        }
+
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const res = await fetch(this.API_URL + '?action=authGuru&teacherId=' + encodeURIComponent(guruName) + '&pin=' + encodeURIComponent(pin), {
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+          const data = await res.json();
+
+          if (data.status === 'success') {
+            const session = {
+              role: 'GURU',
+              guruName: data.teacherName || guruName,
+              mapel: data.mapel || mapel || 'Tenaga Pendidik MTs YASUA',
+              loginAt: new Date().toISOString()
+            };
+            this.setSession(session);
+            window.closeAuthModal('GURU');
+            if (typeof window.showToast === 'function') window.showToast('Selamat datang, ' + (data.teacherName || guruName));
+            return;
+          } else if (data.status === 'error' && data.message) {
+            errEl.textContent = data.message;
+            errEl.classList.remove('hidden');
+            return;
+          }
+        } catch (fetchErr) {
+          console.warn('Live guru auth fallback:', fetchErr);
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            if (window.lucide) window.lucide.createIcons();
+          }
+        }
+
+        // Local fallback check
         if (pin !== 'yasua2026' && pin !== '123456') {
           errEl.textContent = 'PIN Asatidz tidak sesuai. (Gunakan PIN default: yasua2026)';
           errEl.classList.remove('hidden');
@@ -2160,17 +2275,40 @@
           mapel: mapel || 'Tenaga Pendidik MTs YASUA',
           loginAt: new Date().toISOString()
         };
-
         this.setSession(session);
         window.closeAuthModal('GURU');
         if (typeof window.showToast === 'function') window.showToast('Selamat datang, ' + guruName);
       },
 
-      recordGuruAttendance() {
+      async recordGuruAttendance() {
         const btnText = document.getElementById('btn-attendance-text');
         const badge = document.getElementById('guru-attendance-badge');
+        const session = this.getSession() || {};
         const now = new Date();
         const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ' WIB';
+
+        if (badge) {
+          badge.textContent = 'Mencatat...';
+          badge.className = 'text-[9.5px] font-bold px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full animate-pulse';
+        }
+
+        try {
+          const payload = {
+            teacher_name: session.guruName || 'Asatidz MTs YASUA',
+            status: 'Hadir',
+            time: timeStr,
+            device: navigator.userAgent
+          };
+          fetch(this.API_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'recordAttendance', data: payload })
+          }).catch(e => console.warn('Attendance push sync:', e));
+        } catch (e) {
+          console.warn('Attendance local log:', e);
+        }
+
         if (badge) {
           badge.textContent = 'Tercatat: Hadir (' + timeStr + ')';
           badge.className = 'text-[9.5px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full animate-pulse';
