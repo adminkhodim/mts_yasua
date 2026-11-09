@@ -63,8 +63,8 @@
         <button onclick="openSearchModal()" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-white transition-all cursor-pointer" title="Cari Informasi" aria-label="Cari">
           <i data-lucide="search" class="w-4 h-4"></i>
         </button>
-        <!-- Notifikasi & Pengaturan -->
-        <button onclick="window.openSettingsModal()" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-amber-300 relative transition-all cursor-pointer" title="Pengaturan Aplikasi" aria-label="Pengaturan">
+        <!-- Notifikasi & Pengaturan (Native Tab 5) -->
+        <button onclick="switchAppTab('pengaturan')" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-amber-300 relative transition-all cursor-pointer" title="Pengaturan Aplikasi" aria-label="Pengaturan">
           <i data-lucide="bell" class="w-4 h-4"></i>
           <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
           <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400"></span>
@@ -1271,6 +1271,361 @@
       </div>
     </div><!-- End #tab-alumni -->
 
+    <!-- ========================================== -->
+    <!-- TAB: PENGATURAN & PUSAT AKSES (TAB KE-5 NATIVE ALA ASNAWIYYAH) -->
+    <!-- ========================================== -->
+    <div id="tab-pengaturan" class="hidden space-y-3.5 pb-20">
+      <!-- 1. Header Banner Tab Pengaturan -->
+      <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 text-white p-4 rounded-3xl shadow-sm border border-emerald-600/30 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-amber-300 font-bold shrink-0 shadow-inner">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-black text-white leading-tight">Pusat Akses &amp; Pengaturan</h2>
+            <p class="text-[10px] text-emerald-200 mt-0.5">MTs YASUA Pilangwetan &bull; PWA Shell v2.1</p>
+          </div>
+        </div>
+        <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- 2. Kartu Identitas / Status Pengguna (Public Gateway ala Asnawiyyah) -->
+      <div class="bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 text-white p-4 rounded-3xl shadow-sm border border-emerald-800/60 relative overflow-hidden">
+        <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center justify-between relative z-10">
+          <div class="flex items-center space-x-3.5 min-w-0">
+            <div class="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-white shrink-0 shadow-sm">
+              <i data-lucide="shield" class="w-6 h-6 text-emerald-300"></i>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center space-x-1.5">
+                <h3 class="font-black text-xs text-white truncate">Tamu / Mode Publik</h3>
+                <span class="px-1.5 py-0.5 rounded text-[8.5px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">PUBLIK</span>
+              </div>
+              <p class="text-[10.5px] text-emerald-200/80 truncate mt-0.5">Gerbang Informasi MTs YASUA</p>
+              <p class="text-[9.5px] text-slate-300 mt-0.5 flex items-center gap-1 font-medium">
+                <i data-lucide="check-circle" class="w-3 h-3 text-emerald-400 shrink-0"></i>
+                <span>Gunakan Pintu Akses Resmi di bawah untuk akses staf/wali</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SECTION PINTU AKSES RESMI (COLLAPSIBLE ALA ASNAWIYYAH) -->
+      <div class="bg-white rounded-3xl shadow-xs border border-slate-200/80 overflow-hidden transition-all">
+        <button type="button" onclick="window.togglePintuAksesResmi()" id="btn-pintu-akses" class="w-full px-4 py-3.5 flex items-center justify-between text-left hover:bg-slate-50 transition cursor-pointer">
+          <span class="flex items-center space-x-2.5">
+            <span class="w-8 h-8 rounded-xl bg-emerald-50 text-brand-primary flex items-center justify-center text-xs border border-emerald-100 shadow-2xs">
+              <i data-lucide="lock" class="w-4 h-4 text-emerald-600"></i>
+            </span>
+            <span>
+              <span class="font-extrabold text-xs text-slate-900 block leading-tight">🔐 Pintu Akses Resmi Madrasah</span>
+              <span class="text-[9.5px] text-slate-500 block">Wali Murid &bull; Asatidz &bull; Admin &bull; Pimpinan</span>
+            </span>
+          </span>
+          <i data-lucide="chevron-down" id="icon-pintu-akses" class="w-4 h-4 text-slate-400 transition-transform duration-200"></i>
+        </button>
+
+        <div id="dropdown-pintu-akses" class="p-2.5 pt-0 space-y-2 border-t border-slate-100">
+          <!-- 3.1 Pintu 1: Wali Murid / Santri -->
+          <button type="button" onclick="window.openWaliMuridGatewayModal()" class="w-full text-left p-3 rounded-2xl hover:bg-emerald-50/70 border border-slate-100 hover:border-emerald-200 flex items-center justify-between transition group bg-slate-50/50 cursor-pointer">
+            <div class="flex items-center space-x-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="users" class="w-5 h-5 text-emerald-700"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center space-x-1.5">
+                  <h4 class="font-bold text-xs text-slate-900 truncate">Wali Murid / Santri</h4>
+                  <span class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-emerald-100 text-emerald-800 shrink-0">NISN / WA</span>
+                </div>
+                <p class="text-[10px] text-slate-500 truncate mt-0.5">Pantau presensi, mutaba'ah hafalan &amp; informasi anak</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition ml-2 shrink-0"></i>
+          </button>
+
+          <!-- 3.2 Pintu 2: Dewan Asatidz & Guru -->
+          <a href="/app/guru" onclick="event.preventDefault(); switchAppTab('guru');" class="w-full text-left p-3 rounded-2xl hover:bg-indigo-50/70 border border-slate-100 hover:border-indigo-200 flex items-center justify-between transition group bg-slate-50/50 cursor-pointer block">
+            <div class="flex items-center space-x-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="user-check" class="w-5 h-5 text-indigo-700"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center space-x-1.5">
+                  <h4 class="font-bold text-xs text-slate-900 truncate">Dewan Asatidz &amp; Guru</h4>
+                  <span class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-indigo-100 text-indigo-800 shrink-0">Presensi &amp; Kinerja</span>
+                </div>
+                <p class="text-[10px] text-slate-500 truncate mt-0.5">Presensi digital harian, profil guru &amp; jurnal KBM</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-indigo-700 group-hover:translate-x-0.5 transition ml-2 shrink-0"></i>
+          </a>
+
+          <!-- 3.3 Pintu 3: Pengelola / Admin CMS -->
+          <a href="/admin" class="w-full text-left p-3 rounded-2xl hover:bg-blue-50/70 border border-slate-100 hover:border-blue-200 flex items-center justify-between transition group bg-slate-50/50 cursor-pointer block">
+            <div class="flex items-center space-x-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="shield-check" class="w-5 h-5 text-blue-700"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center space-x-1.5">
+                  <h4 class="font-bold text-xs text-slate-900 truncate">Pengelola / Admin CMS</h4>
+                  <span class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-blue-100 text-blue-800 shrink-0">1-Klik / PIN</span>
+                </div>
+                <p class="text-[10px] text-slate-500 truncate mt-0.5">Operasional berita, kelola banner, PPDB &amp; madrasah</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-blue-700 group-hover:translate-x-0.5 transition ml-2 shrink-0"></i>
+          </a>
+
+          <!-- 3.4 Pintu 4: Pimpinan Madrasah & Yayasan -->
+          <button type="button" onclick="window.openPimpinanModal()" class="w-full text-left p-3 rounded-2xl hover:bg-amber-50/80 border border-amber-200/70 flex items-center justify-between transition group bg-amber-50/40 cursor-pointer">
+            <div class="flex items-center space-x-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-amber-200 text-amber-900 flex items-center justify-center shrink-0 group-hover:scale-105 transition shadow-2xs border border-amber-300">
+                <i data-lucide="award" class="w-5 h-5 text-amber-900"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center space-x-1.5">
+                  <h4 class="font-bold text-xs text-slate-900 truncate">Pimpinan &amp; Yayasan</h4>
+                  <span class="px-1.5 py-0.5 rounded text-[8px] font-black bg-amber-400 text-slate-950 shrink-0">SUPERVISI</span>
+                </div>
+                <p class="text-[10px] text-amber-800 truncate mt-0.5">Pengawasan kebijakan, khidmat lembaga &amp; mutu santri</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-amber-600 group-hover:translate-x-0.5 transition ml-2 shrink-0"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. SECTION TAMPILAN APLIKASI (ALA ASNAWIYYAH) -->
+      <div class="bg-white p-4 rounded-3xl shadow-xs border border-slate-200/80 space-y-3.5">
+        <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center">
+          <span class="w-1.5 h-3.5 bg-brand-primary rounded-full mr-2"></span>
+          <span>Tampilan Aplikasi</span>
+        </h3>
+
+        <!-- 4.1 Gaya Tampilan Mobile -->
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+              <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
+              <span>Gaya Tampilan Mobile</span>
+            </span>
+            <span id="tabSettingModeLabel" class="text-[10px] bg-white px-2 py-0.5 rounded-full border border-slate-200 text-slate-600 font-bold">Dashboard App</span>
+          </div>
+          <p class="text-[10.5px] text-slate-500">Pilih pengalaman layar aplikasi mandiri atau tampilan profil web.</p>
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button type="button" onclick="window.setMobileExperienceMode('app'); if(typeof syncTabSettingsUI==='function') syncTabSettingsUI();" id="tabBtnModeApp" class="py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center bg-emerald-50 text-brand-primary border-brand-primary shadow-2xs">
+              Dashboard App
+            </button>
+            <button type="button" onclick="window.setMobileExperienceMode('web'); if(typeof syncTabSettingsUI==='function') syncTabSettingsUI();" id="tabBtnModeWeb" class="py-2 px-3 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all cursor-pointer text-center">
+              Web Profil
+            </button>
+          </div>
+        </div>
+
+        <!-- 4.2 Aksesibilitas: Ukuran Teks Bacaan -->
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+              <i data-lucide="type" class="w-4 h-4 text-emerald-600"></i>
+              <span>Ukuran Teks Bacaan</span>
+            </span>
+            <span id="tabSettingFontSizeLabel" class="text-[10px] bg-white px-2 py-0.5 rounded-full border border-slate-200 text-slate-600 font-bold">Normal</span>
+          </div>
+          <p class="text-[10.5px] text-slate-500">Sesuaikan ukuran font untuk kenyamanan membaca warta dan pengumuman.</p>
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button type="button" onclick="window.setFontSize('normal'); if(typeof syncTabSettingsUI==='function') syncTabSettingsUI();" id="tabBtnFontNormal" class="py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center bg-emerald-50 text-brand-primary border-brand-primary shadow-2xs">
+              A (Normal)
+            </button>
+            <button type="button" onclick="window.setFontSize('large'); if(typeof syncTabSettingsUI==='function') syncTabSettingsUI();" id="tabBtnFontLarge" class="py-2 px-3 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all cursor-pointer text-center">
+              A+ (Lebih Besar)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. SECTION LOKASI & JADWAL SHALAT KAB. DEMAK (ALA ASNAWIYYAH) -->
+      <div class="bg-white p-4 rounded-3xl shadow-xs border border-slate-200/80 space-y-3">
+        <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center">
+          <span class="w-1.5 h-3.5 bg-brand-primary rounded-full mr-2"></span>
+          <span>Lokasi &amp; Jadwal Shalat</span>
+        </h3>
+
+        <div class="space-y-2.5">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Wilayah / Kab. Lokasi Anda</label>
+            <select id="tabPrayerLocationSelect" onchange="window.updateTabPrayerLocation(this.value)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-primary transition-colors cursor-pointer">
+              <option value="Kab. Demak" selected>Kab. Demak [MTs YASUA Pilangwetan]</option>
+              <option value="Kota Semarang">Kota Semarang, Jawa Tengah</option>
+              <option value="Kab. Kudus">Kab. Kudus, Jawa Tengah</option>
+              <option value="Kab. Jepara">Kab. Jepara, Jawa Tengah</option>
+            </select>
+          </div>
+
+          <!-- Preview Waktu Shalat 5 Waktu -->
+          <div class="grid grid-cols-5 gap-1.5 text-center text-[10px] pt-1">
+            <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-100">
+              <span class="block text-slate-400 font-medium text-[9px]">Subuh</span>
+              <span id="tabPrayerSubuh" class="font-extrabold text-brand-primary font-mono text-[11px]">04:02</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-100">
+              <span class="block text-slate-400 font-medium text-[9px]">Dzuhur</span>
+              <span id="tabPrayerDzuhur" class="font-bold text-slate-800 font-mono text-[11px]">11:35</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-100">
+              <span class="block text-slate-400 font-medium text-[9px]">Ashar</span>
+              <span id="tabPrayerAshar" class="font-bold text-slate-800 font-mono text-[11px]">14:52</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-100">
+              <span class="block text-slate-400 font-medium text-[9px]">Maghrib</span>
+              <span id="tabPrayerMaghrib" class="font-bold text-slate-800 font-mono text-[11px]">17:46</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-100">
+              <span class="block text-slate-400 font-medium text-[9px]">Isya</span>
+              <span id="tabPrayerIsya" class="font-bold text-slate-800 font-mono text-[11px]">18:58</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. SECTION STATUS INSTALASI & DIAGNOSTIK PWA -->
+      <div class="bg-white p-4 rounded-3xl shadow-xs border border-slate-200/80 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center">
+            <span class="w-1.5 h-3.5 bg-brand-primary rounded-full mr-2"></span>
+            <span>Status Sistem &amp; Diagnostik</span>
+          </h3>
+          <span id="tabPwaStorageUsage" class="text-[10px] bg-emerald-100 text-brand-dark px-2 py-0.5 rounded-full font-bold">Penyimpanan: Aktif</span>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-xs font-bold text-slate-800">Status PWA</h4>
+              <p id="tabPwaStatusText" class="text-[10.5px] text-slate-500">Terbuka di Peramban Web</p>
+            </div>
+            <button type="button" onclick="window.installPwa()" id="tabBtnInstallPwa" class="px-3 py-1.5 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer">
+              Pasang PWA
+            </button>
+          </div>
+
+          <div class="pt-2 border-t border-slate-200/70 space-y-2">
+            <button type="button" onclick="window.checkForAppUpdate()" class="w-full py-2 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-brand-primary text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-2xs">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-brand-primary"></i>
+              <span>Periksa Pembaruan Sistem (Update SW)</span>
+            </button>
+            <button type="button" onclick="window.refreshAppCache()" class="w-full py-2 px-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-300 text-slate-700 hover:text-brand-primary text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-2xs">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>Bersihkan Cache &amp; Muat Ulang</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. SECTION BANTUAN & INFORMASI RESMI -->
+      <div class="p-3.5 bg-slate-50 rounded-3xl border border-slate-200/80 space-y-2 text-center">
+        <a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Humas%20MTs%20YASUA,%20saya%20membutuhkan%20informasi%20layanan%20madrasah." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3.5 rounded-2xl bg-white hover:bg-emerald-50 text-slate-800 hover:text-brand-primary border border-slate-200 text-xs font-bold flex items-center justify-between transition-colors shadow-2xs">
+          <span class="flex items-center gap-2">
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>Hubungi Humas &amp; Layanan Madrasah (WhatsApp)</span>
+          </span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-400"></i>
+        </a>
+        <p class="text-[10px] text-slate-400 pt-1">
+          &copy; 2026 MTs YASUA Pilangwetan, Wonosalam, Demak.<br>
+          Lembaga Pendidikan Ma'arif NU Demak &bull; PWA Shell v2.1
+        </p>
+      </div>
+    </div><!-- End #tab-pengaturan -->
+
+    <!-- MODAL GATEWAY: WALI MURID & SANTRI -->
+    <div id="modalWaliMuridGateway" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
+      <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl border border-emerald-100 flex flex-col relative animate-in fade-in zoom-in-95 space-y-3.5">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
+              <i data-lucide="users" class="w-4 h-4 text-emerald-700"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-xs text-slate-900 leading-tight">Layanan Wali Murid</h3>
+              <p class="text-[10px] text-slate-500">MTs YASUA Pilangwetan</p>
+            </div>
+          </div>
+          <button onclick="window.closeWaliMuridGatewayModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="space-y-2.5 text-left">
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Bapak/Ibu Wali Murid dapat memantau kehadiran, mutaba'ah tahfidz, dan laporan akademik santri melalui kontak resmi Wali Kelas atau TU Madrasah.
+          </p>
+
+          <div class="p-3 bg-emerald-50/70 rounded-2xl border border-emerald-100 space-y-2">
+            <label class="block text-[10px] font-bold text-emerald-900 uppercase">Cek Cepat Nomor Induk / NISN</label>
+            <div class="flex gap-1.5">
+              <input type="text" id="waliSearchNisn" placeholder="Masukkan NISN Santri..." class="flex-1 bg-white border border-emerald-200 px-3 py-2 rounded-xl text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+              <button onclick="window.searchSantriStatus()" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition shadow-2xs cursor-pointer">Cek</button>
+            </div>
+            <div id="waliSearchResult" class="text-[10.5px] text-slate-600 hidden pt-1"></div>
+          </div>
+
+          <div class="pt-1 space-y-1.5">
+            <a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Bapak%2FIbu%20TU%20MTs%20YASUA,%20saya%20Wali%20Murid%20ingin%20menanyakan%20perkembangan%20putra%2Fputri%20saya." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>Hubungi Wali Kelas / TU (WA)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL GATEWAY: PIMPINAN MADRASAH & YAYASAN -->
+    <div id="modalPimpinanGateway" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
+      <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl border border-amber-200 flex flex-col relative animate-in fade-in zoom-in-95 space-y-3.5">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center">
+              <i data-lucide="award" class="w-4 h-4 text-amber-900"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-xs text-slate-900 leading-tight">Pimpinan &amp; Komite Madrasah</h3>
+              <p class="text-[10px] text-amber-800">Supervisi Makro &amp; Khidmat Lembaga</p>
+            </div>
+          </div>
+          <button onclick="window.closePimpinanModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="space-y-2.5 text-left">
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Pintu komunikasi dan supervisi langsung dengan Kepala Madrasah, Komite Sekolah, dan Pengurus Yayasan MTs YASUA Pilangwetan.
+          </p>
+
+          <div class="p-3 bg-amber-50/70 rounded-2xl border border-amber-200/80 space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[10px] font-bold text-amber-900 uppercase">Kepala Madrasah: Muthohar, S.Pd.</span>
+            </div>
+            <p class="text-[10.5px] text-slate-600">Komitmen mewujudkan madrasah hijau, berkarakter santri, dan berprestasi.</p>
+          </div>
+
+          <div class="pt-1 space-y-1.5">
+            <a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Bapak%20Kepala%20Madrasah%20MTs%20YASUA,%20saya%20ingin%20berkonsultasi%20terkait%20kebijakan%20madrasah." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors">
+              <i data-lucide="message-square" class="w-4 h-4"></i>
+              <span>Hubungi Kepala Madrasah (WhatsApp)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- LIGHTBOX MODAL APP PWA -->
     <div id="appGalleryLightboxModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4" onclick="closeAppGalleryLightbox()">
       <div class="relative max-w-sm w-full bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col" onclick="event.stopPropagation()">
@@ -1456,7 +1811,7 @@
   <script>
     // --- 1. Client-Side Tab Router ---
     let currentActiveTab = 'beranda';
-    const allAppTabs = ['beranda', 'berita', 'kalender', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni', 'berita-baca'];
+    const allAppTabs = ['beranda', 'berita', 'kalender', 'pengaturan', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni', 'berita-baca'];
 
     function switchAppTab(tabName, updateHistory = true) {
       if (!allAppTabs.includes(tabName)) tabName = 'beranda';
@@ -1477,8 +1832,8 @@
 
       // Update bottom dock active styles: standard dock tabs (beranda, berita, kalender)
       // When in sub-views (guru, program, ppdb, etc.), beranda is highlighted
-      const dockTabToHighlight = ['berita', 'berita-baca'].includes(tabName) ? 'berita' : (tabName === 'kalender' ? 'kalender' : 'beranda');
-      ['beranda', 'berita', 'kalender'].forEach(t => {
+      const dockTabToHighlight = ['berita', 'berita-baca'].includes(tabName) ? 'berita' : (tabName === 'kalender' ? 'kalender' : (tabName === 'pengaturan' ? 'pengaturan' : 'beranda'));
+      ['beranda', 'berita', 'kalender', 'pengaturan'].forEach(t => {
         const btn = document.getElementById('dockBtn-' + t);
         if (btn) {
           const svg = btn.querySelector('svg');
@@ -1515,6 +1870,8 @@
         if (typeof initTabGaleri === 'function') initTabGaleri();
       } else if (tabName === 'alumni') {
         if (typeof initTabAlumni === 'function') initTabAlumni();
+      } else if (tabName === 'pengaturan') {
+        if (typeof syncTabSettingsUI === 'function') syncTabSettingsUI();
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2115,7 +2472,139 @@
         });
     }
 
-    window.switchAppTab = switchAppTab;
+
+    // --- PENGATURAN & PINTU AKSES RESMI CONTROLLER ---
+    window.togglePintuAksesResmi = function() {
+      const drop = document.getElementById('dropdown-pintu-akses');
+      const icon = document.getElementById('icon-pintu-akses');
+      if (!drop) return;
+      const isHidden = drop.classList.contains('hidden');
+      if (isHidden) {
+        drop.classList.remove('hidden');
+        if (icon) icon.classList.add('rotate-180');
+      } else {
+        drop.classList.add('hidden');
+        if (icon) icon.classList.remove('rotate-180');
+      }
+      if (window.lucide) window.lucide.createIcons();
+    };
+
+    window.openWaliMuridGatewayModal = function() {
+      const modal = document.getElementById('modalWaliMuridGateway');
+      if (modal) modal.classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    };
+
+    window.closeWaliMuridGatewayModal = function() {
+      const modal = document.getElementById('modalWaliMuridGateway');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.openPimpinanModal = function() {
+      const modal = document.getElementById('modalPimpinanGateway');
+      if (modal) modal.classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    };
+
+    window.closePimpinanModal = function() {
+      const modal = document.getElementById('modalPimpinanGateway');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.searchSantriStatus = function() {
+      const input = document.getElementById('waliSearchNisn');
+      const res = document.getElementById('waliSearchResult');
+      if (!input || !res) return;
+      const val = input.value.trim();
+      if (!val) {
+        res.innerHTML = '<span class="text-rose-600 font-bold">Silakan masukkan NISN atau nama santri.</span>';
+        res.classList.remove('hidden');
+        return;
+      }
+      res.innerHTML = '<span class="text-emerald-700 font-bold">Santri terdaftar:</span> Data akademik semester aktif dapat diakses penuh melalui buku mutaba\'ah raport berkala madrasah.';
+      res.classList.remove('hidden');
+    };
+
+    window.updateTabPrayerLocation = function(city) {
+      const schedule = {
+        'Kab. Demak': { subuh: '04:02', dzuhur: '11:35', ashar: '14:52', maghrib: '17:46', isya: '18:58' },
+        'Kota Semarang': { subuh: '04:03', dzuhur: '11:36', ashar: '14:53', maghrib: '17:47', isya: '18:59' },
+        'Kab. Kudus': { subuh: '04:01', dzuhur: '11:34', ashar: '14:51', maghrib: '17:45', isya: '18:57' },
+        'Kab. Jepara': { subuh: '04:01', dzuhur: '11:34', ashar: '14:52', maghrib: '17:46', isya: '18:58' }
+      };
+      const s = schedule[city] || schedule['Kab. Demak'];
+      const elSubuh = document.getElementById('tabPrayerSubuh');
+      const elDzuhur = document.getElementById('tabPrayerDzuhur');
+      const elAshar = document.getElementById('tabPrayerAshar');
+      const elMaghrib = document.getElementById('tabPrayerMaghrib');
+      const elIsya = document.getElementById('tabPrayerIsya');
+      if (elSubuh) elSubuh.textContent = s.subuh;
+      if (elDzuhur) elDzuhur.textContent = s.dzuhur;
+      if (elAshar) elAshar.textContent = s.ashar;
+      if (elMaghrib) elMaghrib.textContent = s.maghrib;
+      if (elIsya) elIsya.textContent = s.isya;
+    };
+
+    window.syncTabSettingsUI = function() {
+      // 1. Sinkronisasi Mode Tampilan
+      const currentMode = localStorage.getItem('mts_experience_mode') || 'app';
+      const labelMode = document.getElementById('tabSettingModeLabel');
+      const btnApp = document.getElementById('tabBtnModeApp');
+      const btnWeb = document.getElementById('tabBtnModeWeb');
+      if (labelMode) labelMode.textContent = (currentMode === 'web') ? 'Web Profil' : 'Dashboard App';
+      if (btnApp && btnWeb) {
+        if (currentMode === 'web') {
+          btnWeb.className = 'py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center bg-emerald-50 text-brand-primary border-brand-primary shadow-2xs';
+          btnApp.className = 'py-2 px-3 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all cursor-pointer text-center';
+        } else {
+          btnApp.className = 'py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center bg-emerald-50 text-brand-primary border-brand-primary shadow-2xs';
+          btnWeb.className = 'py-2 px-3 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all cursor-pointer text-center';
+        }
+      }
+
+      // 2. Sinkronisasi Ukuran Font
+      const currentFont = localStorage.getItem('mts_font_size') || 'normal';
+      const labelFont = document.getElementById('tabSettingFontSizeLabel');
+      const btnNormal = document.getElementById('tabBtnFontNormal');
+      const btnLarge = document.getElementById('tabBtnFontLarge');
+      if (labelFont) labelFont.textContent = (currentFont === 'large') ? 'A+ (Lebih Besar)' : 'A (Normal)';
+      if (btnNormal && btnLarge) {
+        if (currentFont === 'large') {
+          btnLarge.className = 'py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center bg-emerald-50 text-brand-primary border-brand-primary shadow-2xs';
+          btnNormal.className = 'py-2 px-3 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all cursor-pointer text-center';
+        } else {
+          btnNormal.className = 'py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center bg-emerald-50 text-brand-primary border-brand-primary shadow-2xs';
+          btnLarge.className = 'py-2 px-3 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all cursor-pointer text-center';
+        }
+      }
+
+      // 3. Status PWA & Storage
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      const statusPwa = document.getElementById('tabPwaStatusText');
+      const btnInstall = document.getElementById('tabBtnInstallPwa');
+      if (statusPwa) {
+        statusPwa.textContent = isStandalone ? 'Aplikasi Terpasang (PWA Standalone)' : 'Terbuka di Peramban Web';
+      }
+      if (btnInstall) {
+        if (isStandalone) {
+          btnInstall.classList.add('hidden');
+        } else {
+          btnInstall.classList.remove('hidden');
+        }
+      }
+
+      if (navigator.storage && navigator.storage.estimate) {
+        navigator.storage.estimate().then((est) => {
+          const usageMb = (est.usage / (1024 * 1024)).toFixed(1);
+          const badge = document.getElementById('tabPwaStorageUsage');
+          if (badge) badge.textContent = 'Penyimpanan: ± ' + usageMb + ' MB';
+        }).catch(() => {});
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+    };
+
+        window.switchAppTab = switchAppTab;
 
     // Handle deep links and browser Back/Forward navigation
     function initClientRouting() {
