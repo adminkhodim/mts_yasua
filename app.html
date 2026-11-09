@@ -2468,8 +2468,7 @@
 
     window.YASUAIdentity = YASUAIdentity;
 
-    
-    // ====================================================================window.openAuthModal = function(type) {
+    window.openAuthModal = function(type) {
       const modalId = 'modalAuth' + type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
       const modal = document.getElementById(modalId);
       if (modal) modal.classList.remove('hidden');
