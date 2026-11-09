@@ -240,18 +240,17 @@
     <!-- CONTENT WRAPPER -->
     <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-      <!-- TOPBAR -->
-      <header class="bg-white border-b border-slate-200 z-10 px-4 sm:px-6 py-3 flex items-center justify-between shadow-2xs">
+      <!-- TOPBAR (Mobile: Hanya Tombol Kembali, Desktop: Header Lengkap) -->
+      <header class="bg-white border-b border-slate-200 z-10 px-4 lg:px-6 py-2.5 lg:py-3 flex items-center justify-between shadow-2xs">
         <div class="flex items-center gap-3">
-          <a href="/app/pengaturan" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold transition shadow-2xs">
+          <!-- Tombol Kembali (Satu-satunya kontrol header di Mobile) -->
+          <a href="/app/pengaturan" onclick="if(window.history.length > 1 && document.referrer.includes('/app')) { window.history.back(); return false; }" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold transition shadow-2xs">
             <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-emerald-700"></i>
             <span>Kembali ke App</span>
           </a>
-          <button onclick="toggleSidebar()" class="lg:hidden text-slate-600 hover:text-slate-900">
-            <i data-lucide="menu" class="w-6 h-6"></i>
-          </button>
-          <!-- Dynamic Breadcrumb -->
-          <div class="flex items-center gap-2 text-xs">
+
+          <!-- Dynamic Breadcrumb (Khusus Desktop lg:) -->
+          <div class="hidden lg:flex items-center gap-2 text-xs">
             <span class="text-slate-400">Admin</span>
             <span class="text-slate-300">/</span>
             <span id="breadcrumbCategory" class="text-slate-400">Kesiswaan &amp; SDM</span>
@@ -260,10 +259,11 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-3">
+        <!-- Menu Kanan (Khusus Desktop lg:) -->
+        <div class="hidden lg:flex items-center gap-3">
           <!-- Web Publik Button -->
           <a id="topbarWebPublikBtn" href="guru.html" target="_blank"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors">
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors">
             <i data-lucide="external-link" class="w-3.5 h-3.5 text-brand-primary"></i>
             <span id="topbarWebPublikLabel">Web Publik (guru.html)</span>
           </a>
@@ -273,7 +273,7 @@
             <div id="topbarAvatar" class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-xs">
               SA
             </div>
-            <div class="hidden sm:block text-left text-xs leading-tight">
+            <div class="text-left text-xs leading-tight">
               <span id="topbarAdminName" class="font-bold text-slate-800 block">Admin YASUA</span>
               <span id="topbarAdminRole" class="inline-flex items-center gap-1 text-[9.5px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-extrabold">👑 Super Admin</span>
             </div>
