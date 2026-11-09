@@ -1517,8 +1517,8 @@
 
       <!-- ==================== STATE 4: AUTHENTICATED ADMIN ==================== -->
       <div id="identity-state-admin" class="hidden space-y-4">
-        <!-- Profil Card Admin -->
-        <div style="background: linear-gradient(135deg, #312e81 0%, #0f172a 50%, #020617 100%);" class="text-white p-4 sm:p-5 rounded-2xl shadow-md border border-indigo-700/60 relative overflow-hidden">
+        <!-- Profil Card Admin (Disembunyikan Otomatis Saat Masuk Subview Admin Ala Asnawiyyah) -->
+        <div id="admin-profile-banner" style="background: linear-gradient(135deg, #312e81 0%, #0f172a 50%, #020617 100%);" class="text-white p-4 sm:p-5 rounded-2xl shadow-md border border-indigo-700/60 relative overflow-hidden">
           <div class="flex items-center justify-between relative z-10">
             <div class="flex items-center space-x-3.5 min-w-0">
               <div class="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur border border-white/20 flex items-center justify-center text-indigo-300 text-xl font-bold shrink-0 shadow-inner">
@@ -1667,21 +1667,29 @@
 
         <!-- CONTAINER SUB-VIEW ADMIN SPA (Tampil Instan Tanpa Reload Ala Asnawiyyah) -->
         <div id="admin-module-container" class="hidden space-y-4">
-          <!-- Dynamic Top Navigation with [← Kembali ke Hub] -->
-          <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <button type="button" onclick="closeAdminModule()" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 flex items-center justify-center transition active:scale-95 cursor-pointer shadow-2xs" title="Kembali ke Menu Admin">
+          <!-- Dynamic Top Navigation Subview (Full Screen Asnawiyyah Style) -->
+          <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-2.5 min-w-0">
+              <button type="button" onclick="closeAdminModule()" class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center transition active:scale-95 shrink-0 cursor-pointer" title="Kembali ke Dashboard">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
               </button>
-              <div>
-                <span class="text-[9.5px] font-extrabold text-emerald-700 uppercase tracking-widest block leading-tight">Portal Kontrol Admin</span>
-                <h3 id="admin-subview-title" class="text-sm font-extrabold text-slate-900 leading-tight">Manajemen Berita</h3>
+              <div id="admin-subview-icon-box" class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shadow-sm shrink-0">
+                <i id="admin-subview-icon" data-lucide="newspaper" class="w-5 h-5"></i>
+              </div>
+              <div class="min-w-0">
+                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-widest block leading-tight">Dashboard Admin</span>
+                <h2 id="admin-subview-title" class="text-sm font-bold text-slate-800 truncate leading-tight">Manajemen Berita &amp; Publikasi</h2>
               </div>
             </div>
-            <div id="admin-subview-badge" class="flex items-center gap-1.5">
-              <span class="text-[9.5px] font-extrabold px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">
-                PWA Native
-              </span>
+            <div id="admin-subview-actions" class="flex items-center space-x-1.5 shrink-0">
+              <button type="button" id="admin-news-toggle-btn" onclick="toggleAdminNewsForm()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                <i data-lucide="plus" class="w-3.5 h-3.5" id="admin-news-toggle-icon"></i>
+                <span id="admin-news-toggle-text">Tulis Berita Baru</span>
+              </button>
+              <button type="button" onclick="loadAdminNewsList()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition flex items-center space-x-1 active:scale-95 cursor-pointer" title="Refresh">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                <span class="hidden sm:inline">Refresh</span>
+              </button>
             </div>
           </div>
 
@@ -1694,7 +1702,7 @@
                   <i data-lucide="edit-3" class="w-4 h-4 text-emerald-600"></i>
                   <span>Tulis Berita / Warta Baru</span>
                 </h4>
-                <button type="button" onclick="toggleAdminNewsForm(false)" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-xs">
+                <button type="button" onclick="toggleAdminNewsForm(false)" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-xs cursor-pointer">
                   <i data-lucide="x" class="w-3.5 h-3.5"></i>
                 </button>
               </div>
@@ -1710,10 +1718,11 @@
                   <div>
                     <label class="block font-bold text-slate-700 mb-1">Kategori</label>
                     <select id="admNewsKategori" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                      <option value="Berita & Kegiatan">Berita & Kegiatan</option>
-                      <option value="Prestasi & Santri">Prestasi & Santri</option>
+                      <option value="Berita & Kegiatan">Berita &amp; Kegiatan</option>
+                      <option value="Prestasi & Santri">Prestasi &amp; Santri</option>
                       <option value="Pengumuman Resmi">Pengumuman Resmi</option>
                       <option value="Keagamaan">Keagamaan</option>
+                      <option value="Artikel & Opini">Artikel &amp; Opini</option>
                     </select>
                   </div>
                   <div>
@@ -1724,7 +1733,7 @@
 
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">URL Gambar / Poster</label>
-                  <input type="text" id="admNewsGambar" placeholder="https://lh3.googleusercontent.com/... atau foto-upacara.webp" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                  <input type="text" id="admNewsGambar" placeholder="https://lh3.googleusercontent.com/... atau poster_pts_berita.webp" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
@@ -1749,60 +1758,121 @@
                 </div>
 
                 <div class="flex gap-2 pt-2 border-t border-slate-100">
-                  <button type="button" onclick="toggleAdminNewsForm(false)" class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition">Batal</button>
-                  <button type="submit" id="btnSubmitAdminNews" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <button type="button" onclick="toggleAdminNewsForm(false)" class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition cursor-pointer">Batal</button>
+                  <button type="submit" id="btnSubmitAdminNews" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
                     <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                    <span>Simpan & Terbitkan</span>
+                    <span>Simpan &amp; Terbitkan</span>
                   </button>
                 </div>
               </form>
             </div>
 
-            <!-- Ringkasan Statistik Berita (4 Kartu Warna Vibran Ala Asnawiyyah) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-white">
-              <div class="p-3 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-800 shadow-2xs">
-                <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-200 block">Total Berita</span>
-                <span id="admMetricTotalNews" class="text-xl font-black block mt-0.5">...</span>
-                <span class="text-[8.5px] text-emerald-100 font-medium mt-0.5 block">Arsip Database</span>
-              </div>
-              <div class="p-3 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-800 shadow-2xs">
-                <span class="text-[9px] font-bold uppercase tracking-wider text-blue-200 block">Berita Terbit</span>
-                <span id="admMetricPublishedNews" class="text-xl font-black block mt-0.5">...</span>
-                <span class="text-[8.5px] text-blue-100 font-medium mt-0.5 block">Tampil Publik</span>
-              </div>
-              <div class="p-3 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-700 shadow-2xs">
-                <span class="text-[9px] font-bold uppercase tracking-wider text-amber-200 block">Berita Utama</span>
-                <span id="admMetricFeaturedNews" class="text-xl font-black block mt-0.5">...</span>
-                <span class="text-[8.5px] text-amber-100 font-medium mt-0.5 block">Headline Pin</span>
-              </div>
-              <div class="p-3 rounded-2xl bg-gradient-to-br from-teal-600 to-cyan-800 shadow-2xs">
-                <span class="text-[9px] font-bold uppercase tracking-wider text-teal-200 block">Total Pembaca</span>
-                <span id="admMetricTotalViews" class="text-xl font-black block mt-0.5">13.800+</span>
-                <span class="text-[8.5px] text-teal-100 font-medium mt-0.5 block">Akumulasi Views</span>
-              </div>
-            </div>
-
-            <!-- Daftar List Berita Admin -->
-            <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="newspaper" class="w-4 h-4 text-emerald-600"></i>
-                  <span>Daftar Artikel & Warta</span>
-                </h4>
-                <div class="flex items-center gap-1.5">
-                  <button type="button" onclick="loadAdminNewsList()" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs transition" title="Muat Ulang Berita">
-                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                  </button>
-                  <button type="button" onclick="toggleAdminNewsForm(true)" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-2xs transition active:scale-95">
-                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                    <span>Tulis Baru</span>
-                  </button>
+            <!-- CARDS RINGKASAN DATA BERITA (BERWARNA VIBRANT PERSIS ASNAWIYYAH) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Total Berita (Emerald Gradient) -->
+              <div class="bg-gradient-to-br from-[#059669] to-[#047857] text-white p-3 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-semibold text-white/90 uppercase tracking-wider">TOTAL BERITA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="newspaper" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricTotalNews" class="text-lg font-black tracking-tight leading-none">6 Berita</h3>
+                  <p class="text-[9.5px] text-white/80 mt-1">Katalog Publikasi</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px] font-semibold text-emerald-100">
+                  <span>Katalog Warta</span>
+                  <i data-lucide="chevron-right" class="w-2.5 h-2.5"></i>
                 </div>
               </div>
 
-              <!-- List Container -->
-              <div id="adminNewsListContainer" class="space-y-2.5">
-                <div class="text-center py-6 text-slate-400 text-xs animate-pulse">Memuat daftar berita dari database...</div>
+              <!-- 2. Total Pembaca (Blue Gradient) -->
+              <div class="bg-gradient-to-br from-[#2563eb] to-[#1d4ed8] text-white p-3 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-semibold text-white/90 uppercase tracking-wider">TOTAL PEMBACA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricTotalViews" class="text-lg font-black tracking-tight leading-none">13.8k Views</h3>
+                  <p class="text-[9.5px] text-white/80 mt-1">Akumulasi Pembaca</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px] font-semibold text-blue-100">
+                  <span>Performa</span>
+                  <i data-lucide="chevron-right" class="w-2.5 h-2.5"></i>
+                </div>
+              </div>
+
+              <!-- 3. Kategori Rubrik (Amber Gradient) -->
+              <div class="bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white p-3 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-semibold text-white/90 uppercase tracking-wider">KATEGORI RUBLIK</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="tags" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricKategori" class="text-lg font-black tracking-tight leading-none">4 Topik</h3>
+                  <p class="text-[9.5px] text-white/80 mt-1">Kontribusi Aktif</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px] font-semibold text-amber-100">
+                  <span>Distribusi</span>
+                  <i data-lucide="chevron-right" class="w-2.5 h-2.5"></i>
+                </div>
+              </div>
+
+              <!-- 4. Redaksi Penulis (Purple Gradient) -->
+              <div class="bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] text-white p-3 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-semibold text-white/90 uppercase tracking-wider">REDAKSI PENULIS</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricPenulis" class="text-lg font-black tracking-tight leading-none">5 Penulis</h3>
+                  <p class="text-[9.5px] text-white/80 mt-1">Kontribusi Aktif</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px] font-semibold text-purple-100">
+                  <span>Kontributor</span>
+                  <i data-lucide="chevron-right" class="w-2.5 h-2.5"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- DAFTAR BERITA TERBIT & FILTER PERSIS ASNAWIYYAH -->
+            <div class="bg-white p-3.5 md:p-4 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="list" class="w-4 h-4 text-emerald-600"></i>
+                  <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Daftar Berita Terbit</h4>
+                </div>
+                <span id="admNewsCountBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                  6 Berita
+                </span>
+              </div>
+
+              <!-- Search Bar Realtime -->
+              <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                <input type="text" id="admNewsSearchInput" oninput="filterAdminNewsRealtime()" placeholder="Cari judul, kategori, penulis..." class="w-full pl-9 pr-3 py-2 bg-slate-50 hover:bg-white focus:bg-white rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none transition shadow-xs">
+              </div>
+
+              <!-- Filter Pills Horizontal Scrollable -->
+              <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px] font-bold" id="admNewsCategoryFilterContainer">
+                <button type="button" onclick="setAdminNewsCatFilter('Semua', this)" class="adm-cat-btn px-3 py-1 rounded-xl bg-emerald-700 text-white shadow-xs shrink-0 cursor-pointer">Semua</button>
+                <button type="button" onclick="setAdminNewsCatFilter('Prestasi', this)" class="adm-cat-btn px-3 py-1 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 shrink-0 cursor-pointer">Prestasi</button>
+                <button type="button" onclick="setAdminNewsCatFilter('Kegiatan', this)" class="adm-cat-btn px-3 py-1 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 shrink-0 cursor-pointer">Kegiatan</button>
+                <button type="button" onclick="setAdminNewsCatFilter('Artikel', this)" class="adm-cat-btn px-3 py-1 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 shrink-0 cursor-pointer">Artikel</button>
+                <button type="button" onclick="setAdminNewsCatFilter('Pengumuman', this)" class="adm-cat-btn px-3 py-1 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 shrink-0 cursor-pointer">Pengumuman</button>
+                <button type="button" onclick="setAdminNewsCatFilter('Keagamaan', this)" class="adm-cat-btn px-3 py-1 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 shrink-0 cursor-pointer">Keagamaan</button>
+              </div>
+
+              <!-- Container List Berita -->
+              <div id="adminNewsListContainer" class="space-y-3 pt-1">
+                <div class="text-center py-6 text-slate-400 text-xs animate-pulse">Menghubungkan ke Spreadsheet Google API...</div>
               </div>
             </div>
           </div>
@@ -1990,6 +2060,9 @@
         </div>
       </div>
 
+      <!-- Extra Settings Sections (Disembunyikan Otomatis Saat Masuk Subview Admin Ala Asnawiyyah) -->
+      <div id="settings-extra-sections" class="space-y-4">
+
       <!-- ==================== SECTION TAMPILAN APLIKASI ==================== -->
       <div class="space-y-2">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center">
@@ -2132,6 +2205,7 @@
           Lembaga Pendidikan Ma'arif NU Demak &bull; PWA Shell v2.1
         </p>
       </div>
+      </div><!-- End #settings-extra-sections -->
     </div><!-- End #tab-pengaturan -->
 
     <!-- ==================== MODAL AUTH 1: WALI MURID (NISN & PIN LAHIR) ==================== -->
@@ -4357,32 +4431,54 @@
     let currentAdminNewsData = [];
 
     function openAdminModule(moduleName) {
+      const banner = document.getElementById('admin-profile-banner');
       const hub = document.getElementById('admin-hub-grid');
+      const extraSections = document.getElementById('settings-extra-sections');
       const container = document.getElementById('admin-module-container');
+
+      // 1. Sembunyikan Banner Profil, Grid Hub, dan Section Tambahan Ala Asnawiyyah
+      if (banner) banner.classList.add('hidden');
       if (hub) hub.classList.add('hidden');
+      if (extraSections) extraSections.classList.add('hidden');
       if (container) container.classList.remove('hidden');
 
+      // 2. Sembunyikan Semua Subview Lain
       const allSubviews = ['news', 'banners', 'ticker', 'guru', 'prestasi', 'alumni'];
       allSubviews.forEach(s => {
         const el = document.getElementById('admin-subview-' + s);
         if (el) el.classList.add('hidden');
       });
 
+      // 3. Tampilkan Subview Target
       const targetViewName = (moduleName === 'slider') ? 'banners' : moduleName;
       const targetView = document.getElementById('admin-subview-' + targetViewName);
       if (targetView) targetView.classList.remove('hidden');
 
+      // 4. Update Header Judul & Ikon
       const titleEl = document.getElementById('admin-subview-title');
-      const titles = {
-        news: 'Manajemen Berita & Warta',
-        banners: 'Banner Promo & Slider',
-        slider: 'Banner Promo & Slider',
-        ticker: 'Pengumuman Teks Berjalan',
-        guru: 'Dewan Guru & Asatidz',
-        prestasi: 'Kejuaraan & Prestasi Santri',
-        alumni: 'Jejaring Alumni Madrasah'
+      const iconBoxEl = document.getElementById('admin-subview-icon-box');
+      const iconEl = document.getElementById('admin-subview-icon');
+      const newsToggleBtn = document.getElementById('admin-news-toggle-btn');
+
+      const meta = {
+        news: { title: 'Manajemen Berita & Publikasi', icon: 'newspaper', color: 'bg-emerald-50 text-emerald-600' },
+        banners: { title: 'Banner Promo & Slider', icon: 'image', color: 'bg-amber-50 text-amber-600' },
+        slider: { title: 'Banner Promo & Slider', icon: 'image', color: 'bg-amber-50 text-amber-600' },
+        ticker: { title: 'Pengumuman Teks Berjalan', icon: 'megaphone', color: 'bg-rose-50 text-rose-600' },
+        guru: { title: 'Dewan Guru & Asatidz', icon: 'users', color: 'bg-blue-50 text-blue-600' },
+        prestasi: { title: 'Kejuaraan & Prestasi Santri', icon: 'award', color: 'bg-amber-50 text-amber-600' },
+        alumni: { title: 'Jejaring Alumni Madrasah', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' }
       };
-      if (titleEl) titleEl.textContent = titles[moduleName] || 'Portal Kontrol Admin';
+
+      const currentMeta = meta[moduleName] || { title: 'Portal Kontrol Admin', icon: 'layout-grid', color: 'bg-emerald-50 text-emerald-600' };
+      if (titleEl) titleEl.textContent = currentMeta.title;
+      if (iconBoxEl) iconBoxEl.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-sm shrink-0 ' + currentMeta.color;
+      if (iconEl) iconEl.setAttribute('data-lucide', currentMeta.icon);
+
+      // Tampilkan tombol Tulis Berita Baru hanya saat membuka modul berita
+      if (newsToggleBtn) {
+        newsToggleBtn.style.display = (targetViewName === 'news') ? 'flex' : 'none';
+      }
 
       if (targetViewName === 'news') {
         loadAdminNewsList();
@@ -4394,10 +4490,17 @@
     window.openAdminModule = openAdminModule;
 
     function closeAdminModule() {
+      const banner = document.getElementById('admin-profile-banner');
       const hub = document.getElementById('admin-hub-grid');
+      const extraSections = document.getElementById('settings-extra-sections');
       const container = document.getElementById('admin-module-container');
+
+      // Kembalikan Tampilan Dashboard Utama Ala Asnawiyyah
       if (container) container.classList.add('hidden');
+      if (banner) banner.classList.remove('hidden');
       if (hub) hub.classList.remove('hidden');
+      if (extraSections) extraSections.classList.remove('hidden');
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (window.lucide) window.lucide.createIcons();
     }
@@ -4405,15 +4508,65 @@
 
     function toggleAdminNewsForm(show) {
       const card = document.getElementById('admin-news-form-card');
+      const toggleText = document.getElementById('admin-news-toggle-text');
+      const toggleIcon = document.getElementById('admin-news-toggle-icon');
       if (!card) return;
+
       const isHidden = card.classList.contains('hidden');
       const shouldShow = (typeof show === 'boolean') ? show : isHidden;
       card.classList.toggle('hidden', !shouldShow);
+
+      if (toggleText) toggleText.textContent = shouldShow ? 'Tutup Form' : 'Tulis Berita Baru';
+      if (toggleIcon) toggleIcon.setAttribute('data-lucide', shouldShow ? 'x' : 'plus');
+
       if (shouldShow) {
         card.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      if (window.lucide) window.lucide.createIcons();
     }
     window.toggleAdminNewsForm = toggleAdminNewsForm;
+
+    let currentAdminNewsFilterCat = 'Semua';
+    let currentAdminNewsSearchKeyword = '';
+
+    function filterAdminNewsRealtime() {
+      const searchInput = document.getElementById('admNewsSearchInput');
+      currentAdminNewsSearchKeyword = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      applyAdminNewsFilter();
+    }
+    window.filterAdminNewsRealtime = filterAdminNewsRealtime;
+
+    function setAdminNewsCatFilter(cat, btn) {
+      currentAdminNewsFilterCat = cat;
+      document.querySelectorAll('.adm-cat-btn').forEach(b => {
+        b.className = 'adm-cat-btn px-3 py-1 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 shrink-0 cursor-pointer';
+      });
+      if (btn) {
+        btn.className = 'adm-cat-btn px-3 py-1 rounded-xl bg-emerald-700 text-white shadow-xs shrink-0 cursor-pointer';
+      }
+      applyAdminNewsFilter();
+    }
+    window.setAdminNewsCatFilter = setAdminNewsCatFilter;
+
+    function applyAdminNewsFilter() {
+      let filtered = currentAdminNewsData || [];
+      if (currentAdminNewsFilterCat !== 'Semua') {
+        filtered = filtered.filter(n => (n.kategori || '').toLowerCase().includes(currentAdminNewsFilterCat.toLowerCase()));
+      }
+      if (currentAdminNewsSearchKeyword) {
+        filtered = filtered.filter(n => {
+          const j = (n.judul || '').toLowerCase();
+          const k = (n.kategori || '').toLowerCase();
+          const p = (n.penulis || '').toLowerCase();
+          const r = (n.ringkasan || '').toLowerCase();
+          return j.includes(currentAdminNewsSearchKeyword) || 
+                 k.includes(currentAdminNewsSearchKeyword) || 
+                 p.includes(currentAdminNewsSearchKeyword) || 
+                 r.includes(currentAdminNewsSearchKeyword);
+        });
+      }
+      renderAdminNewsUI(filtered);
+    }
 
     async function loadAdminNewsList() {
       const container = document.getElementById('adminNewsListContainer');
@@ -4434,60 +4587,101 @@
         currentAdminNewsData = (typeof tabNewsData !== 'undefined' && tabNewsData.length > 0) ? tabNewsData : [];
       }
 
-      renderAdminNewsUI();
+      applyAdminNewsFilter();
     }
     window.loadAdminNewsList = loadAdminNewsList;
 
-    function renderAdminNewsUI() {
+    function renderAdminNewsUI(customList = null) {
       const container = document.getElementById('adminNewsListContainer');
       if (!container) return;
 
-      const totalEl = document.getElementById('admMetricTotalNews');
-      const pubEl = document.getElementById('admMetricPublishedNews');
-      const featEl = document.getElementById('admMetricFeaturedNews');
+      const list = (customList !== null) ? customList : (currentAdminNewsData || []);
+      const countBadge = document.getElementById('admNewsCountBadge');
+      const metricTotal = document.getElementById('admMetricTotalNews');
+      const metricViews = document.getElementById('admMetricTotalViews');
+      const metricKat = document.getElementById('admMetricKategori');
+      const metricPenulis = document.getElementById('admMetricPenulis');
 
-      const total = currentAdminNewsData.length;
-      const published = currentAdminNewsData.filter(n => n.status_aktif === true || String(n.status_aktif).toLowerCase() === 'true').length;
-      const featured = currentAdminNewsData.filter(n => n.is_featured === true || String(n.is_featured).toLowerCase() === 'true').length;
+      if (countBadge) countBadge.textContent = list.length + ' Berita';
+      if (metricTotal) metricTotal.textContent = (currentAdminNewsData.length || 0) + ' Berita';
+      
+      if (metricViews) {
+        const totalViews = (currentAdminNewsData || []).reduce((acc, n) => acc + (parseInt(n.views) || 2300), 0);
+        metricViews.textContent = totalViews > 1000 ? (totalViews / 1000).toFixed(1) + 'k Views' : totalViews + ' Views';
+      }
+      if (metricKat) {
+        const cats = new Set((currentAdminNewsData || []).map(n => n.kategori).filter(Boolean));
+        metricKat.textContent = (cats.size || 4) + ' Topik';
+      }
+      if (metricPenulis) {
+        const authors = new Set((currentAdminNewsData || []).map(n => n.penulis).filter(Boolean));
+        metricPenulis.textContent = (authors.size || 5) + ' Penulis';
+      }
 
-      if (totalEl) totalEl.textContent = total;
-      if (pubEl) pubEl.textContent = published;
-      if (featEl) featEl.textContent = featured;
-
-      if (total === 0) {
-        container.innerHTML = '<div class="text-center py-8 text-slate-400 text-xs italic">Belum ada warta berita tersimpan.</div>';
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="py-10 text-center text-xs text-slate-400 space-y-2 bg-slate-50/60 rounded-2xl border border-slate-100 p-4">
+            <i data-lucide="newspaper" class="w-8 h-8 text-slate-300 mx-auto"></i>
+            <p class="font-medium text-slate-500">Tidak ada berita yang ditemukan.</p>
+            <button type="button" onclick="toggleAdminNewsForm(true)" class="mt-2 px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold inline-flex items-center gap-1.5 transition cursor-pointer shadow-xs">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Tulis Berita Sekarang</span>
+            </button>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
         return;
       }
 
-      container.innerHTML = currentAdminNewsData.map(n => {
-        const isAktif = (n.status_aktif === true || String(n.status_aktif).toLowerCase() === 'true');
-        const isUtama = (n.is_featured === true || String(n.is_featured).toLowerCase() === 'true');
-        const statusPill = isAktif 
-          ? '<span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Terbit</span>'
-          : '<span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200">Draft</span>';
-        const headlinePill = isUtama
-          ? '<span class="text-[8.5px] font-black px-1.5 py-0.5 rounded bg-amber-400 text-amber-950">HEADLINE</span>'
-          : '';
+      container.innerHTML = list.map(news => {
+        const thumbUrl = news.gambar_url || news.gambar || 'poster_pts_berita.webp';
+        const viewsCount = typeof news.views !== 'undefined' ? Number(news.views).toLocaleString('id-ID') : '0';
+        
+        // Dynamic badge color based on kategori persis Asnawiyyah
+        let badgeColor = "bg-emerald-50 text-emerald-700 border border-emerald-200/60";
+        const katLower = (news.kategori || '').toLowerCase();
+        if (katLower.includes('prestasi')) badgeColor = "bg-amber-50 text-amber-800 border border-amber-200/60";
+        else if (katLower.includes('kegiatan')) badgeColor = "bg-sky-50 text-sky-800 border border-sky-200/60";
+        else if (katLower.includes('artikel')) badgeColor = "bg-indigo-50 text-indigo-800 border border-indigo-200/60";
+        else if (katLower.includes('pengumuman')) badgeColor = "bg-purple-50 text-purple-800 border border-purple-200/60";
+
+        const isFeatured = (news.is_featured === true || String(news.is_featured).toLowerCase() === 'true');
+        const headlinePill = isFeatured ? '<span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-amber-400 text-amber-950 uppercase tracking-wider">HEADLINE</span>' : '';
 
         return `
-          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:border-emerald-200 transition space-y-2">
-            <div class="flex items-start justify-between gap-2">
-              <div class="min-w-0 flex-1">
-                <div class="flex items-center gap-1.5 mb-1">
-                  ${statusPill}
-                  ${headlinePill}
-                  <span class="text-[9.5px] font-semibold text-slate-400">${n.tanggal || '-'}</span>
-                </div>
-                <h5 class="font-extrabold text-xs text-slate-900 leading-snug line-clamp-2">${n.judul}</h5>
-                <p class="text-[10.5px] text-slate-500 line-clamp-1 mt-0.5">${n.ringkasan || ''}</p>
-              </div>
-              ${n.gambar_url ? `<img src="${n.gambar_url}" alt="${n.judul}" class="w-14 h-14 rounded-lg object-cover shrink-0 border border-slate-200" onerror="this.onerror=null; this.src='/logo.png'">` : ''}
+          <div class="p-3 bg-slate-50/80 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-emerald-200 shadow-xs flex items-start gap-3 transition-all duration-200">
+            <!-- Thumbnail Kiri (W-24 H-18 rounded-xl) -->
+            <div class="w-24 h-18 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/80 relative">
+              <img src="${thumbUrl}" alt="${news.judul}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='poster_pts_berita.webp'">
             </div>
-            <div class="flex items-center justify-between pt-1.5 border-t border-slate-200/50 text-[10px]">
-              <span class="text-slate-400 font-medium">Penulis: <b class="text-slate-600">${n.penulis || 'Humas'}</b></span>
-              <div class="flex items-center gap-1.5">
-                <button type="button" onclick="editAdminNews('${n.id}')" class="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold transition">Edit</button>
-                <button type="button" onclick="deleteAdminNews('${n.id}')" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold transition">Hapus</button>
+            
+            <!-- Info Kanan -->
+            <div class="min-w-0 flex-1 space-y-1">
+              <div class="flex items-center flex-wrap gap-1.5">
+                <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md ${badgeColor}">
+                  ${news.kategori || 'Berita'}
+                </span>
+                ${headlinePill}
+                <span class="text-[9.5px] text-slate-400">${news.tanggal || '-'}</span>
+                <span class="text-[9.5px] text-slate-400 flex items-center gap-0.5">
+                  <i data-lucide="eye" class="w-2.5 h-2.5"></i>
+                  <span>${viewsCount} views</span>
+                </span>
+              </div>
+
+              <h5 class="font-bold text-xs text-slate-900 leading-snug line-clamp-2">${news.judul}</h5>
+              <p class="text-[10px] text-slate-500 font-medium truncate">Penulis: <span class="text-slate-700">${news.penulis || 'Humas MTs YASUA'}</span></p>
+
+              <!-- Action Buttons -->
+              <div class="flex items-center justify-end gap-1.5 pt-1">
+                <button type="button" onclick="editAdminNews('${news.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[10.5px] font-bold transition flex items-center gap-1 cursor-pointer">
+                  <i data-lucide="edit-3" class="w-3 h-3"></i>
+                  <span>Edit</span>
+                </button>
+                <button type="button" onclick="deleteAdminNews('${news.id}')" class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10.5px] font-bold transition flex items-center gap-1 cursor-pointer">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
+                  <span>Hapus</span>
+                </button>
               </div>
             </div>
           </div>
