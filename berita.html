@@ -2,12 +2,13 @@
 <html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Berita & Pengumuman — MTs YASUA Pilangwetan</title>
   <meta name="description" content="Kabar berita terkini, prestasi santri, agenda kegiatan sekolah, dan pengumuman resmi MTs YASUA Pilangwetan, Kebonagung, Demak.">
   <meta name="keywords" content="Berita MTs YASUA, Pengumuman PTS Demak, Prestasi Siswa MTs Yasua Pilangwetan, Kebonagung">
   
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="/logo.png">
     <!-- PWA & Mobile Web App Meta (Android & iOS Safari) -->
   <meta name="theme-color" content="#065F46">
   <meta name="mobile-web-app-capable" content="yes">
@@ -16,9 +17,9 @@
   <meta name="apple-mobile-web-app-title" content="MTs YASUA">
   <meta name="application-name" content="MTs YASUA">
   <meta name="format-detection" content="telephone=no">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="canonical" href="https://www.mtsyasua.sch.id/berita.html">
 
   <meta property="og:title" content="Berita & Pengumuman — MTs YASUA Pilangwetan">
@@ -64,16 +65,16 @@
   </script>
 
   <!-- Compiled Production Tailwind CSS (High-Performance Sub-Second Load) -->
-  <link rel="stylesheet" href="site.min.css">
+  <link rel="stylesheet" href="/site.min.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Montserrat:wght@800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Interactive Live Search Component -->
-  <script src="search.js" defer></script>
+  <script src="/search.js" defer></script>
   <!-- Progressive Web App (PWA) & Mobile Interaction Controller -->
-  <script src="pwa.js" defer></script>
+  <script src="/pwa.js" defer></script>
 
   <style>
     /* Mobile Viewport, Touch & Safe-Area Adjustments (Android & iPhone) */
@@ -1746,6 +1747,30 @@
 
     // Cek URL Query / Hash saat halaman dimuat (Deep Link Auto-Open langsung ke mode baca artikel penuh)
     function checkUrlHash() {
+      // Dukungan SSR/Serverless Initial Article (Instan 0ms)
+      if (window.__INITIAL_NEWS_ITEM__ && window.__INITIAL_NEWS_ITEM__.slug) {
+        const initial = window.__INITIAL_NEWS_ITEM__;
+        const exists = newsMasterList.find(n => n.id === initial.id || n.slug === initial.slug);
+        if (!exists) {
+          newsMasterList.unshift({
+            id: initial.id || 'news_initial',
+            slug: initial.slug,
+            kategori: initial.kategori || 'Berita & Kegiatan',
+            badge_class: initial.badge_class || getCategoryBadgeClass(initial.kategori),
+            tanggal: initial.tanggal || '',
+            judul: initial.judul || '',
+            ringkasan: initial.ringkasan || '',
+            gambar_url: initial.gambar_url || 'poster_pts_berita.webp',
+            konten: initial.konten || '',
+            is_featured: Boolean(initial.is_featured),
+            status_aktif: true,
+            views: Number(initial.views) || 1220,
+            read_time: initial.read_time || '2 menit baca'
+          });
+        }
+        readNewsArticle(initial.id || initial.slug);
+        return;
+      }
       const pathSegments = window.location.pathname.split('/').filter(Boolean);
       let targetFromPath = null;
       if (pathSegments.length >= 2 && pathSegments[0] === 'berita') {

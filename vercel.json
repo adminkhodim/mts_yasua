@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/berita/:slug+",
+      "source": "/berita/:slug((?!.*\\.[\\w]+$).*)",
       "destination": "/api/og?slug=:slug"
     },
     {

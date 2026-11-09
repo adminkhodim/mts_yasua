@@ -50,6 +50,19 @@ const STATIC_NEWS = [
     judul: 'Bentuk Karakter Religius dan Disiplin, Siswa-Siswi MTs Yasua Konsisten Jalankan Shalat Zuhur Berjamaah',
     ringkasan: 'Kedisiplinan ibadah shalat berjamaah tepat waktu sebagai fondasi pembentukan akhlakul karimah seluruh santri madrasah.',
     gambar_url: 'https://www.mtsyasua.sch.id/foto-sholat-santri.jpg'
+  },
+  {
+    id: 'NEWS-006',
+    alt_id: 'tempat-sampah',
+    slug: 'keren-mts-yasua-hadirkan-tempat-sampah-khusus-botol-plastik-demi-wujudkan-madrasah-hijau',
+    judul: 'Keren! MTs Yasua Hadirkan Tempat Sampah Khusus Botol Plastik demi Wujudkan Madrasah Hijau',
+    kategori: 'Berita & Kegiatan',
+    tanggal: '9 November 2026',
+    views: 1226,
+    read_time: '2 menit baca',
+    ringkasan: 'DEMAK – Langkah nyata dalam menjaga kelestarian lingkungan terus digalakkan di lingkungan pendidikan.',
+    gambar_url: 'https://lh3.googleusercontent.com/d/1YuAgGt2guP9c9Pi79YGzNZTYZahpPhSL',
+    konten: '<p class="mb-3">DEMAK – Langkah nyata dalam menjaga kelestarian lingkungan terus digalakkan di lingkungan pendidikan. Salah satu terobosan menarik lahir dari MTs Yasua, Kecamatan Kebonagung, Kabupaten Demak. Guna menekan angka limbah plastik di sekolah, pihak madrasah secara resmi meluncurkan fasilitas tempat sampah khusus botol plastik di lingkungan sekolah.</p><p class="mb-3">Langkah inovatif ini diambil bukan tanpa alasan. Produksi sampah botol plastik bekas minuman harian siswa dinilai cukup tinggi. Melalui penyediaan tempat sampah terpisah ini, MTs Yasua berkomitmen untuk mempermudah proses pemilahan sampah sejak dari sumbernya (hulu), sekaligus mengedukasi para siswa tentang pentingnya konsep daur ulang (recycle).</p><p class="mb-3">Kepala MTs Yasua menyampaikan bahwa program ini merupakan bagian dari gerakan menuju madrasah hijau (green madrasah) yang bebas dari tumpukan sampah plastik yang tidak terurai.<br>"Kami ingin menanamkan karakter peduli lingkungan kepada para siswa sejak dini. Dengan adanya tempat sampah khusus botol plastik ini, siswa diajarkan bahwa botol bekas bukanlah limbah yang tidak berguna, melainkan material yang memiliki nilai ekonomis dan kreativitas jika dikelola dengan benar," ujarnya.</p><p class="mb-3">Pilah Sampah Jadi Tabungan Kreatif<br>Menariknya, botol-botol plastik yang terkumpul di tempat sampah khusus tersebut tidak akan langsung dibuang begitu saja ke Tempat Pembuangan Akhir (TPA). Madrasah telah merencanakan program lanjutan untuk mengolah botol bekas tersebut.<br>Beberapa opsi pengelolaan yang disiapkan antara lain menyalurkannya ke bank sampah, memanfaatkannya sebagai media tanam hidroponik di taman sekolah, hingga mengolahnya menjadi bahan baku kerajinan tangan bernilai estetika tinggi pada mata pelajaran Prakarya.</p><p class="mb-3">Respon positif pun datang dari para siswa. Mereka mengaku menjadi lebih bersemangat untuk memilah sampah karena tempat sampahnya dirancang dengan visual yang menarik dan mudah dikenali di area koridor madrasah.</p><p class="mb-3">Melalui kehadiran tempat sampah khusus ini, MTs Yasua berharap dapat menjadi inspirasi bagi sekolah-sekolah lain di wilayah Demak untuk terus berinovasi dalam mengelola kebersihan lingkungan demi masa depan bumi yang lebih baik.</p>'
   }
 ];
 
@@ -128,15 +141,7 @@ async function findNewsItem(slug) {
   if (!slug) return null;
   const search = slug.toString().toLowerCase().trim();
 
-  // 1. Cek di dataset lokal terlebih dahulu (Instan 0ms)
-  const local = STATIC_NEWS.find(n => 
-    (n.slug && n.slug.toLowerCase() === search) ||
-    (n.id && n.id.toLowerCase() === search) ||
-    (n.alt_id && n.alt_id.toLowerCase() === search)
-  );
-  if (local) return local;
-
-  // 2. Cek di cache/live GAS
+  // 1. Cek di cache/live GAS terlebih dahulu (Data Terkini & Lengkap)
   const liveList = await fetchFromGasWithCache();
   if (Array.isArray(liveList)) {
     const found = liveList.find(n => 
@@ -145,6 +150,14 @@ async function findNewsItem(slug) {
     );
     if (found) return found;
   }
+
+  // 2. Fallback ke dataset lokal (Instan 0ms jika GAS offline / cold start)
+  const local = STATIC_NEWS.find(n => 
+    (n.slug && n.slug.toLowerCase() === search) ||
+    (n.id && n.id.toLowerCase() === search) ||
+    (n.alt_id && n.alt_id.toLowerCase() === search)
+  );
+  if (local) return local;
 
   return null;
 }
@@ -202,7 +215,13 @@ module.exports = async function handler(req, res) {
   <meta name="twitter:image" content="${escapeHtml(image)}">
       `;
 
-      html = html.replace(/<head>/i, `<head>\n${dynamicMetaTags}`);
+      const initialArticleScript = `
+  <!-- Injeksi Data Artikel Instan 0ms untuk Client-Side Hydration -->
+  <script>
+    window.__INITIAL_NEWS_ITEM__ = ${JSON.stringify(newsItem).replace(/</g, '\\u003c')};
+  </script>
+`;
+      html = html.replace(/<head>/i, `<head>\n  <base href="/">\n${dynamicMetaTags}\n${initialArticleScript}`);
     }
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
