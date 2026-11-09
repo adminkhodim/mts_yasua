@@ -10,18 +10,36 @@
   <!-- Compiled Production Tailwind CSS (High-Performance Sub-Second Load) -->
   <link rel="stylesheet" href="site.min.css">
 
-  <!-- Early Deep-Link Pre-Resolver: Zero-FOUC (Mencegah kedipan / flash Dashboard Utama saat dibuka dari /app) -->
+  <!-- Early Deep-Link Pre-Resolver: Zero-FOUC (Mencegah kedipan Login Screen & Dashboard Utama saat dibuka dari /app) -->
   <script>
     (function () {
       try {
+        var sessStr = localStorage.getItem('mts_admin_session');
+        var hasValidSession = false;
+        if (sessStr) {
+          var sess = JSON.parse(sessStr);
+          if (sess && sess.token && (!sess.expiresAt || sess.expiresAt > Date.now())) {
+            hasValidSession = true;
+          }
+        }
+
         var params = new URLSearchParams(window.location.search);
         var tab = params.get('tab') || window.location.hash.replace('#', '');
         var validTabs = ['news', 'teachers', 'banners', 'prestasi', 'gallery', 'alumni'];
+
+        var cssRules = '';
+        if (hasValidSession) {
+          cssRules += '#loginScreen { display: none !important; } ';
+        }
         if (tab && validTabs.indexOf(tab) !== -1) {
           var viewId = 'view' + tab.charAt(0).toUpperCase() + tab.slice(1);
+          cssRules += '#viewDashboard { display: none !important; } #' + viewId + ' { display: block !important; }';
+        }
+
+        if (cssRules) {
           var style = document.createElement('style');
           style.id = 'early-route-style';
-          style.textContent = '#viewDashboard { display: none !important; } #' + viewId + ' { display: block !important; }';
+          style.textContent = cssRules;
           document.head.appendChild(style);
         }
       } catch (e) {}
@@ -64,7 +82,7 @@
   <!-- =================================================================== -->
   <!-- 1. LOGIN SCREEN OVERLAY (Aktif jika admin belum login)              -->
   <!-- =================================================================== -->
-  <div id="loginScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-[#022c1f] via-[#065F46] to-[#0A6B48] flex items-center justify-center p-4">
+  <div id="loginScreen" class="hidden fixed inset-0 z-50 bg-gradient-to-br from-[#022c1f] via-[#065F46] to-[#0A6B48] flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-emerald-100 animate-in fade-in zoom-in-95 duration-200">
       <div class="text-center space-y-2 mb-6">
         <div class="w-16 h-16 bg-emerald-50 rounded-2xl mx-auto p-2 border border-emerald-100 flex items-center justify-center shadow-xs">
