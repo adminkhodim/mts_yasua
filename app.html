@@ -1543,70 +1543,128 @@
           </div>
         </div>
 
-        <!-- Pusat Kontrol Admin Cepat -->
+        <!-- Pusat Kontrol Admin Mobile (1 Baris 4 Menu - 12 Modul Resmi) -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
           <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
             <h4 class="text-xs font-bold text-slate-800 flex items-center gap-2 uppercase tracking-wider">
               <span class="w-1.5 h-3.5 bg-indigo-600 rounded-full"></span>
-              <span>Pusat Kontrol Cepat CMS</span>
+              <span>Portal Kontrol Mobile Admin</span>
             </h4>
-            <span class="text-[9.5px] font-extrabold px-2.5 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">6 Modul Aktif</span>
+            <span class="text-[9.5px] font-extrabold px-2.5 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">12 Modul Resmi</span>
           </div>
 
-          <div class="grid grid-cols-3 gap-2.5 pt-1 text-center">
-            <a href="/admin" class="p-3 rounded-2xl bg-slate-50/80 hover:bg-indigo-50/70 border border-slate-200/70 flex flex-col items-center group transition cursor-pointer shadow-2xs">
-              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="newspaper" class="w-5 h-5 text-emerald-700"></i>
+          <!-- Grid 1 Baris 4 Menu (3 Baris x 4 Kolom) -->
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <!-- 1. Berita -->
+            <button type="button" onclick="window.openAdminMobileModule('news')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="newspaper" class="w-4 h-4 text-emerald-700"></i>
               </div>
-              <span class="text-[11px] font-extrabold text-slate-800">Berita</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">6 Pos</span>
-            </a>
-            <a href="/admin" class="p-3 rounded-2xl bg-slate-50/80 hover:bg-indigo-50/70 border border-slate-200/70 flex flex-col items-center group transition cursor-pointer shadow-2xs">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="image" class="w-5 h-5 text-amber-700"></i>
-              </div>
-              <span class="text-[11px] font-extrabold text-slate-800">Banner</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">3 Slide</span>
-            </a>
-            <a href="/admin" class="p-3 rounded-2xl bg-slate-50/80 hover:bg-indigo-50/70 border border-slate-200/70 flex flex-col items-center group transition cursor-pointer shadow-2xs">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="calendar" class="w-5 h-5 text-blue-700"></i>
-              </div>
-              <span class="text-[11px] font-extrabold text-slate-800">Agenda</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">Aktif</span>
-            </a>
-            <a href="/admin" class="p-3 rounded-2xl bg-slate-50/80 hover:bg-indigo-50/70 border border-slate-200/70 flex flex-col items-center group transition cursor-pointer shadow-2xs">
-              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="graduation-cap" class="w-5 h-5 text-purple-700"></i>
-              </div>
-              <span class="text-[11px] font-extrabold text-slate-800">PPDB</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">2026/2027</span>
-            </a>
-            <a href="/admin" class="p-3 rounded-2xl bg-slate-50/80 hover:bg-indigo-50/70 border border-slate-200/70 flex flex-col items-center group transition cursor-pointer shadow-2xs">
-              <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="users" class="w-5 h-5 text-teal-700"></i>
-              </div>
-              <span class="text-[11px] font-extrabold text-slate-800">Guru</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">9 Guru</span>
-            </a>
-            <a href="/admin" class="p-3 rounded-2xl bg-slate-50/80 hover:bg-indigo-50/70 border border-slate-200/70 flex flex-col items-center group transition cursor-pointer shadow-2xs">
-              <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="camera" class="w-5 h-5 text-rose-700"></i>
-              </div>
-              <span class="text-[11px] font-extrabold text-slate-800">Galeri</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">Drive</span>
-            </a>
-          </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Berita</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Warta</span>
+            </button>
 
-          <div class="pt-1">
-            <a href="/admin" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-800 hover:to-indigo-950 text-white text-xs font-black flex items-center justify-center gap-2 transition shadow-md hover:shadow-lg">
-              <i data-lucide="external-link" class="w-4 h-4"></i>
-              <span>Buka Portal Admin CMS Lengkap</span>
-            </a>
+            <!-- 2. Banner -->
+            <button type="button" onclick="window.openAdminMobileModule('banners')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-amber-50/70 border border-slate-200/70 hover:border-amber-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="image" class="w-4 h-4 text-amber-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Banner</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Promo 3:1</span>
+            </button>
+
+            <!-- 3. Slider -->
+            <button type="button" onclick="window.openAdminMobileModule('hero')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-cyan-50/70 border border-slate-200/70 hover:border-cyan-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-cyan-100 text-cyan-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="sparkles" class="w-4 h-4 text-cyan-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Slider</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">5 Foto</span>
+            </button>
+
+            <!-- 4. Ticker -->
+            <button type="button" onclick="window.openAdminMobileModule('settings')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-rose-50/70 border border-slate-200/70 hover:border-rose-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="megaphone" class="w-4 h-4 text-rose-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Ticker</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Pengumuman</span>
+            </button>
+
+            <!-- 5. Guru -->
+            <button type="button" onclick="window.openAdminMobileModule('teachers')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-blue-50/70 border border-slate-200/70 hover:border-blue-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="users" class="w-4 h-4 text-blue-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Guru</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Asatidz</span>
+            </button>
+
+            <!-- 6. Santri -->
+            <button type="button" onclick="window.openAdminMobileModule('students')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-purple-50/70 border border-slate-200/70 hover:border-purple-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Santri</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Master Data</span>
+            </button>
+
+            <!-- 7. Presensi -->
+            <button type="button" onclick="window.openAdminMobileModule('presensi')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-indigo-50/70 border border-slate-200/70 hover:border-indigo-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="user-check" class="w-4 h-4 text-indigo-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Presensi</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Log Harian</span>
+            </button>
+
+            <!-- 8. Tahfidz -->
+            <button type="button" onclick="window.openAdminMobileModule('mutabaah')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="book-open" class="w-4 h-4 text-emerald-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Tahfidz</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Mutaba'ah</span>
+            </button>
+
+            <!-- 9. Agenda -->
+            <button type="button" onclick="window.openAdminMobileModule('agenda')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/70 hover:border-sky-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="calendar" class="w-4 h-4 text-sky-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Agenda</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">KBM</span>
+            </button>
+
+            <!-- 10. PPDB -->
+            <button type="button" onclick="window.openAdminMobileModule('ppdb')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-orange-50/70 border border-slate-200/70 hover:border-orange-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-orange-100 text-orange-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="user-plus" class="w-4 h-4 text-orange-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">PPDB</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Pendaftar</span>
+            </button>
+
+            <!-- 11. Prestasi -->
+            <button type="button" onclick="window.openAdminMobileModule('prestasi')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-yellow-50/70 border border-slate-200/70 hover:border-yellow-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-yellow-100 text-yellow-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="trophy" class="w-4 h-4 text-yellow-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Prestasi</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Kejuaraan</span>
+            </button>
+
+            <!-- 12. Alumni -->
+            <button type="button" onclick="window.openAdminMobileModule('alumni')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-violet-50/70 border border-slate-200/70 hover:border-violet-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-violet-100 text-violet-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="award" class="w-4 h-4 text-violet-700"></i>
+              </div>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Alumni</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Jejak</span>
+            </button>
           </div>
         </div>
       </div>
-
       <!-- ==================== STATE 5: AUTHENTICATED PIMPINAN ==================== -->
       <div id="identity-state-pimpinan" class="hidden space-y-4">
         <!-- Profil Card Pimpinan -->
@@ -1924,7 +1982,32 @@
     </div>
 
     <!-- ==================== MODAL AUTH 3: PENGELOLA / ADMIN CMS ==================== -->
-    <div id="modalAuthAdmin" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
+    <!-- Modal Aksi Admin Mobile Spesifik (/app) -->
+  <div id="modalAdminMobileAction" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
+    <div class="bg-white rounded-3xl w-full max-w-sm sm:max-w-md overflow-hidden shadow-2xl border border-slate-200 animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
+      <div class="p-4 bg-gradient-to-r from-indigo-900 to-slate-900 text-white flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <div id="adminModalIcon" class="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center text-indigo-300 font-bold shrink-0">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 id="adminModalTitle" class="font-extrabold text-sm text-white truncate">Manajemen Modul</h3>
+            <p id="adminModalSub" class="text-[10px] text-indigo-200/90 font-medium">Akses Operasional Mobile Administrator</p>
+          </div>
+        </div>
+        <button type="button" onclick="window.closeAdminMobileModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300 hover:text-white transition cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Isi Konten Modul Dinamis -->
+      <div id="adminModalContent" class="p-4 overflow-y-auto space-y-3.5 text-xs text-slate-700">
+        <!-- Akan di-render via JavaScript secara dinamis -->
+      </div>
+    </div>
+  </div>
+
+  <div id="modalAuthAdmin" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
       <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl border border-indigo-100 flex flex-col relative animate-in fade-in zoom-in-95 space-y-3.5 text-slate-800">
         <div class="flex items-center justify-between pb-2 border-b border-slate-100">
           <div class="flex items-center gap-2.5">
