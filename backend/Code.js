@@ -15,6 +15,12 @@ const CONFIG = {
   SHEET_HERO: 'hero_slides',
   SHEET_NEWS: 'news',
   SHEET_SETTINGS: 'settings',
+  SHEET_USERS: 'users',
+  SHEET_ROLES_PERMISSIONS: 'roles_permissions',
+  SHEET_STUDENTS: 'students',
+  SHEET_WALI_MAP: 'wali_santri_map',
+  SHEET_PRESENSI_GURU: 'presensi_guru',
+  SHEET_MUTABAAH: 'mutabaah_santri',
   DEFAULT_ADMIN_PASS: 'adminyasua2026'
 };
 
@@ -879,6 +885,115 @@ function createJsonResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * SETUP DATABASE AUTH, RBAC, SISWA, PRESENSI & MUTABAAH
+ * Otomatis membuat 6 sheet baru jika belum ada di spreadsheet
+ */
+function setupAuthDatabase() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  const now = new Date().toISOString();
+  const createdSheets = [];
+
+  // 1. Sheet 'users'
+  let sUsers = ss.getSheetByName(CONFIG.SHEET_USERS);
+  if (!sUsers) {
+    sUsers = ss.insertSheet(CONFIG.SHEET_USERS);
+    const headers = ['user_id', 'username', 'pin_hash', 'name', 'role', 'phone', 'email', 'photo_url', 'status', 'created_at', 'last_login_at'];
+    sUsers.appendRow(headers);
+    sUsers.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sUsers.setFrozenRows(1);
+
+    const defaultUsers = [
+      ['USR-ADMIN-01', 'admin', 'adminyasua2026', 'Administrator MTs YASUA', 'ADMIN', '085649881966', 'admin@mtsyasua.sch.id', 'logo.png', 'AKTIF', now, now],
+      ['USR-PIMPINAN-01', 'muthohar', 'pimpinanyasua', 'Muthohar, S.Pd.', 'PIMPINAN', '085649881966', 'kepala@mtsyasua.sch.id', 'kepala-madrasah.webp', 'AKTIF', now, now],
+      ['USR-GURU-01', 'thoibah', 'yasua2026', 'Hj. Thoibah Roudlotul Jannah, S.Ag.', 'GURU', '085649881966', 'thoibah@mtsyasua.sch.id', 'guru_5.webp', 'AKTIF', now, now],
+      ['USR-WALI-01', '2026001', '2012-05-14', 'Bpk/Ibu Wali Santri Ahmad Zaki', 'WALI_MURID', '085649881966', 'wali.zaki@gmail.com', 'logo.png', 'AKTIF', now, now]
+    ];
+    defaultUsers.forEach(r => sUsers.appendRow(r));
+    createdSheets.push('users');
+  }
+
+  // 2. Sheet 'roles_permissions'
+  let sRoles = ss.getSheetByName(CONFIG.SHEET_ROLES_PERMISSIONS);
+  if (!sRoles) {
+    sRoles = ss.insertSheet(CONFIG.SHEET_ROLES_PERMISSIONS);
+    const headers = ['role_key', 'role_name', 'can_access_cms', 'can_edit_news', 'can_edit_banner', 'can_edit_teachers', 'can_edit_ppdb', 'can_record_attendance', 'can_view_student_progress', 'can_macro_supervision', 'active_permissions_json', 'updated_at'];
+    sRoles.appendRow(headers);
+    sRoles.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sRoles.setFrozenRows(1);
+
+    const defaultRoles = [
+      ['ADMIN', 'Administrator CMS', true, true, true, true, true, true, true, true, JSON.stringify(['ALL_CMS', 'MANAGE_USERS', 'MANAGE_NEWS', 'MANAGE_BANNER']), now],
+      ['PIMPINAN', 'Pimpinan Madrasah & Yayasan', true, false, false, false, false, false, true, true, JSON.stringify(['SUPERVISION_MACRO', 'READ_REPORTS']), now],
+      ['GURU', 'Dewan Asatidz & Guru', false, false, false, false, false, true, false, false, JSON.stringify(['ATTENDANCE_RECORD', 'KBM_JURNAL']), now],
+      ['WALI_MURID', 'Wali Murid / Santri', false, false, false, false, false, false, true, false, JSON.stringify(['VIEW_CHILD_PROGRESS', 'VIEW_MUTABAAH']), now]
+    ];
+    defaultRoles.forEach(r => sRoles.appendRow(r));
+    createdSheets.push('roles_permissions');
+  }
+
+  // 3. Sheet 'students'
+  let sStudents = ss.getSheetByName(CONFIG.SHEET_STUDENTS);
+  if (!sStudents) {
+    sStudents = ss.insertSheet(CONFIG.SHEET_STUDENTS);
+    const headers = ['student_id', 'nisn', 'nis', 'name', 'gender', 'birth_date', 'kelas', 'program', 'wali_name', 'wali_phone', 'photo_url', 'status', 'created_at'];
+    sStudents.appendRow(headers);
+    sStudents.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sStudents.setFrozenRows(1);
+
+    const defaultStudents = [
+      ['SAN-2026-001', '2026001', '2024001', 'Ahmad Zaki Al-Fatih', 'L', '2012-05-14', '8-A', 'Tahfidz & Sains', 'Bpk. Muhammad Fatih', '085649881966', 'logo.png', 'AKTIF', now],
+      ['SAN-2026-002', '2026002', '2024002', 'Siti Fatimah Az-Zahra', 'P', '2012-08-20', '7-B', 'Tahfidz Al-Qur\'an', 'Ibu Siti Aminah', '085649881966', 'logo.png', 'AKTIF', now]
+    ];
+    defaultStudents.forEach(r => sStudents.appendRow(r));
+    createdSheets.push('students');
+  }
+
+  // 4. Sheet 'wali_santri_map'
+  let sWaliMap = ss.getSheetByName(CONFIG.SHEET_WALI_MAP);
+  if (!sWaliMap) {
+    sWaliMap = ss.insertSheet(CONFIG.SHEET_WALI_MAP);
+    const headers = ['map_id', 'user_id', 'student_id', 'relationship', 'created_at'];
+    sWaliMap.appendRow(headers);
+    sWaliMap.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sWaliMap.setFrozenRows(1);
+
+    sWaliMap.appendRow(['MAP-001', 'USR-WALI-01', 'SAN-2026-001', 'WALI', now]);
+    createdSheets.push('wali_santri_map');
+  }
+
+  // 5. Sheet 'presensi_guru'
+  let sPresensi = ss.getSheetByName(CONFIG.SHEET_PRESENSI_GURU);
+  if (!sPresensi) {
+    sPresensi = ss.insertSheet(CONFIG.SHEET_PRESENSI_GURU);
+    const headers = ['presensi_id', 'teacher_id', 'teacher_name', 'tanggal', 'jam_masuk', 'status_kehadiran', 'lokasi_gps', 'device_info', 'created_at'];
+    sPresensi.appendRow(headers);
+    sPresensi.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sPresensi.setFrozenRows(1);
+    createdSheets.push('presensi_guru');
+  }
+
+  // 6. Sheet 'mutabaah_santri'
+  let sMutabaah = ss.getSheetByName(CONFIG.SHEET_MUTABAAH);
+  if (!sMutabaah) {
+    sMutabaah = ss.insertSheet(CONFIG.SHEET_MUTABAAH);
+    const headers = ['mutabaah_id', 'student_id', 'tanggal', 'juz_aktif', 'surah_terakhir', 'nilai_kelancaran', 'kehadiran_persen', 'status_infaq', 'catatan_ustadz', 'created_at'];
+    sMutabaah.appendRow(headers);
+    sMutabaah.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sMutabaah.setFrozenRows(1);
+
+    sMutabaah.appendRow(['MUT-001', 'SAN-2026-001', '2026-11-09', 'Juz 30', 'Surah An-Nas', 'MUMTAZ', 98, 'LUNAS', 'Hafalan lancar dan tartil, makhraj huruf sangat baik.', now]);
+    createdSheets.push('mutabaah_santri');
+  }
+
+  return {
+    status: 'success',
+    message: 'Setup Auth & RBAC Sheets selesai!',
+    createdSheets: createdSheets
+  };
+}
+
 
 /**
  * =====================================================================
