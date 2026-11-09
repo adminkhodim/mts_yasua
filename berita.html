@@ -98,6 +98,50 @@
       letter-spacing: 0.04em;
     }
     .glass-nav { background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    /* Tipografi Editorial Mobile & Desktop Berita Web Publik */
+    .web-article-content {
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      color: #334155;
+    }
+    @media (min-width: 640px) {
+      .web-article-content {
+        font-size: 1.05rem;
+        line-height: 1.85;
+      }
+    }
+    .web-article-content p {
+      margin-bottom: 1.25rem;
+    }
+    .web-article-content blockquote, .web-article-content .quote-box {
+      background-color: #f0fdf4;
+      border-left: 4px solid #059669;
+      padding: 0.85rem 1.15rem;
+      border-radius: 0.75rem;
+      margin: 1.25rem 0;
+      font-style: italic;
+      color: #064e3b;
+      font-size: 0.875rem;
+    }
+    @media (min-width: 640px) {
+      .web-article-content blockquote, .web-article-content .quote-box {
+        font-size: 0.95rem;
+        padding: 1rem 1.35rem;
+      }
+    }
+    .web-article-content strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .web-article-content ul, .web-article-content ol {
+      padding-left: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .web-article-content li {
+      margin-bottom: 0.45rem;
+      line-height: 1.65;
+    }
+
     .hover-lift { transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease; }
     .hover-lift:hover { transform: translateY(-4px); }
     .nav-dropdown .dropdown-menu { transform: translateX(-50%) translateY(8px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }

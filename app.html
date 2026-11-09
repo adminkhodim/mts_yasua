@@ -455,6 +455,99 @@
       </div>
     </div><!-- End #tab-berita -->
 
+    <!-- ==================== SUB-VIEW BACA BERITA MOBILE APP (NATIVE FULL PAGE - TANPA POPUP) ==================== -->
+    <div id="tab-berita-baca" class="hidden space-y-3.5 pb-8 animate-in fade-in duration-200">
+      <!-- 1. Native Top Bar Navigasi Mobile -->
+      <div class="sticky top-2 z-30 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xs border border-emerald-100/90 flex items-center justify-between gap-2">
+        <button onclick="closeNewsReader()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition active:scale-95 cursor-pointer">
+          <i data-lucide="arrow-left" class="w-4 h-4 text-brand-primary"></i>
+          <span id="readNewsBackBtnText">Kembali</span>
+        </button>
+
+        <span class="text-xs font-black text-slate-800 truncate max-w-[170px] sm:max-w-xs" id="readNewsHeaderTitle">Warta Madrasah</span>
+
+        <div class="flex items-center gap-1">
+          <button id="readNewsTopShareBtn" type="button" class="w-8 h-8 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 flex items-center justify-center transition active:scale-90 cursor-pointer" title="Bagikan Warta">
+            <i data-lucide="share-2" class="w-4 h-4 text-emerald-600"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Hero Cover Card Mobile -->
+      <div class="bg-white rounded-3xl overflow-hidden border border-emerald-100/80 shadow-xs">
+        <div class="relative aspect-video w-full overflow-hidden bg-slate-900">
+          <img id="readNewsCoverImg" src="poster_pts_berita.webp" alt="Cover Berita" class="w-full h-full object-cover">
+          <span id="readNewsBadge" class="absolute bottom-3 left-3 px-3 py-1 rounded-full text-[10.5px] font-black text-white shadow-md bg-emerald-600 uppercase tracking-wide">
+            BERITA
+          </span>
+        </div>
+
+        <div class="p-4 sm:p-5 space-y-3.5">
+          <!-- Metadata Baris Mobile Khas Aplikasi -->
+          <div class="flex items-center gap-2 flex-wrap text-[11px] text-slate-500 border-b border-slate-100 pb-3">
+            <span class="inline-flex items-center gap-1 font-semibold text-slate-500">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-primary"></i>
+              <span id="readNewsDate">5 Oktober 2026</span>
+            </span>
+            <span class="text-slate-300">•</span>
+            <span class="inline-flex items-center gap-1 font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100/60">
+              <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
+              <span id="readNewsViews">2.450 pembaca</span>
+            </span>
+            <span class="text-slate-300">•</span>
+            <span class="inline-flex items-center gap-1 font-medium text-slate-500">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="readNewsReadTime">2 menit baca</span>
+            </span>
+          </div>
+
+          <!-- Judul Warta Mobile -->
+          <h1 id="readNewsTitle" class="text-lg sm:text-xl font-black text-slate-900 leading-snug tracking-tight">
+            Judul Warta
+          </h1>
+
+          <!-- Body Artikel Mobile yang Rapi & Proporsional -->
+          <div id="readNewsContent" class="mobile-article-body text-slate-700 text-[13.5px] sm:text-sm leading-relaxed border-t border-slate-100 pt-4 space-y-3">
+          </div>
+
+          <!-- Bottom Action Bar Khas Aplikasi Smartphone -->
+          <div class="pt-4 border-t border-slate-100 space-y-2.5">
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Aksi &amp; Bagikan Warta</div>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="readNewsShareWaBtn" type="button" class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition active:scale-95 cursor-pointer">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-10.416c-4.408 0-7.99 3.582-7.99 7.99 0 1.408.365 2.73 1.001 3.877l-1.062 3.883 3.985-1.045c1.11.606 2.379.945 3.731.945 4.409 0 7.991-3.582 7.991-7.99 0-4.408-3.582-7.99-7.991-7.99z"/></svg>
+                <span>WhatsApp</span>
+              </button>
+              <button id="readNewsCopyLinkBtn" type="button" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer border border-slate-200/60">
+                <i data-lucide="copy" class="w-4 h-4 text-slate-500"></i>
+                <span id="readNewsCopyText">Salin Tautan</span>
+              </button>
+            </div>
+            <a id="readNewsWebPortalBtn" href="berita.html" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-emerald-50/70 hover:bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center gap-1.5 transition border border-emerald-200/60">
+              <i data-lucide="globe" class="w-4 h-4 text-brand-primary"></i>
+              <span>Buka di Web Portal Publik</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Rekomendasi Warta Terkait di Bawahnya -->
+      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/80 shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between pb-1 border-b border-slate-100">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-3.5 bg-brand-primary rounded-full"></span>
+            <h3 class="font-black text-slate-900 text-xs">Kabar Madrasah Lainnya</h3>
+          </div>
+          <button onclick="closeNewsReader()" class="text-[11px] font-bold text-brand-primary hover:underline cursor-pointer">
+            Semua Berita →
+          </button>
+        </div>
+        <div id="readNewsRelatedList" class="space-y-2">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div><!-- End #tab-berita-baca -->
+
     <!-- ==================== TAB 3: KALENDER ISLAM & PASARAN JAWA ==================== -->
     <div id="tab-kalender" class="hidden space-y-3.5">
       <!-- Header Banner Tab Kalender -->
@@ -1236,62 +1329,7 @@
       </div>
     </div>
 
-    <!-- Modal Detail Berita Mobile (Diperbarui dengan Views, Waktu Baca, & Share WA) -->
-    <div id="newsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 bg-slate-950/70 backdrop-blur-xs transition-opacity duration-300" onclick="closeNewsModal()">
-      <div class="bg-white rounded-3xl max-w-md w-full max-h-[88vh] overflow-y-auto shadow-2xl border border-emerald-100 flex flex-col relative animate-in fade-in zoom-in-95" onclick="event.stopPropagation()">
-        <button onclick="closeNewsModal()" class="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center cursor-pointer backdrop-blur-xs" title="Tutup">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-        <div id="modalNewsImgContainer" class="relative aspect-video w-full overflow-hidden bg-slate-900">
-          <img id="modalNewsImg" src="" alt="Berita Image" class="w-full h-full object-cover">
-          <span id="modalNewsCategory" class="absolute bottom-2.5 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-md"></span>
-        </div>
-        <div class="p-4 space-y-3">
-          <!-- Meta Info: Tanggal, Views, Read Time -->
-          <div class="flex items-center gap-2 flex-wrap text-[11px] border-b border-slate-100 pb-2.5">
-            <span class="text-slate-400 font-semibold flex items-center gap-1">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-primary"></i>
-              <span id="modalNewsDate"></span>
-            </span>
-            <span class="text-slate-300">•</span>
-            <span id="modalNewsViews" class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 flex items-center gap-1">
-              <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
-              <span>2.450 pembaca</span>
-            </span>
-            <span class="text-slate-300">•</span>
-            <span id="modalNewsReadTime" class="text-slate-500 font-medium flex items-center gap-1">
-              <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
-              <span>2 mnt baca</span>
-            </span>
-          </div>
-
-          <h3 id="modalNewsTitle" class="text-base font-black text-slate-900 leading-snug"></h3>
-          <div id="modalNewsContent" class="text-slate-600 text-xs leading-relaxed border-t border-slate-100 pt-3"></div>
-
-          <!-- Action Bar: Share WA, Salin Tautan, Buka Web -->
-          <div class="pt-3 border-t border-slate-100 space-y-2">
-            <div class="flex items-center gap-2">
-              <button id="modalNewsShareWaBtn" type="button" class="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer">
-                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-10.416c-4.408 0-7.99 3.582-7.99 7.99 0 1.408.365 2.73 1.001 3.877l-1.062 3.883 3.985-1.045c1.11.606 2.379.945 3.731.945 4.409 0 7.991-3.582 7.991-7.99 0-4.408-3.582-7.99-7.991-7.99z"/></svg>
-                <span>Bagikan WA</span>
-              </button>
-              <button id="modalNewsCopyLinkBtn" type="button" class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
-                <i data-lucide="link" class="w-3.5 h-3.5 text-slate-500"></i>
-                <span id="modalNewsCopyText">Salin Link</span>
-              </button>
-              <a id="modalNewsWebLink" href="berita.html" target="_blank" class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-brand-primary"></i>
-                <span class="hidden sm:inline">Web</span>
-              </a>
-            </div>
-            <div class="flex justify-end pt-1">
-              <button onclick="closeNewsModal()" class="w-full py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs cursor-pointer">
-                Tutup Jendela
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Modal Popup Dihapus: Digantikan oleh Native Screen #tab-berita-baca -->
     </div>
 
   </main>
@@ -1417,7 +1455,7 @@
   <script>
     // --- 1. Client-Side Tab Router ---
     let currentActiveTab = 'beranda';
-    const allAppTabs = ['beranda', 'berita', 'kalender', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni'];
+    const allAppTabs = ['beranda', 'berita', 'kalender', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni', 'berita-baca'];
 
     function switchAppTab(tabName, updateHistory = true) {
       if (!allAppTabs.includes(tabName)) tabName = 'beranda';
@@ -1438,7 +1476,7 @@
 
       // Update bottom dock active styles: standard dock tabs (beranda, berita, kalender)
       // When in sub-views (guru, program, ppdb, etc.), beranda is highlighted
-      const dockTabToHighlight = ['berita', 'kalender'].includes(tabName) ? tabName : 'beranda';
+      const dockTabToHighlight = ['berita', 'berita-baca'].includes(tabName) ? 'berita' : (tabName === 'kalender' ? 'kalender' : 'beranda');
       ['beranda', 'berita', 'kalender'].forEach(t => {
         const btn = document.getElementById('dockBtn-' + t);
         if (btn) {
@@ -2103,14 +2141,13 @@
       switchAppTab(matchedTab, false);
 
       window.addEventListener('popstate', (e) => {
-        const modal = document.getElementById('newsModal');
-        if (e.state && e.state.modal === 'news' && e.state.id) {
-          if (e.state.tab) switchAppTab(e.state.tab, false);
-          openNewsModal(e.state.id, true);
+        if (e.state && e.state.tab === 'berita-baca' && e.state.id) {
+          openAppNewsReader(e.state.id, false);
           return;
         }
-        if (modal && !modal.classList.contains('hidden')) {
-          closeNewsModal(true);
+        if (currentActiveTab === 'berita-baca') {
+          const targetTab = (e.state && e.state.tab) ? e.state.tab : (lastAppTabBeforeReading || 'berita');
+          switchAppTab(targetTab, false);
           return;
         }
         if (e.state && e.state.tab) {
@@ -2205,8 +2242,18 @@
     };
 
     let currentOpenAppNews = null;
+    let lastAppTabBeforeReading = 'berita';
 
-    function openNewsModal(newsId, fromHistory = false) {
+    // Kompatibilitas panggilan lama: alihkan langsung ke Native Reader tanpa popup
+    function openNewsModal(newsId) {
+      openAppNewsReader(newsId);
+    }
+
+    function closeNewsModal() {
+      closeNewsReader();
+    }
+
+    function openAppNewsReader(newsId, updateHistory = true) {
       // Cari data berdasarkan id atau slug
       let data = tabNewsDetails[newsId];
       if (!data) {
@@ -2220,6 +2267,9 @@
       if (!data) return;
 
       currentOpenAppNews = data;
+      if (currentActiveTab !== 'berita-baca') {
+        lastAppTabBeforeReading = currentActiveTab;
+      }
 
       // Akumulasi Live Views ke backend Google Spreadsheet
       if (data.id) {
@@ -2230,51 +2280,51 @@
         }
       }
 
-      // Integrasi Navigasi History State (Tombol Back smartphone / Browser)
-      if (!fromHistory && window.history && window.history.pushState) {
-        window.history.pushState({ modal: 'news', id: data.id, tab: currentActiveTab }, '', window.location.pathname + window.location.search);
-      }
+      // Isi elemen-elemen Native Reader Screen
+      const coverImg = document.getElementById('readNewsCoverImg');
+      const badge = document.getElementById('readNewsBadge');
+      const dateEl = document.getElementById('readNewsDate');
+      const viewsEl = document.getElementById('readNewsViews');
+      const readTimeEl = document.getElementById('readNewsReadTime');
+      const titleEl = document.getElementById('readNewsTitle');
+      const headerTitleEl = document.getElementById('readNewsHeaderTitle');
+      const contentEl = document.getElementById('readNewsContent');
+      const shareWaBtn = document.getElementById('readNewsShareWaBtn');
+      const topShareBtn = document.getElementById('readNewsTopShareBtn');
+      const copyBtn = document.getElementById('readNewsCopyLinkBtn');
+      const webPortalBtn = document.getElementById('readNewsWebPortalBtn');
+      const backBtnText = document.getElementById('readNewsBackBtnText');
 
-      const modal = document.getElementById('newsModal');
-      const img = document.getElementById('modalNewsImg');
-      const category = document.getElementById('modalNewsCategory');
-      const date = document.getElementById('modalNewsDate');
-      const views = document.getElementById('modalNewsViews');
-      const readTime = document.getElementById('modalNewsReadTime');
-      const title = document.getElementById('modalNewsTitle');
-      const content = document.getElementById('modalNewsContent');
-      const shareWaBtn = document.getElementById('modalNewsShareWaBtn');
-      const copyBtn = document.getElementById('modalNewsCopyLinkBtn');
-      const webLink = document.getElementById('modalNewsWebLink');
-
-      if (img) { img.src = data.image; img.alt = data.title; }
-      if (category) {
-        category.textContent = data.category;
-        category.className = 'absolute bottom-2.5 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-md ' + (data.badgeClass || 'bg-emerald-600 text-white');
+      if (coverImg) { coverImg.src = data.image; coverImg.alt = data.title; }
+      if (badge) {
+        badge.textContent = data.category;
+        badge.className = 'absolute bottom-3 left-3 px-3 py-1 rounded-full text-[10.5px] font-black text-white shadow-md uppercase tracking-wide ' + (data.badgeClass || 'bg-emerald-600');
       }
-      if (date) date.textContent = data.date;
-      if (views) views.innerHTML = '<i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i><span>' + (Number(data.views) || 1250).toLocaleString('id-ID') + ' pembaca</span>';
-      if (readTime) readTime.innerHTML = '<i data-lucide="clock" class="w-3 h-3 text-slate-400"></i><span>' + (data.readTime || '2 mnt baca') + '</span>';
-      if (title) title.textContent = data.title;
-      if (content) content.innerHTML = data.content;
+      if (dateEl) dateEl.textContent = data.date;
+      if (viewsEl) viewsEl.textContent = (Number(data.views) || 1250).toLocaleString('id-ID') + ' pembaca';
+      if (readTimeEl) readTimeEl.textContent = data.readTime || '2 menit baca';
+      if (titleEl) titleEl.textContent = data.title;
+      if (headerTitleEl) headerTitleEl.textContent = data.title;
+      if (contentEl) contentEl.innerHTML = data.content;
+      if (backBtnText) backBtnText.textContent = lastAppTabBeforeReading === 'beranda' ? 'Beranda' : 'Daftar';
 
       const articleSlug = data.slug || data.id;
       const shareUrl = window.location.origin + '/berita/' + articleSlug;
 
-      if (shareWaBtn) {
-        shareWaBtn.onclick = function() {
-          const msg = '*' + data.title + '*\n\nBaca warta resmi selengkapnya:\n' + shareUrl;
-          window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank');
-        };
-      }
+      const handleShareWa = () => {
+        const msg = '*' + data.title + '*\n\nBaca warta resmi selengkapnya:\n' + shareUrl;
+        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank');
+      };
+      if (shareWaBtn) shareWaBtn.onclick = handleShareWa;
+      if (topShareBtn) topShareBtn.onclick = handleShareWa;
 
       if (copyBtn) {
-        copyBtn.onclick = function() {
-          const textEl = document.getElementById('modalNewsCopyText');
+        copyBtn.onclick = () => {
+          const textEl = document.getElementById('readNewsCopyText');
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(shareUrl).then(function() {
+            navigator.clipboard.writeText(shareUrl).then(() => {
               if (textEl) textEl.textContent = 'Tersalin! ✓';
-              setTimeout(function() { if (textEl) textEl.textContent = 'Salin Link'; }, 2000);
+              setTimeout(() => { if (textEl) textEl.textContent = 'Salin Tautan'; }, 2000);
             });
           } else {
             prompt('Salin link berita berikut:', shareUrl);
@@ -2282,27 +2332,37 @@
         };
       }
 
-      if (webLink) {
-        webLink.href = '/berita/' + articleSlug;
+      if (webPortalBtn) {
+        webPortalBtn.href = '/berita/' + articleSlug;
       }
 
-      if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+      // Rekomendasi Warta Lainnya di bawah artikel
+      const relatedContainer = document.getElementById('readNewsRelatedList');
+      if (relatedContainer) {
+        const otherNews = Object.values(tabNewsDetails).filter(n => n.id !== data.id).slice(0, 3);
+        relatedContainer.innerHTML = otherNews.map(n => {
+          const vCount = (Number(n.views) || 1500).toLocaleString('id-ID');
+          return '<div onclick="openAppNewsReader(\'' + n.id + '\')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50/50 transition cursor-pointer border border-slate-100 group">' +
+            '<img src="' + escapeHtml(n.image || 'poster_pts_berita.webp') + '" alt="' + escapeHtml(n.title) + '" class="w-16 h-12 rounded-lg object-cover shrink-0" onerror="this.src=\'poster_pts_berita.webp\'">' +
+            '<div class="flex-1 min-w-0">' +
+              '<h5 class="text-xs font-bold text-slate-800 line-clamp-1 group-hover:text-brand-primary transition">' + escapeHtml(n.title) + '</h5>' +
+              '<span class="text-[10px] text-slate-400 block mt-0.5">' + escapeHtml(n.date) + ' • ' + vCount + ' baca</span>' +
+            '</div>' +
+          '</div>';
+        }).join('');
       }
+
+      // Tampilkan screen membaca di dalam container SPA
+      switchAppTab('berita-baca', false);
+      if (updateHistory) {
+        window.history.pushState({ tab: 'berita-baca', id: data.id, returnTab: lastAppTabBeforeReading }, '', '/app/berita/' + articleSlug);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (window.lucide) window.lucide.createIcons();
     }
 
-    function closeNewsModal(fromHistory = false) {
-      const modal = document.getElementById('newsModal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-      }
-      currentOpenAppNews = null;
-      if (!fromHistory && window.history && window.history.state && window.history.state.modal === 'news') {
-        window.history.back();
-      }
+    function closeNewsReader() {
+      switchAppTab(lastAppTabBeforeReading || 'berita');
     }
 
     let isTabNewsLoaded = false;
