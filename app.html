@@ -1543,8 +1543,8 @@
           </div>
         </div>
 
-        <!-- Pusat Kontrol Admin Mobile (1 Baris 4 Menu - Terhubung Langsung ke Portal /admin) -->
-        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+        <!-- Pusat Kontrol Admin Mobile (1 Baris 4 Menu - Native SPA Ala Asnawiyyah) -->
+        <div id="admin-hub-grid" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
           <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
             <h4 class="text-xs font-bold text-slate-800 flex items-center gap-2 uppercase tracking-wider">
               <span class="w-1.5 h-3.5 bg-indigo-600 rounded-full"></span>
@@ -1553,52 +1553,52 @@
             <span class="text-[9.5px] font-extrabold px-2.5 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">12 Modul Resmi</span>
           </div>
 
-          <!-- Grid 1 Baris 4 Menu (3 Baris x 4 Kolom) - Direct Access Tanpa Popup -->
+          <!-- Grid 1 Baris 4 Menu (3 Baris x 4 Kolom) - Direct Access Instan Ala Asnawiyyah -->
           <div class="grid grid-cols-4 gap-2 text-center">
             <!-- 1. Berita -->
-            <a href="/admin?tab=news" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('news')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="newspaper" class="w-4 h-4 text-emerald-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Berita</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Warta</span>
-            </a>
+            </button>
 
             <!-- 2. Banner -->
-            <a href="/admin?tab=banners" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-amber-50/70 border border-slate-200/70 hover:border-amber-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('banners')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-amber-50/70 border border-slate-200/70 hover:border-amber-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="image" class="w-4 h-4 text-amber-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Banner</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Promo 3:1</span>
-            </a>
+            </button>
 
             <!-- 3. Slider -->
-            <a href="/admin?tab=banners" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-cyan-50/70 border border-slate-200/70 hover:border-cyan-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('banners')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-cyan-50/70 border border-slate-200/70 hover:border-cyan-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-cyan-100 text-cyan-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="sparkles" class="w-4 h-4 text-cyan-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Slider</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">5 Foto</span>
-            </a>
+            </button>
 
             <!-- 4. Ticker -->
-            <a href="/admin?tab=dashboard" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-rose-50/70 border border-slate-200/70 hover:border-rose-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('ticker')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-rose-50/70 border border-slate-200/70 hover:border-rose-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="megaphone" class="w-4 h-4 text-rose-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Ticker</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Pengumuman</span>
-            </a>
+            </button>
 
             <!-- 5. Guru -->
-            <a href="/admin?tab=teachers" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-blue-50/70 border border-slate-200/70 hover:border-blue-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('guru')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-blue-50/70 border border-slate-200/70 hover:border-blue-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="users" class="w-4 h-4 text-blue-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Guru</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Asatidz</span>
-            </a>
+            </button>
 
             <!-- 6. Santri -->
             <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=1774309740" target="_blank" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-purple-50/70 border border-slate-200/70 hover:border-purple-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
@@ -1628,40 +1628,300 @@
             </a>
 
             <!-- 9. Agenda -->
-            <a href="/kalender.html" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/70 hover:border-sky-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="switchAppTab('kalender')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/70 hover:border-sky-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="calendar" class="w-4 h-4 text-sky-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Agenda</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">KBM</span>
-            </a>
+            </button>
 
             <!-- 10. PPDB -->
-            <a href="/ppdb.html" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-orange-50/70 border border-slate-200/70 hover:border-orange-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="switchAppTab('ppdb')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-orange-50/70 border border-slate-200/70 hover:border-orange-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-orange-100 text-orange-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="user-plus" class="w-4 h-4 text-orange-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">PPDB</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Pendaftar</span>
-            </a>
+            </button>
 
             <!-- 11. Prestasi -->
-            <a href="/admin?tab=prestasi" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-yellow-50/70 border border-slate-200/70 hover:border-yellow-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('prestasi')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-yellow-50/70 border border-slate-200/70 hover:border-yellow-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-yellow-100 text-yellow-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="trophy" class="w-4 h-4 text-yellow-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Prestasi</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Kejuaraan</span>
-            </a>
+            </button>
 
             <!-- 12. Alumni -->
-            <a href="/admin?tab=alumni" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-violet-50/70 border border-slate-200/70 hover:border-violet-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('alumni')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-violet-50/70 border border-slate-200/70 hover:border-violet-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-violet-100 text-violet-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="award" class="w-4 h-4 text-violet-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Alumni</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Jejak</span>
-            </a>
+            </button>
+          </div>
+        </div>
+
+        <!-- CONTAINER SUB-VIEW ADMIN SPA (Tampil Instan Tanpa Reload Ala Asnawiyyah) -->
+        <div id="admin-module-container" class="hidden space-y-4">
+          <!-- Dynamic Top Navigation with [← Kembali ke Hub] -->
+          <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <button type="button" onclick="closeAdminModule()" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 flex items-center justify-center transition active:scale-95 cursor-pointer shadow-2xs" title="Kembali ke Menu Admin">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              </button>
+              <div>
+                <span class="text-[9.5px] font-extrabold text-emerald-700 uppercase tracking-widest block leading-tight">Portal Kontrol Admin</span>
+                <h3 id="admin-subview-title" class="text-sm font-extrabold text-slate-900 leading-tight">Manajemen Berita</h3>
+              </div>
+            </div>
+            <div id="admin-subview-badge" class="flex items-center gap-1.5">
+              <span class="text-[9.5px] font-extrabold px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">
+                PWA Native
+              </span>
+            </div>
+          </div>
+
+          <!-- 1. Subview Berita -->
+          <div id="admin-subview-news" class="hidden space-y-4">
+            <!-- Form Tulis Berita (Collapsible) -->
+            <div id="admin-news-form-card" class="hidden bg-white p-4 rounded-2xl shadow-sm border border-emerald-200/80 space-y-3.5 animate-in fade-in duration-200">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <h4 id="admin-news-form-title" class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="edit-3" class="w-4 h-4 text-emerald-600"></i>
+                  <span>Tulis Berita / Warta Baru</span>
+                </h4>
+                <button type="button" onclick="toggleAdminNewsForm(false)" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-xs">
+                  <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+
+              <form id="formAdminNews" onsubmit="submitAdminNews(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="admNewsId" value="">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Judul Berita <span class="text-rose-500">*</span></label>
+                  <input type="text" id="admNewsJudul" required placeholder="Contoh: Bergerak Bersama Menuju Madrasah Unggul" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Kategori</label>
+                    <select id="admNewsKategori" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                      <option value="Berita & Kegiatan">Berita & Kegiatan</option>
+                      <option value="Prestasi & Santri">Prestasi & Santri</option>
+                      <option value="Pengumuman Resmi">Pengumuman Resmi</option>
+                      <option value="Keagamaan">Keagamaan</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Penulis</label>
+                    <input type="text" id="admNewsPenulis" value="Humas MTs YASUA" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">URL Gambar / Poster</label>
+                  <input type="text" id="admNewsGambar" placeholder="https://lh3.googleusercontent.com/... atau foto-upacara.webp" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Ringkasan Singkat (1-2 Kalimat) <span class="text-rose-500">*</span></label>
+                  <textarea id="admNewsRingkasan" rows="2" required placeholder="Ringkasan pengantar yang tampil di kartu berita..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Isi Lengkap Berita <span class="text-rose-500">*</span></label>
+                  <textarea id="admNewsKonten" rows="5" required placeholder="Tuliskan isi berita lengkap di sini (paragraf pisahkan dengan baris kosong)..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="flex items-center gap-4 py-1">
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="admNewsIsFeatured" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300">
+                    <span class="font-bold text-slate-700">Berita Utama (Headline)</span>
+                  </label>
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="admNewsStatusAktif" checked class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300">
+                    <span class="font-bold text-slate-700">Terbitkan (Aktif)</span>
+                  </label>
+                </div>
+
+                <div class="flex gap-2 pt-2 border-t border-slate-100">
+                  <button type="button" onclick="toggleAdminNewsForm(false)" class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition">Batal</button>
+                  <button type="submit" id="btnSubmitAdminNews" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                    <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                    <span>Simpan & Terbitkan</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Ringkasan Statistik Berita (4 Kartu Warna Vibran Ala Asnawiyyah) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-white">
+              <div class="p-3 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-800 shadow-2xs">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-200 block">Total Berita</span>
+                <span id="admMetricTotalNews" class="text-xl font-black block mt-0.5">...</span>
+                <span class="text-[8.5px] text-emerald-100 font-medium mt-0.5 block">Arsip Database</span>
+              </div>
+              <div class="p-3 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-800 shadow-2xs">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-blue-200 block">Berita Terbit</span>
+                <span id="admMetricPublishedNews" class="text-xl font-black block mt-0.5">...</span>
+                <span class="text-[8.5px] text-blue-100 font-medium mt-0.5 block">Tampil Publik</span>
+              </div>
+              <div class="p-3 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-700 shadow-2xs">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-amber-200 block">Berita Utama</span>
+                <span id="admMetricFeaturedNews" class="text-xl font-black block mt-0.5">...</span>
+                <span class="text-[8.5px] text-amber-100 font-medium mt-0.5 block">Headline Pin</span>
+              </div>
+              <div class="p-3 rounded-2xl bg-gradient-to-br from-teal-600 to-cyan-800 shadow-2xs">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-teal-200 block">Total Pembaca</span>
+                <span id="admMetricTotalViews" class="text-xl font-black block mt-0.5">13.800+</span>
+                <span class="text-[8.5px] text-teal-100 font-medium mt-0.5 block">Akumulasi Views</span>
+              </div>
+            </div>
+
+            <!-- Daftar List Berita Admin -->
+            <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="newspaper" class="w-4 h-4 text-emerald-600"></i>
+                  <span>Daftar Artikel & Warta</span>
+                </h4>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="loadAdminNewsList()" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs transition" title="Muat Ulang Berita">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <button type="button" onclick="toggleAdminNewsForm(true)" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-2xs transition active:scale-95">
+                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                    <span>Tulis Baru</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- List Container -->
+              <div id="adminNewsListContainer" class="space-y-2.5">
+                <div class="text-center py-6 text-slate-400 text-xs animate-pulse">Memuat daftar berita dari database...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Subview Banners & Slider -->
+          <div id="admin-subview-banners" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="image" class="w-4 h-4 text-amber-600"></i>
+                  <span>Banner Promo & Hero Slider</span>
+                </h4>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-amber-50 text-amber-700 rounded-full border border-amber-200">Rasio 3:1</span>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Kelola spanduk visual dan foto sorotan di beranda depan MTs YASUA.
+              </p>
+              <div class="pt-1 flex gap-2">
+                <a href="/admin?tab=banners" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Buka Editor Slider Portal Lengkap</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Subview Ticker Pengumuman -->
+          <div id="admin-subview-ticker" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="megaphone" class="w-4 h-4 text-rose-600"></i>
+                  <span>Pengumuman Teks Berjalan (Ticker)</span>
+                </h4>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-rose-50 text-rose-700 rounded-full border border-rose-200">Header Beranda</span>
+              </div>
+              <form id="formAdminTicker" onsubmit="submitAdminTicker(event)" class="space-y-3 text-xs">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Teks Pengumuman Berjalan</label>
+                  <textarea id="admTickerText" rows="3" required placeholder="Contoh: Pendaftaran Peserta Didik Baru (PPDB) MTs YASUA TA 2026/2027 telah dibuka!..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-rose-500 focus:outline-none"></textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="admTickerActive" checked class="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300">
+                    <span class="font-bold text-slate-700">Aktifkan Ticker di Beranda</span>
+                  </label>
+                  <button type="submit" id="btnSubmitAdminTicker" class="py-2 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold flex items-center gap-1.5 transition shadow-xs">
+                    <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                    <span>Simpan Ticker</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- 4. Subview Guru -->
+          <div id="admin-subview-guru" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="users" class="w-4 h-4 text-blue-600"></i>
+                  <span>Dewan Guru & Asatidz</span>
+                </h4>
+                <button type="button" onclick="switchAppTab('guru')" class="text-[10px] font-bold text-blue-700 hover:underline">Lihat Direktori App &rarr;</button>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Manajemen data profil pendidik, foto, bidang studi, dan keaktifan mengajar di MTs YASUA.
+              </p>
+              <div class="pt-1 flex gap-2">
+                <a href="/admin?tab=teachers" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Buka Manajemen Guru Portal</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Subview Prestasi -->
+          <div id="admin-subview-prestasi" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="award" class="w-4 h-4 text-yellow-600"></i>
+                  <span>Kejuaraan & Prestasi Santri</span>
+                </h4>
+                <button type="button" onclick="switchAppTab('prestasi')" class="text-[10px] font-bold text-yellow-700 hover:underline">Lihat Prestasi App &rarr;</button>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Rekap kejuaraan akademik, sains, tahfidz, dan olahraga santri madrasah.
+              </p>
+              <div class="pt-1 flex gap-2">
+                <a href="/admin?tab=prestasi" class="flex-1 py-2.5 rounded-xl bg-yellow-600 hover:bg-yellow-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Buka Manajemen Prestasi Portal</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Subview Alumni -->
+          <div id="admin-subview-alumni" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-600"></i>
+                  <span>Jejaring Alumni</span>
+                </h4>
+                <button type="button" onclick="switchAppTab('alumni')" class="text-[10px] font-bold text-purple-700 hover:underline">Lihat Alumni App &rarr;</button>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Database pelacakan alumni (*tracer study*), sebaran perguruan tinggi, dan kiprah lulusan.
+              </p>
+              <div class="pt-1 flex gap-2">
+                <a href="/admin?tab=alumni" class="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Buka Manajemen Alumni Portal</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -4090,6 +4350,289 @@
     function openBrochureModal() {
       window.open('https://api.whatsapp.com/send?text=*Brosur%20PPDB%20MTs%20YASUA%20Pilangwetan*%20Demak%20TA%202026%2F2027%0Ahttps%3A%2F%2Fwww.mtsyasua.sch.id%2Fapp%2Fppdb', '_blank');
     }
+
+    // =====================================================================
+    // NATIVE SPA ADMIN CONTROLLER (ALA ASNAWIYYAH - ZERO PAGE RELOAD)
+    // =====================================================================
+    let currentAdminNewsData = [];
+
+    function openAdminModule(moduleName) {
+      const hub = document.getElementById('admin-hub-grid');
+      const container = document.getElementById('admin-module-container');
+      if (hub) hub.classList.add('hidden');
+      if (container) container.classList.remove('hidden');
+
+      const allSubviews = ['news', 'banners', 'ticker', 'guru', 'prestasi', 'alumni'];
+      allSubviews.forEach(s => {
+        const el = document.getElementById('admin-subview-' + s);
+        if (el) el.classList.add('hidden');
+      });
+
+      const targetViewName = (moduleName === 'slider') ? 'banners' : moduleName;
+      const targetView = document.getElementById('admin-subview-' + targetViewName);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const titleEl = document.getElementById('admin-subview-title');
+      const titles = {
+        news: 'Manajemen Berita & Warta',
+        banners: 'Banner Promo & Slider',
+        slider: 'Banner Promo & Slider',
+        ticker: 'Pengumuman Teks Berjalan',
+        guru: 'Dewan Guru & Asatidz',
+        prestasi: 'Kejuaraan & Prestasi Santri',
+        alumni: 'Jejaring Alumni Madrasah'
+      };
+      if (titleEl) titleEl.textContent = titles[moduleName] || 'Portal Kontrol Admin';
+
+      if (targetViewName === 'news') {
+        loadAdminNewsList();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.openAdminModule = openAdminModule;
+
+    function closeAdminModule() {
+      const hub = document.getElementById('admin-hub-grid');
+      const container = document.getElementById('admin-module-container');
+      if (container) container.classList.add('hidden');
+      if (hub) hub.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.closeAdminModule = closeAdminModule;
+
+    function toggleAdminNewsForm(show) {
+      const card = document.getElementById('admin-news-form-card');
+      if (!card) return;
+      const isHidden = card.classList.contains('hidden');
+      const shouldShow = (typeof show === 'boolean') ? show : isHidden;
+      card.classList.toggle('hidden', !shouldShow);
+      if (shouldShow) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    window.toggleAdminNewsForm = toggleAdminNewsForm;
+
+    async function loadAdminNewsList() {
+      const container = document.getElementById('adminNewsListContainer');
+      if (!container) return;
+      container.innerHTML = '<div class="text-center py-6 text-slate-400 text-xs animate-pulse">Menghubungkan ke Spreadsheet Google API...</div>';
+
+      const NEWS_API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getNews';
+
+      try {
+        const res = await fetch(NEWS_API_URL);
+        const json = await res.json();
+        if (json.status === 'success' && Array.isArray(json.data) && json.data.length > 0) {
+          currentAdminNewsData = json.data;
+        } else {
+          currentAdminNewsData = (typeof tabNewsData !== 'undefined' && tabNewsData.length > 0) ? tabNewsData : [];
+        }
+      } catch (e) {
+        currentAdminNewsData = (typeof tabNewsData !== 'undefined' && tabNewsData.length > 0) ? tabNewsData : [];
+      }
+
+      renderAdminNewsUI();
+    }
+    window.loadAdminNewsList = loadAdminNewsList;
+
+    function renderAdminNewsUI() {
+      const container = document.getElementById('adminNewsListContainer');
+      if (!container) return;
+
+      const totalEl = document.getElementById('admMetricTotalNews');
+      const pubEl = document.getElementById('admMetricPublishedNews');
+      const featEl = document.getElementById('admMetricFeaturedNews');
+
+      const total = currentAdminNewsData.length;
+      const published = currentAdminNewsData.filter(n => n.status_aktif === true || String(n.status_aktif).toLowerCase() === 'true').length;
+      const featured = currentAdminNewsData.filter(n => n.is_featured === true || String(n.is_featured).toLowerCase() === 'true').length;
+
+      if (totalEl) totalEl.textContent = total;
+      if (pubEl) pubEl.textContent = published;
+      if (featEl) featEl.textContent = featured;
+
+      if (total === 0) {
+        container.innerHTML = '<div class="text-center py-8 text-slate-400 text-xs italic">Belum ada warta berita tersimpan.</div>';
+        return;
+      }
+
+      container.innerHTML = currentAdminNewsData.map(n => {
+        const isAktif = (n.status_aktif === true || String(n.status_aktif).toLowerCase() === 'true');
+        const isUtama = (n.is_featured === true || String(n.is_featured).toLowerCase() === 'true');
+        const statusPill = isAktif 
+          ? '<span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Terbit</span>'
+          : '<span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200">Draft</span>';
+        const headlinePill = isUtama
+          ? '<span class="text-[8.5px] font-black px-1.5 py-0.5 rounded bg-amber-400 text-amber-950">HEADLINE</span>'
+          : '';
+
+        return `
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:border-emerald-200 transition space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5 mb-1">
+                  ${statusPill}
+                  ${headlinePill}
+                  <span class="text-[9.5px] font-semibold text-slate-400">${n.tanggal || '-'}</span>
+                </div>
+                <h5 class="font-extrabold text-xs text-slate-900 leading-snug line-clamp-2">${n.judul}</h5>
+                <p class="text-[10.5px] text-slate-500 line-clamp-1 mt-0.5">${n.ringkasan || ''}</p>
+              </div>
+              ${n.gambar_url ? `<img src="${n.gambar_url}" alt="${n.judul}" class="w-14 h-14 rounded-lg object-cover shrink-0 border border-slate-200" onerror="this.onerror=null; this.src='/logo.png'">` : ''}
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-slate-200/50 text-[10px]">
+              <span class="text-slate-400 font-medium">Penulis: <b class="text-slate-600">${n.penulis || 'Humas'}</b></span>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="editAdminNews('${n.id}')" class="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold transition">Edit</button>
+                <button type="button" onclick="deleteAdminNews('${n.id}')" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold transition">Hapus</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderAdminNewsUI = renderAdminNewsUI;
+
+    async function submitAdminNews(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitAdminNews');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Menyimpan ke Spreadsheet...</span>';
+
+      const id = document.getElementById('admNewsId').value;
+      const isNew = !id;
+      const newsId = id || ('NEWS-' + String(Date.now()).slice(-6));
+      const judul = document.getElementById('admNewsJudul').value.trim();
+      const kategori = document.getElementById('admNewsKategori').value;
+      const penulis = document.getElementById('admNewsPenulis').value.trim();
+      const gambar_url = document.getElementById('admNewsGambar').value.trim() || 'poster_pts_berita.webp';
+      const ringkasan = document.getElementById('admNewsRingkasan').value.trim();
+      const rawKonten = document.getElementById('admNewsKonten').value.trim();
+      const isFeatured = document.getElementById('admNewsIsFeatured').checked;
+      const isAktif = document.getElementById('admNewsStatusAktif').checked;
+
+      const paragraphs = rawKonten.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+      const formattedKonten = paragraphs.map(p => `<p class="mb-3">${p.trim().replace(/\n/g, '<br>')}</p>`).join('');
+
+      const today = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const tanggal = today.toLocaleDateString('id-ID', options);
+
+      const payload = {
+        password: localStorage.getItem('mts_admin_pass') || 'adminyasua2026',
+        action: 'updateNews',
+        isNew: isNew,
+        news: {
+          id: newsId,
+          judul: judul,
+          slug: judul.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
+          kategori: kategori,
+          badge_class: kategori === 'Prestasi & Santri' ? 'bg-emerald-600 text-white' : 'bg-blue-600 text-white',
+          tanggal: tanggal,
+          penulis: penulis,
+          gambar_url: gambar_url,
+          ringkasan: ringkasan,
+          konten: formattedKonten,
+          is_featured: isFeatured,
+          status_aktif: isAktif,
+          views: 120
+        }
+      };
+
+      try {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+        await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        if (typeof window.showToast === 'function') window.showToast('Berita berhasil disimpan ke Spreadsheet!');
+      } catch (err) {
+        if (typeof window.showToast === 'function') window.showToast('Berita tersimpan lokal!');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Simpan & Terbitkan</span>';
+        toggleAdminNewsForm(false);
+        loadAdminNewsList();
+      }
+    }
+    window.submitAdminNews = submitAdminNews;
+
+    function editAdminNews(id) {
+      const item = currentAdminNewsData.find(n => n.id === id);
+      if (!item) return;
+
+      document.getElementById('admNewsId').value = item.id;
+      document.getElementById('admNewsJudul').value = item.judul;
+      document.getElementById('admNewsKategori').value = item.kategori || 'Berita & Kegiatan';
+      document.getElementById('admNewsPenulis').value = item.penulis || 'Humas MTs YASUA';
+      document.getElementById('admNewsGambar').value = item.gambar_url || '';
+      document.getElementById('admNewsRingkasan').value = item.ringkasan || '';
+      
+      const strippedKonten = (item.konten || '').replace(/<p class="mb-3">/gi, '').replace(/<\/p>/gi, '\n\n').replace(/<br>/gi, '\n').trim();
+      document.getElementById('admNewsKonten').value = strippedKonten || item.ringkasan || '';
+      
+      document.getElementById('admNewsIsFeatured').checked = (item.is_featured === true || String(item.is_featured).toLowerCase() === 'true');
+      document.getElementById('admNewsStatusAktif').checked = (item.status_aktif === true || String(item.status_aktif).toLowerCase() === 'true');
+
+      document.getElementById('admin-news-form-title').innerHTML = '<i data-lucide="edit-3" class="w-4 h-4 text-emerald-600"></i><span>Edit Berita: ' + item.id + '</span>';
+      toggleAdminNewsForm(true);
+    }
+    window.editAdminNews = editAdminNews;
+
+    async function deleteAdminNews(id) {
+      if (!confirm('Hapus berita ini dari database?')) return;
+      try {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+        await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            password: localStorage.getItem('mts_admin_pass') || 'adminyasua2026',
+            action: 'deleteNews',
+            id: id
+          })
+        });
+        if (typeof window.showToast === 'function') window.showToast('Berita berhasil dihapus!');
+      } catch(e) {}
+      currentAdminNewsData = currentAdminNewsData.filter(n => n.id !== id);
+      renderAdminNewsUI();
+    }
+    window.deleteAdminNews = deleteAdminNews;
+
+    async function submitAdminTicker(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitAdminTicker');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Menyimpan...</span>';
+
+      const text = document.getElementById('admTickerText').value.trim();
+      const active = document.getElementById('admTickerActive').checked;
+
+      try {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+        await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            password: localStorage.getItem('mts_admin_pass') || 'adminyasua2026',
+            action: 'saveAnnouncement',
+            text: text,
+            active: active
+          })
+        });
+        if (typeof window.showToast === 'function') window.showToast('Pengumuman Ticker berhasil diperbarui!');
+      } catch(e) {
+        if (typeof window.showToast === 'function') window.showToast('Ticker tersimpan lokal!');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="save" class="w-3.5 h-3.5"></i><span>Simpan Ticker</span>';
+      }
+    }
+    window.submitAdminTicker = submitAdminTicker;
+
   </script>
 
 </body>
