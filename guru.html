@@ -1488,7 +1488,7 @@
                   <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-4 relative">
                     <img src="${foto}" alt="${escapeHtml(namaGuru)}"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy" onerror="this.src='logo.png'">
+                      loading="lazy" onerror="this.onerror=null; this.src='/logo.png'">
                     <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full ${badgeColor} text-white text-[10px] font-bold backdrop-blur-xs shadow-xs">
                       ${escapeHtml(bidang)}
                     </span>

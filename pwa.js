@@ -410,7 +410,7 @@
           <!-- Tab 1: QR Portal Madrasah -->
           <div id="qrContentPortal" class="text-center space-y-3">
             <div class="bg-emerald-50/70 border border-emerald-100 rounded-2xl p-4 inline-block shadow-inner">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.mtsyasua.sch.id&margin=1" alt="QR Code MTs YASUA" class="w-44 h-44 mx-auto rounded-xl bg-white p-2 shadow-xs" onerror="this.onerror=null; this.src='logo.png';">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.mtsyasua.sch.id&margin=1" alt="QR Code MTs YASUA" class="w-44 h-44 mx-auto rounded-xl bg-white p-2 shadow-xs" onerror="this.onerror=null; this.src='/logo.png'">
             </div>
             <p class="text-xs font-bold text-slate-800">Pindai untuk Membuka Website Resmi</p>
             <p class="text-[11px] text-slate-500">Arahkan kamera HP Anda untuk langsung membuka portal madrasah &amp; informasi PPDB.</p>
@@ -434,7 +434,7 @@
                   <span class="text-[11px] font-black text-rose-600 tracking-wider">QRIS</span>
                   <span class="text-[9px] font-bold text-slate-500">PEMBAYARAN DIGITAL</span>
                 </div>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.mtsyasua.sch.id/ppdb.html&margin=1" alt="QRIS MTs YASUA" class="w-44 h-44 mx-auto rounded-lg" onerror="this.onerror=null; this.src='logo.png';">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.mtsyasua.sch.id/ppdb.html&margin=1" alt="QRIS MTs YASUA" class="w-44 h-44 mx-auto rounded-lg" onerror="this.onerror=null; this.src='/logo.png'">
                 <div class="text-[10px] font-extrabold text-slate-800 uppercase">
                   MTs YASUA PILANGWETAN
                 </div>

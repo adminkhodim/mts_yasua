@@ -4,8 +4,8 @@
  * Version: 2.0.0
  */
 
-const SHELL_CACHE_NAME = 'mts-yasua-shell-v2.0';
-const DATA_CACHE_NAME = 'mts-yasua-data-v2.0';
+const SHELL_CACHE_NAME = 'mts-yasua-shell-v2.1';
+const DATA_CACHE_NAME = 'mts-yasua-data-v2.1';
 const OFFLINE_URL = 'offline.html';
 
 // Critical core assets to pre-cache on install (App Shell)
@@ -43,6 +43,13 @@ const PRECACHE_ASSETS = [
   'apple-touch-icon.png',
   'foto-gedung.webp',
   'kepala-madrasah.webp',
+  'poster_pts_berita.webp',
+  'guru_1.webp',
+  'guru_2.webp',
+  'guru_3.webp',
+  'guru_4.webp',
+  'guru_5.webp',
+  'guru_6.webp',
   'banner_1.jpg',
   'banner_2.jpg',
   'banner_3.jpg'
@@ -190,22 +197,15 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // TIER 1B: Static Assets (CSS, JS, Fonts, Local Images) — Cache-First with Background Revalidation
+  // TIER 1B: Static Assets (CSS, JS, Fonts, Local Images) — Pure Cache-First (CDN Quota Saver)
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
+      // 1. Direct Cache-Hit: return immediately, zero network overhead
       if (cachedResponse) {
-        // Background revalidation
-        fetch(request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(SHELL_CACHE_NAME).then((cache) => cache.put(request, networkResponse));
-            }
-          })
-          .catch(() => {/* Ignore background revalidation errors */});
         return cachedResponse;
       }
 
-      // Not in cache: fetch from network and cache
+      // 2. Cache-Miss: fetch from network and store in cache for future offline / pure cache-hit
       return fetch(request).then((response) => {
         if (!response || (response.status !== 200 && response.type !== 'opaque')) {
           return response;
