@@ -10,6 +10,24 @@
   <!-- Compiled Production Tailwind CSS (High-Performance Sub-Second Load) -->
   <link rel="stylesheet" href="site.min.css">
 
+  <!-- Early Deep-Link Pre-Resolver: Zero-FOUC (Mencegah kedipan / flash Dashboard Utama saat dibuka dari /app) -->
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var tab = params.get('tab') || window.location.hash.replace('#', '');
+        var validTabs = ['news', 'teachers', 'banners', 'prestasi', 'gallery', 'alumni'];
+        if (tab && validTabs.indexOf(tab) !== -1) {
+          var viewId = 'view' + tab.charAt(0).toUpperCase() + tab.slice(1);
+          var style = document.createElement('style');
+          style.id = 'early-route-style';
+          style.textContent = '#viewDashboard { display: none !important; } #' + viewId + ' { display: block !important; }';
+          document.head.appendChild(style);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2705,11 +2723,11 @@
         fetchAnnouncement();
         fetchNews();
 
-        // Sinkronisasi Deep-Link Tab dari /app Mobile PWA
+        // Sinkronisasi Deep-Link Tab dari /app Mobile PWA langsung aktif seketika tanpa delay
         const urlParams = new URLSearchParams(window.location.search);
         const reqTab = urlParams.get('tab') || window.location.hash.replace('#', '');
         if (reqTab && typeof switchAdminView === 'function') {
-          setTimeout(() => switchAdminView(reqTab), 100);
+          switchAdminView(reqTab);
         }
       } else {
         clearAdminSession();
@@ -2932,6 +2950,14 @@
 
     // View Switcher (Teachers vs Banners vs News)
     function switchAdminView(view) {
+      // Hapus rule early-route-style jika ada agar kontrol dikendalikan penuh oleh JS
+      const earlyStyle = document.getElementById('early-route-style');
+      if (earlyStyle) earlyStyle.remove();
+
+      // Reset scroll ke bagian atas view
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.scrollTop = 0;
+
       const viewDashboard = document.getElementById('viewDashboard');
       const viewTeachers = document.getElementById('viewTeachers');
       const viewPrestasi = document.getElementById('viewPrestasi');
