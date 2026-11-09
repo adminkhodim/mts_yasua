@@ -44,3 +44,4 @@ jobs:
         run: |
           npx -y tailwindcss@3.4.17 -i ./input-site.css -o ./site.min.css --minify
           test -s site.min.css || (echo "site.min.css compilation failed or empty" && exit 1)
+

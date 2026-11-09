@@ -814,7 +814,7 @@
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs text-emerald-800 font-bold bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full sm:ml-auto">
                 <i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-primary"></i>
-                <span>Warta Resmi MTs YASUA</span>
+                <span id="detailNewsAuthor">Warta Resmi MTs YASUA</span>
               </span>
             </div>
 
@@ -1237,6 +1237,7 @@
     ];
 
     // Status filter dan navigasi artikel
+    const DEFAULT_PAGE_TITLE = document.title || 'Berita & Pengumuman — MTs YASUA Pilangwetan';
     let currentCategoryFilter = 'Semua';
     let currentSearchQuery = '';
     let currentOpenNewsId = null;
@@ -1355,12 +1356,12 @@
         <article onclick="readNewsArticle('${main.id}')" class="group cursor-pointer bg-slate-50/60 hover:bg-emerald-50/40 rounded-2xl p-4 border border-emerald-100/80 transition-all duration-300 flex flex-col justify-between h-full">
           <div class="space-y-3.5">
             <div class="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100">
-              <img src="${main.gambar_url || 'poster_pts_berita.webp'}" alt="${main.judul}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='poster_pts_berita.webp'">
+              <img src="${main.gambar_url || 'poster_pts_berita.webp'}" alt="${escapeHtml(main.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='poster_pts_berita.webp'">
               <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${mainBadgeClass} text-white font-black text-xs shadow-md">
-                <i data-lucide="bell" class="w-3.5 h-3.5"></i> ${main.kategori.toUpperCase()}
+                <i data-lucide="bell" class="w-3.5 h-3.5"></i> ${escapeHtml(main.kategori.toUpperCase())}
               </span>
               <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 text-white font-semibold text-[11px] backdrop-blur-md">
-                <i data-lucide="calendar" class="w-3 h-3 text-brand-gold"></i> ${main.tanggal}
+                <i data-lucide="calendar" class="w-3 h-3 text-brand-gold"></i> ${escapeHtml(main.tanggal)}
               </span>
             </div>
             <div class="space-y-2">
@@ -1372,14 +1373,14 @@
                 <span>•</span>
                 <span class="inline-flex items-center gap-1 text-slate-500">
                   <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
-                  <span>${main.read_time || '2 menit baca'}</span>
+                  <span>${escapeHtml(main.read_time || '2 menit baca')}</span>
                 </span>
               </div>
               <h3 class="text-lg sm:text-xl font-black text-slate-900 group-hover:text-brand-primary transition-colors leading-snug">
-                ${main.judul}
+                ${escapeHtml(main.judul)}
               </h3>
               <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
-                ${main.ringkasan}
+                ${escapeHtml(main.ringkasan)}
               </p>
             </div>
           </div>
@@ -1536,7 +1537,7 @@
     // ===================================================================
     // HALAMAN BACA ARTIKEL DEDIKASI (FULL ARTICLE VIEW - TANPA POPUP)
     // ===================================================================
-    function readNewsArticle(newsId) {
+    function readNewsArticle(newsId, fromHistory = false) {
       const data = newsMasterList.find(n => 
         String(n.id).toLowerCase() === String(newsId).toLowerCase() || 
         (n.slug && String(n.slug).toLowerCase() === String(newsId).toLowerCase())
@@ -1545,8 +1546,23 @@
 
       currentOpenNewsId = data.id;
 
-      // Inkrementasi jumlah views secara interaktif
+      // 1. Inkrementasi jumlah views di memori lokal
       data.views = (Number(data.views) || 1200) + 1;
+
+      // 2. Persistensi Views ke Database Google Spreadsheet (Fire-and-forget)
+      try {
+        if (typeof NEWS_API_URL !== 'undefined' && NEWS_API_URL && data.id) {
+          const incrementUrl = NEWS_API_URL.replace('action=getNews', 'action=incrementViews') + '&id=' + encodeURIComponent(data.id);
+          fetch(incrementUrl, { method: 'GET', keepalive: true }).catch(() => {});
+        }
+      } catch (e) {}
+
+      // 3. Perbarui Tab Title & Canonical URL Dinamis
+      document.title = `${data.judul} — MTs YASUA Pilangwetan`;
+      const canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.href = `${window.location.origin}/berita/${data.slug || data.id}`;
+      }
 
       const listView = document.getElementById('newsListView');
       const detailView = document.getElementById('newsDetailView');
@@ -1556,6 +1572,7 @@
       const date = document.getElementById('detailNewsDate');
       const readTime = document.getElementById('detailNewsReadTime');
       const viewsEl = document.getElementById('detailNewsViews');
+      const authorEl = document.getElementById('detailNewsAuthor');
       const title = document.getElementById('detailNewsTitle');
       const content = document.getElementById('detailNewsContent');
       const relatedGrid = document.getElementById('detailRelatedGrid');
@@ -1567,16 +1584,17 @@
         img.alt = data.judul;
       }
       if (category) {
-        category.textContent = data.kategori.toUpperCase();
+        category.textContent = (data.kategori || 'WARTA').toUpperCase();
         category.className = `px-3.5 py-1 rounded-full text-xs font-black shadow-2xs ${data.badge_class || getCategoryBadgeClass(data.kategori)}`;
       }
       if (date) date.textContent = data.tanggal;
       if (readTime) readTime.textContent = data.read_time || '2 menit baca';
       if (viewsEl) viewsEl.textContent = `${Number(data.views).toLocaleString('id-ID')} pembaca`;
+      if (authorEl) authorEl.textContent = data.penulis || 'Warta Resmi MTs YASUA';
       if (title) title.textContent = data.judul;
       if (content) content.innerHTML = data.konten;
 
-      // Render Artikel Terkait / Lainnya (3 artikel) dengan Views Counter
+      // Render Artikel Terkait / Lainnya (3 artikel)
       if (relatedGrid) {
         const relatedItems = newsMasterList.filter(n => String(n.id).toLowerCase() !== String(data.id).toLowerCase()).slice(0, 3);
         relatedGrid.innerHTML = relatedItems.map(r => {
@@ -1586,20 +1604,20 @@
             <div onclick="readNewsArticle('${r.id}')" class="bg-white rounded-2xl p-3.5 border border-emerald-100 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
               <div>
                 <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-2.5">
-                  <img src="${r.gambar_url || 'poster_pts_berita.webp'}" alt="${r.judul}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
+                  <img src="${r.gambar_url || 'poster_pts_berita.webp'}" alt="${escapeHtml(r.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
                   <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full ${badgeColor} text-[9px] font-black shadow-sm uppercase tracking-wider">
-                    ${r.kategori}
+                    ${escapeHtml(r.kategori)}
                   </span>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                  <span>${r.tanggal}</span>
+                  <span>${escapeHtml(r.tanggal)}</span>
                   <span class="inline-flex items-center gap-1 text-emerald-700 font-bold">
                     <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
                     <span>${rViews}</span>
                   </span>
                 </div>
                 <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-brand-primary transition-colors leading-snug line-clamp-2">
-                  ${r.judul}
+                  ${escapeHtml(r.judul)}
                 </h4>
               </div>
               <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-brand-primary font-bold">
@@ -1615,9 +1633,9 @@
       if (listView) listView.classList.add('hidden');
       if (detailView) detailView.classList.remove('hidden');
 
-      // Update URL Hash
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, null, `/berita/${data.slug || data.id}`);
+      // Update Browser History dengan pushState (Mendukung tombol Back HP/Browser secara natural)
+      if (!fromHistory && window.history && window.history.pushState) {
+        window.history.pushState({ newsId: data.id, slug: data.slug }, '', `/berita/${data.slug || data.id}`);
       }
 
       // Scroll ke atas halaman membaca
@@ -1627,7 +1645,7 @@
     }
 
     // Kembali ke Daftar Berita (List View)
-    function backToNewsList() {
+    function backToNewsList(fromHistory = false) {
       const listView = document.getElementById('newsListView');
       const detailView = document.getElementById('newsDetailView');
 
@@ -1635,9 +1653,16 @@
       if (listView) listView.classList.remove('hidden');
       currentOpenNewsId = null;
 
-      // Bersihkan URL Hash
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, null, '/berita');
+      // Revert Document Title & Canonical
+      document.title = DEFAULT_PAGE_TITLE;
+      const canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.href = `${window.location.origin}/berita.html`;
+      }
+
+      // Update Browser History
+      if (!fromHistory && window.history && window.history.pushState) {
+        window.history.pushState(null, '', '/berita');
       }
 
       // Scroll kembali ke atas daftar berita
@@ -1748,6 +1773,21 @@
     }
 
     window.addEventListener('hashchange', checkUrlHash);
+
+    // Navigasi Sejarah Browser (Tombol Back/Forward HP & Desktop)
+    window.addEventListener('popstate', (e) => {
+      if (e.state && (e.state.newsId || e.state.slug)) {
+        readNewsArticle(e.state.newsId || e.state.slug, true);
+      } else {
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        if (pathSegments.length >= 2 && pathSegments[0] === 'berita') {
+          readNewsArticle(decodeURIComponent(pathSegments[1]), true);
+        } else {
+          backToNewsList(true);
+        }
+      }
+    });
+  
 
     // ===================================================================
     // SINKRONISASI DINAMIS BERITA & PENGUMUMAN DARI GOOGLE SPREADSHEET
