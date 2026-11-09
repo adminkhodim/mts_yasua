@@ -3,15 +3,16 @@
 
 <head>
   <meta charset="UTF-8">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Aplikasi MTs YASUA — Dashboard Mobile Resmi</title>
   <meta name="description"
     content="Aplikasi Mobile Resmi Madrasah Tsanawiyah YASUA Pilangwetan, Kebonagung, Demak. Akses cepat jadwal shalat, kalender Islam/Jawa, PPDB, dan informasi madrasah.">
 
   <!-- Favicon & Touch Icons -->
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="canonical" href="https://www.mtsyasua.sch.id/app">
 
   <!-- PWA & Mobile Web App Meta -->
@@ -24,7 +25,7 @@
   <meta name="format-detection" content="telephone=no">
 
   <!-- Compiled Production Tailwind CSS -->
-  <link rel="stylesheet" href="app.min.css">
+  <link rel="stylesheet" href="/app.min.css">
 
   <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,8 +35,8 @@
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Search & PWA Controller -->
-  <script src="search.js" defer></script>
-  <script src="pwa.js" defer></script>
+  <script src="/search.js" defer></script>
+  <script src="/pwa.js" defer></script>
 </head>
 
 <body class="is-pwa-standalone text-slate-800">
@@ -327,7 +328,7 @@
             </h4>
             <span class="text-[10px] text-slate-400 mt-1 block">5 - 10 Oktober 2026</span>
           </div>
-          <img src="poster_pts_berita.webp" alt="PTS Berita" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
+          <img src="/poster_pts_berita.webp" alt="PTS Berita" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
         </div>
 
         <!-- List Berita 2: Prestasi Robotika -->
@@ -344,7 +345,7 @@
             </h4>
             <span class="text-[10px] text-slate-400 mt-1 block">22 September 2026</span>
           </div>
-          <img src="foto-upacara.webp" alt="Juara Robotika" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
+          <img src="/foto-upacara.webp" alt="Juara Robotika" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
         </div>
 
         <!-- List Berita 3: Parenting -->
@@ -361,7 +362,7 @@
             </h4>
             <span class="text-[10px] text-slate-400 mt-1 block">15 September 2026</span>
           </div>
-          <img src="foto-kajian-santriwati.webp" alt="Parenting Akbar" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
+          <img src="/foto-kajian-santriwati.webp" alt="Parenting Akbar" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
         </div>
       </div>
     </div>
@@ -2167,6 +2168,31 @@
     });
 
     // Sanitasi XSS helper untuk konten dinamis
+    function resolveNewsImageUrl(rawImg) {
+      if (!rawImg) return '/poster_pts_berita.webp';
+      let img = String(rawImg).trim();
+      if (!img) return '/poster_pts_berita.webp';
+
+      // Google Drive link resolver
+      if (img.includes('drive.google.com') || img.includes('docs.google.com')) {
+        const driveMatch = img.match(/(?:id=|d\/|open\?id=)([a-zA-Z0-9_-]{25,})/);
+        if (driveMatch && driveMatch[1]) {
+          return 'https://lh3.googleusercontent.com/d/' + driveMatch[1];
+        }
+      }
+
+      // External HTTP/HTTPS URLs
+      if (img.startsWith('http://') || img.startsWith('https://')) {
+        return img;
+      }
+
+      // Local asset: pastikan diawali leading slash '/'
+      if (!img.startsWith('/')) {
+        img = '/' + img;
+      }
+      return img;
+    }
+
     function escapeHtml(str) {
       if (str === null || str === undefined) return '';
       return String(str)
@@ -2188,7 +2214,7 @@
         views: 2450,
         readTime: '2 menit baca',
         title: 'Penilaian Tengah Semester (PTS) Gasal MTs YASUA Pilangwetan',
-        image: 'poster_pts_berita.webp',
+        image: '/poster_pts_berita.webp',
         content: '<p class="mb-3">Assalamu’alaikum Warahmatullahi Wabarakatuh,</p><p class="mb-3">Diberitahukan kepada seluruh siswa-siswi dan Bapak/Ibu Wali Murid MTs YASUA Pilangwetan bahwa kegiatan <strong>Penilaian Tengah Semester (PTS) Gasal Tahun Ajaran 2026/2027</strong> diselenggarakan secara serentak dan terpadu.</p><p class="mb-3">Asesmen menggabungkan ujian tertulis pendalaman materi keagamaan salaf serta CBT di Laboratorium Komputer.</p>'
       },
       prestasi: {
@@ -2200,7 +2226,7 @@
         views: 3120,
         readTime: '2 menit baca',
         title: 'Siswa MTs YASUA Raih Juara 1 Olimpiade Sains & Robotika Tingkat Provinsi Jawa Tengah',
-        image: 'foto-upacara.webp',
+        image: '/foto-upacara.webp',
         content: '<p class="mb-3">Alhamdulillahirabbil \'alamin, prestasi gemilang kembali diraih santri MTs YASUA Pilangwetan dengan membawa pulang Trofi <strong>Juara 1 Olimpiade Sains & Robotika Terapan Madrasah Tingkat Provinsi Jawa Tengah</strong>.</p><p class="mb-3">Melalui inovasi alat penyiram tanaman cerdas berbasis mikrokontroler ramah lingkungan, tim siswa berhasil menyisihkan puluhan peserta dari berbagai kabupaten.</p>'
       },
       parenting: {
@@ -2212,7 +2238,7 @@
         views: 1890,
         readTime: '3 menit baca',
         title: "Workshop Parenting Akbar: Membangun Sinergi Rumah dan Sekolah Menuju Generasi Qur'ani",
-        image: 'foto-kajian-santriwati.webp',
+        image: '/foto-kajian-santriwati.webp',
         content: '<p class="mb-3">MTs YASUA Pilangwetan sukses menggelar kegiatan <strong>Workshop Parenting Akbar dan Silaturahmi Wali Siswa</strong> di Aula Madrasah yang dihadiri oleh ratusan orang tua/wali murid dari kelas VII, VIII, dan IX.</p><p class="mb-3">Mengangkat tema “Membina Karakter Islami di Era Serba Digital”, narasumber membagikan wawasan aplikatif mengenai keteladanan dan pendampingan anak.</p>'
       },
       ppdb: {
@@ -2224,7 +2250,7 @@
         views: 4580,
         readTime: '2 menit baca',
         title: 'Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Resmi Dibuka',
-        image: 'foto-gedung.webp',
+        image: '/foto-gedung.webp',
         content: '<p class="mb-3">Penerimaan Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan untuk Tahun Pelajaran 2026/2027 resmi dibuka secara daring dan luring.</p><p class="mb-3">Tersedia Jalur Prestasi (Bebas Biaya Pendaftaran & Beasiswa Tahfidz) serta Jalur Reguler bagi lulusan SD/MI sederajat.</p>'
       },
       anbk: {
@@ -2236,7 +2262,7 @@
         views: 1760,
         readTime: '2 menit baca',
         title: 'Pelaksanaan Asesmen Nasional (ANBK) di Laboratorium Komputer Berlangsung Tertib & Lancar',
-        image: 'foto-labkom.webp',
+        image: '/foto-labkom.webp',
         content: '<p class="mb-3">Pelaksanaan Asesmen Nasional Berbasis Komputer (ANBK) di Laboratorium Komputer Terpadu MTs YASUA Pilangwetan berjalan tertib, aman, dan 100% lancar tanpa kendala teknis.</p><p class="mb-3">Didukung 40 unit komputer dan koneksi fiber optik berkecepatan tinggi.</p>'
       }
     };
@@ -2295,7 +2321,7 @@
       const webPortalBtn = document.getElementById('readNewsWebPortalBtn');
       const backBtnText = document.getElementById('readNewsBackBtnText');
 
-      if (coverImg) { coverImg.src = data.image; coverImg.alt = data.title; }
+      if (coverImg) { coverImg.src = resolveNewsImageUrl(data.image); coverImg.alt = data.title; }
       if (badge) {
         badge.textContent = data.category;
         badge.className = 'absolute bottom-3 left-3 px-3 py-1 rounded-full text-[10.5px] font-black text-white shadow-md uppercase tracking-wide ' + (data.badgeClass || 'bg-emerald-600');
@@ -2343,7 +2369,7 @@
         relatedContainer.innerHTML = otherNews.map(n => {
           const vCount = (Number(n.views) || 1500).toLocaleString('id-ID');
           return '<div onclick="openAppNewsReader(\'' + n.id + '\')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50/50 transition cursor-pointer border border-slate-100 group">' +
-            '<img src="' + escapeHtml(n.image || 'poster_pts_berita.webp') + '" alt="' + escapeHtml(n.title) + '" class="w-16 h-12 rounded-lg object-cover shrink-0" onerror="this.src=\'poster_pts_berita.webp\'">' +
+            '<img src="' + escapeHtml(resolveNewsImageUrl(n.image)) + '" alt="' + escapeHtml(n.title) + '" class="w-16 h-12 rounded-lg object-cover shrink-0" onerror="this.onerror=null; this.src=\'/poster_pts_berita.webp\'">'  +
             '<div class="flex-1 min-w-0">' +
               '<h5 class="text-xs font-bold text-slate-800 line-clamp-1 group-hover:text-brand-primary transition">' + escapeHtml(n.title) + '</h5>' +
               '<span class="text-[10px] text-slate-400 block mt-0.5">' + escapeHtml(n.date) + ' • ' + vCount + ' baca</span>' +
@@ -2396,7 +2422,7 @@
                 views: viewsNum,
                 readTime: readTimeStr,
                 title: n.judul,
-                image: n.gambar_url || 'poster_pts_berita.webp',
+                image: resolveNewsImageUrl(n.gambar_url),
                 content: n.konten
               };
             });
@@ -2425,7 +2451,7 @@
                     '</h4>' +
                     '<span class="text-[10px] text-slate-400 mt-1 block">' + escapeHtml(n.tanggal) + '</span>' +
                   '</div>' +
-                  '<img src="' + escapeHtml(n.gambar_url || 'poster_pts_berita.webp') + '" alt="' + escapeHtml(n.judul) + '" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform" onerror="this.src=\'poster_pts_berita.webp\'">' +
+                  '<img src="' + escapeHtml(resolveNewsImageUrl(n.gambar_url)) + '" alt="' + escapeHtml(n.judul) + '" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.src=\'/poster_pts_berita.webp\'">'  +
                 '</div>';
               }).join('');
             }
@@ -2436,7 +2462,7 @@
             if (featSection && featured) {
               featSection.setAttribute('onclick', "openNewsModal('" + featured.id + "')");
               const img = document.getElementById('tabFeaturedImg');
-              if (img) img.src = featured.gambar_url || 'poster_pts_berita.webp';
+              if (img) img.src = resolveNewsImageUrl(featured.gambar_url);
               const dateEl = document.getElementById('tabFeaturedDate');
               if (dateEl) dateEl.textContent = featured.tanggal;
               const badgeEl = document.getElementById('tabFeaturedBadge');
@@ -2465,7 +2491,7 @@
 
                 return '<div onclick="openNewsModal(\'' + n.id + '\')" class="bg-white p-3 rounded-2xl border border-emerald-100 shadow-2xs hover:border-emerald-300 transition-all cursor-pointer flex gap-3 items-center group">' +
                   '<div class="w-20 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0 relative">' +
-                    '<img src="' + escapeHtml(n.gambar_url || 'poster_pts_berita.webp') + '" alt="' + escapeHtml(n.judul) + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src=\'poster_pts_berita.webp\'">' +
+                    '<img src="' + escapeHtml(resolveNewsImageUrl(n.gambar_url)) + '" alt="' + escapeHtml(n.judul) + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src=\'/poster_pts_berita.webp\'">'  +
                   '</div>' +
                   '<div class="flex-1 min-w-0 space-y-1">' +
                     '<div class="flex items-center justify-between">' +

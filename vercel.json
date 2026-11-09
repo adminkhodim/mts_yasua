@@ -6,7 +6,7 @@
       "destination": "/api/og?slug=:slug"
     },
     {
-      "source": "/app/(.*)",
+      "source": "/app/((?!.*\\.[\\w]+$).*)",
       "destination": "/app"
     },
     {

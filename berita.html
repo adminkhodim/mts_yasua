@@ -1130,6 +1130,31 @@
   </div>
 
   <script>
+    function resolveNewsImageUrl(rawImg) {
+      if (!rawImg) return '/poster_pts_berita.webp';
+      let img = String(rawImg).trim();
+      if (!img) return '/poster_pts_berita.webp';
+
+      // Google Drive link resolver
+      if (img.includes('drive.google.com') || img.includes('docs.google.com')) {
+        const driveMatch = img.match(/(?:id=|d\/|open\?id=)([a-zA-Z0-9_-]{25,})/);
+        if (driveMatch && driveMatch[1]) {
+          return 'https://lh3.googleusercontent.com/d/' + driveMatch[1];
+        }
+      }
+
+      // External HTTP/HTTPS URLs
+      if (img.startsWith('http://') || img.startsWith('https://')) {
+        return img;
+      }
+
+      // Local asset: pastikan diawali leading slash '/'
+      if (!img.startsWith('/')) {
+        img = '/' + img;
+      }
+      return img;
+    }
+
     function escapeHtml(str) {
       if (str === null || str === undefined) return '';
       return String(str)
@@ -1401,7 +1426,7 @@
         <article onclick="readNewsArticle('${main.id}')" class="group cursor-pointer bg-slate-50/60 hover:bg-emerald-50/40 rounded-2xl p-4 border border-emerald-100/80 transition-all duration-300 flex flex-col justify-between h-full">
           <div class="space-y-3.5">
             <div class="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100">
-              <img src="${main.gambar_url || 'poster_pts_berita.webp'}" alt="${escapeHtml(main.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='poster_pts_berita.webp'">
+              <img src="${resolveNewsImageUrl(main.gambar_url)}" alt="${escapeHtml(main.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='/poster_pts_berita.webp'">
               <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${mainBadgeClass} text-white font-black text-xs shadow-md">
                 <i data-lucide="bell" class="w-3.5 h-3.5"></i> ${escapeHtml(main.kategori.toUpperCase())}
               </span>
@@ -1444,7 +1469,7 @@
           <article onclick="readNewsArticle('${n.id}')" class="group cursor-pointer bg-slate-50/50 hover:bg-emerald-50/30 rounded-2xl p-3 border border-slate-200/70 hover:border-emerald-200 transition-all duration-200 flex flex-col justify-between flex-1">
             <div>
               <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-2.5">
-                <img src="${n.gambar_url || 'poster_pts_berita.webp'}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
+                <img src="${resolveNewsImageUrl(n.gambar_url)}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
                 <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md ${badge} text-[9px] font-black shadow-xs uppercase tracking-wider">
                   ${escapeHtml(n.kategori)}
                 </span>
@@ -1544,7 +1569,7 @@
               <div onclick="readNewsArticle('${n.id}')" class="bg-white rounded-3xl p-4 border border-emerald-100 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
                 <div>
                   <div class="relative aspect-video rounded-2xl overflow-hidden bg-slate-100 mb-3.5">
-                    <img src="${n.gambar_url || 'poster_pts_berita.webp'}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
+                    <img src="${resolveNewsImageUrl(n.gambar_url)}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
                     <span class="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-full ${badgeClass} text-[10px] font-black shadow-sm uppercase tracking-wider">
                       ${escapeHtml(n.kategori)}
                     </span>
@@ -1649,7 +1674,7 @@
             <div onclick="readNewsArticle('${r.id}')" class="bg-white rounded-2xl p-3.5 border border-emerald-100 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
               <div>
                 <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-2.5">
-                  <img src="${r.gambar_url || 'poster_pts_berita.webp'}" alt="${escapeHtml(r.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
+                  <img src="${resolveNewsImageUrl(r.gambar_url)}" alt="${escapeHtml(r.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='poster_pts_berita.webp'">
                   <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full ${badgeColor} text-[9px] font-black shadow-sm uppercase tracking-wider">
                     ${escapeHtml(r.kategori)}
                   </span>
@@ -1883,7 +1908,7 @@
               tanggal: item.tanggal || '',
               judul: item.judul || '',
               ringkasan: item.ringkasan || '',
-              gambar_url: item.gambar_url || 'poster_pts_berita.webp',
+              gambar_url: resolveNewsImageUrl(item.gambar_url),
               konten: item.konten || '',
               is_featured: item.is_featured === true || String(item.is_featured).toLowerCase() === 'true',
               status_aktif: true,
