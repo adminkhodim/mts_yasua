@@ -667,9 +667,15 @@
             <p class="text-[10px] text-emerald-200 mt-0.5">Roster KBM • Tahun Pelajaran 2026/2027</p>
           </div>
         </div>
-        <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9.5px] font-black uppercase tracking-wide">
-          Semester Genap
-        </span>
+        <div class="flex items-center gap-1.5">
+          <span id="jadwal-sync-badge" class="px-2 py-0.5 rounded-full bg-emerald-800/90 text-emerald-200 text-[9px] font-bold border border-emerald-600/50 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Live Sheet</span>
+          </span>
+          <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9.5px] font-black uppercase tracking-wide">
+            Semester Genap
+          </span>
+        </div>
       </div>
 
       <!-- KARTU PINTASAN HARI INI (LIVE DYNAMIC HIGHLIGHT) -->
@@ -3144,6 +3150,9 @@
         if (typeof initTabAlumni === 'function') initTabAlumni();
       } else if (tabName === 'pengaturan') {
         if (typeof syncTabSettingsUI === 'function') syncTabSettingsUI();
+      } else if (tabName === 'jadwal') {
+        if (typeof initJadwalToday === 'function') initJadwalToday();
+        if (typeof fetchJadwalFromBackend === 'function') fetchJadwalFromBackend();
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -5916,11 +5925,84 @@
     }
     window.printJadwalKbm = printJadwalKbm;
 
+    // --- Sinkronisasi Otomatis dengan Spreadsheet Apps Script ---
+    async function fetchJadwalFromBackend() {
+      try {
+        const syncBadge = document.getElementById('jadwal-sync-badge');
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getJadwalData';
+        const res = await fetch(API_URL);
+        const resJson = await res.json();
+
+        if (resJson && resJson.status === 'success' && resJson.data) {
+          const { jadwal, seragam } = resJson.data;
+
+          // 1. Update data seragam jika tersedia dari Spreadsheet
+          if (Array.isArray(seragam) && seragam.length > 0) {
+            seragam.forEach(s => {
+              if (s.hari && s.nama_seragam) {
+                DATA_SERAGAM[s.hari] = {
+                  title: s.nama_seragam,
+                  desc: s.deskripsi_lengkap || s.nama_seragam
+                };
+              }
+            });
+          }
+
+          // 2. Update data roster jika tersedia dari Spreadsheet
+          if (Array.isArray(jadwal) && jadwal.length > 0) {
+            // Grouping jadwal berdasarkan kelas & hari
+            const grouped = {};
+            jadwal.forEach(j => {
+              const k = String(j.kelas || '7');
+              const h = String(j.hari || 'Senin');
+              if (!grouped[k]) grouped[k] = {};
+              if (!grouped[k][h]) grouped[k][h] = [];
+              grouped[k][h].push({
+                jam: j.waktu || '07.00 - 08.00',
+                mapel: j.mata_pelajaran || '-',
+                guru: j.nama_guru || '-',
+                ruang: j.ruang || '',
+                type: j.tipe || 'mapel'
+              });
+            });
+
+            // Timpa kelompok kelas yang ada
+            Object.keys(grouped).forEach(k => {
+              if (!DATA_ROSTER_KBM[k]) DATA_ROSTER_KBM[k] = {};
+              Object.keys(grouped[k]).forEach(h => {
+                DATA_ROSTER_KBM[k][h] = grouped[k][h];
+              });
+            });
+          }
+
+          if (syncBadge) {
+            syncBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span><span>Spreadsheet Sync</span>';
+          }
+
+          // Re-render tampilan dengan data terbaru dari spreadsheet
+          renderJadwalButtons();
+          renderJadwalRoster();
+          const uniformInfo = DATA_SERAGAM[activeJadwalHari] || DATA_SERAGAM['Senin'];
+          const uTitleEl = document.getElementById('today-uniform-title');
+          const uDescEl = document.getElementById('today-uniform-desc');
+          if (uTitleEl) uTitleEl.textContent = uniformInfo.title;
+          if (uDescEl) uDescEl.textContent = uniformInfo.desc;
+        }
+      } catch (err) {
+        console.warn('Gagal memuat jadwal dari spreadsheet, menggunakan data offline lokal:', err);
+      }
+    }
+    window.fetchJadwalFromBackend = fetchJadwalFromBackend;
+
     // Panggil inisialisasi jadwal saat script dimuat
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initJadwalToday);
+      document.addEventListener('DOMContentLoaded', () => {
+        initJadwalToday();
+        fetchJadwalFromBackend();
+      });
     } else {
       initJadwalToday();
+      fetchJadwalFromBackend();
     }
 
 

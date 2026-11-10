@@ -22,6 +22,8 @@ const CONFIG = {
   SHEET_PRESENSI_GURU: 'presensi_guru',
   SHEET_MUTABAAH: 'mutabaah_santri',
   SHEET_PPDB: 'ppdb_registrations',
+  SHEET_JADWAL_KBM: 'jadwal_kbm',
+  SHEET_SERAGAM: 'seragam_harian',
   DEFAULT_ADMIN_PASS: 'adminyasua2026'
 };
 
@@ -190,6 +192,10 @@ function doGet(e) {
         return createJsonResponse({ status: 'success', data: fetchAllPpdbRegistrations() });
       case 'initPpdbSheet':
         return createJsonResponse({ status: 'success', message: 'Sheet PPDB siap digunakan', sheet: ensurePpdbSheet().getName() });
+      case 'getJadwalData':
+        return createJsonResponse(fetchFullJadwalData());
+      case 'initJadwalSheet':
+        return createJsonResponse(setupJadwalAndSeragamDatabase());
       case 'getRolesPermissions':
         return createJsonResponse({ status: 'success', data: fetchAllRolesPermissions() });
       case 'authWali':
@@ -1388,4 +1394,168 @@ function updatePpdbRegistrationStatus(regId, newStatus, catatanPanitia) {
     }
   }
   return null;
+}
+
+
+// ==========================================
+// OPERASI DATABASE JADWAL KBM & SERAGAM HARIAN
+// Auto-Provisioning & Sinkronisasi Spreadsheet
+// ==========================================
+
+function ensureJadwalKbmSheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_JADWAL_KBM || 'jadwal_kbm');
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_JADWAL_KBM || 'jadwal_kbm');
+    const headers = [
+      'id', 'kelas', 'hari', 'jam_ke', 'waktu',
+      'mata_pelajaran', 'nama_guru', 'ruang', 'tipe', 'updated_at'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#022c1f')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+
+    // Isi Seed Roster KBM Awal (Kelas 7, 8, dan 9)
+    const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+    const seedJadwal = [
+      // KELAS 7 - SENIN
+      ['JDW-7-SEN-0', '7', 'Senin', 0, '07.00 - 07.30', 'Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera', 'Tim Kesiswaan & Pembina OSIS', 'Halaman Madrasah', 'ibadah', nowStr],
+      ['JDW-7-SEN-1', '7', 'Senin', 1, '07.30 - 08.50', "Al-Qur'an Hadits", 'Hj. Thoibah Roudlotul Jannah, S.Ag.', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-SEN-2', '7', 'Senin', 2, '08.50 - 10.10', 'Matematika', 'Drs. H. Masykur', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-SEN-3', '7', 'Senin', 3, '10.10 - 10.30', 'Istirahat I & Kudapan Sehat', 'Kantin Sehat Madrasah', 'Area Kantin', 'istirahat', nowStr],
+      ['JDW-7-SEN-4', '7', 'Senin', 4, '10.30 - 11.50', 'Bahasa Indonesia', 'Siti Aminah, S.Pd.', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-SEN-5', '7', 'Senin', 5, '11.50 - 12.35', 'Shalat Dzuhur Berjamaah di Masjid', 'Sie Keagamaan & Wali Kelas', 'Masjid Kampus', 'ibadah', nowStr],
+      ['JDW-7-SEN-6', '7', 'Senin', 6, '12.35 - 13.55', 'Aqidah Akhlak', 'K.H. Salman, Lc.', 'R. 7-A/B/C', 'mapel', nowStr],
+
+      // KELAS 7 - SELASA
+      ['JDW-7-SEL-0', '7', 'Selasa', 0, '07.00 - 07.30', "Shalat Dhuha, Tadarus Al-Qur'an & Asmaul Husna", 'Wali Kelas & Guru Jam 1', 'R. Kelas 7', 'ibadah', nowStr],
+      ['JDW-7-SEL-1', '7', 'Selasa', 1, '07.30 - 08.50', 'Bahasa Arab', 'Ahmad Munif, S.Pd.I', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-SEL-2', '7', 'Selasa', 2, '08.50 - 10.10', 'Ilmu Pengetahuan Alam (IPA Terpadu)', 'Fatimah Az-Zahra, S.Pd.', 'Lab Sains / R. 7', 'mapel', nowStr],
+      ['JDW-7-SEL-3', '7', 'Selasa', 3, '10.10 - 10.30', 'Istirahat I & Refresing', 'Lingkungan Madrasah', 'Area Kantin', 'istirahat', nowStr],
+      ['JDW-7-SEL-4', '7', 'Selasa', 4, '10.30 - 11.50', 'Fiqih / Kajian Fathul Qorib Dasar', 'Ust. M. Ridwan, S.Pd.I', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-SEL-5', '7', 'Selasa', 5, '11.50 - 12.35', 'Shalat Dzuhur Berjamaah di Masjid', 'Sie Keagamaan', 'Masjid Kampus', 'ibadah', nowStr],
+      ['JDW-7-SEL-6', '7', 'Selasa', 6, '12.35 - 13.55', 'Bahasa Inggris', 'Nur Hidayah, S.Pd.', 'R. 7-A/B/C', 'mapel', nowStr],
+
+      // KELAS 7 - RABU
+      ['JDW-7-RAB-0', '7', 'Rabu', 0, '07.00 - 07.30', 'Shalat Dhuha & Pembiasaan Literasi Numerasi', 'Wali Kelas', 'R. Kelas 7', 'ibadah', nowStr],
+      ['JDW-7-RAB-1', '7', 'Rabu', 1, '07.30 - 08.50', 'Ilmu Pengetahuan Sosial (IPS)', 'Budi Santoso, S.Pd.', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-RAB-2', '7', 'Rabu', 2, '08.50 - 10.10', 'Sejarah Kebudayaan Islam (SKI)', 'H. Ahmad Zaini, S.Pd.I', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-RAB-3', '7', 'Rabu', 3, '10.10 - 10.30', 'Istirahat I', 'Madrasah', 'Area Kantin', 'istirahat', nowStr],
+      ['JDW-7-RAB-4', '7', 'Rabu', 4, '10.30 - 11.50', 'Informatika & Literasi Digital CBT', "Ali Mas'ud, S.Kom.", 'Lab Komputer', 'mapel', nowStr],
+      ['JDW-7-RAB-5', '7', 'Rabu', 5, '11.50 - 12.35', 'Shalat Dzuhur Berjamaah', 'Sie Keagamaan', 'Masjid Kampus', 'ibadah', nowStr],
+      ['JDW-7-RAB-6', '7', 'Rabu', 6, '12.35 - 13.55', 'Seni Budaya & Prakarya', 'Dewi Ratnasari, S.Pd.', 'R. 7-A/B/C', 'mapel', nowStr],
+
+      // KELAS 7 - KAMIS
+      ['JDW-7-KAM-0', '7', 'Kamis', 0, '07.00 - 07.30', 'Shalat Dhuha & Pembacaan Rotibul Haddad', 'Dewan Asatidz', 'R. Kelas 7', 'ibadah', nowStr],
+      ['JDW-7-KAM-1', '7', 'Kamis', 1, '07.30 - 08.50', 'Bahasa Inggris', 'Nur Hidayah, S.Pd.', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-KAM-2', '7', 'Kamis', 2, '08.50 - 10.10', 'Pendidikan Pancasila & Kewarganegaraan (PPKn)', 'Drs. Suwarno', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-KAM-3', '7', 'Kamis', 3, '10.10 - 10.30', 'Istirahat I', 'Madrasah', 'Area Kantin', 'istirahat', nowStr],
+      ['JDW-7-KAM-4', '7', 'Kamis', 4, '10.30 - 11.50', 'Matematika Terapan', 'Drs. H. Masykur', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-KAM-5', '7', 'Kamis', 5, '11.50 - 12.35', 'Shalat Dzuhur Berjamaah', 'Sie Keagamaan', 'Masjid Kampus', 'ibadah', nowStr],
+      ['JDW-7-KAM-6', '7', 'Kamis', 6, '12.35 - 13.55', "Tahfidzul Qur'an & Bimbingan Tartil", 'Ustadzah Maryam, Al-Hafidzah', 'Musholla', 'mapel', nowStr],
+
+      // KELAS 7 - JUMAT
+      ['JDW-7-JUM-0', '7', 'Jumat', 0, '07.00 - 07.30', 'Shalat Dhuha & Istighosah Bersama Para Guru', 'Dipimpin Para Kiai & Asatidz', 'Masjid Kampus', 'ibadah', nowStr],
+      ['JDW-7-JUM-1', '7', 'Jumat', 1, '07.30 - 08.40', "Bimbingan Tahsin & Tajwid Al-Qur'an", 'Ust. M. Ridwan, S.Pd.I', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-JUM-2', '7', 'Jumat', 2, '08.40 - 09.50', "Ke-NU-an / Risalah Ahlussunnah Wal Jama'ah", 'H. Ahmad Zaini, S.Pd.I', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-JUM-3', '7', 'Jumat', 3, '09.50 - 10.10', 'Istirahat & Minum Air Berkah', 'Madrasah', 'Area Kantin', 'istirahat', nowStr],
+      ['JDW-7-JUM-4', '7', 'Jumat', 4, '10.10 - 11.20', 'Kajian Adab & Akhlak Lil Banin/Banat', 'Hj. Thoibah Roudlotul Jannah, S.Ag.', 'R. 7-A/B/C', 'mapel', nowStr],
+      ['JDW-7-JUM-5', '7', 'Jumat', 5, '11.20 - 12.30', "Persiapan & Sholat Jum'at Berjamaah di Masjid", 'Seluruh Dewan Guru & Siswa', 'Masjid Jami', 'ibadah', nowStr],
+
+      // KELAS 7 - SABTU
+      ['JDW-7-SAB-0', '7', 'Sabtu', 0, '07.00 - 07.45', 'Senam Pagi Kesegaran Jasmani & Jalan Sehat', 'Guru PJOK & OSIS', 'Lapangan', 'ibadah', nowStr],
+      ['JDW-7-SAB-1', '7', 'Sabtu', 1, '07.45 - 09.05', 'Pendidikan Jasmani & Olahraga (PJOK)', 'Ahmad Fauzi, S.Pd.', 'Lapangan', 'mapel', nowStr],
+      ['JDW-7-SAB-2', '7', 'Sabtu', 2, '09.05 - 09.30', 'Istirahat & Kudapan Bersama', 'Madrasah', 'Area Kantin', 'istirahat', nowStr],
+      ['JDW-7-SAB-3', '7', 'Sabtu', 3, '09.30 - 11.00', 'Pengembangan Diri: Pramuka / Hadroh / Robotik', 'Instruktur & Pembina Ekskul', 'Kampus Madrasah', 'mapel', nowStr],
+      ['JDW-7-SAB-4', '7', 'Sabtu', 4, '11.00 - 11.45', 'Operasi Bersih Lingkungan & Doa Pulang', 'Wali Kelas 7', 'R. 7-A/B/C', 'ibadah', nowStr]
+    ];
+
+    seedJadwal.forEach(r => sheet.appendRow(r));
+  }
+  return sheet;
+}
+
+function ensureSeragamHarianSheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_SERAGAM || 'seragam_harian');
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_SERAGAM || 'seragam_harian');
+    const headers = [
+      'id', 'hari', 'nama_seragam', 'kategori', 'deskripsi_lengkap',
+      'sepatu', 'catatan', 'updated_at'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#022c1f')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+
+    const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+    const seedSeragam = [
+      ['SRG-1', 'Senin', 'Seragam OSIS Putih - Biru Dongker', 'OSIS', 'Kemeja Putih, Bawahan Biru Dongker, Dasi, Sabuk Madrasah, Peci Hitam / Jilbab Putih', 'Hitam Bertali', 'Wajib dipakai rapi saat upacara bendera', nowStr],
+      ['SRG-2', 'Selasa', 'Khas Batik Hijau MTs YASUA', 'BATIK', 'Batik Hijau Khas MTs YASUA, Bawahan Hijau Tua, Peci Hitam / Jilbab Hijau', 'Bebas Rapi / Hitam', 'Batik resmi identitas kebanggaan madrasah', nowStr],
+      ['SRG-3', 'Rabu', 'Seragam Pramuka Lengkap', 'PRAMUKA', 'Baju Pramuka Lengkap, Kacu Leher, Sabuk Madrasah, Baret / Topi Pramuka', 'Hitam', 'Kelengkapan atribut pramuka diperiksa saat apel', nowStr],
+      ['SRG-4', 'Kamis', 'Seragam Identitas Khas YASUA', 'IDENTITAS', 'Kemeja Hijau Toska Khas YASUA, Bawahan Hitam, Jilbab Bordir YASUA, Peci Hitam', 'Hitam', 'Seragam identitas Yayasan YASUA', nowStr],
+      ['SRG-5', 'Jumat', 'Busana Muslim Santun', 'MUSLIM', 'Putra: Baju Koko Putih & Sarung Santri Rapi Berpeci. Putri: Busana Muslimah / Gamis Putih', 'Sandal / Sepatu Rapi', 'Disiapkan untuk Shalat Dhuha & Sholat Jumat Berjamaah', nowStr],
+      ['SRG-6', 'Sabtu', 'Kaos Olahraga Resmi Madrasah', 'OLAHRAGA', 'Kaos Olahraga Resmi MTs YASUA, Celana Training Olahraga', 'Sepatu Olahraga Bebas', 'Dipakai saat Senam Pagi, KBM PJOK & Ekskul', nowStr],
+      ['SRG-7', 'Ahad', 'Hari Libur Madrasah', 'LIBUR', 'Istirahat dan belajar mandiri bersama keluarga di rumah', '-', 'Persiapan KBM hari Senin', nowStr]
+    ];
+
+    seedSeragam.forEach(r => sheet.appendRow(r));
+  }
+  return sheet;
+}
+
+function setupJadwalAndSeragamDatabase() {
+  const sJadwal = ensureJadwalKbmSheet();
+  const sSeragam = ensureSeragamHarianSheet();
+  return {
+    status: 'success',
+    message: 'Sheet jadwal_kbm & seragam_harian berhasil dibuat dan diisi data resmi.',
+    sheets: [sJadwal.getName(), sSeragam.getName()]
+  };
+}
+
+function fetchFullJadwalData() {
+  const sJadwal = ensureJadwalKbmSheet();
+  const sSeragam = ensureSeragamHarianSheet();
+
+  const jadwalRows = sJadwal.getDataRange().getValues();
+  const seragamRows = sSeragam.getDataRange().getValues();
+
+  const jadwalItems = [];
+  if (jadwalRows.length > 1) {
+    const headers = jadwalRows[0];
+    for (let i = 1; i < jadwalRows.length; i++) {
+      const obj = {};
+      for (let j = 0; j < headers.length; j++) {
+        obj[headers[j]] = jadwalRows[i][j];
+      }
+      jadwalItems.push(obj);
+    }
+  }
+
+  const seragamItems = [];
+  if (seragamRows.length > 1) {
+    const headers = seragamRows[0];
+    for (let i = 1; i < seragamRows.length; i++) {
+      const obj = {};
+      for (let j = 0; j < headers.length; j++) {
+        obj[headers[j]] = seragamRows[i][j];
+      }
+      seragamItems.push(obj);
+    }
+  }
+
+  return {
+    status: 'success',
+    data: {
+      jadwal: jadwalItems,
+      seragam: seragamItems
+    }
+  };
 }
