@@ -25,7 +25,7 @@ const STATIC_NEWS = [
     slug: 'awali-hari-dengan-keberkahan-lantunan-asmaulhusna-doa-dan-murojaah-menggema-setiap-pagi-di-mts-yasua',
     judul: 'Awali Hari dengan Keberkahan: Lantunan Asmaulhusna, Doa, dan Murojaah Menggema Setiap Pagi di MTs Yasua',
     ringkasan: 'Pembiasaan karakter islami santri melalui lantunan doa, asmaulhusna, dan murojaah hafalan Al-Qur\'an sebelum memulai jam pembelajaran.',
-    gambar_url: 'https://www.mtsyasua.sch.id/foto-upacara.jpg'
+    gambar_url: 'https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp'
   },
   {
     id: 'NEWS-003',
@@ -41,7 +41,7 @@ const STATIC_NEWS = [
     slug: 'penerimaan-peserta-didik-baru-ppdb-tahun-ajaran-20262027-resmi-dibuka',
     judul: 'Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Resmi Dibuka',
     ringkasan: 'Tersedia jalur prestasi beasiswa tahfidz serta jalur reguler bagi lulusan SD/MI se-Kabupaten Demak.',
-    gambar_url: 'https://www.mtsyasua.sch.id/foto-gedung.jpg'
+    gambar_url: 'https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6'
   },
   {
     id: 'NEWS-005',
@@ -49,7 +49,7 @@ const STATIC_NEWS = [
     slug: 'bentuk-karakter-religius-dan-disiplin-siswa-siswi-mts-yasua-konsisten-jalankan-shalat-zuhur-berjamaah',
     judul: 'Bentuk Karakter Religius dan Disiplin, Siswa-Siswi MTs Yasua Konsisten Jalankan Shalat Zuhur Berjamaah',
     ringkasan: 'Kedisiplinan ibadah shalat berjamaah tepat waktu sebagai fondasi pembentukan akhlakul karimah seluruh santri madrasah.',
-    gambar_url: 'https://www.mtsyasua.sch.id/foto-sholat-santri.jpg'
+    gambar_url: 'https://lh3.googleusercontent.com/d/1VpfpkDMRYqlf_rzgctWVR5Yjj6mxONer'
   },
   {
     id: 'NEWS-006',
@@ -225,7 +225,7 @@ module.exports = async function handler(req, res) {
     }
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400');
+    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
     return res.status(200).send(html);
   } catch (err) {
     console.error('[OG Serverless Error]:', err);
