@@ -1,11 +1,11 @@
 /**
  * MTs YASUA Pilangwetan — Progressive Web App (PWA) Service Worker
  * Multi-Tier Caching Architecture & Offline-First Data Resilience Engine
- * Version: 3.4.0
+ * Version: 3.5.0
  */
 
-const SHELL_CACHE_NAME = 'mts-yasua-shell-v3.4';
-const DATA_CACHE_NAME = 'mts-yasua-data-v3.4';
+const SHELL_CACHE_NAME = 'mts-yasua-shell-v3.5';
+const DATA_CACHE_NAME = 'mts-yasua-data-v3.5';
 const OFFLINE_URL = 'offline.html';
 
 // Critical core assets to pre-cache on install (App Shell)
@@ -49,10 +49,7 @@ const PRECACHE_ASSETS = [
   'guru_3.webp',
   'guru_4.webp',
   'guru_5.webp',
-  'guru_6.webp',
-  'banner_1.jpg',
-  'banner_2.jpg',
-  'banner_3.jpg'
+  'guru_6.webp'
 ];
 
 // Domains eligible for Tier 2: Stale-While-Revalidate Data & Cloud Image Caching
