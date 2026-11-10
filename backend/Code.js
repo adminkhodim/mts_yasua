@@ -402,7 +402,7 @@ function fetchAllNews() {
     
     // Fallback otomatis jika field baru belum terisi di baris lama
     if (obj.views === undefined || obj.views === '' || obj.views === null) {
-      obj.views = 1500 + (i * 240);
+      obj.views = 0;
     } else {
       obj.views = Number(obj.views) || 0;
     }
@@ -436,7 +436,9 @@ function addNewNews(newsData) {
 
   const judul = newsData.judul || 'Judul Berita';
   const slug = newsData.slug || generateBackendSlug(judul);
-  const views = Number(newsData.views) || 1250;
+  const views = (newsData.views !== undefined && newsData.views !== null && newsData.views !== '') 
+    ? (Number(newsData.views) || 0) 
+    : 0;
   const readTime = newsData.read_time || calculateBackendReadTime(newsData.konten);
 
   const rowObj = {

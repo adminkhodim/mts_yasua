@@ -1942,7 +1942,7 @@
               <span class="text-[10px] text-slate-400 font-normal">Counter Awal</span>
             </label>
             <div class="relative">
-              <input type="number" id="newsViews" min="0" placeholder="Contoh: 1250"
+              <input type="number" id="newsViews" min="0" placeholder="0"
                 class="w-full pl-8 pr-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-primary font-mono text-xs">
               <i data-lucide="eye" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3"></i>
             </div>
@@ -4215,7 +4215,7 @@
         badge_class: 'bg-blue-600 text-white',
         tanggal: '5 - 10 Oktober 2026',
         penulis: 'Waka Kurikulum',
-        views: 2450,
+        views: 42,
         read_time: '2 menit baca',
         gambar_url: 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst',
         ringkasan: 'Diberitahukan kepada seluruh siswa-siswi kelas VII, VIII, dan IX serta Bapak/Ibu Wali Murid bahwa pelaksanaan PTS terpadu dilaksanakan berbasis asesmen tertulis dan digital komputer.',
@@ -4234,7 +4234,7 @@
         badge_class: 'bg-emerald-600 text-white',
         tanggal: '22 September 2026',
         penulis: 'Humas & Pembina Robotika',
-        views: 3120,
+        views: 80,
         read_time: '2 menit baca',
         gambar_url: 'https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp',
         ringkasan: 'Kabar membanggakan diraih delegasi siswa madrasah dalam ajang bergengsi sains dan teknologi terapan.',
@@ -4253,7 +4253,7 @@
         badge_class: 'bg-blue-600 text-white',
         tanggal: '15 September 2026',
         penulis: 'Komite Madrasah',
-        views: 1890,
+        views: 120,
         read_time: '3 menit baca',
         gambar_url: 'https://lh3.googleusercontent.com/d/1xyiEwouAo5sUvDhAwfjoUi0vBbw-pfeN',
         ringkasan: 'Silaturahmi wali murid dan komite madrasah mendiskusikan bimbingan moral anak di era serba digital.',
@@ -4272,7 +4272,7 @@
         badge_class: 'bg-amber-600 text-white',
         tanggal: '10 September 2026',
         penulis: 'Panitia PPDB',
-        views: 4580,
+        views: 60,
         read_time: '2 menit baca',
         gambar_url: 'https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6',
         ringkasan: 'Tersedia jalur prestasi beasiswa tahfidz serta jalur reguler bagi lulusan SD/MI se-Kabupaten Demak.',
@@ -4291,7 +4291,7 @@
         badge_class: 'bg-purple-600 text-white',
         tanggal: '28 Agustus 2026',
         penulis: 'Tim Proktor & Teknisi',
-        views: 1760,
+        views: 70,
         read_time: '2 menit baca',
         gambar_url: 'https://lh3.googleusercontent.com/d/1aID6eBBBvG6qrNGkX23FRB4MUujp3e8P',
         ringkasan: 'Infrastruktur jaringan komputer mandiri memastikan 100% peserta mengerjakan asesmen tanpa kendala.',
@@ -4691,7 +4691,7 @@
       const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
       document.getElementById('newsTanggal').value = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
       document.getElementById('newsPenulis').value = 'Humas MTs YASUA';
-      document.getElementById('newsViews').value = Math.floor(Math.random() * 300) + 1200; // default awal
+      document.getElementById('newsViews').value = 0; // Berita baru mulai dari 0 pembaca real
       document.getElementById('newsGambarUrl').value = 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
       document.getElementById('newsRingkasan').value = '';
       document.getElementById('newsKonten').value = '';
@@ -4717,7 +4717,7 @@
       document.getElementById('newsKategori').value = n.kategori || 'Akademik';
       document.getElementById('newsTanggal').value = n.tanggal || '';
       document.getElementById('newsPenulis').value = n.penulis || 'Humas MTs YASUA';
-      document.getElementById('newsViews').value = n.views !== undefined ? n.views : 1250;
+      document.getElementById('newsViews').value = n.views !== undefined ? (Number(n.views) || 0) : 0;
       document.getElementById('newsGambarUrl').value = n.gambar_url || '';
       document.getElementById('newsRingkasan').value = n.ringkasan || '';
 
@@ -4977,7 +4977,8 @@
       const isFeatured = document.getElementById('newsIsFeatured').checked;
       const judulVal = document.getElementById('newsJudul').value.trim();
       const slugVal = document.getElementById('newsSlug').value.trim() || generateSlug(judulVal);
-      const viewsVal = parseInt(document.getElementById('newsViews').value, 10) || 1200;
+      const parsedViews = parseInt(document.getElementById('newsViews').value, 10);
+      const viewsVal = isNaN(parsedViews) ? 0 : Math.max(0, parsedViews);
       const readTimeVal = calculateReadTime(rawKonten);
 
       const payload = {

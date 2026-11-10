@@ -493,7 +493,7 @@
             <span class="text-slate-300">•</span>
             <span class="inline-flex items-center gap-1 font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100/60">
               <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
-              <span id="readNewsViews">2.450 pembaca</span>
+              <span id="readNewsViews">0 pembaca</span>
             </span>
             <span class="text-slate-300">•</span>
             <span class="inline-flex items-center gap-1 font-medium text-slate-500">
@@ -3707,7 +3707,7 @@
         category: 'AKADEMIK',
         badgeClass: 'bg-blue-600 text-white',
         date: '5 - 10 Oktober 2026',
-        views: 2450,
+        views: 42,
         readTime: '2 menit baca',
         title: 'Penilaian Tengah Semester (PTS) Gasal MTs YASUA Pilangwetan',
         image: '/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst',
@@ -3719,7 +3719,7 @@
         category: 'PRESTASI',
         badgeClass: 'bg-emerald-600 text-white',
         date: '22 September 2026',
-        views: 3120,
+        views: 80,
         readTime: '2 menit baca',
         title: 'Siswa MTs YASUA Raih Juara 1 Olimpiade Sains & Robotika Tingkat Provinsi Jawa Tengah',
         image: '/https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp',
@@ -3731,7 +3731,7 @@
         category: 'KEGIATAN',
         badgeClass: 'bg-blue-600 text-white',
         date: '15 September 2026',
-        views: 1890,
+        views: 120,
         readTime: '3 menit baca',
         title: "Workshop Parenting Akbar: Membangun Sinergi Rumah dan Sekolah Menuju Generasi Qur'ani",
         image: '/https://lh3.googleusercontent.com/d/1xyiEwouAo5sUvDhAwfjoUi0vBbw-pfeN',
@@ -3743,7 +3743,7 @@
         category: 'PENGUMUMAN',
         badgeClass: 'bg-amber-600 text-white',
         date: '10 September 2026',
-        views: 4580,
+        views: 60,
         readTime: '2 menit baca',
         title: 'Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Resmi Dibuka',
         image: '/https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6',
@@ -3755,7 +3755,7 @@
         category: 'AKADEMIK',
         badgeClass: 'bg-purple-600 text-white',
         date: '28 Agustus 2026',
-        views: 1760,
+        views: 70,
         readTime: '2 menit baca',
         title: 'Pelaksanaan Asesmen Nasional (ANBK) di Laboratorium Komputer Berlangsung Tertib & Lancar',
         image: '/https://lh3.googleusercontent.com/d/1aID6eBBBvG6qrNGkX23FRB4MUujp3e8P',
@@ -3823,7 +3823,7 @@
         badge.className = 'absolute bottom-3 left-3 px-3 py-1 rounded-full text-[10.5px] font-black text-white shadow-md uppercase tracking-wide ' + (data.badgeClass || 'bg-emerald-600');
       }
       if (dateEl) dateEl.textContent = data.date;
-      if (viewsEl) viewsEl.textContent = (Number(data.views) || 1250).toLocaleString('id-ID') + ' pembaca';
+      if (viewsEl) viewsEl.textContent = (Number(data.views) || 0).toLocaleString('id-ID') + ' pembaca';
       if (readTimeEl) readTimeEl.textContent = data.readTime || '2 menit baca';
       if (titleEl) titleEl.textContent = data.title;
       if (headerTitleEl) headerTitleEl.textContent = data.title;
@@ -3906,7 +3906,7 @@
                             n.kategori === 'Akademik' ? 'bg-blue-600 text-white' : 'bg-purple-600 text-white';
 
               const slug = n.slug || (n.judul ? n.judul.toLowerCase().replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-') : n.id);
-              const viewsNum = Number(n.views) || (1500 + (idx * 240));
+              const viewsNum = Number(n.views) || 0;
               const readTimeStr = n.read_time || '2 menit baca';
 
               tabNewsDetails[n.id] = {

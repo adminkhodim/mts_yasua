@@ -855,7 +855,7 @@
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs text-slate-600 font-semibold bg-slate-50 border border-slate-200/70 px-3 py-1 rounded-full">
                 <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i>
-                <span id="detailNewsViews">1.250 pembaca</span>
+                <span id="detailNewsViews">0 pembaca</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs text-emerald-800 font-bold bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full sm:ml-auto">
                 <i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-primary"></i>
@@ -1200,7 +1200,7 @@
         is_featured: true,
         status_aktif: true,
         read_time: '2 menit baca',
-        views: 2450,
+        views: 42,
         konten: `
           <p class="mb-4">Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
           <p class="mb-4">Diberitahukan kepada seluruh siswa-siswi dan Bapak/Ibu Wali Murid MTs YASUA Pilangwetan bahwa kegiatan <strong>Penilaian Tengah Semester (PTS) Gasal Tahun Ajaran 2026/2027</strong> akan diselenggarakan secara serentak dan terpadu pada:</p>
@@ -1229,7 +1229,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '2 menit baca',
-        views: 3120,
+        views: 80,
         konten: `
           <p class="mb-4">Alhamdulillahirabbil 'alamin, kabar membanggakan kembali hadir mengharumkan nama almamater MTs YASUA tercinta. Delegasi siswa madrasah berhasil mengukir prestasi gemilang dengan meraih <strong>Juara 1 Lomba Olimpiade Sains Terapan & Robotika Madrasah Tingkat Provinsi Jawa Tengah</strong>.</p>
           <p class="mb-4">Prestasi membanggakan ini diraih berkat dedikasi, bimbingan intensif bapak/ibu guru pembina ekstrakurikuler sains, serta ketekunan para siswa dalam menguasai perancangan sensor cerdas dan pemrograman mikrokontroler.</p>
@@ -1252,7 +1252,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '3 menit baca',
-        views: 1890,
+        views: 120,
         konten: `
           <p class="mb-4">MTs YASUA Pilangwetan sukses menggelar kegiatan <strong>Workshop Parenting Akbar dan Silaturahmi Wali Siswa</strong> di Aula Madrasah yang dihadiri oleh ratusan orang tua/wali murid dari kelas VII, VIII, dan IX.</p>
           <p class="mb-4">Mengangkat tema <em>“Membina Karakter Islami di Era Serba Digital”</em>, narasumber membagikan wawasan aplikatif mengenai pentingnya keteladanan orang tua di rumah, pendampingan penggunaan gawai, serta sinergi erat bersama dewan asatidz di madrasah.</p>
@@ -1272,7 +1272,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '2 menit baca',
-        views: 4580,
+        views: 60,
         konten: `
           <p class="mb-4">Penerimaan Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan untuk Tahun Pelajaran 2026/2027 resmi dibuka secara daring melalui website dan luring di kantor sekretariat madrasah.</p>
           <p class="mb-4">Kami mengundang putra-putri lulusan SD/MI untuk bergabung bersama keluarga besar MTs YASUA melalui pilihan jalur pendaftaran:</p>
@@ -1296,7 +1296,7 @@
         is_featured: false,
         status_aktif: true,
         read_time: '2 menit baca',
-        views: 1760,
+        views: 70,
         konten: `
           <p class="mb-4">Pelaksanaan Asesmen Nasional Berbasis Komputer (ANBK) di Laboratorium Komputer Terpadu MTs YASUA Pilangwetan berjalan tertib, aman, dan 100% lancar tanpa kendala teknis.</p>
           <p class="mb-4">Dukungan 40 unit komputer berspesifikasi mutakhir, suplai cadangan daya UPS, serta koneksi fiber optik berkecepatan tinggi memastikan seluruh peserta dapat menyelesaikan instrumen asesmen literasi, numerasi, dan survei karakter dengan nyaman.</p>
@@ -1617,7 +1617,7 @@
       currentOpenNewsId = data.id;
 
       // 1. Inkrementasi jumlah views di memori lokal
-      data.views = (Number(data.views) || 1200) + 1;
+      data.views = (Number(data.views) || 0) + 1;
 
       // 2. Persistensi Views ke Database Google Spreadsheet (Fire-and-forget)
       try {
@@ -1833,7 +1833,7 @@
             konten: initial.konten || '',
             is_featured: Boolean(initial.is_featured),
             status_aktif: true,
-            views: Number(initial.views) || 1220,
+            views: Number(initial.views) || 0,
             read_time: initial.read_time || '2 menit baca'
           });
         }
@@ -1913,7 +1913,7 @@
               is_featured: item.is_featured === true || String(item.is_featured).toLowerCase() === 'true',
               status_aktif: true,
               read_time: item.read_time || '2 menit baca',
-              views: Number(item.views) || (1500 + (idx * 240))
+              views: Number(item.views) || 0
             }));
 
             // Perbarui counter dan render ulang grid
