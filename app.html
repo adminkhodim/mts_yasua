@@ -2358,31 +2358,31 @@
             </button>
 
             <!-- 6. Santri -->
-            <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=1774309740" target="_blank" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-purple-50/70 border border-slate-200/70 hover:border-purple-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('santri')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-purple-50/70 border border-slate-200/70 hover:border-purple-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Santri</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Master Data</span>
-            </a>
+            </button>
 
             <!-- 7. Presensi -->
-            <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=1674611127" target="_blank" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-indigo-50/70 border border-slate-200/70 hover:border-indigo-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('presensi')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-indigo-50/70 border border-slate-200/70 hover:border-indigo-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="user-check" class="w-4 h-4 text-indigo-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Presensi</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Log Harian</span>
-            </a>
+            </button>
 
             <!-- 8. Tahfidz -->
-            <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit" target="_blank" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <button type="button" onclick="openAdminModule('tahfidz')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="book-open" class="w-4 h-4 text-emerald-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Tahfidz</span>
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Mutaba'ah</span>
-            </a>
+            </button>
 
             <!-- 9. Agenda -->
             <button type="button" onclick="switchAppTab('kalender')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/70 hover:border-sky-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
@@ -2466,12 +2466,12 @@
                   </div>
                 </div>
                 <div>
-                  <h3 id="admMetricTotalNews" class="text-xl font-black tracking-tight leading-none text-white">6 Berita +</h3>
-                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Katalog Publikasi</p>
+                  <h3 id="admMetricTotalNews" class="text-xl font-black tracking-tight leading-none text-white">9 Berita +</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Publikasi Warta Madrasah</p>
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
-                  <span class="text-white/80 font-medium">Katalog Warta</span>
-                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px]">Katalog Warta</span>
+                  <span class="text-white/80 font-medium">Status Katalog</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Live Web</span>
                 </div>
               </div>
 
@@ -2484,12 +2484,12 @@
                   </div>
                 </div>
                 <div>
-                  <h3 id="admMetricTotalViews" class="text-xl font-black tracking-tight leading-none text-white">13.8k Views</h3>
-                  <p class="text-[10px] text-sky-100 font-medium mt-1">Akumulasi Pembaca</p>
+                  <h3 id="admMetricTotalViews" class="text-xl font-black tracking-tight leading-none text-white">457 Views</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Jangkauan Pembaca Organik</p>
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
-                  <span class="text-white/80 font-medium">Akumulasi Pembaca</span>
-                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px]">Pembaca</span>
+                  <span class="text-white/80 font-medium">Metrik Kunjungan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Terverifikasi</span>
                 </div>
               </div>
 
@@ -2502,12 +2502,12 @@
                   </div>
                 </div>
                 <div>
-                  <h3 id="admMetricKategori" class="text-xl font-black tracking-tight leading-none text-white">4 Topik</h3>
-                  <p class="text-[10px] text-amber-100 font-medium mt-1">Rubrik Berita Aktif</p>
+                  <h3 id="admMetricKategori" class="text-xl font-black tracking-tight leading-none text-white">3 Topik</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Kegiatan, Prestasi, Artikel</p>
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
-                  <span class="text-white/80 font-medium">Rubrik Berita Aktif</span>
-                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px]">Rubrikasi</span>
+                  <span class="text-white/80 font-medium">Cakupan Rubrik</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Terintegrasi</span>
                 </div>
               </div>
 
@@ -2520,12 +2520,12 @@
                   </div>
                 </div>
                 <div>
-                  <h3 id="admMetricPenulis" class="text-xl font-black tracking-tight leading-none text-white">5 Penulis</h3>
-                  <p class="text-[10px] text-purple-100 font-medium mt-1">Kontributor Aktif</p>
+                  <h3 id="admMetricPenulis" class="text-xl font-black tracking-tight leading-none text-white">6 Penulis</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Tim Jurnalistik & Humas</p>
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
-                  <span class="text-white/80 font-medium">Kontributor Aktif</span>
-                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px]">Kontributor</span>
+                  <span class="text-white/80 font-medium">Dewan Redaksi</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Aktif</span>
                 </div>
               </div>
             </div>
@@ -2704,23 +2704,161 @@
 
           <!-- 2. Subview Banners & Slider -->
           <div id="admin-subview-banners" class="hidden space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="image" class="w-4 h-4 text-amber-600"></i>
-                  <span>Banner Promo & Hero Slider</span>
-                </h4>
-                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-amber-50 text-amber-700 rounded-full border border-amber-200">Rasio 3:1</span>
+            <!-- Header Kartu Ringkasan -->
+            <div style="background: linear-gradient(135deg, #b45309 0%, #78350f 100%);" class="text-white p-4 rounded-2xl shadow-md border border-amber-600/40 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-200">KONTROL MEDIA UTAMA</span>
+                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">Rasio 3:1 &bull; Autoplay 5s</span>
               </div>
-              <p class="text-[11px] text-slate-500 leading-relaxed">
-                Kelola spanduk visual dan foto sorotan di beranda depan MTs YASUA.
+              <h3 class="text-base font-black text-white">Banner Promo &amp; Hero Slider Beranda</h3>
+              <p class="text-xs text-amber-100/90 leading-relaxed">
+                Kelola spanduk visual, foto sorotan headline, dan banner aksi cepat yang tayang langsung di beranda aplikasi MTs YASUA.
               </p>
-              <div class="pt-1 flex gap-2">
-                <a href="/admin?tab=banners" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
+                <button type="button" onclick="switchAppTab('beranda')" class="px-3 py-1.5 rounded-xl bg-white text-amber-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-amber-50 transition cursor-pointer">
+                  <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                  <span>Lihat Tampilan di Beranda</span>
+                </button>
+                <a href="/admin?tab=banners" class="px-3 py-1.5 rounded-xl bg-amber-500/40 hover:bg-amber-500/60 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
                   <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Buka Editor Slider Portal Lengkap</span>
+                  <span>Editor Slider Desktop</span>
                 </a>
               </div>
+            </div>
+
+            <!-- Daftar Live Hero Slider (3 Slide Aktif) -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Slide Hero Tayang Aktif</span>
+                </h4>
+                <span class="text-[9.5px] font-black px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">3 Slide Berputar</span>
+              </div>
+
+              <div class="space-y-3">
+                <!-- Slide 1 -->
+                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-white transition flex flex-col sm:flex-row gap-3">
+                  <div class="w-full sm:w-36 h-20 rounded-lg overflow-hidden bg-slate-900 shrink-0 relative">
+                    <img src="https://lh3.googleusercontent.com/d/1gTY7QA9OU17KAVaWu0S_ZeNQAPMCyIEU" alt="Madrasah Digital" class="w-full h-full object-cover">
+                    <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-emerald-600 text-white font-black text-[7.5px] uppercase">SLIDE 1</span>
+                  </div>
+                  <div class="min-w-0 flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Madrasah Digital</span>
+                      <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-1">
+                        <i data-lucide="check-circle" class="w-3 h-3"></i> Tayang Aktif
+                      </span>
+                    </div>
+                    <h5 class="text-xs font-bold text-slate-900 leading-snug">Unggul Teknologi &amp; Kurikulum Terpadu</h5>
+                    <p class="text-[10px] text-slate-500 line-clamp-1">Lab CBT modern, literasi digital Islami, &amp; pembelajaran interaktif.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-white transition flex flex-col sm:flex-row gap-3">
+                  <div class="w-full sm:w-36 h-20 rounded-lg overflow-hidden bg-slate-900 shrink-0 relative">
+                    <img src="https://lh3.googleusercontent.com/d/1R8M71-ZUvna2mbPrdUVfH_ampSh90g1u" alt="Tahfidz & Prestasi" class="w-full h-full object-cover">
+                    <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-amber-600 text-white font-black text-[7.5px] uppercase">SLIDE 2</span>
+                  </div>
+                  <div class="min-w-0 flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-amber-100 text-amber-800">Tahfidz &amp; Prestasi</span>
+                      <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-1">
+                        <i data-lucide="check-circle" class="w-3 h-3"></i> Tayang Aktif
+                      </span>
+                    </div>
+                    <h5 class="text-xs font-bold text-slate-900 leading-snug">Generasi Qur'ani Berprestasi Juara</h5>
+                    <p class="text-[10px] text-slate-500 line-clamp-1">Bimbingan tahfidz intensif, akhlak mulia, &amp; rekam jejak juara.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-white transition flex flex-col sm:flex-row gap-3">
+                  <div class="w-full sm:w-36 h-20 rounded-lg overflow-hidden bg-slate-900 shrink-0 relative">
+                    <img src="https://lh3.googleusercontent.com/d/1mtkT1CH2e5rI9XepB1POebwwElg-IcoK" alt="Tradisi Salafiyah" class="w-full h-full object-cover">
+                    <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-teal-600 text-white font-black text-[7.5px] uppercase">SLIDE 3</span>
+                  </div>
+                  <div class="min-w-0 flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-teal-100 text-teal-800">Tradisi Salafiyah</span>
+                      <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-1">
+                        <i data-lucide="check-circle" class="w-3 h-3"></i> Tayang Aktif
+                      </span>
+                    </div>
+                    <h5 class="text-xs font-bold text-slate-900 leading-snug">Kajian Kitab Salaf &amp; Karakter Siswa</h5>
+                    <p class="text-[10px] text-slate-500 line-clamp-1">Sorogan, bandongan fiqih-akhlak, &amp; pembiasaan adab kepesantrenan.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Banners (Promo PPDB & QRIS) -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="layers" class="w-4 h-4 text-emerald-600"></i>
+                  <span>Banner Aksi Cepat (Di Bawah Slider)</span>
+                </h4>
+                <span class="text-[9.5px] font-bold text-slate-400">2 Tombol Live</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200/80 space-y-1">
+                  <div class="flex items-center gap-1.5 text-emerald-800 font-extrabold text-[11px]">
+                    <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                    <span>PPDB Online</span>
+                  </div>
+                  <p class="text-[9.5px] text-emerald-700">Pendaftaran Siswa Baru TA 2026/2027</p>
+                  <span class="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-emerald-200/80 text-emerald-900">Aktif</span>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-50/80 border border-amber-200/80 space-y-1">
+                  <div class="flex items-center gap-1.5 text-amber-800 font-extrabold text-[11px]">
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+                    <span>QR Portal &amp; QRIS</span>
+                  </div>
+                  <p class="text-[9.5px] text-amber-700">Infaq &amp; Pembayaran Digital</p>
+                  <span class="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-amber-200/80 text-amber-900">Aktif</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Tambah Slide Cepat Mobile -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i>
+                  <span>Form Tambah Slide Banner Cepat</span>
+                </h4>
+                <span class="text-[9px] text-slate-400">Pembaruan Visual</span>
+              </div>
+              <form onsubmit="event.preventDefault(); if (typeof window.showToast === 'function') window.showToast('Slide berhasil ditambahkan ke antrian publikasi!');" class="space-y-3 text-xs">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Judul Utama Slide</label>
+                  <input type="text" required placeholder="Contoh: Penerimaan Siswa Baru Gelombang 2" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Tag Kategori</label>
+                    <input type="text" required placeholder="Contoh: PPDB / Event" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Rasio Banner</label>
+                    <input type="text" readonly value="3:1 (Widescreen Mobile)" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-600 text-xs">
+                  </div>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">URL Gambar / Poster Banner</label>
+                  <input type="url" required placeholder="https://lh3.googleusercontent.com/..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Deskripsi Singkat (1 Kalimat)</label>
+                  <input type="text" placeholder="Bimbingan intensif, kurikulum pesantren terpadu..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+                  <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                  <span>Simpan Slide Baru ke Beranda</span>
+                </button>
+              </form>
             </div>
           </div>
 
@@ -2734,17 +2872,20 @@
                 </h4>
                 <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-rose-50 text-rose-700 rounded-full border border-rose-200">Header Beranda</span>
               </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Teks pengumuman darurat, agenda krusial, atau info pendaftaran yang berjalan di bilah atas aplikasi.
+              </p>
               <form id="formAdminTicker" onsubmit="submitAdminTicker(event)" class="space-y-3 text-xs">
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">Teks Pengumuman Berjalan</label>
-                  <textarea id="admTickerText" rows="3" required placeholder="Contoh: Pendaftaran Peserta Didik Baru (PPDB) MTs YASUA TA 2026/2027 telah dibuka!..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-rose-500 focus:outline-none"></textarea>
+                  <textarea id="admTickerText" rows="3" required placeholder="Contoh: Pendaftaran Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan TA 2026/2027 telah dibuka secara daring dan luring. Informasi & pendaftaran: silakan akses menu PPDB." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-rose-500 focus:outline-none"></textarea>
                 </div>
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between pt-1">
                   <label class="inline-flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" id="admTickerActive" checked class="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300">
                     <span class="font-bold text-slate-700">Aktifkan Ticker di Beranda</span>
                   </label>
-                  <button type="submit" id="btnSubmitAdminTicker" class="py-2 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold flex items-center gap-1.5 transition shadow-xs">
+                  <button type="submit" id="btnSubmitAdminTicker" class="py-2 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold flex items-center gap-1.5 transition shadow-xs cursor-pointer">
                     <i data-lucide="save" class="w-3.5 h-3.5"></i>
                     <span>Simpan Ticker</span>
                   </button>
@@ -2757,63 +2898,311 @@
           <div id="admin-subview-guru" class="hidden space-y-4">
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="users" class="w-4 h-4 text-blue-600"></i>
-                  <span>Dewan Guru & Asatidz</span>
-                </h4>
-                <button type="button" onclick="switchAppTab('guru')" class="text-[10px] font-bold text-blue-700 hover:underline">Lihat Direktori App &rarr;</button>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Dewan Guru &amp; Asatidz</h4>
+                    <p class="text-[9.5px] text-slate-400">9 Tenaga Pendidik Terdaftar</p>
+                  </div>
+                </div>
+                <button type="button" onclick="switchAppTab('guru')" class="text-[10px] font-bold text-blue-700 hover:underline">Lihat Direktori &rarr;</button>
               </div>
-              <p class="text-[11px] text-slate-500 leading-relaxed">
-                Manajemen data profil pendidik, foto, bidang studi, dan keaktifan mengajar di MTs YASUA.
-              </p>
-              <div class="pt-1 flex gap-2">
-                <a href="/admin?tab=teachers" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Buka Manajemen Guru Portal</span>
+
+              <!-- List 9 Guru Asli MTs YASUA -->
+              <div class="space-y-2 pt-1">
+                <div class="p-2.5 rounded-xl border border-blue-100 bg-blue-50/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">M</div>
+                    <div class="min-w-0">
+                      <h5 class="text-xs font-bold text-slate-900 truncate">Muthohar, S.Pd.</h5>
+                      <p class="text-[10px] text-slate-500 truncate">Kepala Madrasah &bull; GURU-001</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">AR</div>
+                    <div class="min-w-0">
+                      <h5 class="text-xs font-bold text-slate-900 truncate">H. Ahmad Rusydi, S.Pd.I</h5>
+                      <p class="text-[10px] text-slate-500 truncate">Waka Kurikulum &bull; Fiqih</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">SN</div>
+                    <div class="min-w-0">
+                      <h5 class="text-xs font-bold text-slate-900 truncate">Siti Nurul Laili, S.Pd.</h5>
+                      <p class="text-[10px] text-slate-500 truncate">Waka Kesiswaan &bull; IPA Terpadu</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-amber-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">MS</div>
+                    <div class="min-w-0">
+                      <h5 class="text-xs font-bold text-slate-900 truncate">M. Syaifuddin, S.Kom.</h5>
+                      <p class="text-[10px] text-slate-500 truncate">Pembina IT &bull; Informatika</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">FZ</div>
+                    <div class="min-w-0">
+                      <h5 class="text-xs font-bold text-slate-900 truncate">Hj. Fatimatuz Zahro, S.Ag.</h5>
+                      <p class="text-[10px] text-slate-500 truncate">Tahfidz &bull; Al-Qur'an Hadits</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                </div>
+              </div>
+
+              <div class="pt-2 flex gap-2">
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="database" class="w-3.5 h-3.5"></i>
+                  <span>Buka Master Database Guru</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- 5. Subview Prestasi -->
+          <!-- 5. Subview Santri & Siswa -->
+          <div id="admin-subview-santri" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Master Data Siswa &amp; Santri</h4>
+                    <p class="text-[9.5px] text-slate-400">Total 276 Siswa &bull; 9 Rombongan Belajar</p>
+                  </div>
+                </div>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">TA 2026/2027</span>
+              </div>
+
+              <!-- Distribusi Kelas -->
+              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
+                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1">
+                  <span class="text-[10px] font-bold text-purple-800">Kelas VII</span>
+                  <p class="text-base font-black text-purple-950">96</p>
+                  <span class="text-[8.5px] text-purple-600">3 Rombel (A, B, C)</span>
+                </div>
+                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1">
+                  <span class="text-[10px] font-bold text-purple-800">Kelas VIII</span>
+                  <p class="text-base font-black text-purple-950">92</p>
+                  <span class="text-[8.5px] text-purple-600">3 Rombel (A, B, C)</span>
+                </div>
+                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1">
+                  <span class="text-[10px] font-bold text-purple-800">Kelas IX</span>
+                  <p class="text-base font-black text-purple-950">88</p>
+                  <span class="text-[8.5px] text-purple-600">3 Rombel (A, B, C)</span>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2 text-xs">
+                <div class="flex items-center justify-between font-bold text-slate-700">
+                  <span>Jalur Program Peminatan:</span>
+                  <span class="text-emerald-700">100% Terdistribusi</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-slate-600">
+                  <span>&bull; Kelas Reguler Berbasis Digital:</span>
+                  <span class="font-bold">186 Siswa</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-slate-600">
+                  <span>&bull; Kelas Unggulan Tahfidz &amp; Kitab Salaf:</span>
+                  <span class="font-bold">90 Santri</span>
+                </div>
+              </div>
+
+              <div class="pt-1 flex gap-2">
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=1774309740" target="_blank" class="flex-1 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Buka Spreadsheet Database Siswa</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Subview Presensi Pendidik -->
+          <div id="admin-subview-presensi" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+                    <i data-lucide="user-check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Presensi Guru &amp; Pegawai</h4>
+                    <p class="text-[9.5px] text-slate-400">Log Kehadiran Digital Harian</p>
+                  </div>
+                </div>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">Presensi Online</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-gradient-to-r from-indigo-900 to-blue-900 text-white space-y-2">
+                <span class="text-[9px] font-bold text-indigo-200 uppercase tracking-wider">STATUS HARI INI</span>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h4 class="text-sm font-bold text-white">Kehadiran Asatidz &amp; Tendik</h4>
+                    <p class="text-[10px] text-indigo-200">9 dari 9 Guru Hadir Tepat Waktu</p>
+                  </div>
+                  <span class="text-lg font-black text-emerald-400">100%</span>
+                </div>
+              </div>
+
+              <button type="button" onclick="if (window.YASUAIdentity && window.YASUAIdentity.recordGuruAttendance) window.YASUAIdentity.recordGuruAttendance();" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+                <i data-lucide="fingerprint" class="w-4 h-4"></i>
+                <span>Rekam Presensi Cepat Mandiri</span>
+              </button>
+
+              <div class="pt-1 flex gap-2">
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=1674611127" target="_blank" class="flex-1 py-2.5 rounded-xl border border-indigo-200 bg-indigo-50/60 hover:bg-indigo-100 text-indigo-900 text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i>
+                  <span>Buka Rekapitulasi Presensi Lengkap</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Subview Tahfidz & Mutaba'ah -->
+          <div id="admin-subview-tahfidz" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Mutaba'ah Tahfidz Al-Qur'an</h4>
+                    <p class="text-[9.5px] text-slate-400">Monitoring Setoran &amp; Uji Ziyadah</p>
+                  </div>
+                </div>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">Program Unggulan</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9.5px] font-bold text-emerald-800">Target Juz 30</span>
+                  <p class="text-base font-black text-emerald-950">100%</p>
+                  <span class="text-[8.5px] text-emerald-600">Seluruh Santri MTs</span>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
+                  <span class="text-[9.5px] font-bold text-amber-800">Kelas Tahfidz Lanjutan</span>
+                  <p class="text-base font-black text-amber-950">3-5 Juz</p>
+                  <span class="text-[8.5px] text-amber-600">Hafalan Mutqin</span>
+                </div>
+              </div>
+
+              <div class="pt-1 flex gap-2">
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit" target="_blank" class="flex-1 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Buka Buku Mutaba'ah Tahfidz Spreadsheet</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Subview Prestasi -->
           <div id="admin-subview-prestasi" class="hidden space-y-4">
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="award" class="w-4 h-4 text-yellow-600"></i>
-                  <span>Kejuaraan & Prestasi Siswa</span>
-                </h4>
-                <button type="button" onclick="switchAppTab('prestasi')" class="text-[10px] font-bold text-yellow-700 hover:underline">Lihat Prestasi App &rarr;</button>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                    <i data-lucide="trophy" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Kejuaraan &amp; Prestasi Santri</h4>
+                    <p class="text-[9.5px] text-slate-400">Rekap Capaian Prestasi Madrasah</p>
+                  </div>
+                </div>
+                <button type="button" onclick="switchAppTab('prestasi')" class="text-[10px] font-bold text-amber-700 hover:underline">Lihat di App &rarr;</button>
               </div>
-              <p class="text-[11px] text-slate-500 leading-relaxed">
-                Rekap kejuaraan akademik, sains, tahfidz, dan olahraga santri madrasah.
-              </p>
+
+              <!-- Daftar Prestasi Terkini -->
+              <div class="space-y-2 pt-1 text-xs">
+                <div class="p-3 rounded-xl border border-amber-200/70 bg-amber-50/50 flex items-start gap-2.5">
+                  <span class="text-amber-600 font-black text-base shrink-0">🥇</span>
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded">SAINS &bull; 2026</span>
+                    <h5 class="font-bold text-slate-900 mt-0.5">Juara 1 KSM Matematika Terintegrasi</h5>
+                    <p class="text-[10px] text-slate-500">Tingkat Kabupaten Demak &bull; Ananda M. Fatih</p>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-black text-base shrink-0">🥈</span>
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded">TAHFIDZ &bull; 2026</span>
+                    <h5 class="font-bold text-slate-900 mt-0.5">Juara 2 MHQ 5 Juz Tingkat Karesidenan</h5>
+                    <p class="text-[10px] text-slate-500">Karesidenan Semarang &bull; Ananda Siti Aisyah</p>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-start gap-2.5">
+                  <span class="text-blue-600 font-black text-base shrink-0">🥇</span>
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-blue-800 bg-blue-100 px-1.5 py-0.5 rounded">OLAHRAGA BELADIRI &bull; 2026</span>
+                    <h5 class="font-bold text-slate-900 mt-0.5">Juara 1 Kejurda Pencak Silat Pagar Nusa</h5>
+                    <p class="text-[10px] text-slate-500">Tingkat Jawa Tengah &bull; Kontingen Santri YASUA</p>
+                  </div>
+                </div>
+              </div>
+
               <div class="pt-1 flex gap-2">
-                <a href="/admin?tab=prestasi" class="flex-1 py-2.5 rounded-xl bg-yellow-600 hover:bg-yellow-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
+                <a href="/admin?tab=prestasi" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
                   <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Buka Manajemen Prestasi Portal</span>
+                  <span>Buka Editor Prestasi Desktop</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- 6. Subview Alumni -->
+          <!-- 9. Subview Alumni -->
           <div id="admin-subview-alumni" class="hidden space-y-4">
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h4 class="font-extrabold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-600"></i>
-                  <span>Jejaring Alumni</span>
-                </h4>
-                <button type="button" onclick="switchAppTab('alumni')" class="text-[10px] font-bold text-purple-700 hover:underline">Lihat Alumni App &rarr;</button>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Jejaring Alumni IKAMAS</h4>
+                    <p class="text-[9.5px] text-slate-400">Tracer Study &bull; 1.250+ Lulusan</p>
+                  </div>
+                </div>
+                <button type="button" onclick="switchAppTab('alumni')" class="text-[10px] font-bold text-purple-700 hover:underline">Lihat di App &rarr;</button>
               </div>
-              <p class="text-[11px] text-slate-500 leading-relaxed">
-                Database pelacakan alumni (*tracer study*), sebaran perguruan tinggi, dan kiprah lulusan.
-              </p>
+
+              <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
+                  <span class="text-[9.5px] font-bold text-purple-800">Total Alumni</span>
+                  <p class="text-base font-black text-purple-950">1.250+</p>
+                  <span class="text-[8.5px] text-purple-600">Angkatan 1985 - 2026</span>
+                </div>
+                <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
+                  <span class="text-[9.5px] font-bold text-blue-800">Lanjut Studi</span>
+                  <p class="text-base font-black text-blue-950">98%</p>
+                  <span class="text-[8.5px] text-blue-600">MA, SMA &amp; Pesantren</span>
+                </div>
+              </div>
+
               <div class="pt-1 flex gap-2">
                 <a href="/admin?tab=alumni" class="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
                   <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Buka Manajemen Alumni Portal</span>
+                  <span>Buka Master Data Alumni Desktop</span>
                 </a>
               </div>
             </div>
@@ -5593,7 +5982,7 @@
       if (container) container.classList.remove('hidden');
 
       // 2. Sembunyikan Semua Subview Lain
-      const allSubviews = ['news', 'banners', 'ticker', 'guru', 'prestasi', 'alumni'];
+      const allSubviews = ['news', 'banners', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'prestasi', 'alumni'];
       allSubviews.forEach(s => {
         const el = document.getElementById('admin-subview-' + s);
         if (el) el.classList.add('hidden');
@@ -5617,7 +6006,10 @@
         ticker: { title: 'Pengumuman Teks Berjalan', icon: 'megaphone', color: 'bg-rose-50 text-rose-600' },
         guru: { title: 'Dewan Guru & Asatidz', icon: 'users', color: 'bg-blue-50 text-blue-600' },
         prestasi: { title: 'Kejuaraan & Prestasi Siswa', icon: 'award', color: 'bg-amber-50 text-amber-600' },
-        alumni: { title: 'Jejaring Alumni Madrasah', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' }
+        alumni: { title: 'Jejaring Alumni Madrasah', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' },
+        santri: { title: 'Master Data Siswa & Santri', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' },
+        presensi: { title: 'Presensi Guru & Pegawai', icon: 'user-check', color: 'bg-indigo-50 text-indigo-600' },
+        tahfidz: { title: "Mutaba'ah Tahfidz Al-Qur'an", icon: 'book-open', color: 'bg-emerald-50 text-emerald-600' }
       };
 
       const currentMeta = meta[moduleName] || { title: 'Portal Kontrol Admin', icon: 'layout-grid', color: 'bg-emerald-50 text-emerald-600' };
@@ -5632,6 +6024,11 @@
 
       if (targetViewName === 'news') {
         loadAdminNewsList();
+      } else if (targetViewName === 'ticker') {
+        const tickerArea = document.getElementById('admTickerText');
+        if (tickerArea && !tickerArea.value) {
+          tickerArea.value = 'Pendaftaran Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan TA 2026/2027 telah dibuka secara daring dan luring. Informasi & pendaftaran: silakan akses menu PPDB.';
+        }
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
