@@ -2442,6 +2442,10 @@
 
             <!-- Baris 2: Tombol Aksi [+ Tulis Berita Baru] dan [🔄] -->
             <div id="admin-subview-actions" class="flex items-center space-x-2 pt-0.5">
+              <button type="button" id="admin-guru-toggle-btn" onclick="toggleAdminGuruForm()" class="hidden flex-1 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                <i data-lucide="user-plus" class="w-3.5 h-3.5" id="admin-guru-toggle-icon"></i>
+                <span id="admin-guru-toggle-text">Tambah Guru Baru</span>
+              </button>
               <button type="button" id="admin-news-toggle-btn" onclick="toggleAdminNewsForm()" class="flex-1 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
                 <i data-lucide="plus" class="w-3.5 h-3.5" id="admin-news-toggle-icon"></i>
                 <span id="admin-news-toggle-text">Tulis Berita Baru</span>
@@ -2894,86 +2898,252 @@
             </div>
           </div>
 
-          <!-- 4. Subview Guru -->
+          <!-- 4. Subview Guru & Tendik -->
           <div id="admin-subview-guru" class="hidden space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
-                    <i data-lucide="users" class="w-4 h-4"></i>
+
+            <!-- 1. CARDS RINGKASAN DATA GURU (SOLID GRADIENT PROFESSIONAL) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- Total Guru -->
+              <div style="background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL PENDIDIK</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricTotalGuru" class="text-xl font-black tracking-tight leading-none text-white">9 Asatidz +</h3>
+                  <p class="text-[10px] text-blue-100 font-medium mt-1">Dewan Guru &amp; Tendik</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Status Pengajar</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">100% Aktif</span>
+                </div>
+              </div>
+
+              <!-- Sertifikasi / SIMPATIKA -->
+              <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">SIMPATIKA KEMENAG</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricVerifGuru" class="text-xl font-black tracking-tight leading-none text-white">Terverifikasi</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">NIP &amp; NUPTK Resmi</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Validasi Data</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">EMIS 4.0</span>
+                </div>
+              </div>
+
+              <!-- Rumpun Mapel -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">RUMPUN KEILMUAN</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricRumpunGuru" class="text-xl font-black tracking-tight leading-none text-white">4 Bidang</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Agama, Bahasa, Sains, Sosial</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Kurikulum</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Merdeka &amp; Salaf</span>
+                </div>
+              </div>
+
+              <!-- Kualifikasi Akademik -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KUALIFIKASI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admMetricAkademikGuru" class="text-xl font-black tracking-tight leading-none text-white">100% S1 / S2</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Lulusan PT Terakreditasi</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Kompetensi</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Profesional</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. FORMULIR TAMBAH / EDIT GURU (COLLAPSIBLE CARD DENGAN UPLOAD FOTO) -->
+            <section id="admin-guru-form-card" class="hidden bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-slate-200/90 space-y-4 animate-in fade-in duration-200">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center space-x-2">
+                  <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
                   </div>
                   <div>
-                    <h4 class="font-extrabold text-xs text-slate-800">Dewan Guru &amp; Asatidz</h4>
-                    <p class="text-[9.5px] text-slate-400">9 Tenaga Pendidik Terdaftar</p>
+                    <h3 id="admin-guru-form-title" class="font-extrabold text-xs md:text-sm text-slate-800">Tambah Guru &amp; Asatidz Baru</h3>
+                    <p class="text-[10px] text-slate-400">Lengkapi identitas pendidik, mapel &amp; foto profil</p>
                   </div>
                 </div>
-                <button type="button" onclick="switchAppTab('guru')" class="text-[10px] font-bold text-blue-700 hover:underline">Lihat Direktori &rarr;</button>
+                <button type="button" onclick="toggleAdminGuruForm(false)" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition active:scale-95 cursor-pointer" title="Tutup">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
               </div>
 
-              <!-- List 9 Guru Asli MTs YASUA -->
-              <div class="space-y-2 pt-1">
-                <div class="p-2.5 rounded-xl border border-blue-100 bg-blue-50/40 flex items-center justify-between">
-                  <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">M</div>
-                    <div class="min-w-0">
-                      <h5 class="text-xs font-bold text-slate-900 truncate">Muthohar, S.Pd.</h5>
-                      <p class="text-[10px] text-slate-500 truncate">Kepala Madrasah &bull; GURU-001</p>
-                    </div>
-                  </div>
-                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+              <form id="formAdminGuru" onsubmit="saveAdminGuru(event)" class="space-y-3.5 text-xs">
+                <input type="hidden" id="admGuruId" value="">
+
+                <!-- Nama Lengkap & Gelar -->
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Nama Lengkap &amp; Gelar Pendidik <span class="text-rose-500">*</span></label>
+                  <input type="text" id="admGuruNama" required placeholder="Contoh: Hj. Thoibah Roudlotul Jannah, S.Ag." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
 
-                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
-                  <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">AR</div>
-                    <div class="min-w-0">
-                      <h5 class="text-xs font-bold text-slate-900 truncate">H. Ahmad Rusydi, S.Pd.I</h5>
-                      <p class="text-[10px] text-slate-500 truncate">Waka Kurikulum &bull; Fiqih</p>
-                    </div>
+                <!-- Jabatan & Tugas Tambahan -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Jabatan / Mapel Utama <span class="text-rose-500">*</span></label>
+                    <input type="text" id="admGuruJabatan" required placeholder="Contoh: Waka Kurikulum / Guru SKI" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                   </div>
-                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Rumpun Bidang Keilmuan <span class="text-rose-500">*</span></label>
+                    <select id="admGuruKategori" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium">
+                      <option value="agama">Pendidikan Agama Islam &amp; Salaf</option>
+                      <option value="bahasa">Bahasa (Arab, Inggris, Indonesia)</option>
+                      <option value="sains">Sains, Matematika &amp; TI</option>
+                      <option value="karakter">Sosial, Karakter &amp; Konseling</option>
+                    </select>
+                  </div>
                 </div>
 
-                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
-                  <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-indigo-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">SN</div>
-                    <div class="min-w-0">
-                      <h5 class="text-xs font-bold text-slate-900 truncate">Siti Nurul Laili, S.Pd.</h5>
-                      <p class="text-[10px] text-slate-500 truncate">Waka Kesiswaan &bull; IPA Terpadu</p>
-                    </div>
+                <!-- Badge Singkat & Pendidikan Terakhir -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Label Badge Singkat</label>
+                    <input type="text" id="admGuruBadge" placeholder="Contoh: Kurikulum &amp; Agama" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                   </div>
-                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Kualifikasi Pendidikan</label>
+                    <input type="text" id="admGuruPendidikan" placeholder="Contoh: Sarjana Agama (S.Ag.)" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                  </div>
                 </div>
 
-                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
-                  <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-amber-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">MS</div>
-                    <div class="min-w-0">
-                      <h5 class="text-xs font-bold text-slate-900 truncate">M. Syaifuddin, S.Kom.</h5>
-                      <p class="text-[10px] text-slate-500 truncate">Pembina IT &bull; Informatika</p>
-                    </div>
+                <!-- NIP / NUPTK & Status -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">NIP / NUPTK / PegID (Opsional)</label>
+                    <input type="text" id="admGuruNip" placeholder="Nomor Induk Pegawai Kemenag" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                   </div>
-                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Status Keaktifan</label>
+                    <select id="admGuruStatus" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium">
+                      <option value="Aktif">Aktif Mengajar (Penuh)</option>
+                      <option value="Tugas Belajar">Tugas Belajar / Studi Lanjut</option>
+                      <option value="Cuti">Cuti Resmi</option>
+                    </select>
+                  </div>
                 </div>
 
-                <div class="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-center justify-between">
-                  <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">FZ</div>
-                    <div class="min-w-0">
-                      <h5 class="text-xs font-bold text-slate-900 truncate">Hj. Fatimatuz Zahro, S.Ag.</h5>
-                      <p class="text-[10px] text-slate-500 truncate">Tahfidz &bull; Al-Qur'an Hadits</p>
+                <!-- Deskripsi Pengajaran / Tugas -->
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Deskripsi Pengajaran &amp; Pembinaan Siswa</label>
+                  <textarea id="admGuruDeskripsi" rows="2" placeholder="Mengampu Sejarah Kebudayaan Islam serta memimpin pengembangan kurikulum terpadu madrasah..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                </div>
+
+                <!-- UPLOAD FOTO & PREVIEW REAL-TIME -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 flex items-center gap-1.5 text-xs">
+                      <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i>
+                      <span>Foto Profil Guru / Monogram</span>
+                    </span>
+                    <span class="text-[9px] text-slate-400">Rasio 1:1 atau 3:4 Rapi</span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5">
+                    <!-- Preview Box -->
+                    <div id="admGuruFotoPreviewBox" class="w-20 h-24 rounded-xl overflow-hidden bg-white border-2 border-dashed border-slate-300 flex flex-col items-center justify-center shrink-0 relative shadow-2xs">
+                      <img id="admGuruFotoImg" src="" alt="Preview Foto" class="w-full h-full object-cover hidden">
+                      <div id="admGuruFotoPlaceholder" class="text-center p-2 text-slate-400">
+                        <i data-lucide="user" class="w-6 h-6 mx-auto mb-1 opacity-60"></i>
+                        <span class="text-[8px] font-bold block leading-tight">Belum Ada Foto</span>
+                      </div>
+                    </div>
+
+                    <!-- Pilihan Upload & Input URL -->
+                    <div class="min-w-0 flex-1 space-y-2">
+                      <div class="flex flex-wrap gap-2">
+                        <label for="admGuruFileInput" class="px-3 py-1.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-[10.5px] inline-flex items-center gap-1.5 transition shadow-xs cursor-pointer active:scale-95">
+                          <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                          <span>Upload dari HP / File</span>
+                        </label>
+                        <input type="file" id="admGuruFileInput" accept="image/*" class="hidden" onchange="handleGuruPhotoUpload(event)">
+                        
+                        <button type="button" onclick="useGuruMonogramDefault()" class="px-2.5 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-medium text-[10.5px] transition cursor-pointer">
+                          Gunakan Inisial
+                        </button>
+                      </div>
+
+                      <div>
+                        <input type="url" id="admGuruFotoUrl" placeholder="Atau tempel URL foto (Google Drive / Web)..." oninput="handleGuruPhotoUrlInput(this.value)" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px] focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                      </div>
                     </div>
                   </div>
-                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">Aktif</span>
                 </div>
+
+                <!-- Tombol Aksi Form -->
+                <div class="pt-2 flex items-center space-x-2">
+                  <button type="submit" id="btnSubmitAdminGuru" class="flex-1 py-2.5 px-4 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                    <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                    <span id="btnSubmitAdminGuruText">Simpan Data Pendidik</span>
+                  </button>
+                  <button type="button" onclick="toggleAdminGuruForm(false)" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition active:scale-95 cursor-pointer">
+                    Batal
+                  </button>
+                </div>
+              </form>
+            </section>
+
+            <!-- 3. FILTER & SEARCH DAFTAR GURU -->
+            <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-blue-600"></i>
+                  <span>Daftar Guru MTs YASUA</span>
+                </h4>
+                <span id="admGuruCountBadge" class="text-[9.5px] font-black px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">9 Guru</span>
               </div>
 
-              <div class="pt-2 flex gap-2">
-                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
-                  <i data-lucide="database" class="w-3.5 h-3.5"></i>
-                  <span>Buka Master Database Guru</span>
-                </a>
+              <!-- Input Pencarian -->
+              <div class="relative">
+                <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                <input type="text" id="admGuruSearchInput" oninput="filterAdminGuruList()" placeholder="Cari nama guru, mapel, atau jabatan..." class="w-full pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
               </div>
+
+              <!-- Category Pills Filter -->
+              <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[10px] font-bold">
+                <button type="button" onclick="setAdminGuruCategoryFilter('all', this)" class="adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-blue-700 text-white shadow-2xs shrink-0 cursor-pointer">Semua</button>
+                <button type="button" onclick="setAdminGuruCategoryFilter('agama', this)" class="adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer">Agama &amp; Salaf</button>
+                <button type="button" onclick="setAdminGuruCategoryFilter('bahasa', this)" class="adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer">Bahasa</button>
+                <button type="button" onclick="setAdminGuruCategoryFilter('sains', this)" class="adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer">Sains &amp; IT</button>
+                <button type="button" onclick="setAdminGuruCategoryFilter('karakter', this)" class="adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer">Sosial &amp; Karakter</button>
+              </div>
+            </div>
+
+            <!-- 4. CONTAINER DAFTAR KARTU GURU INTERAKTIF -->
+            <div id="adminGuruListContainer" class="space-y-2.5">
+              <!-- Rendered via renderAdminGuruUI() -->
+            </div>
+
+            <!-- 5. TAUTAN SPREADSHEET MASTER DATABASE GURU -->
+            <div class="pt-1 flex gap-2">
+              <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-900 border border-slate-200 hover:border-blue-200 text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-2xs">
+                <i data-lucide="database" class="w-3.5 h-3.5 text-blue-600"></i>
+                <span>Buka Master Database Guru Spreadsheet</span>
+              </a>
             </div>
           </div>
 
@@ -5965,7 +6135,505 @@
     // =====================================================================
     let currentAdminNewsData = [];
 
-    function openAdminModule(moduleName) {
+    
+    // =====================================================================
+    // CONTROLLER DEWAN GURU & ASATIDZ (ADMIN SPA ENGINE)
+    // =====================================================================
+    let currentAdminGuruCategory = 'all';
+    let currentAdminGuruSearch = '';
+
+    // Data 9 Guru Asli Default MTs YASUA
+    const DEFAULT_GURU_LIST = [
+      {
+        id: 'GURU-001',
+        nama_lengkap: 'Muthohar, S.Pd.',
+        jabatan: 'Kepala Madrasah',
+        badge_bidang: 'Pimpinan & Manajemen',
+        kategori: 'karakter',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)',
+        nip: '197505102005011003',
+        status: 'Aktif',
+        foto_url: '',
+        deskripsi: 'Memimpin operasional, arah strategis, pembiasaan akhlaqul karimah, dan mutu pendidikan terpadu MTs YASUA.'
+      },
+      {
+        id: 'GURU-002',
+        nama_lengkap: 'Hj. Thoibah Roudlotul Jannah, S.Ag.',
+        jabatan: 'Waka Kurikulum / Guru SKI',
+        badge_bidang: 'Kurikulum & Agama',
+        kategori: 'agama',
+        pendidikan: 'Sarjana Agama (S.Ag.)',
+        nip: '197808152007012014',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/1BAnqGfZKYAIgwGZJ4geLSfMw8FzqrGxN',
+        deskripsi: 'Mengampu Sejarah Kebudayaan Islam (SKI) & Al-Qur\'an Hadits serta memimpin pengembangan kurikulum madrasah.'
+      },
+      {
+        id: 'GURU-003',
+        nama_lengkap: 'Hj. Inna Mawaddah, S.Ag.',
+        jabatan: 'Waka Sarpras / Guru Fiqih',
+        badge_bidang: 'Sarpras & Fiqih',
+        kategori: 'agama',
+        pendidikan: 'Sarjana Agama Islam (S.Ag.)',
+        nip: '198003122008012019',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/1tIdWz-hi7ud8DLzuSgRip8b9INLYWmfD',
+        deskripsi: 'Mengampu Fiqih Ibadah & Muamalah serta membina sarana prasarana penunjang kegiatan belajar madrasah.'
+      },
+      {
+        id: 'GURU-004',
+        nama_lengkap: 'Ahmad Wawahib, S.Pd.',
+        jabatan: 'Waka Humas / Guru Bahasa Arab',
+        badge_bidang: 'Humas & Bahasa',
+        kategori: 'bahasa',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)',
+        nip: '198209212009011011',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/1txOuLq70n63uFFXo5SjDmmmwl5gBJ7VE',
+        deskripsi: 'Mengampu Bahasa Arab & IPS serta membina relasi kemitraan masyarakat dan publikasi madrasah.'
+      },
+      {
+        id: 'GURU-005',
+        nama_lengkap: 'Aidiyah, S.Pd.',
+        jabatan: 'Waka Kesiswaan / Guru Matematika',
+        badge_bidang: 'Kesiswaan & Sains',
+        kategori: 'sains',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)',
+        nip: '198506172010012018',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/1AAKCNISYYJwH-R2fGkfY7LFTwBBaPcrp',
+        deskripsi: 'Mengampu Matematika & Keagamaan serta memimpin pembinaan kedisiplinan dan bakat minat siswa-siswi.'
+      },
+      {
+        id: 'GURU-006',
+        nama_lengkap: 'Tri Susilowati, S.Pd.',
+        jabatan: 'Guru Bahasa Inggris',
+        badge_bidang: 'Bahasa Asing',
+        kategori: 'bahasa',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)',
+        nip: '198711042011012015',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/1ELghDVz8TatUPrzoeVRjHcl1lIoOzyJs',
+        deskripsi: 'Mengembangkan percakapan aktif bahasa Inggris, literasi internasional, dan pembimbingan lomba kebahasaan.'
+      },
+      {
+        id: 'GURU-007',
+        nama_lengkap: 'H. Cholilullah, S.Pd.',
+        jabatan: 'Guru Kitab Salaf & IPS',
+        badge_bidang: 'Kitab & Sosial',
+        kategori: 'karakter',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)',
+        nip: '197904082006041012',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/11aMRtcCeCsgNz0Z7Dei56vuvhoP7vyuV',
+        deskripsi: 'Membina pengajian kitab kuning klasik, wawasan sejarah Islam, kepedulian sosial, dan karakter santri.'
+      },
+      {
+        id: 'GURU-008',
+        nama_lengkap: 'NURUN NISA\', S.Ag.',
+        jabatan: 'Guru Aqidah Akhlak & SKI',
+        badge_bidang: 'Aqidah & Akhlak',
+        kategori: 'agama',
+        pendidikan: 'Sarjana Agama (S.Ag.)',
+        nip: '198302192008012022',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/1HubtowTyx6EnK99cuNdihp_FyUqDz5bi',
+        deskripsi: 'Membimbing pembiasaan akhlaqul karimah harian, keteladanan salafus sholih, dan pembinaan wali kelas.'
+      },
+      {
+        id: 'GURU-009',
+        nama_lengkap: 'Mita Aryani, S.Pd.',
+        jabatan: 'Guru IPA & Matematika',
+        badge_bidang: 'Sains Terpadu',
+        kategori: 'sains',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)',
+        nip: '199008252014022007',
+        status: 'Aktif',
+        foto_url: 'https://lh3.googleusercontent.com/d/11EAVhmm-ePkV45r0EEA_5eSdB0bGmDZ6',
+        deskripsi: 'Mengampu Ilmu Pengetahuan Alam (IPA) eksperimen sains laboratorium dan penguatan numerasi siswa.'
+      }
+    ];
+
+    function getAdminGuruDataset() {
+      try {
+        const saved = localStorage.getItem('mts_admin_teachers');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+      return [...DEFAULT_GURU_LIST];
+    }
+
+    function saveAdminGuruDataset(data) {
+      try {
+        localStorage.setItem('mts_admin_teachers', JSON.stringify(data));
+      } catch (e) {}
+      // Sync dengan array runtime publik appTeachersData jika tersedia
+      if (typeof appTeachersData !== 'undefined') {
+        appTeachersData = data.filter(g => g.id !== 'GURU-001');
+      }
+    }
+
+    function loadAdminGuruList() {
+      const container = document.getElementById('adminGuruListContainer');
+      if (!container) return;
+      container.innerHTML = '<div class="text-center py-6 text-slate-400 text-xs animate-pulse">Memuat daftar dewan guru...</div>';
+      setTimeout(() => {
+        renderAdminGuruUI();
+      }, 100);
+    }
+    window.loadAdminGuruList = loadAdminGuruList;
+
+    function renderAdminGuruUI() {
+      const container = document.getElementById('adminGuruListContainer');
+      if (!container) return;
+
+      const dataset = getAdminGuruDataset();
+      const countBadge = document.getElementById('admGuruCountBadge');
+      const metricTotal = document.getElementById('admMetricTotalGuru');
+
+      if (countBadge) countBadge.textContent = dataset.length + ' Guru';
+      if (metricTotal) metricTotal.textContent = dataset.length + ' Asatidz +';
+
+      let filtered = dataset;
+      if (currentAdminGuruCategory !== 'all') {
+        filtered = filtered.filter(g => (g.kategori || '').toLowerCase() === currentAdminGuruCategory.toLowerCase());
+      }
+      if (currentAdminGuruSearch) {
+        const q = currentAdminGuruSearch.toLowerCase();
+        filtered = filtered.filter(g => 
+          (g.nama_lengkap || '').toLowerCase().includes(q) ||
+          (g.jabatan || '').toLowerCase().includes(q) ||
+          (g.badge_bidang || '').toLowerCase().includes(q) ||
+          (g.nip || '').includes(q)
+        );
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center text-xs text-slate-400 space-y-2 bg-slate-50/60 rounded-2xl border border-slate-100 p-4">
+            <i data-lucide="users" class="w-8 h-8 text-slate-300 mx-auto"></i>
+            <p class="font-medium text-slate-500">Tidak ada guru yang sesuai pencarian/filter.</p>
+            <button type="button" onclick="resetAdminGuruSearch()" class="mt-1 text-[11px] font-bold text-blue-700 hover:underline">Reset Pencarian</button>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(guru => {
+        const initials = (guru.nama_lengkap || 'G').split(' ')
+          .filter(n => !n.includes('.') && n.length > 1)
+          .slice(0, 2)
+          .map(n => n[0])
+          .join('') || (guru.nama_lengkap ? guru.nama_lengkap.substring(0, 2).toUpperCase() : 'GU');
+
+        const hasPhoto = (guru.foto_url && guru.foto_url.trim().length > 5);
+        const avatarHtml = hasPhoto
+          ? `<img src="${guru.foto_url}" alt="${guru.nama_lengkap}" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\\\'font-black text-xs text-white\\\'>${initials}</span>';">`
+          : `<span class="font-black text-xs text-white tracking-wider">${initials}</span>`;
+
+        let badgeBg = 'bg-blue-50 text-blue-800 border-blue-200/70';
+        if (guru.kategori === 'agama') badgeBg = 'bg-emerald-50 text-emerald-800 border-emerald-200/70';
+        else if (guru.kategori === 'bahasa') badgeBg = 'bg-cyan-50 text-cyan-800 border-cyan-200/70';
+        else if (guru.kategori === 'sains') badgeBg = 'bg-amber-50 text-amber-800 border-amber-200/70';
+        else if (guru.kategori === 'karakter') badgeBg = 'bg-purple-50 text-purple-800 border-purple-200/70';
+
+        const isKepala = (guru.id === 'GURU-001' || (guru.jabatan && guru.jabatan.toLowerCase().includes('kepala madrasah')));
+        const kepalaPill = isKepala ? '<span class="px-1.5 py-0.5 rounded bg-amber-400 text-amber-950 font-black text-[7.5px] uppercase tracking-wider">PIMPINAN</span>' : '';
+
+        return `
+          <div class="p-3.5 bg-slate-50/80 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-blue-200 shadow-2xs space-y-2.5 transition">
+            <div class="flex items-start gap-3 min-w-0">
+              <!-- Avatar Kotak Foto -->
+              <div class="w-12 h-14 rounded-xl overflow-hidden shrink-0 bg-gradient-to-br from-blue-700 to-indigo-900 border border-slate-200/80 flex items-center justify-center shadow-xs">
+                ${avatarHtml}
+              </div>
+
+              <!-- Info Guru -->
+              <div class="min-w-0 flex-1 space-y-0.5">
+                <div class="flex items-center flex-wrap gap-1.5">
+                  <span class="text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded border ${badgeBg}">
+                    ${guru.badge_bidang || 'Pendidik'}
+                  </span>
+                  ${kepalaPill}
+                  <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
+                    ${guru.status || 'Aktif'}
+                  </span>
+                </div>
+                <h5 class="text-xs md:text-sm font-bold text-slate-900 truncate leading-snug">${guru.nama_lengkap}</h5>
+                <p class="text-[10px] text-slate-600 font-medium truncate">${guru.jabatan || 'Guru Pengampu'}</p>
+                <p class="text-[9px] text-slate-400 truncate">${guru.pendidikan || 'Sarjana Pendidikan'} &bull; NIP: ${guru.nip || '-'}</p>
+              </div>
+            </div>
+
+            <!-- Tombol Aksi: Edit & Hapus -->
+            <div class="pt-2 border-t border-slate-200/70 flex items-center justify-between text-xs">
+              <span class="text-[9px] font-bold text-slate-400 font-mono">${guru.id}</span>
+              <div class="flex items-center space-x-1.5">
+                <button type="button" onclick="editAdminGuru('${guru.id}')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10.5px] inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                  <i data-lucide="edit-3" class="w-3 h-3"></i>
+                  <span>Edit</span>
+                </button>
+                ${!isKepala ? `
+                <button type="button" onclick="deleteAdminGuru('${guru.id}')" class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-[10.5px] inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
+                  <span>Hapus</span>
+                </button>
+                ` : ''}
+                <button type="button" onclick="switchAppTab('guru')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10.5px] inline-flex items-center gap-1 transition active:scale-95 cursor-pointer" title="Lihat di App Publik">
+                  <i data-lucide="eye" class="w-3 h-3"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderAdminGuruUI = renderAdminGuruUI;
+
+    function toggleAdminGuruForm(show) {
+      const card = document.getElementById('admin-guru-form-card');
+      const toggleBtn = document.getElementById('admin-guru-toggle-btn');
+      const toggleText = document.getElementById('admin-guru-toggle-text');
+      const toggleIcon = document.getElementById('admin-guru-toggle-icon');
+      if (!card) return;
+
+      const isHidden = card.classList.contains('hidden');
+      const shouldShow = (typeof show === 'boolean') ? show : isHidden;
+      card.classList.toggle('hidden', !shouldShow);
+
+      if (toggleBtn) {
+        if (shouldShow) {
+          toggleBtn.className = 'flex-1 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer';
+          if (toggleText) toggleText.textContent = 'Tutup Form Guru';
+          if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'chevron-up');
+        } else {
+          toggleBtn.className = 'flex-1 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer';
+          if (toggleText) toggleText.textContent = 'Tambah Guru Baru';
+          if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'user-plus');
+        }
+      }
+
+      if (shouldShow) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.toggleAdminGuruForm = toggleAdminGuruForm;
+
+    function resetAdminGuruForm() {
+      const form = document.getElementById('formAdminGuru');
+      if (form) form.reset();
+      document.getElementById('admGuruId').value = '';
+      document.getElementById('admin-guru-form-title').textContent = 'Tambah Guru & Asatidz Baru';
+      document.getElementById('btnSubmitAdminGuruText').textContent = 'Simpan Data Pendidik';
+      useGuruMonogramDefault();
+    }
+    window.resetAdminGuruForm = resetAdminGuruForm;
+
+    function editAdminGuru(id) {
+      const dataset = getAdminGuruDataset();
+      const guru = dataset.find(g => g.id === id);
+      if (!guru) return;
+
+      resetAdminGuruForm();
+      document.getElementById('admGuruId').value = guru.id;
+      document.getElementById('admGuruNama').value = guru.nama_lengkap || '';
+      document.getElementById('admGuruJabatan').value = guru.jabatan || '';
+      document.getElementById('admGuruKategori').value = guru.kategori || 'agama';
+      document.getElementById('admGuruBadge').value = guru.badge_bidang || '';
+      document.getElementById('admGuruPendidikan').value = guru.pendidikan || '';
+      document.getElementById('admGuruNip').value = guru.nip || '';
+      document.getElementById('admGuruStatus').value = guru.status || 'Aktif';
+      document.getElementById('admGuruDeskripsi').value = guru.deskripsi || '';
+
+      document.getElementById('admin-guru-form-title').textContent = 'Edit Data: ' + (guru.nama_lengkap || 'Pendidik');
+      document.getElementById('btnSubmitAdminGuruText').textContent = 'Simpan Perubahan';
+
+      if (guru.foto_url && guru.foto_url.trim().length > 5) {
+        handleGuruPhotoUrlInput(guru.foto_url);
+      } else {
+        useGuruMonogramDefault();
+      }
+
+      toggleAdminGuruForm(true);
+    }
+    window.editAdminGuru = editAdminGuru;
+
+    function saveAdminGuru(e) {
+      e.preventDefault();
+      const id = document.getElementById('admGuruId').value.trim();
+      const nama = document.getElementById('admGuruNama').value.trim();
+      const jabatan = document.getElementById('admGuruJabatan').value.trim();
+      const kategori = document.getElementById('admGuruKategori').value;
+      const badge = document.getElementById('admGuruBadge').value.trim() || 'Pendidik';
+      const pendidikan = document.getElementById('admGuruPendidikan').value.trim() || 'Sarjana Pendidikan';
+      const nip = document.getElementById('admGuruNip').value.trim();
+      const status = document.getElementById('admGuruStatus').value;
+      const deskripsi = document.getElementById('admGuruDeskripsi').value.trim();
+      const fotoUrl = document.getElementById('admGuruFotoUrl').value.trim();
+
+      let dataset = getAdminGuruDataset();
+
+      if (id) {
+        // Mode Update
+        const idx = dataset.findIndex(g => g.id === id);
+        if (idx !== -1) {
+          dataset[idx] = {
+            ...dataset[idx],
+            nama_lengkap: nama,
+            jabatan: jabatan,
+            kategori: kategori,
+            badge_bidang: badge,
+            pendidikan: pendidikan,
+            nip: nip,
+            status: status,
+            deskripsi: deskripsi,
+            foto_url: fotoUrl
+          };
+        }
+      } else {
+        // Mode Tambah Baru
+        const nextNum = dataset.length + 1;
+        const newId = 'GURU-' + String(nextNum).padStart(3, '0');
+        dataset.push({
+          id: newId,
+          nama_lengkap: nama,
+          jabatan: jabatan,
+          kategori: kategori,
+          badge_bidang: badge,
+          pendidikan: pendidikan,
+          nip: nip,
+          status: status,
+          deskripsi: deskripsi,
+          foto_url: fotoUrl
+        });
+      }
+
+      saveAdminGuruDataset(dataset);
+      renderAdminGuruUI();
+      toggleAdminGuruForm(false);
+      resetAdminGuruForm();
+
+      if (typeof window.showToast === 'function') {
+        window.showToast(id ? 'Data pendidik berhasil diperbarui!' : 'Pendidik baru berhasil ditambahkan!');
+      }
+
+      // Update tampilan direktori guru publik jika fungsi tersedia
+      if (typeof renderAppTeachers === 'function') {
+        renderAppTeachers();
+      }
+    }
+    window.saveAdminGuru = saveAdminGuru;
+
+    function deleteAdminGuru(id) {
+      const dataset = getAdminGuruDataset();
+      const guru = dataset.find(g => g.id === id);
+      if (!guru) return;
+
+      const confirmed = window.confirm('Apakah Anda yakin ingin menghapus data pendidik: ' + guru.nama_lengkap + '?');
+      if (!confirmed) return;
+
+      const updated = dataset.filter(g => g.id !== id);
+      saveAdminGuruDataset(updated);
+      renderAdminGuruUI();
+
+      if (typeof window.showToast === 'function') {
+        window.showToast('Data pendidik berhasil dihapus.');
+      }
+      if (typeof renderAppTeachers === 'function') {
+        renderAppTeachers();
+      }
+    }
+    window.deleteAdminGuru = deleteAdminGuru;
+
+    // Handler Upload Foto Langsung (FileReader)
+    function handleGuruPhotoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      // Batasi ukuran file max 5MB
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Ukuran file foto maksimal 5 MB!');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Url = e.target.result;
+        document.getElementById('admGuruFotoUrl').value = base64Url;
+        updateGuruFotoPreview(base64Url);
+      };
+      reader.readAsDataURL(file);
+    }
+    window.handleGuruPhotoUpload = handleGuruPhotoUpload;
+
+    function handleGuruPhotoUrlInput(url) {
+      document.getElementById('admGuruFotoUrl').value = url;
+      updateGuruFotoPreview(url);
+    }
+    window.handleGuruPhotoUrlInput = handleGuruPhotoUrlInput;
+
+    function updateGuruFotoPreview(src) {
+      const img = document.getElementById('admGuruFotoImg');
+      const placeholder = document.getElementById('admGuruFotoPlaceholder');
+      if (src && src.trim().length > 5) {
+        if (img) {
+          img.src = src;
+          img.classList.remove('hidden');
+        }
+        if (placeholder) placeholder.classList.add('hidden');
+      } else {
+        useGuruMonogramDefault();
+      }
+    }
+
+    function useGuruMonogramDefault() {
+      const img = document.getElementById('admGuruFotoImg');
+      const placeholder = document.getElementById('admGuruFotoPlaceholder');
+      const input = document.getElementById('admGuruFotoUrl');
+      if (input) input.value = '';
+      if (img) {
+        img.src = '';
+        img.classList.add('hidden');
+      }
+      if (placeholder) placeholder.classList.remove('hidden');
+    }
+    window.useGuruMonogramDefault = useGuruMonogramDefault;
+
+    function filterAdminGuruList() {
+      const searchInput = document.getElementById('admGuruSearchInput');
+      currentAdminGuruSearch = searchInput ? searchInput.value.trim() : '';
+      renderAdminGuruUI();
+    }
+    window.filterAdminGuruList = filterAdminGuruList;
+
+    function resetAdminGuruSearch() {
+      const searchInput = document.getElementById('admGuruSearchInput');
+      if (searchInput) searchInput.value = '';
+      currentAdminGuruSearch = '';
+      currentAdminGuruCategory = 'all';
+      renderAdminGuruUI();
+    }
+    window.resetAdminGuruSearch = resetAdminGuruSearch;
+
+    function setAdminGuruCategoryFilter(cat, btn) {
+      currentAdminGuruCategory = cat;
+      const allBtns = document.querySelectorAll('.adm-guru-filter-btn');
+      allBtns.forEach(b => {
+        b.className = 'adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 shrink-0 cursor-pointer';
+      });
+      if (btn) {
+        btn.className = 'adm-guru-filter-btn px-2.5 py-1 rounded-lg bg-blue-700 text-white shadow-2xs shrink-0 cursor-pointer';
+      }
+      renderAdminGuruUI();
+    }
+    window.setAdminGuruCategoryFilter = setAdminGuruCategoryFilter;
+function openAdminModule(moduleName) {
       const header = document.getElementById('app-main-header');
       const dock = document.getElementById('mobileBottomDock');
       const banner = document.getElementById('admin-profile-banner');
@@ -6022,8 +6690,15 @@
         newsToggleBtn.style.display = (targetViewName === 'news') ? 'flex' : 'none';
       }
 
+      const guruToggleBtn = document.getElementById('admin-guru-toggle-btn');
+      if (guruToggleBtn) {
+        guruToggleBtn.style.display = (targetViewName === 'guru') ? 'flex' : 'none';
+      }
+      
       if (targetViewName === 'news') {
         loadAdminNewsList();
+      } else if (targetViewName === 'guru') {
+        loadAdminGuruList();
       } else if (targetViewName === 'ticker') {
         const tickerArea = document.getElementById('admTickerText');
         if (tickerArea && !tickerArea.value) {
