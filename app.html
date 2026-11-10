@@ -893,23 +893,109 @@
       </div>
 
       <!-- Hero Callout PPDB -->
-      <div class="bg-gradient-to-br from-brand-primary to-emerald-800 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-500/50 space-y-2">
-        <div class="flex items-center gap-2 text-amber-300 text-xs font-black">
-          <i data-lucide="award" class="w-4 h-4"></i>
-          <span>Pendaftaran Santri Baru Dibuka!</span>
+      <div class="bg-gradient-to-br from-brand-primary to-emerald-800 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-500/50 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-amber-300 text-xs font-black">
+            <i data-lucide="award" class="w-4 h-4"></i>
+            <span>Pendaftaran Santri Baru Dibuka!</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-200 text-[9.5px] font-bold border border-emerald-600/40">
+            TA 2026/2027
+          </span>
         </div>
         <p class="text-[11px] text-emerald-100 leading-relaxed">
-          Raih beasiswa bebas biaya pendaftaran dan SPP bagi santri berprestasi akademik, kejuaraan olahraga/seni, dan penghafal Al-Qur'an (Tahfidz).
+          Raih beasiswa bebas biaya pendaftaran dan beasiswa SPP bagi santri berprestasi akademik, kejuaraan olahraga/seni, dan penghafal Al-Qur'an (Tahfidz).
         </p>
-        <div class="pt-1 flex gap-2">
-          <a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Panitia%20PPDB%20MTs%20YASUA%20Pilangwetan%2C%20saya%20ingin%20mendaftar%20santri%20baru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs text-center flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all">
-            <i data-lucide="send" class="w-3.5 h-3.5"></i>
-            <span>Daftar via WA</span>
-          </a>
-          <button onclick="openBrochureModal()" class="py-2 px-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all">
-            <i data-lucide="printer" class="w-3.5 h-3.5 text-amber-300"></i>
+        <div class="pt-1 grid grid-cols-3 gap-1.5">
+          <button onclick="openPpdbRegistrationModal()" type="button" class="py-2 px-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[11px] text-center flex items-center justify-center gap-1 shadow-sm active:scale-98 transition-all cursor-pointer">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            <span>Form Online</span>
+          </button>
+          <button onclick="openPpdbStatusModal()" type="button" class="py-2 px-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-[11px] text-center flex items-center justify-center gap-1 shadow-xs active:scale-98 transition-all cursor-pointer">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-amber-300"></i>
+            <span>Cek Status</span>
+          </button>
+          <button onclick="openBrochureModal()" type="button" class="py-2 px-1.5 rounded-xl bg-emerald-700/80 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 cursor-pointer active:scale-98 transition-all">
+            <i data-lucide="share-2" class="w-3.5 h-3.5 text-amber-300"></i>
             <span>Brosur</span>
           </button>
+        </div>
+      </div>
+
+      <!-- Card Banner Formulir Pendaftaran Mandiri Online -->
+      <div class="bg-gradient-to-br from-amber-500/10 via-emerald-50/50 to-teal-50/40 p-4 rounded-2xl border-2 border-emerald-600/40 shadow-xs space-y-3">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-sm shadow-emerald-950/20">
+            <i data-lucide="user-plus" class="w-5 h-5 text-amber-300"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider">Online &amp; Mandiri</span>
+              <span class="text-[10px] text-emerald-800 font-semibold">Tersimpan ke Database</span>
+            </div>
+            <h3 class="text-xs font-black text-slate-900 mt-1 leading-snug">Formulir Pendaftaran Online Mandiri</h3>
+            <p class="text-[10.5px] text-slate-600 mt-0.5 leading-relaxed">
+              Daftarkan putra-putri Anda secara mandiri dalam hitungan menit. Bukti pendaftaran resmi dan nomor registrasi langsung diterbitkan otomatis.
+            </p>
+          </div>
+        </div>
+
+        <div class="pt-1 flex flex-col sm:flex-row gap-2">
+          <button onclick="openPpdbRegistrationModal()" type="button" class="w-full py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer">
+            <i data-lucide="clipboard-pen" class="w-4 h-4 text-amber-400"></i>
+            <span>Isi Formulir Pendaftaran Santri Baru</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Jalur Pendaftaran & Beasiswa -->
+      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2.5">
+        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span>Jalur Pendaftaran &amp; Beasiswa</span>
+        </h4>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <!-- Jalur 1 -->
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+            <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-bold text-xs">01</div>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-800 text-[11px] block">Jalur Prestasi Tahfidz Qur'an</span>
+              <p class="text-[10px] text-slate-500 mt-0.5">Bebas biaya pendaftaran dan beasiswa SPP bagi hafidz/hafidzah minimal 1 juz.</p>
+            </div>
+          </div>
+          <!-- Jalur 2 -->
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+            <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-bold text-xs">02</div>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-800 text-[11px] block">Jalur Prestasi Akademik</span>
+              <p class="text-[10px] text-slate-500 mt-0.5">Peringkat 1-3 di MI/SD asal atau juara lomba KSM/OSN tingkat kecamatan/kabupaten.</p>
+            </div>
+          </div>
+          <!-- Jalur 3 -->
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+            <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 font-bold text-xs">03</div>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-800 text-[11px] block">Jalur Minat Bakat (Olahraga &amp; Seni)</span>
+              <p class="text-[10px] text-slate-500 mt-0.5">Juara POPDA, bulutangkis, futsal, catur, rebana/hadroh, kaligrafi, pidato.</p>
+            </div>
+          </div>
+          <!-- Jalur 4 -->
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+            <div class="w-7 h-7 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center shrink-0 font-bold text-xs">04</div>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-800 text-[11px] block">Jalur Afirmasi / KIP</span>
+              <p class="text-[10px] text-slate-500 mt-0.5">Bantuan pendidikan penuh bagi santri yatim, piatu, atau pemegang KIP/PKH.</p>
+            </div>
+          </div>
+          <!-- Jalur 5 -->
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2 sm:col-span-2">
+            <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-800 flex items-center justify-center shrink-0 font-bold text-xs">05</div>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-800 text-[11px] block">Jalur Reguler Umum</span>
+              <p class="text-[10px] text-slate-500 mt-0.5">Terbuka untuk seluruh lulusan SD/MI negeri maupun swasta tanpa tes seleksi yang rumit.</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -983,6 +1069,24 @@
             <span class="font-semibold text-slate-700">Pas Foto 3x4 (3 lembar)</span>
           </div>
         </div>
+      </div>
+
+      <!-- Card Cek Status Pendaftaran Mandiri -->
+      <div class="bg-gradient-to-r from-emerald-900 to-teal-950 text-white p-3.5 rounded-2xl border border-emerald-700/60 shadow-xs space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="search-check" class="w-4 h-4 text-amber-300"></i>
+            <h4 class="text-xs font-black text-white">Sudah Mendaftar? Lacak Status</h4>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black">Live</span>
+        </div>
+        <p class="text-[10.5px] text-emerald-100 leading-relaxed">
+          Ketahui hasil verifikasi berkas, kelulusan, dan pengumuman seleksi santri baru dengan memasukkan nomor pendaftaran atau nomor WhatsApp.
+        </p>
+        <button onclick="openPpdbStatusModal()" type="button" class="w-full py-2 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-white/10">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span>Cek Status Pendaftaran Anda</span>
+        </button>
       </div>
 
       <!-- Kontak Sekretariat PPDB -->
@@ -2462,6 +2566,291 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL FORMULIR PPDB ONLINE MANDIRI ==================== -->
+    <div id="modalPpdbRegistration" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-2 sm:p-4 transition-opacity">
+      <div class="bg-white rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col shadow-2xl border border-emerald-200 relative animate-in fade-in zoom-in-95 text-slate-800 overflow-hidden">
+        
+        <!-- Modal Header -->
+        <div class="p-4 bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white flex items-center justify-between border-b border-emerald-800/80 shrink-0">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shadow-xs">
+              <i data-lucide="clipboard-pen" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-xs sm:text-sm text-white leading-tight">Formulir Pendaftaran Santri Baru</h3>
+              <p class="text-[10px] text-emerald-200 mt-0.5">PPDB MTs YASUA Pilangwetan • TA 2026/2027</p>
+            </div>
+          </div>
+          <button onclick="closePpdbRegistrationModal()" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-colors" title="Tutup Formulir">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body (Scrollable) -->
+        <div class="p-4 overflow-y-auto space-y-4 text-left">
+          
+          <!-- STEP 1: FORM PENGISIAN -->
+          <div id="ppdbFormView">
+            <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200/80 text-[11px] text-emerald-900 leading-relaxed mb-3">
+              Silakan isi data calon santri baru dengan benar. Data akan otomatis masuk ke database pendaftaran madrasah dan Anda akan mendapatkan nomor registrasi resmi.
+            </div>
+
+            <form id="ppdbRegistrationForm" onsubmit="handlePpdbSubmit(event)" class="space-y-3.5">
+              
+              <!-- SECTION A: JALUR & PROGRAM -->
+              <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
+                  <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  <span>1. Pilihan Jalur &amp; Program</span>
+                </span>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Jalur Pendaftaran <span class="text-rose-500">*</span></label>
+                    <select id="ppdbJalur" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option value="Reguler">Jalur Reguler (Umum)</option>
+                      <option value="Prestasi Tahfidz">Jalur Prestasi Tahfidz Al-Qur'an (Beasiswa)</option>
+                      <option value="Prestasi Akademik">Jalur Prestasi Akademik (Peringkat / Juara KSM)</option>
+                      <option value="Prestasi Minat Bakat">Jalur Minat Bakat (Olahraga / Seni / Rebana)</option>
+                      <option value="Afirmasi">Jalur Afirmasi / KIP / Yatim Piatu</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Program Pilihan <span class="text-rose-500">*</span></label>
+                    <select id="ppdbProgram" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option value="Tahfidzul Qur'an & Kitab Salaf">Tahfidzul Qur'an &amp; Kitab Salaf (Unggulan)</option>
+                      <option value="Literasi Digital CBT">Literasi Digital CBT &amp; IT Madrasah</option>
+                      <option value="Literasi Bahasa">Literasi Bahasa (Bilingual Arab &amp; Inggris)</option>
+                      <option value="Reguler">Reguler Standar Nasional</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SECTION B: DATA CALON SANTRI -->
+              <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
+                  <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                  <span>2. Identitas Calon Santri</span>
+                </span>
+
+                <div>
+                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Lengkap Siswa <span class="text-rose-500">*</span></label>
+                  <input type="text" id="ppdbNama" required placeholder="Contoh: MUHAMMAD ALFATIH" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500 uppercase">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Jenis Kelamin <span class="text-rose-500">*</span></label>
+                    <select id="ppdbGender" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option value="Laki-laki (Putra)">Laki-laki (Putra)</option>
+                      <option value="Perempuan (Putri)">Perempuan (Putri)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1 flex items-center justify-between">
+                      <span>NISN</span>
+                      <span class="text-[9px] text-slate-400 font-normal">10 Digit (Boleh Kosong)</span>
+                    </label>
+                    <input type="text" id="ppdbNisn" maxlength="12" placeholder="Nomor Induk Siswa Nasional" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Tempat Lahir <span class="text-rose-500">*</span></label>
+                    <input type="text" id="ppdbTempatLahir" required placeholder="Contoh: Demak" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Tanggal Lahir <span class="text-rose-500">*</span></label>
+                    <input type="date" id="ppdbTanggalLahir" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Asal SD / MI <span class="text-rose-500">*</span></label>
+                  <input type="text" id="ppdbSekolahAsal" required placeholder="Contoh: MI Yasua Pilangwetan / SD Negeri 1 Pilangwetan" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+              </div>
+
+              <!-- SECTION C: DATA WALI & ALAMAT -->
+              <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
+                  <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                  <span>3. Kontak Orang Tua / Wali</span>
+                </span>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Orang Tua / Wali <span class="text-rose-500">*</span></label>
+                    <input type="text" id="ppdbNamaWali" required placeholder="Nama Ayah / Ibu / Wali" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">No. WhatsApp Aktif <span class="text-rose-500">*</span></label>
+                    <input type="tel" id="ppdbNoWa" required placeholder="Contoh: 081234567890" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Alamat Tinggal (Desa &amp; Kecamatan) <span class="text-rose-500">*</span></label>
+                  <input type="text" id="ppdbAlamatDesa" required placeholder="Contoh: Desa Pilangwetan RT 02 / RW 01, Kec. Kebonagung" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <div>
+                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1 flex items-center justify-between">
+                    <span>Catatan Tambahan (Opsional)</span>
+                    <span class="text-[9px] text-slate-400 font-normal">Misal: info beasiswa / prestasi</span>
+                  </label>
+                  <input type="text" id="ppdbCatatan" placeholder="Prestasi yang pernah diraih, dsb." class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+              </div>
+
+              <!-- Alert Status & Submit Button -->
+              <div id="ppdbSubmitError" class="hidden p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold"></div>
+
+              <div class="pt-1 flex items-center justify-end gap-2">
+                <button onclick="closePpdbRegistrationModal()" type="button" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
+                  Batal
+                </button>
+                <button type="submit" id="btnSubmitPpdb" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer">
+                  <i data-lucide="send" class="w-3.5 h-3.5 text-amber-300"></i>
+                  <span>Kirim Pendaftaran Santri Baru</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- STEP 2: TANDA TERIMA PENDAFTARAN DIGITAL (RECEIPT VIEW) -->
+          <div id="ppdbReceiptView" class="hidden space-y-4 py-2">
+            <div class="text-center space-y-1">
+              <div class="w-14 h-14 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2 shadow-inner">
+                <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-600"></i>
+              </div>
+              <h4 class="text-sm font-black text-slate-900">Alhamdulillah! Pendaftaran Berhasil Dikirim</h4>
+              <p class="text-xs text-slate-500">Data Anda telah resmi tersimpan di database seleksi PPDB MTs YASUA.</p>
+            </div>
+
+            <!-- Kartu Bukti Digital -->
+            <div id="ppdbReceiptCard" class="p-4 bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-900 text-white rounded-2xl border-2 border-amber-400/80 shadow-lg space-y-3 relative overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-amber-400/10 rounded-full blur-xl pointer-events-none"></div>
+
+              <div class="flex items-center justify-between border-b border-emerald-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs">
+                    MTs
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-black tracking-wide">TANDA BUKTI PENDAFTARAN</h5>
+                    <p class="text-[9.5px] text-emerald-300">PPDB TA 2026/2027</p>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-700/80 text-emerald-100 text-[9px] font-bold" id="rcptStatus">
+                  Menunggu Verifikasi
+                </span>
+              </div>
+
+              <!-- Nomor Registrasi Prominent -->
+              <div class="bg-black/30 p-2.5 rounded-xl border border-amber-400/40 text-center space-y-0.5">
+                <span class="text-[9.5px] text-amber-300 uppercase tracking-widest font-bold">Nomor Registrasi Resmi</span>
+                <div class="flex items-center justify-center gap-2">
+                  <span id="rcptRegId" class="text-lg font-black text-white tracking-wider font-mono">PPDB-2026-000</span>
+                  <button type="button" onclick="copyPpdbRegId()" class="p-1 rounded-md bg-white/10 hover:bg-white/20 text-amber-300 transition-colors" title="Salin Nomor Registrasi">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Rincian Data Siswa -->
+              <div class="grid grid-cols-2 gap-2 text-[10.5px] pt-1">
+                <div>
+                  <span class="text-slate-400 block text-[9.5px]">Nama Calon Siswa:</span>
+                  <span id="rcptNama" class="font-bold text-white">NAMA LENGKAP</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[9.5px]">Asal Sekolah / MI:</span>
+                  <span id="rcptSekolah" class="font-semibold text-emerald-200">MI YASUA</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[9.5px]">Jalur Pendaftaran:</span>
+                  <span id="rcptJalur" class="font-semibold text-amber-300">Reguler</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[9.5px]">Program Pilihan:</span>
+                  <span id="rcptProgram" class="font-semibold text-white">Tahfidz &amp; Kitab Salaf</span>
+                </div>
+                <div class="col-span-2">
+                  <span class="text-slate-400 block text-[9.5px]">Waktu Pendaftaran:</span>
+                  <span id="rcptTime" class="text-slate-300 text-[10px] font-mono">2026-11-10 12:00:00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons Pasca Pendaftaran -->
+            <div class="space-y-2 pt-1">
+              <button type="button" onclick="openPpdbWhatsAppConfirmation()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer">
+                <i data-lucide="message-circle" class="w-4 h-4 text-amber-300"></i>
+                <span>Konfirmasi Bukti ke WA Panitia PPDB</span>
+              </button>
+
+              <div class="flex gap-2">
+                <button type="button" onclick="printPpdbReceipt()" class="flex-1 py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+                  <i data-lucide="printer" class="w-3.5 h-3.5 text-slate-600"></i>
+                  <span>Cetak / Simpan</span>
+                </button>
+                <button type="button" onclick="closePpdbRegistrationModal()" class="flex-1 py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+                  <span>Selesai</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL CEK STATUS PPDB ==================== -->
+    <div id="modalPpdbStatus" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
+      <div class="bg-white rounded-3xl max-w-md w-full p-4 sm:p-5 shadow-2xl border border-emerald-200 flex flex-col relative animate-in fade-in zoom-in-95 space-y-3.5 text-slate-800">
+        
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center border border-emerald-200">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-tight">Lacak Status Pendaftaran PPDB</h3>
+              <p class="text-[10px] text-emerald-700">MTs YASUA Pilangwetan • TA 2026/2027</p>
+            </div>
+          </div>
+          <button onclick="closePpdbStatusModal()" type="button" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Form Pencarian -->
+        <form onsubmit="checkPpdbStatus(event)" class="space-y-3">
+          <div>
+            <label class="block text-[10.5px] font-bold text-slate-700 mb-1">
+              Nomor Registrasi atau Nomor WhatsApp
+            </label>
+            <div class="flex gap-1.5">
+              <input type="text" id="inputPpdbQuery" required placeholder="Contoh: PPDB-2026-001 atau 0812..." class="flex-1 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 uppercase">
+              <button type="submit" id="btnCheckPpdb" class="py-2 px-3 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-bold text-xs flex items-center gap-1 shadow-xs transition-colors cursor-pointer">
+                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                <span>Cari</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Hasil Pencarian Status -->
+        <div id="ppdbStatusResult" class="hidden space-y-2.5"></div>
+
       </div>
     </div>
 
@@ -4943,6 +5332,287 @@
       }
     }
     window.submitAdminTicker = submitAdminTicker;
+
+    // =====================================================================
+    // PPDB ONLINE CONTROLLER & RECEIPT GENERATOR
+    // =====================================================================
+    let lastRegisteredPpdbData = null;
+
+    function openPpdbRegistrationModal() {
+      const modal = document.getElementById('modalPpdbRegistration');
+      const formView = document.getElementById('ppdbFormView');
+      const receiptView = document.getElementById('ppdbReceiptView');
+      const errorDiv = document.getElementById('ppdbSubmitError');
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        if (formView) formView.classList.remove('hidden');
+        if (receiptView) receiptView.classList.add('hidden');
+        if (errorDiv) errorDiv.classList.add('hidden');
+        document.body.style.overflow = 'hidden';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.openPpdbRegistrationModal = openPpdbRegistrationModal;
+
+    function closePpdbRegistrationModal() {
+      const modal = document.getElementById('modalPpdbRegistration');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    window.closePpdbRegistrationModal = closePpdbRegistrationModal;
+
+    async function handlePpdbSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitPpdb');
+      const errorDiv = document.getElementById('ppdbSubmitError');
+      if (errorDiv) errorDiv.classList.add('hidden');
+
+      const nama = document.getElementById('ppdbNama').value.trim();
+      const jalur = document.getElementById('ppdbJalur').value;
+      const program = document.getElementById('ppdbProgram').value;
+      const gender = document.getElementById('ppdbGender').value;
+      const nisn = document.getElementById('ppdbNisn').value.trim();
+      const tempatLahir = document.getElementById('ppdbTempatLahir').value.trim();
+      const tanggalLahir = document.getElementById('ppdbTanggalLahir').value;
+      const sekolahAsal = document.getElementById('ppdbSekolahAsal').value.trim();
+      const namaWali = document.getElementById('ppdbNamaWali').value.trim();
+      const noWa = document.getElementById('ppdbNoWa').value.trim();
+      const alamatDesa = document.getElementById('ppdbAlamatDesa').value.trim();
+      const catatan = document.getElementById('ppdbCatatan').value.trim();
+
+      if (!nama || !sekolahAsal || !namaWali || !noWa) {
+        if (errorDiv) {
+          errorDiv.textContent = 'Mohon lengkapi seluruh kolom yang berbintang merah (*)';
+          errorDiv.classList.remove('hidden');
+        }
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="inline-block animate-spin mr-1">⏳</span><span>Mengirim data...</span>';
+
+      const payload = {
+        action: 'submitPpdb',
+        data: {
+          nama_lengkap: nama,
+          jalur: jalur,
+          program_pilihan: program,
+          gender: gender,
+          jenis_kelamin: gender,
+          nisn: nisn,
+          tempat_lahir: tempatLahir,
+          tanggal_lahir: tanggalLahir,
+          sekolah_asal: sekolahAsal,
+          nama_wali: namaWali,
+          no_whatsapp: noWa,
+          alamat_desa: alamatDesa,
+          catatan: catatan
+        }
+      };
+
+      try {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        const resJson = await res.json();
+
+        if (resJson && resJson.status === 'success' && resJson.data) {
+          lastRegisteredPpdbData = {
+            id: resJson.data.id,
+            nama_lengkap: resJson.data.nama_lengkap || nama.toUpperCase(),
+            jalur: resJson.data.jalur || jalur,
+            program_pilihan: resJson.data.program_pilihan || program,
+            sekolah_asal: sekolahAsal,
+            no_whatsapp: noWa,
+            created_at: resJson.data.created_at || new Date().toLocaleString('id-ID'),
+            status_pendaftaran: resJson.data.status_pendaftaran || 'Menunggu Verifikasi'
+          };
+
+          // Tampilkan Tanda Terima Digital
+          document.getElementById('rcptRegId').textContent = lastRegisteredPpdbData.id;
+          document.getElementById('rcptNama').textContent = lastRegisteredPpdbData.nama_lengkap;
+          document.getElementById('rcptSekolah').textContent = lastRegisteredPpdbData.sekolah_asal;
+          document.getElementById('rcptJalur').textContent = lastRegisteredPpdbData.jalur;
+          document.getElementById('rcptProgram').textContent = lastRegisteredPpdbData.program_pilihan;
+          document.getElementById('rcptTime').textContent = lastRegisteredPpdbData.created_at;
+          document.getElementById('rcptStatus').textContent = lastRegisteredPpdbData.status_pendaftaran;
+
+          document.getElementById('ppdbFormView').classList.add('hidden');
+          document.getElementById('ppdbReceiptView').classList.remove('hidden');
+
+          if (window.showToast) window.showToast('Pendaftaran Berhasil! Nomor: ' + lastRegisteredPpdbData.id);
+          if (window.lucide) lucide.createIcons();
+        } else {
+          throw new Error((resJson && resJson.message) || 'Respon server tidak valid');
+        }
+      } catch (err) {
+        console.error('Error PPDB submit:', err);
+        // Fallback jika terjadi kendala jaringan
+        if (errorDiv) {
+          errorDiv.innerHTML = 'Terjadi kendala koneksi ke server database. Anda dapat mencoba lagi atau <a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Panitia%20PPDB%20MTs%20YASUA%2C%20saya%20ingin%20mendaftar%20calon%20santri%20baru%20atas%20nama%20' + encodeURIComponent(nama) + '" target="_blank" class="underline font-bold text-emerald-800">Daftar Langsung via WA Panitia di sini</a>.';
+          errorDiv.classList.remove('hidden');
+        }
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="send" class="w-3.5 h-3.5 text-amber-300"></i><span>Kirim Pendaftaran Santri Baru</span>';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.handlePpdbSubmit = handlePpdbSubmit;
+
+    function copyPpdbRegId() {
+      const regId = document.getElementById('rcptRegId').textContent;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(regId).then(() => {
+          if (window.showToast) window.showToast('Nomor Registrasi ' + regId + ' berhasil disalin!');
+        });
+      } else {
+        alert('Nomor Registrasi: ' + regId);
+      }
+    }
+    window.copyPpdbRegId = copyPpdbRegId;
+
+    function openPpdbWhatsAppConfirmation() {
+      if (!lastRegisteredPpdbData) return;
+      const text = 'Assalamu%27alaikum%20Panitia%20PPDB%20MTs%20YASUA%20Pilangwetan%2C%20saya%20telah%20mendaftar%20secara%20online%3A%0A%0A' +
+        '*Nomor%20Registrasi%3A*%20' + encodeURIComponent(lastRegisteredPpdbData.id) + '%0A' +
+        '*Nama%20Calon%20Santri%3A*%20' + encodeURIComponent(lastRegisteredPpdbData.nama_lengkap) + '%0A' +
+        '*Asal%20Sekolah%3A*%20' + encodeURIComponent(lastRegisteredPpdbData.sekolah_asal) + '%0A' +
+        '*Jalur%20Pendaftaran%3A*%20' + encodeURIComponent(lastRegisteredPpdbData.jalur) + '%0A' +
+        '*Program%20Pilihan%3A*%20' + encodeURIComponent(lastRegisteredPpdbData.program_pilihan) + '%0A%0A' +
+        'Mohon%20konfirmasi%20dan%20informasi%20langkah%20selanjutnya.%20Terima%20kasih.';
+      window.open('https://wa.me/6285649881966?text=' + text, '_blank');
+    }
+    window.openPpdbWhatsAppConfirmation = openPpdbWhatsAppConfirmation;
+
+    function printPpdbReceipt() {
+      const card = document.getElementById('ppdbReceiptCard');
+      if (!card) return;
+      const printWin = window.open('', '_blank');
+      printWin.document.write('<!DOCTYPE html><html><head><title>Bukti Pendaftaran PPDB - MTs YASUA</title><style>body{font-family:sans-serif;padding:30px;color:#111} .box{border:2px solid #047857;padding:25px;border-radius:12px;max-width:550px;margin:auto} h2{color:#047857;margin-top:0} table{width:100%;border-collapse:collapse;margin-top:15px} td{padding:6px 0;font-size:14px} td.label{color:#666;width:40%} .reg{font-size:22px;font-weight:bold;color:#b45309;padding:10px 0} .footer{margin-top:25px;font-size:12px;color:#666;border-top:1px dashed #ccc;padding-top:10px}</style></head><body>');
+      printWin.document.write('<div class="box">');
+      printWin.document.write('<h2>MTs YASUA PILANGWETAN</h2>');
+      printWin.document.write('<p style="margin:-10px 0 15px;font-size:13px;color:#444">Tanda Bukti Pendaftaran Santri Baru (PPDB Online TA 2026/2027)</p>');
+      printWin.document.write('<div class="reg">' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.id : 'PPDB-2026-REG') + '</div>');
+      printWin.document.write('<table>');
+      printWin.document.write('<tr><td class="label">Nama Calon Siswa</td><td>: <strong>' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.nama_lengkap : '-') + '</strong></td></tr>');
+      printWin.document.write('<tr><td class="label">Asal Sekolah</td><td>: ' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.sekolah_asal : '-') + '</td></tr>');
+      printWin.document.write('<tr><td class="label">Jalur Pendaftaran</td><td>: ' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.jalur : '-') + '</td></tr>');
+      printWin.document.write('<tr><td class="label">Program Pilihan</td><td>: ' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.program_pilihan : '-') + '</td></tr>');
+      printWin.document.write('<tr><td class="label">Status Saat Ini</td><td>: <strong>' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.status_pendaftaran : 'Menunggu Verifikasi') + '</strong></td></tr>');
+      printWin.document.write('<tr><td class="label">Waktu Pendaftaran</td><td>: ' + (lastRegisteredPpdbData ? lastRegisteredPpdbData.created_at : '-') + '</td></tr>');
+      printWin.document.write('</table>');
+      printWin.document.write('<div class="footer"><p>Simpan tanda bukti ini untuk ditunjukkan kepada Panitia PPDB MTs YASUA saat penyerahan berkas fisik atau observasi minat bakat.</p><p>Sekretariat: Gedung MTs YASUA Pilangwetan, Kebonagung, Demak • WA: 0856-4988-1966</p></div>');
+      printWin.document.write('</div>');
+      printWin.document.write('<script>window.onload=function(){window.print();}</scr' + 'ipt>');
+      printWin.document.write('</body></html>');
+      printWin.document.close();
+    }
+    window.printPpdbReceipt = printPpdbReceipt;
+
+    // --- Cek Status PPDB Controller ---
+    function openPpdbStatusModal() {
+      const modal = document.getElementById('modalPpdbStatus');
+      const resDiv = document.getElementById('ppdbStatusResult');
+      if (modal) {
+        modal.classList.remove('hidden');
+        if (resDiv) {
+          resDiv.classList.add('hidden');
+          resDiv.innerHTML = '';
+        }
+        document.body.style.overflow = 'hidden';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.openPpdbStatusModal = openPpdbStatusModal;
+
+    function closePpdbStatusModal() {
+      const modal = document.getElementById('modalPpdbStatus');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    window.closePpdbStatusModal = closePpdbStatusModal;
+
+    async function checkPpdbStatus(e) {
+      e.preventDefault();
+      const q = document.getElementById('inputPpdbQuery').value.trim().toUpperCase();
+      const btn = document.getElementById('btnCheckPpdb');
+      const resDiv = document.getElementById('ppdbStatusResult');
+      if (!q || !resDiv) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="inline-block animate-spin mr-1">⏳</span><span>Mencari...</span>';
+      resDiv.classList.add('hidden');
+
+      try {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getPpdbList';
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
+          const matched = data.find(item => {
+            const id = String(item.id || '').toUpperCase();
+            const wa = String(item.no_whatsapp || '').replace(/[^0-9]/g, '');
+            const qClean = q.replace(/[^0-9A-Z]/g, '');
+            const nama = String(item.nama_lengkap || '').toUpperCase();
+            return id === q || id.includes(qClean) || (wa && (wa.includes(qClean) || qClean.includes(wa) || wa.replace(/^0/, '') === qClean.replace(/^0/, ''))) || nama.includes(q);
+          });
+
+          if (matched) {
+            let statusBadgeClass = 'bg-amber-100 text-amber-800 border-amber-300';
+            if (matched.status_pendaftaran === 'Diterima' || matched.status_pendaftaran === 'Lulus Seleksi') {
+              statusBadgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+            } else if (matched.status_pendaftaran === 'Diverifikasi') {
+              statusBadgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+            }
+
+            resDiv.innerHTML = '<div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">' +
+              '<div class="flex items-center justify-between pb-1.5 border-b border-slate-200">' +
+                '<span class="font-mono font-black text-brand-primary text-sm">' + (matched.id || '-') + '</span>' +
+                '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ' + statusBadgeClass + '">' + (matched.status_pendaftaran || 'Menunggu Verifikasi') + '</span>' +
+              '</div>' +
+              '<div class="space-y-1 text-slate-700">' +
+                '<div><strong class="text-slate-900 block">' + (matched.nama_lengkap || '-') + '</strong></div>' +
+                '<div class="text-[11px] text-slate-500">Asal: ' + (matched.sekolah_asal || '-') + '</div>' +
+                '<div class="text-[11px] text-slate-500">Jalur: <span class="font-semibold text-slate-800">' + (matched.jalur || '-') + '</span> • ' + (matched.program_pilihan || '-') + '</div>' +
+                (matched.catatan_panitia ? '<div class="p-2 bg-amber-50 rounded-lg border border-amber-200 text-amber-900 text-[11px] mt-2"><strong>Catatan Panitia:</strong> ' + matched.catatan_panitia + '</div>' : '') +
+              '</div>' +
+              '<div class="pt-2">' +
+                '<a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Panitia%20PPDB%20MTs%20YASUA%2C%20saya%20ingin%20menanyakan%20status%20pendaftaran%20' + encodeURIComponent(matched.id) + '" target="_blank" class="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">' +
+                  '<i data-lucide="message-circle" class="w-3.5 h-3.5 text-amber-300"></i>' +
+                  '<span>Hubungi Panitia via WA</span>' +
+                '</a>' +
+              '</div>' +
+            '</div>';
+            resDiv.classList.remove('hidden');
+          } else {
+            resDiv.innerHTML = '<div class="p-3 bg-rose-50 rounded-xl border border-rose-200 text-rose-700 text-xs font-medium">' +
+              'Data pendaftaran dengan kata kunci "<strong>' + q + '</strong>" tidak ditemukan. Pastikan nomor registrasi (contoh: PPDB-2026-001) atau nomor WhatsApp yang Anda masukkan benar.' +
+            '</div>';
+            resDiv.classList.remove('hidden');
+          }
+        } else {
+          resDiv.innerHTML = '<div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-800 text-xs font-medium">Belum ada data pendaftar yang terdaftar di sistem.</div>';
+          resDiv.classList.remove('hidden');
+        }
+      } catch (err) {
+        console.error('Error cek status:', err);
+        resDiv.innerHTML = '<div class="p-3 bg-rose-50 rounded-xl border border-rose-200 text-rose-700 text-xs font-medium">Gagal memuat status pendaftaran. Silakan periksa jaringan internet Anda dan coba lagi.</div>';
+        resDiv.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="search" class="w-3.5 h-3.5"></i><span>Cari</span>';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.checkPpdbStatus = checkPpdbStatus;
 
   </script>
 

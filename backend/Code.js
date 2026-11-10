@@ -21,6 +21,7 @@ const CONFIG = {
   SHEET_WALI_MAP: 'wali_santri_map',
   SHEET_PRESENSI_GURU: 'presensi_guru',
   SHEET_MUTABAAH: 'mutabaah_santri',
+  SHEET_PPDB: 'ppdb_registrations',
   DEFAULT_ADMIN_PASS: 'adminyasua2026'
 };
 
@@ -185,6 +186,10 @@ function doGet(e) {
           status: 'success',
           sheets: ssAll.getSheets().map(function(s) { return s.getName(); })
         });
+      case 'getPpdbList':
+        return createJsonResponse({ status: 'success', data: fetchAllPpdbRegistrations() });
+      case 'initPpdbSheet':
+        return createJsonResponse({ status: 'success', message: 'Sheet PPDB siap digunakan', sheet: ensurePpdbSheet().getName() });
       case 'getRolesPermissions':
         return createJsonResponse({ status: 'success', data: fetchAllRolesPermissions() });
       case 'authWali':
@@ -226,6 +231,11 @@ function doPost(e) {
     }
 
     const action = payload.action;
+
+    // Public Endpoint: Pendaftaran Mandiri Calon Santri (PPDB Online)
+    if (action === 'submitPpdb') {
+      return createJsonResponse(submitPpdbRegistration(payload.data || payload));
+    }
     const adminPass = payload.admin_password || payload.password;
 
     // Proteksi Password & Validasi Multi-Role (RBAC)
@@ -1265,4 +1275,117 @@ function cleanupJunkSheets() {
     deletedSheets: deleted,
     activeSheets: kept
   };
+}
+
+
+// ==========================================
+// OPERASI DATABASE PPDB (SHEET 'ppdb_registrations')
+// Auto-Provisioning & Pendaftaran Mandiri Online
+// ==========================================
+
+function ensurePpdbSheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_PPDB || 'ppdb_registrations');
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_PPDB || 'ppdb_registrations');
+    const headers = [
+      'id', 'created_at', 'jalur', 'program_pilihan', 'nama_lengkap',
+      'nisn', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'sekolah_asal',
+      'nama_wali', 'no_whatsapp', 'alamat_desa', 'status_pendaftaran',
+      'catatan_panitia', 'updated_at'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#022c1f')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function submitPpdbRegistration(regData) {
+  if (!regData || !regData.nama_lengkap) {
+    return { status: 'error', message: 'Nama lengkap calon siswa wajib diisi' };
+  }
+
+  const sheet = ensurePpdbSheet();
+  const data = sheet.getDataRange().getValues();
+  const nextNum = data.length;
+  const currentYear = new Date().getFullYear();
+  const regId = 'PPDB-' + currentYear + '-' + String(nextNum).padStart(3, '0');
+  const now = new Date();
+  const nowStr = Utilities.formatDate(now, 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+
+  const rowData = [
+    regId,
+    nowStr,
+    regData.jalur || 'Reguler',
+    regData.program_pilihan || 'Tahfidz & Kitab Salaf',
+    String(regData.nama_lengkap || '').trim().toUpperCase(),
+    String(regData.nisn || '').trim(),
+    regData.jenis_kelamin || 'Laki-laki (Putra)',
+    regData.tempat_lahir || 'Demak',
+    regData.tanggal_lahir || '',
+    regData.sekolah_asal || '',
+    regData.nama_wali || '',
+    String(regData.no_whatsapp || '').trim(),
+    regData.alamat_desa || '',
+    'Menunggu Verifikasi',
+    regData.catatan || '',
+    nowStr
+  ];
+
+  sheet.appendRow(rowData);
+
+  return {
+    status: 'success',
+    message: 'Pendaftaran PPDB berhasil dikirim',
+    data: {
+      id: regId,
+      nama_lengkap: String(regData.nama_lengkap || '').trim().toUpperCase(),
+      jalur: regData.jalur || 'Reguler',
+      program_pilihan: regData.program_pilihan || 'Tahfidz & Kitab Salaf',
+      no_whatsapp: regData.no_whatsapp || '',
+      created_at: nowStr,
+      status_pendaftaran: 'Menunggu Verifikasi'
+    }
+  };
+}
+
+function fetchAllPpdbRegistrations() {
+  const sheet = ensurePpdbSheet();
+  const rows = sheet.getDataRange().getValues();
+  if (rows.length <= 1) return [];
+
+  const headers = rows[0];
+  const items = [];
+  for (let i = rows.length - 1; i >= 1; i--) {
+    const obj = {};
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j]] = rows[i][j];
+    }
+    items.push(obj);
+  }
+  return items;
+}
+
+function updatePpdbRegistrationStatus(regId, newStatus, catatanPanitia) {
+  const sheet = ensurePpdbSheet();
+  const data = sheet.getDataRange().getValues();
+  const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+  
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][0]).trim() === String(regId).trim()) {
+      if (newStatus) {
+        sheet.getRange(i + 1, 14).setValue(newStatus);
+      }
+      if (catatanPanitia !== undefined) {
+        sheet.getRange(i + 1, 15).setValue(catatanPanitia);
+      }
+      sheet.getRange(i + 1, 16).setValue(nowStr);
+      return { id: regId, status: newStatus || data[i][13], updated_at: nowStr };
+    }
+  }
+  return null;
 }
