@@ -4606,7 +4606,8 @@
       }
 
       if (shouldShow) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Pertahankan posisi layar di atas agar 4 Kartu KPI tetap terlihat utuh ala Asnawiyyah
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       if (window.lucide) window.lucide.createIcons();
     }
