@@ -232,7 +232,7 @@ function doPost(e) {
 
     const action = payload.action;
 
-    // Public Endpoint: Pendaftaran Mandiri Calon Santri (PPDB Online)
+    // Public Endpoint: Pendaftaran Mandiri Calon Siswa (PPDB Online)
     if (action === 'submitPpdb') {
       return createJsonResponse(submitPpdbRegistration(payload.data || payload));
     }
@@ -928,7 +928,7 @@ function setupAuthDatabase() {
       ['USR-ADMIN-01', 'admin', 'adminyasua2026', 'Administrator MTs YASUA', 'ADMIN', '085649881966', 'admin@mtsyasua.sch.id', 'logo.png', 'AKTIF', now, now],
       ['USR-PIMPINAN-01', 'muthohar', 'pimpinanyasua', 'Muthohar, S.Pd.', 'PIMPINAN', '085649881966', 'kepala@mtsyasua.sch.id', 'kepala-madrasah.webp', 'AKTIF', now, now],
       ['USR-GURU-01', 'thoibah', 'yasua2026', 'Hj. Thoibah Roudlotul Jannah, S.Ag.', 'GURU', '085649881966', 'thoibah@mtsyasua.sch.id', 'guru_5.webp', 'AKTIF', now, now],
-      ['USR-WALI-01', '2026001', '2012-05-14', 'Bpk/Ibu Wali Santri Ahmad Zaki', 'WALI_MURID', '085649881966', 'wali.zaki@gmail.com', 'logo.png', 'AKTIF', now, now]
+      ['USR-WALI-01', '2026001', '2012-05-14', 'Bpk/Ibu Wali Murid Ahmad Zaki', 'WALI_MURID', '085649881966', 'wali.zaki@gmail.com', 'logo.png', 'AKTIF', now, now]
     ];
     defaultUsers.forEach(r => sUsers.appendRow(r));
     createdSheets.push('users');
@@ -947,7 +947,7 @@ function setupAuthDatabase() {
       ['ADMIN', 'Administrator CMS', true, true, true, true, true, true, true, true, JSON.stringify(['ALL_CMS', 'MANAGE_USERS', 'MANAGE_NEWS', 'MANAGE_BANNER']), now],
       ['PIMPINAN', 'Pimpinan Madrasah & Yayasan', true, false, false, false, false, false, true, true, JSON.stringify(['SUPERVISION_MACRO', 'READ_REPORTS']), now],
       ['GURU', 'Dewan Asatidz & Guru', false, false, false, false, false, true, false, false, JSON.stringify(['ATTENDANCE_RECORD', 'KBM_JURNAL']), now],
-      ['WALI_MURID', 'Wali Murid / Santri', false, false, false, false, false, false, true, false, JSON.stringify(['VIEW_CHILD_PROGRESS', 'VIEW_MUTABAAH']), now]
+      ['WALI_MURID', 'Wali Murid', false, false, false, false, false, false, true, false, JSON.stringify(['VIEW_CHILD_PROGRESS', 'VIEW_MUTABAAH']), now]
     ];
     defaultRoles.forEach(r => sRoles.appendRow(r));
     createdSheets.push('roles_permissions');
@@ -1072,7 +1072,7 @@ function handleAuthWali(nisn, birthDate) {
     }
   }
 
-  // Jika tidak ditemukan di database sheet, gunakan data santri fallback
+  // Jika tidak ditemukan di database sheet, gunakan data siswa fallback
   if (!foundStudent && (cleanNisn === '2026001' || cleanNisn === '0098765432')) {
     foundStudent = {
       student_id: 'SAN-2026-001',
@@ -1089,7 +1089,7 @@ function handleAuthWali(nisn, birthDate) {
   }
 
   if (!foundStudent) {
-    return { status: 'error', message: 'Data santri dengan NISN ' + cleanNisn + ' tidak ditemukan' };
+    return { status: 'error', message: 'Data siswa dengan NISN ' + cleanNisn + ' tidak ditemukan' };
   }
 
   // Ambil data mutabaah hafalan
@@ -1098,7 +1098,7 @@ function handleAuthWali(nisn, birthDate) {
   return {
     status: 'success',
     role: 'WALI_MURID',
-    waliName: foundStudent.wali_name || ('Wali Santri ' + foundStudent.name),
+    waliName: foundStudent.wali_name || ('Wali Murid ' + foundStudent.name),
     student: foundStudent,
     progress: progress,
     message: 'Otentikasi Wali Murid berhasil'
