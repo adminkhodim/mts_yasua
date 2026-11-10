@@ -24,6 +24,8 @@ const CONFIG = {
   SHEET_PPDB: 'ppdb_registrations',
   SHEET_JADWAL_KBM: 'jadwal_kbm',
   SHEET_SERAGAM: 'seragam_harian',
+  SHEET_EKSKUL: 'ekskul_list',
+  SHEET_EKSKUL_REG: 'ekskul_registrations',
   DEFAULT_ADMIN_PASS: 'adminyasua2026'
 };
 
@@ -196,6 +198,10 @@ function doGet(e) {
         return createJsonResponse(fetchFullJadwalData());
       case 'initJadwalSheet':
         return createJsonResponse(setupJadwalAndSeragamDatabase());
+      case 'getEkskulData':
+        return createJsonResponse({ status: 'success', data: fetchAllEkskul() });
+      case 'initEkskulSheet':
+        return createJsonResponse(setupEkskulDatabase());
       case 'getRolesPermissions':
         return createJsonResponse({ status: 'success', data: fetchAllRolesPermissions() });
       case 'authWali':
@@ -241,6 +247,10 @@ function doPost(e) {
     // Public Endpoint: Pendaftaran Mandiri Calon Siswa (PPDB Online)
     if (action === 'submitPpdb') {
       return createJsonResponse(submitPpdbRegistration(payload.data || payload));
+    }
+    // Public Endpoint: Pendaftaran Peminatan Ekstrakurikuler Online
+    if (action === 'registerEkskul') {
+      return createJsonResponse(submitEkskulRegistration(payload.data || payload));
     }
     const adminPass = payload.admin_password || payload.password;
 
@@ -1556,6 +1566,178 @@ function fetchFullJadwalData() {
     data: {
       jadwal: jadwalItems,
       seragam: seragamItems
+    }
+  };
+}
+
+
+// ==========================================
+// OPERASI DATABASE UNIT EKSTRAKURIKULER
+// Auto-Provisioning & Pendaftaran Peminatan
+// ==========================================
+
+function ensureEkskulListSheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_EKSKUL || 'ekskul_list');
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_EKSKUL || 'ekskul_list');
+    const headers = [
+      'id', 'nama_ekskul', 'kategori', 'hari_latihan', 'jam_latihan',
+      'tempat_latihan', 'nama_pembina', 'no_whatsapp', 'deskripsi', 'status_aktif', 'updated_at'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#022c1f')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+
+    const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+    const seedEkskul = [
+      [
+        'EKS-01', 'Gerakan Pramuka (Gudep 07.125-07.126)', 'Kepanduan',
+        'Sabtu', '09.30 - 11.00 WIB', 'Halaman Utama Madrasah',
+        'Kak Ahmad Fauzi, S.Pd.', '085649881966',
+        'Pendidikan karakter mandiri, kepemimpinan, pionering, tali-temali, sandi morse, & kemah bakti.',
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-02', 'Rebana & Hadroh El-YASUA', 'Seni Islami',
+        'Kamis', '14.00 - 16.00 WIB', 'Aula Pertemuan YASUA',
+        'Ust. M. Ridwan, S.Pd.I', '085649881966',
+        'Seni shalawat Nabi, vokal banjari, variasi pukulan terbang & bas, pengiring PHBI & hajatan.',
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-03', 'Futsal & Olahraga Prestasi', 'Olahraga',
+        'Selasa & Sabtu', '15.30 - 17.00 WIB', 'Lapangan Olahraga MTs YASUA',
+        'Coach Budi Santoso, S.Pd.', '085649881966',
+        'Pengasahan teknik dasar futsal, taktik bermain beregu, stamina fisik, & turnamen POPDA Demak.',
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-04', 'PMR Madya (Palang Merah Remaja)', 'Kepanduan',
+        'Rabu', '14.15 - 15.45 WIB', 'Ruang UKS Madrasah',
+        'Fatimah Az-Zahra, S.Pd.', '085649881966',
+        'Pertolongan pertama (P3K), kesiapsiagaan bencana, donor darah, tandu darurat, & aksi sosial.',
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-05', 'Seni Kaligrafi Islam (Khat & Hiasan)', 'Seni Islami',
+        'Senin', '14.15 - 15.45 WIB', 'Sanggar Seni Madrasah',
+        'Ust. H. Ahmad Zaini, S.Pd.I', '085649881966',
+        "Kaidah khat naskhi, tsuluts, riq'ah, dekorasi hiasan mushaf Al-Qur'an, & persiapan MTQ.",
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-06', 'Paskibra Madrasah (PBB Formasi)', 'Kepanduan',
+        "Jum'at", '13.30 - 15.00 WIB', 'Halaman Upacara Madrasah',
+        'Drs. Suwarno', '085649881966',
+        'Peraturan baris berbaris (PBB), variasi formasi bendera, kedisiplinan, & pengibaran HUT RI.',
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-07', 'Klub Sains & Robotika Terapan (MYRES)', 'Sains & Teknologi',
+        'Rabu', '14.30 - 16.00 WIB', 'Lab Komputer & Sains',
+        "Ali Mas'ud, S.Kom.", '085649881966',
+        'Robotika mikrokontroler ramah lingkungan, coding dasar, IoT terapan, & riset sains madrasah.',
+        'AKTIF', nowStr
+      ],
+      [
+        'EKS-08', 'English & Arabic Club (Khitobah & Bahasa)', 'Bahasa & Pidato',
+        'Selasa', '14.15 - 15.30 WIB', 'Perpustakaan Digital',
+        'Nur Hidayah, S.Pd. & Ust. Ahmad Munif', '085649881966',
+        'Percakapan bilingual aktif (muhadatsah & conversation), debat ilmiah, & pidato tiga bahasa.',
+        'AKTIF', nowStr
+      ]
+    ];
+
+    seedEkskul.forEach(r => sheet.appendRow(r));
+  }
+  return sheet;
+}
+
+function ensureEkskulRegSheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_EKSKUL_REG || 'ekskul_registrations');
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_EKSKUL_REG || 'ekskul_registrations');
+    const headers = [
+      'id', 'created_at', 'nama_siswa', 'kelas', 'nisn',
+      'ekskul_pilihan', 'alasan_memilih', 'no_wa_wali', 'status_verifikasi'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#022c1f')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function setupEkskulDatabase() {
+  const sList = ensureEkskulListSheet();
+  const sReg = ensureEkskulRegSheet();
+  return {
+    status: 'success',
+    message: 'Sheet ekskul_list & ekskul_registrations berhasil dibuat dan diisi data resmi.',
+    sheets: [sList.getName(), sReg.getName()]
+  };
+}
+
+function fetchAllEkskul() {
+  const sheet = ensureEkskulListSheet();
+  const rows = sheet.getDataRange().getValues();
+  if (rows.length <= 1) return [];
+
+  const headers = rows[0];
+  const items = [];
+  for (let i = 1; i < rows.length; i++) {
+    const obj = {};
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j]] = rows[i][j];
+    }
+    items.push(obj);
+  }
+  return items;
+}
+
+function submitEkskulRegistration(regData) {
+  if (!regData || !regData.nama_siswa || !regData.ekskul_pilihan) {
+    return { status: 'error', message: 'Nama siswa dan pilihan ekstrakurikuler wajib diisi' };
+  }
+
+  const sheet = ensureEkskulRegSheet();
+  const data = sheet.getDataRange().getValues();
+  const nextNum = data.length;
+  const currentYear = new Date().getFullYear();
+  const regId = 'EKS-REG-' + currentYear + '-' + String(nextNum).padStart(3, '0');
+  const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+
+  const rowData = [
+    regId,
+    nowStr,
+    String(regData.nama_siswa || '').trim().toUpperCase(),
+    String(regData.kelas || '7-A').trim(),
+    String(regData.nisn || '').trim(),
+    String(regData.ekskul_pilihan || '').trim(),
+    String(regData.alasan_memilih || '').trim(),
+    String(regData.no_wa_wali || '').trim(),
+    'Terdaftar'
+  ];
+
+  sheet.appendRow(rowData);
+
+  return {
+    status: 'success',
+    message: 'Pendaftaran ekstrakurikuler berhasil tersimpan',
+    data: {
+      id: regId,
+      nama_siswa: String(regData.nama_siswa || '').trim().toUpperCase(),
+      ekskul_pilihan: regData.ekskul_pilihan,
+      created_at: nowStr,
+      status: 'Terdaftar'
     }
   };
 }

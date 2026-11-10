@@ -1341,8 +1341,9 @@
       </div>
     </div><!-- End #tab-ppdb -->
 
-    <!-- ==================== TAB 7: EKSTRAKURIKULER ==================== -->
+    <!-- ==================== TAB 7: EKSTRAKURIKULER & KONTAK PEMBINA ==================== -->
     <div id="tab-ekskul" class="hidden space-y-3.5">
+      <!-- Header Banner Tab Ekskul -->
       <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-700/80 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
@@ -1350,55 +1351,64 @@
           </button>
           <div>
             <h2 class="text-sm font-black text-white leading-tight">Unit Ekstrakurikuler</h2>
-            <p class="text-[10px] text-emerald-200 mt-0.5">Wadah Bakat, Seni, &amp; Olahraga Siswa</p>
+            <p class="text-[10px] text-emerald-200 mt-0.5">Jadwal Latihan &amp; Kontak Pembina • TP 2026/2027</p>
           </div>
         </div>
-        <span class="text-[10px] font-bold text-amber-300 bg-white/10 px-2 py-0.5 rounded-md">8 Ekskul Aktif</span>
+        <div class="flex items-center gap-1.5">
+          <span id="ekskul-sync-badge" class="px-2 py-0.5 rounded-full bg-emerald-800/90 text-emerald-200 text-[9px] font-bold border border-emerald-600/50 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Live Sheet</span>
+          </span>
+          <span class="text-[10px] font-bold text-amber-300 bg-white/10 px-2 py-0.5 rounded-md">8 Unit Aktif</span>
+        </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-2 text-xs">
-        <div class="bg-white p-3 rounded-2xl border border-emerald-100/90 shadow-xs space-y-1">
-          <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-            <i data-lucide="compass" class="w-4 h-4"></i>
+      <!-- Hero Callout & Pendaftaran Online -->
+      <div class="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white p-3.5 rounded-2xl border border-emerald-600/50 shadow-xs space-y-2.5">
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span class="text-[9.5px] font-black uppercase text-amber-300 tracking-wider flex items-center gap-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>Pengembangan Bakat &amp; Minat Siswa</span>
+            </span>
+            <h3 class="text-xs font-black text-white leading-snug">Pendaftaran Peminatan Ekskul Dibuka!</h3>
           </div>
-          <h4 class="font-bold text-slate-800 text-[11.5px] mt-1">Gerakan Pramuka</h4>
-          <p class="text-[10px] text-slate-500">Gugus Depan MTs YASUA. Kemah, tali-temali, kedisiplinan, &amp; kepemimpinan.</p>
+          <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black">Online</span>
         </div>
-        <div class="bg-white p-3 rounded-2xl border border-emerald-100/90 shadow-xs space-y-1">
-          <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
-            <i data-lucide="music" class="w-4 h-4"></i>
-          </div>
-          <h4 class="font-bold text-slate-800 text-[11.5px] mt-1">Rebana &amp; Hadroh</h4>
-          <p class="text-[10px] text-slate-500">Seni shalawat Nabi, banjari, &amp; pengiring peringatan hari besar Islam.</p>
-        </div>
-        <div class="bg-white p-3 rounded-2xl border border-emerald-100/90 shadow-xs space-y-1">
-          <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-            <i data-lucide="flag" class="w-4 h-4"></i>
-          </div>
-          <h4 class="font-bold text-slate-800 text-[11.5px] mt-1">Paskibra Madrasah</h4>
-          <p class="text-[10px] text-slate-500">Pelatihan baris-berbaris (PBB), upacara kemerdekaan, &amp; jiwa nasionalisme.</p>
-        </div>
-        <div class="bg-white p-3 rounded-2xl border border-emerald-100/90 shadow-xs space-y-1">
-          <div class="w-8 h-8 rounded-xl bg-red-50 text-red-600 flex items-center justify-center font-bold">
-            <i data-lucide="cross" class="w-4 h-4"></i>
-          </div>
-          <h4 class="font-bold text-slate-800 text-[11.5px] mt-1">PMR Madya</h4>
-          <p class="text-[10px] text-slate-500">Pertolongan pertama pada kecelakaan (P3K), kesiapsiagaan bencana, &amp; bakti sosial.</p>
-        </div>
-        <div class="bg-white p-3 rounded-2xl border border-emerald-100/90 shadow-xs space-y-1">
-          <div class="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold">
-            <i data-lucide="trophy" class="w-4 h-4"></i>
-          </div>
-          <h4 class="font-bold text-slate-800 text-[11.5px] mt-1">Futsal Siswa Madrasah</h4>
-          <p class="text-[10px] text-slate-500">Pelatihan teknik dasar futsal, turnamen antarmadrasah, &amp; sportivitas.</p>
-        </div>
-        <div class="bg-white p-3 rounded-2xl border border-emerald-100/90 shadow-xs space-y-1">
-          <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
-            <i data-lucide="pen-tool" class="w-4 h-4"></i>
-          </div>
-          <h4 class="font-bold text-slate-800 text-[11.5px] mt-1">Seni Kaligrafi Islam</h4>
-          <p class="text-[10px] text-slate-500">Khat naskhi, tsuluts, riq'ah, &amp; karya dekorasi hiasan mushaf Al-Qur'an.</p>
-        </div>
+        <p class="text-[10.5px] text-emerald-100 leading-relaxed">
+          Setiap siswa wajib mengikuti ekstrakurikuler Pramuka (kelas 7-8) dan diperbolehkan memilih maksimal 2 ekskul peminatan bakat olahraga, seni, atau sains.
+        </p>
+        <button onclick="openDaftarEkskulModal()" type="button" class="w-full py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer">
+          <i data-lucide="clipboard-pen" class="w-3.5 h-3.5"></i>
+          <span>Daftar Peminatan Ekskul Online</span>
+        </button>
+      </div>
+
+      <!-- Filter Kategori Ekskul -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
+        <button type="button" onclick="filterEkskulKategori('ALL')" id="filterEkskul-ALL" class="py-1.5 px-3 rounded-xl bg-brand-primary text-white font-extrabold text-[11px] shrink-0 shadow-2xs transition cursor-pointer">
+          Semua (8)
+        </button>
+        <button type="button" onclick="filterEkskulKategori('Kepanduan')" id="filterEkskul-Kepanduan" class="py-1.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] shrink-0 border border-slate-200 transition cursor-pointer">
+          Kepanduan (3)
+        </button>
+        <button type="button" onclick="filterEkskulKategori('Seni Islami')" id="filterEkskul-Seni" class="py-1.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] shrink-0 border border-slate-200 transition cursor-pointer">
+          Seni Islami (2)
+        </button>
+        <button type="button" onclick="filterEkskulKategori('Olahraga')" id="filterEkskul-Olahraga" class="py-1.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] shrink-0 border border-slate-200 transition cursor-pointer">
+          Olahraga (1)
+        </button>
+        <button type="button" onclick="filterEkskulKategori('Sains & Teknologi')" id="filterEkskul-Sains" class="py-1.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] shrink-0 border border-slate-200 transition cursor-pointer">
+          Sains &amp; Robotik (1)
+        </button>
+        <button type="button" onclick="filterEkskulKategori('Bahasa & Pidato')" id="filterEkskul-Bahasa" class="py-1.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] shrink-0 border border-slate-200 transition cursor-pointer">
+          Bahasa &amp; Pidato (1)
+        </button>
+      </div>
+
+      <!-- Container Daftar Card Ekskul -->
+      <div id="ekskul-cards-container" class="space-y-3">
+        <!-- Populated dynamically via renderEkskulList() -->
       </div>
     </div><!-- End #tab-ekskul -->
 
@@ -3085,6 +3095,96 @@
       </div>
     </div>
 
+    <!-- ==================== MODAL FORMULIR DAFTAR EKSKUL ==================== -->
+    <div id="modalDaftarEkskul" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
+      <div class="bg-white rounded-3xl max-w-md w-full max-h-[90vh] flex flex-col shadow-2xl border border-emerald-200 relative animate-in fade-in zoom-in-95 text-slate-800 overflow-hidden">
+        
+        <!-- Header Modal -->
+        <div class="p-4 bg-gradient-to-r from-emerald-950 to-teal-900 text-white flex items-center justify-between border-b border-emerald-800 shrink-0">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black">
+              <i data-lucide="compass" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-xs sm:text-sm text-white leading-tight">Formulir Peminatan Ekskul</h3>
+              <p class="text-[10px] text-emerald-200">MTs YASUA Pilangwetan • TP 2026/2027</p>
+            </div>
+          </div>
+          <button onclick="closeDaftarEkskulModal()" type="button" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Form Body -->
+        <div class="p-4 overflow-y-auto space-y-3.5 text-left text-xs">
+          <form id="formPeminatanEkskul" onsubmit="handleEkskulRegistration(event)" class="space-y-3">
+            <div>
+              <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Lengkap Siswa <span class="text-rose-500">*</span></label>
+              <input type="text" id="regEkskulNama" required placeholder="Contoh: AHMAD ZAKI AL-FATIH" class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 uppercase">
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Kelas <span class="text-rose-500">*</span></label>
+                <select id="regEkskulKelas" required class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500">
+                  <option value="7-A">Kelas 7-A</option>
+                  <option value="7-B">Kelas 7-B</option>
+                  <option value="7-C">Kelas 7-C</option>
+                  <option value="8-A">Kelas 8-A</option>
+                  <option value="8-B">Kelas 8-B</option>
+                  <option value="8-C">Kelas 8-C</option>
+                  <option value="9-A">Kelas 9-A</option>
+                  <option value="9-B">Kelas 9-B</option>
+                  <option value="9-C">Kelas 9-C</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10.5px] font-bold text-slate-700 mb-1">NISN (Opsional)</label>
+                <input type="text" id="regEkskulNisn" placeholder="NISN Siswa" class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Pilihan Ekstrakurikuler <span class="text-rose-500">*</span></label>
+              <select id="regEkskulPilihan" required class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500">
+                <option value="Gerakan Pramuka (Gudep 07.125-07.126)">Gerakan Pramuka (Sabtu Pagi)</option>
+                <option value="Rebana & Hadroh El-YASUA">Rebana &amp; Hadroh El-YASUA (Kamis Siang)</option>
+                <option value="Futsal & Olahraga Prestasi">Futsal &amp; Olahraga Prestasi (Selasa &amp; Sabtu)</option>
+                <option value="PMR Madya (Palang Merah Remaja)">PMR Madya (Rabu Siang)</option>
+                <option value="Seni Kaligrafi Islam (Khat & Hiasan)">Seni Kaligrafi Islam (Senin Siang)</option>
+                <option value="Paskibra Madrasah (PBB Formasi)">Paskibra Madrasah (Jum'at Siang)</option>
+                <option value="Klub Sains & Robotika Terapan (MYRES)">Klub Sains &amp; Robotika Terapan (Rabu Siang)</option>
+                <option value="English & Arabic Club (Khitobah & Bahasa)">English &amp; Arabic Club (Selasa Siang)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[10.5px] font-bold text-slate-700 mb-1">No. WhatsApp Wali Murid <span class="text-rose-500">*</span></label>
+              <input type="tel" id="regEkskulWa" required placeholder="Contoh: 081234567890" class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Alasan / Motivasi Memilih</label>
+              <input type="text" id="regEkskulAlasan" placeholder="Ingin berprestasi, mengasah bakat, dsb." class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500">
+            </div>
+
+            <div id="ekskulRegError" class="hidden p-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold"></div>
+
+            <div class="pt-2 flex gap-2">
+              <button onclick="closeDaftarEkskulModal()" type="button" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition cursor-pointer">
+                Batal
+              </button>
+              <button type="submit" id="btnSubmitEkskulReg" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                <i data-lucide="send" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Kirim Pendaftaran Ekskul</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
 <!-- ==================== MOBILE APP SPA ROUTER & ENGINES ==================== -->
   <script>
     // --- 1. Client-Side Tab Router ---
@@ -3153,6 +3253,8 @@
       } else if (tabName === 'jadwal') {
         if (typeof initJadwalToday === 'function') initJadwalToday();
         if (typeof fetchJadwalFromBackend === 'function') fetchJadwalFromBackend();
+      } else if (tabName === 'ekskul') {
+        if (typeof fetchEkskulFromBackend === 'function') fetchEkskulFromBackend();
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -6286,6 +6388,342 @@
       }
     }
     window.checkPpdbStatus = checkPpdbStatus;
+
+
+    // =====================================================================
+    // CONTROLLER EKSTRAKURIKULER & KONTAK PEMBINA (PRIORITAS 3)
+    // =====================================================================
+    let activeEkskulCategory = 'ALL';
+    let MASTER_EKSKUL_DATA = [
+      {
+        id: 'EKS-01',
+        nama: 'Gerakan Pramuka (Gudep 07.125-07.126)',
+        kategori: 'Kepanduan',
+        hari: 'Sabtu',
+        jam: '09.30 - 11.00 WIB',
+        tempat: 'Halaman Utama Madrasah',
+        pembina: 'Kak Ahmad Fauzi, S.Pd.',
+        wa: '085649881966',
+        desc: 'Pendidikan karakter mandiri, kepemimpinan, pionering, tali-temali, sandi morse, & kemah bakti tahunan.',
+        icon: 'compass',
+        color: 'bg-amber-50 text-amber-600 border-amber-200'
+      },
+      {
+        id: 'EKS-02',
+        nama: 'Rebana & Hadroh El-YASUA',
+        kategori: 'Seni Islami',
+        hari: 'Kamis',
+        jam: '14.00 - 16.00 WIB',
+        tempat: 'Aula Pertemuan YASUA',
+        pembina: 'Ust. M. Ridwan, S.Pd.I',
+        wa: '085649881966',
+        desc: 'Seni shalawat Nabi, vokal banjari khas salafiyah, variasi pukulan terbang & bas, pengiring PHBI & hajatan.',
+        icon: 'music',
+        color: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      },
+      {
+        id: 'EKS-03',
+        nama: 'Futsal & Olahraga Prestasi',
+        kategori: 'Olahraga',
+        hari: 'Selasa & Sabtu',
+        jam: '15.30 - 17.00 WIB',
+        tempat: 'Lapangan Olahraga MTs YASUA',
+        pembina: 'Coach Budi Santoso, S.Pd.',
+        wa: '085649881966',
+        desc: 'Pengasahan teknik dasar futsal, taktik bermain beregu, stamina fisik, & persiapan turnamen POPDA Demak.',
+        icon: 'trophy',
+        color: 'bg-teal-50 text-teal-700 border-teal-200'
+      },
+      {
+        id: 'EKS-04',
+        nama: 'PMR Madya (Palang Merah Remaja)',
+        kategori: 'Kepanduan',
+        hari: 'Rabu',
+        jam: '14.15 - 15.45 WIB',
+        tempat: 'Ruang UKS Madrasah',
+        pembina: 'Fatimah Az-Zahra, S.Pd.',
+        wa: '085649881966',
+        desc: 'Pertolongan pertama (P3K), kesiapsiagaan bencana, donor darah, tandu darurat, & kepedulian bakti sosial.',
+        icon: 'cross',
+        color: 'bg-rose-50 text-rose-600 border-rose-200'
+      },
+      {
+        id: 'EKS-05',
+        nama: 'Seni Kaligrafi Islam (Khat & Hiasan)',
+        kategori: 'Seni Islami',
+        hari: 'Senin',
+        jam: '14.15 - 15.45 WIB',
+        tempat: 'Sanggar Seni Madrasah',
+        pembina: 'Ust. H. Ahmad Zaini, S.Pd.I',
+        wa: '085649881966',
+        desc: 'Kaidah khat naskhi, tsuluts, riq'ah, dekorasi hiasan mushaf Al-Qur'an, & persiapan kejuaraan MTQ.',
+        icon: 'pen-tool',
+        color: 'bg-purple-50 text-purple-600 border-purple-200'
+      },
+      {
+        id: 'EKS-06',
+        nama: 'Paskibra Madrasah (PBB Formasi)',
+        kategori: 'Kepanduan',
+        hari: 'Jum'at',
+        jam: '13.30 - 15.00 WIB',
+        tempat: 'Halaman Upacara Madrasah',
+        pembina: 'Drs. Suwarno',
+        wa: '085649881966',
+        desc: 'Peraturan baris berbaris (PBB), variasi formasi bendera, kedisiplinan, & pengibaran upacara HUT RI.',
+        icon: 'flag',
+        color: 'bg-blue-50 text-blue-600 border-blue-200'
+      },
+      {
+        id: 'EKS-07',
+        nama: 'Klub Sains & Robotika Terapan (MYRES)',
+        kategori: 'Sains & Teknologi',
+        hari: 'Rabu',
+        jam: '14.30 - 16.00 WIB',
+        tempat: 'Lab Komputer & Sains',
+        pembina: 'Ali Mas'ud, S.Kom.',
+        wa: '085649881966',
+        desc: 'Robotika mikrokontroler ramah lingkungan, coding dasar, IoT terapan, & riset sains madrasah (MYRES).',
+        icon: 'cpu',
+        color: 'bg-indigo-50 text-indigo-600 border-indigo-200'
+      },
+      {
+        id: 'EKS-08',
+        nama: 'English & Arabic Club (Khitobah & Bahasa)',
+        kategori: 'Bahasa & Pidato',
+        hari: 'Selasa',
+        jam: '14.15 - 15.30 WIB',
+        tempat: 'Perpustakaan Digital',
+        pembina: 'Nur Hidayah, S.Pd. & Ust. Ahmad Munif',
+        wa: '085649881966',
+        desc: 'Percakapan bilingual aktif (muhadatsah & conversation), debat ilmiah, & bimbingan pidato tiga bahasa.',
+        icon: 'languages',
+        color: 'bg-amber-50 text-amber-800 border-amber-200'
+      }
+    ];
+
+    function filterEkskulKategori(kat) {
+      activeEkskulCategory = kat;
+
+      // Update button styles
+      ['ALL', 'Kepanduan', 'Seni', 'Olahraga', 'Sains', 'Bahasa'].forEach(k => {
+        const btn = document.getElementById('filterEkskul-' + k);
+        if (btn) {
+          const match = (k === 'ALL' && kat === 'ALL') || (k === 'Seni' && kat === 'Seni Islami') || (k === 'Sains' && kat === 'Sains & Teknologi') || (k === 'Bahasa' && kat === 'Bahasa & Pidato') || (k === kat);
+          if (match) {
+            btn.className = 'py-1.5 px-3 rounded-xl bg-brand-primary text-white font-extrabold text-[11px] shrink-0 shadow-2xs transition cursor-pointer';
+          } else {
+            btn.className = 'py-1.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] shrink-0 border border-slate-200 transition cursor-pointer';
+          }
+        }
+      });
+
+      renderEkskulList();
+    }
+    window.filterEkskulKategori = filterEkskulKategori;
+
+    function renderEkskulList() {
+      const container = document.getElementById('ekskul-cards-container');
+      if (!container) return;
+
+      const filtered = (activeEkskulCategory === 'ALL') ? MASTER_EKSKUL_DATA : MASTER_EKSKUL_DATA.filter(e => e.kategori === activeEkskulCategory);
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="p-4 bg-slate-50 text-slate-500 rounded-2xl text-center text-xs">Belum ada unit ekskul untuk kategori ini.</div>';
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(item => {
+        const waMsg = encodeURIComponent("Assalamu'alaikum Pembina " + item.nama + " MTs YASUA, saya siswa/wali murid ingin berkonsultasi mengenai kegiatan latihan.");
+        const waUrl = "https://wa.me/" + (item.wa || '6285649881966') + "?text=" + waMsg;
+
+        html += '<div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-3 hover:border-emerald-300 transition-all">' +
+          '<div class="flex items-start justify-between gap-2">' +
+            '<div class="flex items-start gap-2.5">' +
+              '<div class="w-10 h-10 rounded-2xl ' + (item.color || 'bg-emerald-50 text-emerald-700') + ' flex items-center justify-center shrink-0 border font-bold">' +
+                '<i data-lucide="' + (item.icon || 'star') + '" class="w-5 h-5"></i>' +
+              '</div>' +
+              '<div>' +
+                '<span class="px-2 py-0.2 rounded-md bg-slate-100 text-slate-700 text-[9.5px] font-bold uppercase tracking-wider">' + item.kategori + '</span>' +
+                '<h4 class="font-black text-slate-900 text-xs sm:text-sm mt-0.5 leading-snug">' + item.nama + '</h4>' +
+              '</div>' +
+            '</div>' +
+            '<span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[9px] font-bold border border-emerald-200 shrink-0">Aktif</span>' +
+          '</div>' +
+
+          '<p class="text-[10.5px] text-slate-600 leading-relaxed">' + item.desc + '</p>' +
+
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 p-2.5 rounded-xl bg-slate-50/80 border border-slate-200/70 text-[10.5px]">' +
+            '<div class="flex items-center gap-1.5 text-slate-700">' +
+              '<i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500 shrink-0"></i>' +
+              '<span><strong>Latihan:</strong> ' + item.hari + ', ' + item.jam + '</span>' +
+            '</div>' +
+            '<div class="flex items-center gap-1.5 text-slate-700">' +
+              '<i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500 shrink-0"></i>' +
+              '<span><strong>Tempat:</strong> ' + item.tempat + '</span>' +
+            '</div>' +
+            '<div class="col-span-1 sm:col-span-2 flex items-center gap-1.5 text-slate-700 pt-0.5 border-t border-slate-200/50">' +
+              '<i data-lucide="user-check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>' +
+              '<span><strong>Pembina:</strong> ' + item.pembina + '</span>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="pt-1 flex gap-2">' +
+            '<a href="' + waUrl + '" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-2xs">' +
+              '<i data-lucide="message-circle" class="w-3.5 h-3.5 text-amber-300"></i>' +
+              '<span>Chat Pembina</span>' +
+            '</a>' +
+            '<button onclick="openDaftarEkskulModal('' + item.nama.replace(/'/g, "\'") + '')" type="button" class="py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer">' +
+              '<i data-lucide="user-plus" class="w-3.5 h-3.5 text-slate-600"></i>' +
+              '<span>Daftar</span>' +
+            '</button>' +
+          '</div>' +
+        '</div>';
+      });
+
+      container.innerHTML = html;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    async function fetchEkskulFromBackend() {
+      try {
+        const syncBadge = document.getElementById('ekskul-sync-badge');
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getEkskulData';
+        const res = await fetch(API_URL);
+        const resJson = await res.json();
+
+        if (resJson && resJson.status === 'success' && Array.isArray(resJson.data) && resJson.data.length > 0) {
+          MASTER_EKSKUL_DATA = resJson.data.map(item => {
+            let icon = 'star';
+            let color = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+            const k = item.kategori || '';
+            if (k.includes('Kepanduan')) { icon = 'compass'; color = 'bg-amber-50 text-amber-600 border-amber-200'; }
+            else if (k.includes('Seni')) { icon = 'music'; color = 'bg-purple-50 text-purple-600 border-purple-200'; }
+            else if (k.includes('Olahraga')) { icon = 'trophy'; color = 'bg-teal-50 text-teal-700 border-teal-200'; }
+            else if (k.includes('Sains')) { icon = 'cpu'; color = 'bg-indigo-50 text-indigo-600 border-indigo-200'; }
+            else if (k.includes('Bahasa')) { icon = 'languages'; color = 'bg-amber-50 text-amber-800 border-amber-200'; }
+
+            return {
+              id: item.id,
+              nama: item.nama_ekskul,
+              kategori: item.kategori,
+              hari: item.hari_latihan,
+              jam: item.jam_latihan,
+              tempat: item.tempat_latihan,
+              pembina: item.nama_pembina,
+              wa: String(item.no_whatsapp || '085649881966'),
+              desc: item.deskripsi,
+              icon: icon,
+              color: color
+            };
+          });
+
+          if (syncBadge) {
+            syncBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span><span>Spreadsheet Sync</span>';
+          }
+          renderEkskulList();
+        }
+      } catch (e) {
+        console.warn('Gagal sync ekskul dari spreadsheet, menggunakan fallback lokal:', e);
+      }
+    }
+    window.fetchEkskulFromBackend = fetchEkskulFromBackend;
+
+    function openDaftarEkskulModal(ekskulName) {
+      const modal = document.getElementById('modalDaftarEkskul');
+      const select = document.getElementById('regEkskulPilihan');
+      const err = document.getElementById('ekskulRegError');
+      if (err) err.classList.add('hidden');
+      if (select && ekskulName) {
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value === ekskulName || select.options[i].text.includes(ekskulName)) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.openDaftarEkskulModal = openDaftarEkskulModal;
+
+    function closeDaftarEkskulModal() {
+      const modal = document.getElementById('modalDaftarEkskul');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    window.closeDaftarEkskulModal = closeDaftarEkskulModal;
+
+    async function handleEkskulRegistration(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitEkskulReg');
+      const errDiv = document.getElementById('ekskulRegError');
+      if (errDiv) errDiv.classList.add('hidden');
+
+      const nama = document.getElementById('regEkskulNama').value.trim();
+      const kelas = document.getElementById('regEkskulKelas').value;
+      const nisn = document.getElementById('regEkskulNisn').value.trim();
+      const ekskul = document.getElementById('regEkskulPilihan').value;
+      const wa = document.getElementById('regEkskulWa').value.trim();
+      const alasan = document.getElementById('regEkskulAlasan').value.trim();
+
+      if (!nama || !ekskul || !wa) {
+        if (errDiv) {
+          errDiv.textContent = 'Mohon isi nama siswa, pilihan ekskul, dan nomor WhatsApp.';
+          errDiv.classList.remove('hidden');
+        }
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="inline-block animate-spin mr-1">⏳</span><span>Menyimpan...</span>';
+
+      try {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'registerEkskul',
+            data: {
+              nama_siswa: nama,
+              kelas: kelas,
+              nisn: nisn,
+              ekskul_pilihan: ekskul,
+              no_wa_wali: wa,
+              alasan_memilih: alasan
+            }
+          })
+        });
+        const resJson = await res.json();
+
+        if (resJson && resJson.status === 'success') {
+          closeDaftarEkskulModal();
+          if (window.showToast) window.showToast('Alhamdulillah! Pendaftaran ' + ekskul + ' berhasil disimpan di spreadsheet.');
+          alert('Alhamdulillah! Pendaftaran ekstrakurikuler ' + ekskul + ' untuk ananda ' + nama + ' (Kelas ' + kelas + ') telah berhasil tersimpan di database madrasah.');
+        } else {
+          throw new Error((resJson && resJson.message) || 'Respon server tidak valid');
+        }
+      } catch (err) {
+        console.error('Error daftar ekskul:', err);
+        if (errDiv) {
+          errDiv.textContent = 'Terjadi kendala saat mengirim ke database. Silakan coba kembali atau hubungi pembina langsung via WA.';
+          errDiv.classList.remove('hidden');
+        }
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="send" class="w-3.5 h-3.5 text-amber-300"></i><span>Kirim Pendaftaran Ekskul</span>';
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.handleEkskulRegistration = handleEkskulRegistration;
+
+    // Render ekskul awal
+    renderEkskulList();
 
   </script>
 
