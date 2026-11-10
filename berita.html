@@ -43,7 +43,7 @@
     "headline": "Berita & Pengumuman — MTs YASUA Pilangwetan",
     "image": [
       "https://www.mtsyasua.sch.id/logo.png",
-      "https://www.mtsyasua.sch.id/https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp"
+      "https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp"
     ],
     "datePublished": "2026-10-01T07:00:00+07:00",
     "dateModified": "2026-11-05T07:00:00+07:00",
@@ -1131,9 +1131,11 @@
 
   <script>
     function resolveNewsImageUrl(rawImg) {
-      if (!rawImg) return '/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
+      if (!rawImg) return 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
+      if (typeof rawImg === 'string' && rawImg.startsWith('/https://')) rawImg = rawImg.substring(1);
+      if (!rawImg) return 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
       let img = String(rawImg).trim();
-      if (!img) return '/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
+      if (!img) return 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
 
       // Google Drive link resolver
       if (img.includes('drive.google.com') || img.includes('docs.google.com')) {
@@ -1426,7 +1428,7 @@
         <article onclick="readNewsArticle('${main.id}')" class="group cursor-pointer bg-slate-50/60 hover:bg-emerald-50/40 rounded-2xl p-4 border border-emerald-100/80 transition-all duration-300 flex flex-col justify-between h-full">
           <div class="space-y-3.5">
             <div class="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100">
-              <img src="${resolveNewsImageUrl(main.gambar_url)}" alt="${escapeHtml(main.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
+              <img src="${resolveNewsImageUrl(main.gambar_url)}" alt="${escapeHtml(main.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
               <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${mainBadgeClass} text-white font-black text-xs shadow-md">
                 <i data-lucide="bell" class="w-3.5 h-3.5"></i> ${escapeHtml(main.kategori.toUpperCase())}
               </span>
@@ -1469,7 +1471,7 @@
           <article onclick="readNewsArticle('${n.id}')" class="group cursor-pointer bg-slate-50/50 hover:bg-emerald-50/30 rounded-2xl p-3 border border-slate-200/70 hover:border-emerald-200 transition-all duration-200 flex flex-col justify-between flex-1">
             <div>
               <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-2.5">
-                <img src="${resolveNewsImageUrl(n.gambar_url)}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
+                <img src="${resolveNewsImageUrl(n.gambar_url)}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
                 <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md ${badge} text-[9px] font-black shadow-xs uppercase tracking-wider">
                   ${escapeHtml(n.kategori)}
                 </span>
@@ -1569,7 +1571,7 @@
               <div onclick="readNewsArticle('${n.id}')" class="bg-white rounded-3xl p-4 border border-emerald-100 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
                 <div>
                   <div class="relative aspect-video rounded-2xl overflow-hidden bg-slate-100 mb-3.5">
-                    <img src="${resolveNewsImageUrl(n.gambar_url)}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
+                    <img src="${resolveNewsImageUrl(n.gambar_url)}" alt="${escapeHtml(n.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
                     <span class="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-full ${badgeClass} text-[10px] font-black shadow-sm uppercase tracking-wider">
                       ${escapeHtml(n.kategori)}
                     </span>
@@ -1674,7 +1676,7 @@
             <div onclick="readNewsArticle('${r.id}')" class="bg-white rounded-2xl p-3.5 border border-emerald-100 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all duration-200 group cursor-pointer flex flex-col justify-between">
               <div>
                 <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-2.5">
-                  <img src="${resolveNewsImageUrl(r.gambar_url)}" alt="${escapeHtml(r.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='/https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
+                  <img src="${resolveNewsImageUrl(r.gambar_url)}" alt="${escapeHtml(r.judul)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst'">
                   <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full ${badgeColor} text-[9px] font-black shadow-sm uppercase tracking-wider">
                     ${escapeHtml(r.kategori)}
                   </span>
