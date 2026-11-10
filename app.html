@@ -554,101 +554,107 @@
       <!-- Header Banner Tab Kalender -->
       <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-700/80 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-amber-300">
+          <div class="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shadow-xs">
             <i data-lucide="calendar" class="w-5 h-5"></i>
           </div>
           <div>
             <h2 class="text-sm font-black text-white leading-tight">Kalender Islam &amp; Pasaran Jawa</h2>
-            <p class="text-[10px] text-emerald-200 mt-0.5">Hisab LF PBNU, puasa sunnah, &amp; agenda madrasah</p>
+            <p class="text-[10px] text-emerald-200 mt-0.5">Hisab LF PBNU • Puasa Sunnah • Agenda KBM</p>
           </div>
         </div>
-        <button onclick="goToCurrentMonth()" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[10.5px] font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer">
-          <i data-lucide="calendar-check" class="w-3 h-3 text-amber-300"></i>
+        <button onclick="goToCurrentMonth()" type="button" class="px-2.5 py-1 rounded-xl bg-white/15 hover:bg-white/25 text-white text-[10.5px] font-bold flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer border border-white/10 shadow-xs">
+          <i data-lucide="calendar-check" class="w-3.5 h-3.5 text-amber-300"></i>
           <span>Hari Ini</span>
         </button>
       </div>
 
       <!-- Kartu Kalender Interaktif -->
-      <div class="bg-white p-3.5 rounded-2xl shadow-xs border border-emerald-100/90 space-y-3">
+      <div class="bg-white p-3.5 rounded-2xl shadow-xs border border-slate-200 space-y-3">
         <!-- 1. Navigasi Bulan -->
-        <div class="flex items-center justify-between bg-slate-50 p-1.5 rounded-xl border border-slate-200/70">
-          <button onclick="changeCalMonth(-1)" class="w-8 h-8 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-primary rounded-lg flex items-center justify-center shadow-2xs transition active:scale-90 border border-slate-200/60 cursor-pointer">
+        <div class="flex items-center justify-between bg-slate-50 p-2 rounded-2xl border border-slate-200/90 shadow-2xs">
+          <button onclick="changeCalMonth(-1)" type="button" class="w-8 h-8 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-primary rounded-xl flex items-center justify-center shadow-xs transition active:scale-90 border border-slate-200 cursor-pointer" title="Bulan Sebelumnya">
             <i data-lucide="chevron-left" class="w-4 h-4"></i>
           </button>
           <div class="text-center px-2">
-            <span id="cal-month-year-text" class="text-sm font-black text-brand-dark block leading-tight">
-              Oktober 2026
+            <span id="cal-month-year-text" class="text-sm sm:text-base font-black text-slate-900 block leading-tight tracking-wide">
+              November 2026
             </span>
-            <span id="cal-hijri-month-text" class="text-[10px] font-bold text-emerald-700 block leading-tight mt-0.5">
-              Rabi'ul Akhir - Jumadil Ula 1448 H
+            <span id="cal-hijri-month-text" class="text-[10.5px] font-bold text-emerald-800 block leading-tight mt-0.5">
+              Jumadil Ula - Jumadil Akhirah 1448 H
             </span>
           </div>
-          <button onclick="changeCalMonth(1)" class="w-8 h-8 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-primary rounded-lg flex items-center justify-center shadow-2xs transition active:scale-90 border border-slate-200/60 cursor-pointer">
+          <button onclick="changeCalMonth(1)" type="button" class="w-8 h-8 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-primary rounded-xl flex items-center justify-center shadow-xs transition active:scale-90 border border-slate-200 cursor-pointer" title="Bulan Berikutnya">
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
           </button>
         </div>
 
-        <!-- 2. Detail Tanggal Terpilih -->
-        <div id="selected-date-card" class="bg-gradient-to-br from-brand-900 via-brand-800 to-emerald-900 text-white p-3 rounded-xl shadow-xs border border-emerald-700/50 space-y-1">
-          <div class="flex items-center justify-between gap-2">
-            <span id="selected-date-status-badge" class="text-[9px] font-black uppercase bg-amber-400/25 text-amber-300 px-2 py-0.5 rounded tracking-wider shrink-0">
-              Hari Ini
-            </span>
-            <div id="selected-date-tag" class="bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10 text-[9.5px] font-semibold text-emerald-200 truncate max-w-[75%]">
-              <i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> Kegiatan Normal
+        <!-- 2. Detail Tanggal Terpilih (High Contrast Deep Emerald Card) -->
+        <div id="selected-date-card" style="background: linear-gradient(135deg, #033324 0%, #064e3b 50%, #022c22 100%); color: #ffffff;" class="p-3.5 rounded-2xl border-2 border-emerald-500/40 shadow-md space-y-2 relative overflow-hidden">
+          <div class="flex items-center justify-between gap-2 border-b border-white/15 pb-2">
+            <div class="flex items-center gap-1.5">
+              <span id="selected-date-status-badge" class="text-[9.5px] font-black uppercase bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full tracking-wider shadow-xs">
+                Hari Ini
+              </span>
+            </div>
+            <div id="selected-date-tag" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white truncate max-w-[70%] flex items-center gap-1 shadow-2xs">
+              <i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300"></i>
+              <span>Kegiatan KBM Normal</span>
             </div>
           </div>
-          <div id="selected-date-title" class="text-sm font-extrabold text-white tracking-wide leading-tight pt-0.5">
-            Rabu Pon, 28 Oktober 2026
-          </div>
-          <div id="selected-date-subtitle" class="text-xs font-semibold text-amber-300 leading-tight">
-            Rabu Pon, 16 Jumadil Ula 1448 H
-          </div>
-        </div>
-
-        <!-- 3. Legend Kompak -->
-        <div class="flex items-center justify-between text-[8.5px] text-slate-500 px-1 py-1 bg-slate-50 rounded-lg border border-slate-100">
-          <div class="flex items-center gap-2">
-            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Puasa</span>
-            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> PHBI</span>
-            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Jumat</span>
-          </div>
-          <div class="flex items-center gap-1.5 font-medium">
-            <span class="text-slate-800 font-extrabold">Masehi</span> &bull;
-            <span class="text-emerald-700 font-extrabold">Hijriyah</span> &bull;
-            <span class="text-amber-700 font-bold">Jawa</span>
+          <div>
+            <div id="selected-date-title" class="text-sm sm:text-base font-black text-white tracking-wide leading-tight">
+              Rabu Pahing, 11 November 2026
+            </div>
+            <div id="selected-date-subtitle" class="text-xs font-extrabold text-amber-300 leading-tight mt-1 flex items-center gap-1.5">
+              <i data-lucide="moon" class="w-3.5 h-3.5 text-amber-300 shrink-0"></i>
+              <span>Rabu Pahing, 1 Jumadil Akhirah 1448 H</span>
+            </div>
           </div>
         </div>
 
-        <!-- 4. Grid Hari (Ahad - Sabtu) -->
-        <div class="grid grid-cols-7 gap-1 text-center font-bold text-[10px] text-slate-500 py-1 border-y border-slate-100">
-          <div class="text-red-500">Ahad</div>
-          <div>Senin</div>
-          <div>Selasa</div>
-          <div>Rabu</div>
-          <div>Kamis</div>
-          <div class="text-emerald-700 font-extrabold">Jumat</div>
-          <div>Sabtu</div>
+        <!-- 3. Legend Kompak & Keterangan Warna -->
+        <div class="flex flex-wrap items-center justify-between text-[9px] text-slate-600 px-2.5 py-1.5 bg-slate-50 rounded-xl border border-slate-200/80 gap-1.5">
+          <div class="flex items-center gap-2.5">
+            <span class="flex items-center gap-1 font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-500 shadow-2xs"></span> Puasa</span>
+            <span class="flex items-center gap-1 font-semibold"><span class="w-2 h-2 rounded-full bg-amber-400 shadow-2xs"></span> PHBI</span>
+            <span class="flex items-center gap-1 font-semibold"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-2xs"></span> Agenda</span>
+          </div>
+          <div class="flex items-center gap-1.5 font-bold text-[9.5px]">
+            <span class="text-slate-900 font-extrabold">Masehi</span> •
+            <span class="text-emerald-800 font-extrabold">Hijriyah</span> •
+            <span class="text-amber-800 font-extrabold">Pasaran</span>
+          </div>
         </div>
 
-        <!-- 5. Grid Tanggal -->
+        <!-- 4. Grid Nama Hari (Ahad - Sabtu) -->
+        <div class="grid grid-cols-7 gap-1 text-center font-black text-[10px] text-slate-700 py-1">
+          <div class="py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-100 font-black">Ahad</div>
+          <div class="py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200">Sen</div>
+          <div class="py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200">Sel</div>
+          <div class="py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200">Rab</div>
+          <div class="py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200">Kam</div>
+          <div class="py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-100 font-black">Jum</div>
+          <div class="py-1 rounded-lg bg-slate-100/80 text-slate-700 border border-slate-200">Sab</div>
+        </div>
+
+        <!-- 5. Grid Sel Tanggal -->
         <div id="calendar-days-grid" class="grid grid-cols-7 gap-1">
-          <!-- Populated dynamically via JS -->
+          <!-- Populated dynamically via renderCalendar() -->
         </div>
 
-        <!-- 6. Agenda & Hari Besar Islam -->
-        <div class="pt-3 border-t border-slate-100 space-y-2">
+        <!-- 6. Agenda & Hari Besar Islam (PHBI) Bulan Ini -->
+        <div class="pt-3 border-t border-slate-100 space-y-2.5">
           <div class="flex items-center justify-between">
-            <h4 class="text-[11px] font-black text-slate-600 uppercase tracking-wider flex items-center">
-              <span class="w-1.5 h-3 bg-brand-primary rounded-full mr-1.5"></span>
-              Agenda &amp; PHBI Bulan Ini
+            <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+              <span class="w-1.5 h-3.5 bg-brand-primary rounded-full"></span>
+              <span>Agenda &amp; PHBI Bulan Ini</span>
             </h4>
-            <span id="cal-events-count" class="text-[9.5px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span id="cal-events-count" class="text-[9.5px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
               0 Agenda
             </span>
           </div>
-          <div id="calendar-events-container" class="space-y-1.5">
-            <!-- Populated dynamically -->
+          <div id="calendar-events-container" class="space-y-2">
+            <!-- Populated dynamically via renderCalEventsList() -->
           </div>
         </div>
       </div>
@@ -4968,11 +4974,26 @@
     };
 
     const AGENDA_YASUA = {
-      "2026-10-5": { title: "Penilaian Tengah Semester (PTS) Gasal", desc: "Asesmen tertulis & CBT Lab Komputer", type: "exam" },
-      "2026-10-22": { title: "Peringatan Hari Santri Nasional 2026", desc: "Upacara bendera & pawai ta'aruf", type: "event" },
-      "2026-11-10": { title: "Peringatan Hari Pahlawan & Ziarah Suada", desc: "Tahlil akbar di Makam Pendiri YASUA", type: "religious" },
-      "2026-12-14": { title: "Penilaian Akhir Semester (PAS) Gasal", desc: "Ujian semester ganjil digital", type: "exam" }
+      "2026-10-5": { title: "Penilaian Tengah Semester (PTS) Gasal", desc: "Asesmen tertulis & CBT Lab Komputer Terpadu", type: "exam" },
+      "2026-10-22": { title: "Peringatan Hari Santri Nasional 2026", desc: "Upacara bendera & apel siaga santri MTs YASUA", type: "event" },
+      "2026-11-10": { title: "Peringatan Hari Pahlawan Nasional", desc: "Upacara khidmat dipimpin Kepala Madrasah Muthohar, S.Pd.", type: "event" },
+      "2026-11-23": { title: "Asesmen Sumatif Akhir Semester (ASAS) Ganjil", desc: "Hari ke-1 Ujian Semester Ganjil CBT & Tertulis", type: "exam" },
+      "2026-11-24": { title: "ASAS Ganjil Hari Ke-2", desc: "Ujian mata pelajaran keagamaan & umum", type: "exam" },
+      "2026-11-25": { title: "Peringatan Hari Guru Nasional & ASAS Hari Ke-3", desc: "Apresiasi dewan guru & kelanjutan ujian", type: "event" },
+      "2026-11-26": { title: "ASAS Ganjil Hari Ke-4", desc: "Ujian CBT Lab Komputer Terpadu", type: "exam" },
+      "2026-11-27": { title: "ASAS Ganjil Hari Ke-5", desc: "Ujian keagamaan & salafiyyah", type: "exam" },
+      "2026-11-28": { title: "Penutupan ASAS Ganjil TP 2026/2027", desc: "Hari terakhir ujian semester ganjil", type: "exam" },
+      "2026-12-1": { title: "Pekan Pengolahan Nilai & Remedial", desc: "Bimbingan remedial dan rekapitulasi nilai rapor", type: "exam" },
+      "2026-12-18": { title: "Penyerahan Rapor Semester Ganjil", desc: "Penerimaan buku laporan hasil belajar siswa-siswi", type: "event" },
+      "2026-12-21": { title: "Awal Libur Akhir Semester Ganjil", desc: "Libur semester ganjil madrasah", type: "event" },
+      "2027-1-4": { title: "Awal Masuk KBM Semester Genap 2026/2027", desc: "Hari pertama masuk sekolah semester genap", type: "event" },
+      "2027-1-27": { title: "Peringatan Isra Mi'raj 1448 H", desc: "Kajian rohani & pembacaan sholawat akbar", type: "religious" },
+      "2027-2-15": { title: "Malam Nisfu Sya'ban 1448 H", desc: "Doa bersama & pembacaan Surat Yasin 3x", type: "religious" },
+      "2027-3-1": { title: "Perkiraan 1 Ramadhan 1448 H", desc: "Awal ibadah puasa wajib bulan suci Ramadhan", type: "religious" },
+      "2027-3-17": { title: "Peringatan Nuzulul Qur'an 1448 H", desc: "Khataman akbar Al-Qur'an santri & asatidz", type: "religious" }
     };
+
+    let selectedCalDayKey = null;
 
     function getHijriDate(dateObj) {
       try {
@@ -4995,7 +5016,7 @@
           monthName: namaBulanHijriyah[month] || "Hijriyah"
         };
       } catch (e) {
-        return { day: 1, month: 4, year: 1448, monthName: "Rabi'ul Akhir" };
+        return { day: 1, month: 5, year: 1448, monthName: "Jumadil Ula" };
       }
     }
 
@@ -5014,6 +5035,7 @@
 
     function goToCurrentMonth() {
       currentCalDate = new Date();
+      selectedCalDayKey = null;
       renderCalendar();
     }
 
@@ -5048,11 +5070,12 @@
 
       for (let i = 0; i < startDayOfWeek; i++) {
         const emptyCell = document.createElement('div');
-        emptyCell.className = "h-12 sm:h-14 bg-slate-50/40 rounded-lg";
+        emptyCell.className = "h-14 sm:h-16 bg-slate-50/50 rounded-xl border border-slate-100/50";
         grid.appendChild(emptyCell);
       }
 
       const monthlyEvents = [];
+      let defaultSelectedDayInfo = null;
 
       for (let day = 1; day <= totalDays; day++) {
         const thisDate = new Date(year, month, day);
@@ -5071,63 +5094,141 @@
         const isAyyamulBidh = !isRamadhan && !isHaramPuasa && [13, 14, 15].includes(hijri.day);
         const isSeninKamis = !isRamadhan && !isHaramPuasa && (dayOfWeek === 1 || dayOfWeek === 4);
 
-        if (holiday) monthlyEvents.push({ date: day + " " + namaBulanIndo[month], title: holiday, type: "phbi" });
-        if (agenda) monthlyEvents.push({ date: day + " " + namaBulanIndo[month], title: agenda.title, desc: agenda.desc, type: "agenda" });
+        if (holiday) {
+          monthlyEvents.push({ date: day + " " + namaBulanIndo[month] + " (" + hijri.day + " " + hijri.monthName + ")", title: holiday, type: "phbi" });
+        }
+        if (agenda) {
+          monthlyEvents.push({ date: day + " " + namaBulanIndo[month], title: agenda.title, desc: agenda.desc, type: agenda.type || "agenda" });
+        }
+        if (hijri.day === 13 && !isRamadhan && !isHaramPuasa) {
+          monthlyEvents.push({ date: day + " - " + (day + 2) + " " + namaBulanIndo[month], title: "Puasa Sunnah Ayyamul Bidh (" + hijri.monthName + ")", desc: "Puasa sunnah tengah bulan hijriyah tanggal 13, 14, 15", type: "puasa" });
+        }
 
         const dayCell = document.createElement('div');
-        let bgStyle = isToday ? "bg-brand-primary text-white shadow-xs font-black ring-2 ring-amber-400" : "bg-white hover:bg-emerald-50 text-slate-800 border border-slate-100";
-        if (isAyyamulBidh && !isToday) bgStyle += " ring-1 ring-emerald-500 bg-emerald-50/50";
+        dayCell.id = "cal-day-" + dateKey;
 
-        dayCell.className = "h-12 sm:h-14 p-1 rounded-lg flex flex-col justify-between cursor-pointer transition active:scale-95 " + bgStyle;
-        dayCell.onclick = () => selectCalDate(year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, isToday);
+        let bgStyle = "bg-white hover:bg-emerald-50/60 border border-slate-200/90 text-slate-900";
+        let inlineStyle = "";
 
-        const hijriColor = isToday ? "text-amber-200" : "text-emerald-700 font-bold";
-        const pasaranColor = isToday ? "text-amber-300" : (dayOfWeek === 0 ? "text-red-400" : "text-slate-400");
-        const masehiColor = isToday ? "text-white" : (dayOfWeek === 0 ? "text-red-600 font-extrabold" : "font-black");
+        if (isToday) {
+          inlineStyle = "background: #065F46; color: #ffffff; border: 2px solid #F59E0B; box-shadow: 0 4px 10px rgba(6, 95, 70, 0.35);";
+        } else if (dayOfWeek === 0) {
+          // Ahad
+          bgStyle = "bg-rose-50/50 hover:bg-rose-100/60 border border-rose-200/80";
+        } else if (dayOfWeek === 5) {
+          // Jumat
+          bgStyle = "bg-emerald-50/40 hover:bg-emerald-100/60 border border-emerald-200/70";
+        }
+
+        if (isAyyamulBidh && !isToday) {
+          bgStyle += " ring-1 ring-emerald-500 bg-emerald-50/50";
+        }
+
+        dayCell.className = "h-14 sm:h-16 p-1.5 rounded-xl flex flex-col justify-between cursor-pointer transition-all active:scale-95 shadow-2xs " + bgStyle;
+        if (inlineStyle) dayCell.setAttribute("style", inlineStyle);
+
+        dayCell.onclick = () => {
+          selectCalDate(year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, isToday, dateKey);
+        };
+
+        const hijriColor = isToday ? "text-amber-200 font-extrabold" : "text-emerald-700 font-extrabold";
+        const pasaranColor = isToday ? "text-amber-300 font-bold" : (dayOfWeek === 0 ? "text-rose-500 font-bold" : "text-slate-500 font-semibold");
+        const masehiColor = isToday ? "text-white font-black" : (dayOfWeek === 0 ? "text-rose-600 font-black" : "text-slate-900 font-black");
+
+        // Titik Indikator Event
+        let dotIndicator = "";
+        if (holiday) {
+          dotIndicator = '<span class="w-2 h-2 rounded-full bg-amber-400 shadow-xs" title="' + holiday + '"></span>';
+        } else if (agenda) {
+          dotIndicator = '<span class="w-2 h-2 rounded-full bg-blue-500 shadow-xs" title="' + agenda.title + '"></span>';
+        } else if (isAyyamulBidh || isSeninKamis) {
+          dotIndicator = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-2xs" title="Sunnah Puasa"></span>';
+        }
 
         dayCell.innerHTML = 
           '<div class="flex justify-between items-start leading-none">' +
-            '<span class="text-xs ' + masehiColor + '">' + day + '</span>' +
-            '<span class="text-[8px] ' + hijriColor + '">' + hijri.day + '</span>' +
+            '<span class="text-xs sm:text-sm ' + masehiColor + '">' + day + '</span>' +
+            '<span class="text-[8.5px] ' + hijriColor + '">' + hijri.day + '</span>' +
           '</div>' +
           '<div class="flex justify-between items-end leading-none">' +
-            '<span class="text-[7.5px] font-semibold ' + pasaranColor + '">' + pasaran + '</span>' +
-            (holiday || agenda ? '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>' : (isSeninKamis || isAyyamulBidh ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>' : '')) +
+            '<span class="text-[8px] ' + pasaranColor + '">' + pasaran + '</span>' +
+            dotIndicator +
           '</div>';
 
         grid.appendChild(dayCell);
 
         if (isToday) {
-          selectCalDate(year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, true);
+          defaultSelectedDayInfo = { year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, isToday, dateKey };
+        } else if (!defaultSelectedDayInfo && day === 1) {
+          defaultSelectedDayInfo = { year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, isToday: false, dateKey };
         }
+      }
+
+      if (defaultSelectedDayInfo) {
+        selectCalDate(
+          defaultSelectedDayInfo.year,
+          defaultSelectedDayInfo.month,
+          defaultSelectedDayInfo.day,
+          defaultSelectedDayInfo.pasaran,
+          defaultSelectedDayInfo.dayOfWeek,
+          defaultSelectedDayInfo.hijri,
+          defaultSelectedDayInfo.holiday,
+          defaultSelectedDayInfo.agenda,
+          defaultSelectedDayInfo.isToday,
+          defaultSelectedDayInfo.dateKey
+        );
       }
 
       renderCalEventsList(monthlyEvents);
     }
 
-    function selectCalDate(year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, isToday) {
+    function selectCalDate(year, month, day, pasaran, dayOfWeek, hijri, holiday, agenda, isToday, dateKey) {
       const badge = document.getElementById('selected-date-status-badge');
       const tag = document.getElementById('selected-date-tag');
       const title = document.getElementById('selected-date-title');
       const subtitle = document.getElementById('selected-date-subtitle');
 
-      if (badge) badge.textContent = isToday ? "Hari Ini" : namaHariIndo[dayOfWeek];
-      if (title) title.textContent = namaHariIndo[dayOfWeek] + " " + pasaran + ", " + day + " " + namaBulanIndo[month] + " " + year;
-      if (subtitle) subtitle.textContent = namaHariIndo[dayOfWeek] + " " + pasaran + ", " + hijri.day + " " + hijri.monthName + " " + hijri.year + " H";
+      // Visual active cell ring highlight
+      if (selectedCalDayKey) {
+        const prevEl = document.getElementById('cal-day-' + selectedCalDayKey);
+        if (prevEl) prevEl.classList.remove('ring-2', 'ring-emerald-500', 'ring-offset-1');
+      }
+      if (dateKey) {
+        selectedCalDayKey = dateKey;
+        const curEl = document.getElementById('cal-day-' + dateKey);
+        if (curEl && !isToday) {
+          curEl.classList.add('ring-2', 'ring-emerald-500', 'ring-offset-1');
+        }
+      }
+
+      if (badge) {
+        badge.textContent = isToday ? "HARI INI" : namaHariIndo[dayOfWeek].toUpperCase();
+      }
+      if (title) {
+        title.textContent = namaHariIndo[dayOfWeek] + " " + pasaran + ", " + day + " " + namaBulanIndo[month] + " " + year;
+      }
+      if (subtitle) {
+        subtitle.innerHTML = '<i data-lucide="moon" class="w-3.5 h-3.5 text-amber-300 shrink-0"></i><span>' + namaHariIndo[dayOfWeek] + " " + pasaran + ", " + hijri.day + " " + hijri.monthName + " " + hijri.year + " H</span>";
+      }
 
       if (tag) {
         if (holiday) {
-          tag.innerHTML = '<i data-lucide="moon" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> ' + holiday; if (window.lucide) window.lucide.createIcons();
+          tag.innerHTML = '<i data-lucide="moon" class="w-3.5 h-3.5 text-amber-300 mr-1 shrink-0"></i><span class="truncate">' + holiday + '</span>';
         } else if (agenda) {
-          tag.innerHTML = '<i data-lucide="bell" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> ' + agenda.title; if (window.lucide) window.lucide.createIcons();
+          tag.innerHTML = '<i data-lucide="bell" class="w-3.5 h-3.5 text-amber-300 mr-1 shrink-0"></i><span class="truncate">' + agenda.title + '</span>';
         } else if (dayOfWeek === 1 || dayOfWeek === 4) {
-          tag.innerHTML = '<i data-lucide="star" class="w-3.5 h-3.5 text-emerald-300 mr-1 inline"></i> Sunnah Puasa Senin-Kamis'; if (window.lucide) window.lucide.createIcons();
+          tag.innerHTML = '<i data-lucide="star" class="w-3.5 h-3.5 text-emerald-300 mr-1 shrink-0"></i><span>Sunnah Puasa ' + namaHariIndo[dayOfWeek] + '</span>';
         } else if ([13, 14, 15].includes(hijri.day)) {
-          tag.innerHTML = '<i data-lucide="star" class="w-3.5 h-3.5 text-emerald-300 mr-1 inline"></i> Sunnah Puasa Ayyamul Bidh'; if (window.lucide) window.lucide.createIcons();
+          tag.innerHTML = '<i data-lucide="star" class="w-3.5 h-3.5 text-emerald-300 mr-1 shrink-0"></i><span>Sunnah Ayyamul Bidh (' + hijri.day + ' ' + hijri.monthName + ')</span>';
+        } else if (dayOfWeek === 5) {
+          tag.innerHTML = '<i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-300 mr-1 shrink-0"></i><span>Jum\'at Berkah & Khutbah</span>';
+        } else if (dayOfWeek === 0) {
+          tag.innerHTML = '<i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-300 mr-1 shrink-0"></i><span>Libur Akhir Pekan</span>';
         } else {
-          tag.innerHTML = '<i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300 mr-1 inline"></i> Kegiatan KBM Normal'; if (window.lucide) window.lucide.createIcons();
+          tag.innerHTML = '<i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300 mr-1 shrink-0"></i><span>Kegiatan KBM Normal</span>';
         }
       }
+      if (window.lucide) window.lucide.createIcons();
     }
 
     function renderCalEventsList(events) {
@@ -5138,26 +5239,48 @@
       if (count) count.textContent = events.length + ' Agenda';
 
       if (events.length === 0) {
-        container.innerHTML = '<div class="text-center text-xs text-slate-400 py-3 italic">Tidak ada agenda khusus bulan ini.</div>';
+        container.innerHTML = '<div class="text-center text-xs text-slate-500 py-4 bg-slate-50 rounded-xl border border-slate-200/70 font-semibold">Tidak ada agenda khusus bulan ini.</div>';
         return;
       }
 
-      setTimeout(() => { if (window.lucide) window.lucide.createIcons(); }, 10);
       container.innerHTML = events.map(e => {
-        const isPhbi = e.type === 'phbi';
-        return '<div class="p-2.5 rounded-xl border ' + (isPhbi ? 'bg-amber-50/60 border-amber-200/80 text-amber-950' : 'bg-emerald-50/60 border-emerald-200/80 text-emerald-950') + ' flex items-start gap-2.5">' +
-          '<div class="w-7 h-7 rounded-lg ' + (isPhbi ? 'bg-amber-200 text-amber-800' : 'bg-emerald-200 text-emerald-800') + ' flex items-center justify-center font-bold text-xs shrink-0">' +
-            '<i data-lucide="' + (isPhbi ? 'moon' : 'calendar-check') + '" class="w-3.5 h-3.5"></i>' +
+        let badgeColor = 'bg-slate-100 text-slate-700 border-slate-200';
+        let iconName = 'calendar';
+        let cardBg = 'bg-slate-50 border-slate-200';
+
+        if (e.type === 'phbi') {
+          badgeColor = 'bg-amber-100 text-amber-900 border-amber-300';
+          iconName = 'moon';
+          cardBg = 'bg-amber-50/70 border-amber-200/90 text-amber-950';
+        } else if (e.type === 'exam') {
+          badgeColor = 'bg-blue-100 text-blue-900 border-blue-300';
+          iconName = 'file-text';
+          cardBg = 'bg-blue-50/70 border-blue-200/90 text-blue-950';
+        } else if (e.type === 'puasa') {
+          badgeColor = 'bg-emerald-100 text-emerald-900 border-emerald-300';
+          iconName = 'star';
+          cardBg = 'bg-emerald-50/70 border-emerald-200/90 text-emerald-950';
+        } else if (e.type === 'event' || e.type === 'religious') {
+          badgeColor = 'bg-purple-100 text-purple-900 border-purple-300';
+          iconName = 'award';
+          cardBg = 'bg-purple-50/70 border-purple-200/90 text-purple-950';
+        }
+
+        return '<div class="p-3 rounded-2xl border ' + cardBg + ' flex items-start gap-2.5 shadow-2xs">' +
+          '<div class="w-8 h-8 rounded-xl ' + badgeColor + ' flex items-center justify-center font-bold text-xs shrink-0 shadow-xs border">' +
+            '<i data-lucide="' + iconName + '" class="w-4 h-4"></i>' +
           '</div>' +
           '<div class="min-w-0 flex-1">' +
             '<div class="flex items-center justify-between gap-1">' +
-              '<h5 class="font-bold text-xs leading-tight">' + e.title + '</h5>' +
-              '<span class="text-[9px] font-semibold text-slate-500 shrink-0">' + e.date + '</span>' +
+              '<h5 class="font-extrabold text-xs leading-tight text-slate-900">' + e.title + '</h5>' +
+              '<span class="text-[9.5px] font-bold text-slate-600 bg-white/80 px-2 py-0.5 rounded-md border border-slate-200 shrink-0 font-mono">' + e.date + '</span>' +
             '</div>' +
-            (e.desc ? '<p class="text-[10px] text-slate-600 mt-0.5 line-clamp-1">' + e.desc + '</p>' : '') +
+            (e.desc ? '<p class="text-[10.5px] text-slate-600 mt-1 leading-snug">' + e.desc + '</p>' : '') +
           '</div>' +
         '</div>';
       }).join('');
+
+      setTimeout(() => { if (window.lucide) window.lucide.createIcons(); }, 10);
     }
 
     // --- 4. Guru & Tendik Engine ---
