@@ -138,12 +138,12 @@
           <span class="text-[10px] mt-1.5 font-bold text-slate-700 leading-tight">Program</span>
         </a>
 
-        <!-- 2. Kalender Islam & Jawa -->
-        <a href="javascript:void(0)" onclick="switchAppTab('kalender')" class="flex flex-col items-center group active:scale-95 transition-transform text-center cursor-pointer">
-          <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center text-lg shadow-2xs border border-rose-100 group-hover:bg-rose-500 group-hover:text-white transition-colors">
-            <i data-lucide="calendar" class="w-5 h-5"></i>
+        <!-- 2. Jadwal Pelajaran (Roster KBM) & Seragam Harian -->
+        <a href="javascript:void(0)" onclick="switchAppTab('jadwal')" class="flex flex-col items-center group active:scale-95 transition-transform text-center cursor-pointer">
+          <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-lg shadow-2xs border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+            <i data-lucide="calendar-clock" class="w-5 h-5"></i>
           </div>
-          <span class="text-[10px] mt-1.5 font-bold text-slate-700 leading-tight">Kalender</span>
+          <span class="text-[10px] mt-1.5 font-bold text-slate-700 leading-tight">Jadwal KBM</span>
         </a>
 
         <!-- 3. Unit Ekskul -->
@@ -653,6 +653,231 @@
         </div>
       </div>
     </div><!-- End #tab-kalender -->
+
+    <!-- ==================== TAB JADWAL: ROSTER KBM & SERAGAM HARIAN ==================== -->
+    <div id="tab-jadwal" class="hidden space-y-3.5">
+      <!-- Header Banner Tab Jadwal -->
+      <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-700/80 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+          <div>
+            <h2 class="text-sm font-black text-white leading-tight">Jadwal Pelajaran &amp; Seragam</h2>
+            <p class="text-[10px] text-emerald-200 mt-0.5">Roster KBM • Tahun Pelajaran 2026/2027</p>
+          </div>
+        </div>
+        <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9.5px] font-black uppercase tracking-wide">
+          Semester Genap
+        </span>
+      </div>
+
+      <!-- KARTU PINTASAN HARI INI (LIVE DYNAMIC HIGHLIGHT) -->
+      <div id="jadwal-today-card" class="bg-gradient-to-br from-indigo-950 via-slate-900 to-emerald-950 text-white p-4 rounded-2xl border-2 border-indigo-400/50 shadow-md space-y-3 relative overflow-hidden">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs">
+              <i data-lucide="clock" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <span class="text-[9.5px] text-amber-300 uppercase tracking-widest font-black block">Info Hari Ini</span>
+              <h4 id="today-name-display" class="text-xs font-black text-white">Selasa, 10 November 2026</h4>
+            </div>
+          </div>
+          <span id="today-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-bold border border-emerald-500/30">
+            KBM Aktif
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <!-- Seragam Hari Ini -->
+          <div class="p-2.5 rounded-xl bg-white/10 border border-white/10 flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-emerald-400/20 text-emerald-300 flex items-center justify-center shrink-0">
+              <i data-lucide="shirt" class="w-4 h-4"></i>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Seragam Hari Ini</span>
+              <strong id="today-uniform-title" class="text-white text-xs block truncate">Khas Batik Hijau MTs YASUA</strong>
+              <p id="today-uniform-desc" class="text-[10px] text-emerald-200 mt-0.5 leading-snug">Batik Hijau Madrasah, bawahan hijau tua, peci hitam / jilbab hijau.</p>
+            </div>
+          </div>
+
+          <!-- Jam Masuk & Ibadah -->
+          <div class="p-2.5 rounded-xl bg-white/10 border border-white/10 flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0">
+              <i data-lucide="bell" class="w-4 h-4"></i>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Waktu Masuk Madrasah</span>
+              <strong class="text-white text-xs block">Pukul 07.00 WIB Tepat</strong>
+              <p class="text-[10px] text-amber-200 mt-0.5 leading-snug">Diawali Sholat Dhuha, tadarus Al-Qur'an &amp; Asmaul Husna berjamaah.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANDUAN LENGKAP SERAGAM MINGGUAN (Senin - Sabtu) -->
+      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+            <span>Ketentuan Seragam Siswa-Siswi (Senin - Sabtu)</span>
+          </h4>
+          <span class="text-[9.5px] text-slate-400">Tertib &amp; Rapi</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[10.5px]">
+          <!-- Senin -->
+          <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-blue-900 text-xs">SENIN</span>
+              <span class="px-1.5 py-0.2 rounded bg-blue-200 text-blue-800 text-[8.5px] font-bold">OSIS</span>
+            </div>
+            <strong class="text-slate-800 block text-[11px] leading-tight">Putih - Biru Dongker</strong>
+            <p class="text-[9.5px] text-slate-600 leading-snug">Dasi, sabuk madrasah, peci hitam/jilbab putih, sepatu hitam bertali.</p>
+          </div>
+
+          <!-- Selasa -->
+          <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-emerald-900 text-xs">SELASA</span>
+              <span class="px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-800 text-[8.5px] font-bold">BATIK</span>
+            </div>
+            <strong class="text-slate-800 block text-[11px] leading-tight">Khas Batik Hijau YASUA</strong>
+            <p class="text-[9.5px] text-slate-600 leading-snug">Kemeja batik hijau khas, bawahan hijau tua, peci hitam/jilbab hijau.</p>
+          </div>
+
+          <!-- Rabu -->
+          <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-amber-900 text-xs">RABU</span>
+              <span class="px-1.5 py-0.2 rounded bg-amber-200 text-amber-800 text-[8.5px] font-bold">PRAMUKA</span>
+            </div>
+            <strong class="text-slate-800 block text-[11px] leading-tight">Pramuka Lengkap</strong>
+            <p class="text-[9.5px] text-slate-600 leading-snug">Baju pramuka atribut lengkap, kacu leher, baret/topi pramuka.</p>
+          </div>
+
+          <!-- Kamis -->
+          <div class="p-2.5 rounded-xl bg-teal-50/70 border border-teal-200/80 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-teal-900 text-xs">KAMIS</span>
+              <span class="px-1.5 py-0.2 rounded bg-teal-200 text-teal-800 text-[8.5px] font-bold">IDENTITAS</span>
+            </div>
+            <strong class="text-slate-800 block text-[11px] leading-tight">Kemeja Hijau Toska</strong>
+            <p class="text-[9.5px] text-slate-600 leading-snug">Bawahan hitam, jilbab bordir identitas YASUA, peci hitam madrasah.</p>
+          </div>
+
+          <!-- Jumat -->
+          <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200/80 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-purple-900 text-xs">JUM'AT</span>
+              <span class="px-1.5 py-0.2 rounded bg-purple-200 text-purple-800 text-[8.5px] font-bold">MUSLIM</span>
+            </div>
+            <strong class="text-slate-800 block text-[11px] leading-tight">Busana Muslim Santun</strong>
+            <p class="text-[9.5px] text-slate-600 leading-snug">Putra: Koko putih &amp; sarung santri rapi. Putri: Gamis muslimah putih.</p>
+          </div>
+
+          <!-- Sabtu -->
+          <div class="p-2.5 rounded-xl bg-rose-50/70 border border-rose-200/80 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-rose-900 text-xs">SABTU</span>
+              <span class="px-1.5 py-0.2 rounded bg-rose-200 text-rose-800 text-[8.5px] font-bold">OLAHRAGA</span>
+            </div>
+            <strong class="text-slate-800 block text-[11px] leading-tight">Kaos Olahraga Resmi</strong>
+            <p class="text-[9.5px] text-slate-600 leading-snug">Kaos olahraga madrasah, sepatu olahraga (Senam &amp; Ekstrakurikuler).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROSTER JADWAL PELAJARAN (INTERACTIVE FILTER) -->
+      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-3">
+        
+        <!-- Filter Baris 1: Tingkat Kelas -->
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-500 mb-1.5">
+            1. Pilih Tingkat &amp; Kelas:
+          </label>
+          <div class="grid grid-cols-3 gap-1.5">
+            <button type="button" onclick="selectJadwalKelas('7')" id="btnKelas-7" class="py-2 px-2 rounded-xl bg-brand-primary text-white font-extrabold text-xs text-center transition-all shadow-xs cursor-pointer">
+              Kelas 7 (A, B, C)
+            </button>
+            <button type="button" onclick="selectJadwalKelas('8')" id="btnKelas-8" class="py-2 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs text-center transition-all cursor-pointer">
+              Kelas 8 (A, B, C)
+            </button>
+            <button type="button" onclick="selectJadwalKelas('9')" id="btnKelas-9" class="py-2 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs text-center transition-all cursor-pointer">
+              Kelas 9 (A, B, C)
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Baris 2: Hari Belajar (Senin - Sabtu) -->
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-500 mb-1.5">
+            2. Pilih Hari KBM:
+          </label>
+          <div class="grid grid-cols-6 gap-1">
+            <button type="button" onclick="selectJadwalHari('Senin')" id="btnHari-Senin" class="py-1.5 px-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700 font-bold text-[11px] text-center transition-all cursor-pointer">
+              Sen
+            </button>
+            <button type="button" onclick="selectJadwalHari('Selasa')" id="btnHari-Selasa" class="py-1.5 px-1 rounded-lg bg-brand-primary text-white font-bold text-[11px] text-center transition-all shadow-xs cursor-pointer">
+              Sel
+            </button>
+            <button type="button" onclick="selectJadwalHari('Rabu')" id="btnHari-Rabu" class="py-1.5 px-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700 font-bold text-[11px] text-center transition-all cursor-pointer">
+              Rab
+            </button>
+            <button type="button" onclick="selectJadwalHari('Kamis')" id="btnHari-Kamis" class="py-1.5 px-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700 font-bold text-[11px] text-center transition-all cursor-pointer">
+              Kam
+            </button>
+            <button type="button" onclick="selectJadwalHari('Jumat')" id="btnHari-Jumat" class="py-1.5 px-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700 font-bold text-[11px] text-center transition-all cursor-pointer">
+              Jum
+            </button>
+            <button type="button" onclick="selectJadwalHari('Sabtu')" id="btnHari-Sabtu" class="py-1.5 px-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700 font-bold text-[11px] text-center transition-all cursor-pointer">
+              Sab
+            </button>
+          </div>
+        </div>
+
+        <!-- Judul Roster Terpilih -->
+        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+          <div>
+            <h5 id="roster-active-title" class="text-xs font-black text-slate-900 leading-tight">
+              Roster KBM: Kelas 7 • Hari Selasa
+            </h5>
+            <p id="roster-active-subtitle" class="text-[10px] text-slate-500">
+              6 Jam Pelajaran + Pembiasaan Ibadah
+            </p>
+          </div>
+          <button type="button" onclick="printJadwalKbm()" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-[10.5px] flex items-center gap-1 transition-colors cursor-pointer border border-emerald-200">
+            <i data-lucide="printer" class="w-3 h-3 text-emerald-700"></i>
+            <span>Cetak Jadwal</span>
+          </button>
+        </div>
+
+        <!-- Timeline Roster Daftar Pelajaran -->
+        <div id="roster-list-container" class="space-y-2 pt-1 text-xs">
+          <!-- Populated dynamically via renderJadwalRoster() -->
+        </div>
+
+      </div>
+
+      <!-- Quick Action / Catatan Kurikulum -->
+      <div class="bg-slate-900 text-white p-3.5 rounded-2xl shadow-sm space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] text-amber-300 font-black uppercase tracking-wider">Kurikulum MTs YASUA</span>
+          <span class="text-[9.5px] text-slate-400">Waka Kurikulum</span>
+        </div>
+        <p class="text-xs text-slate-200 leading-relaxed">
+          Siswa diharapkan hadir paling lambat 10 menit sebelum jam 07.00 WIB untuk mengikuti Shalat Dhuha dan tadarus bersama di kelas masing-masing.
+        </p>
+        <div class="pt-1 flex items-center gap-2">
+          <a href="https://wa.me/6285649881966?text=Assalamu%27alaikum%20Waka%20Kurikulum%20MTs%20YASUA%2C%20saya%20ingin%20berkonsultasi%20mengenai%20jadwal%20KBM." target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition-colors">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5 text-amber-300"></i>
+            <span>Konsultasi Kurikulum</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- End #tab-jadwal -->
 
     <!-- ==================== TAB 4: DEWAN GURU & TENDIK ==================== -->
     <div id="tab-guru" class="hidden space-y-3.5">
@@ -2858,7 +3083,7 @@
   <script>
     // --- 1. Client-Side Tab Router ---
     let currentActiveTab = 'beranda';
-    const allAppTabs = ['beranda', 'berita', 'kalender', 'pengaturan', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni', 'berita-baca'];
+    const allAppTabs = ['beranda', 'berita', 'kalender', 'pengaturan', 'guru', 'program', 'ppdb', 'ekskul', 'prestasi', 'profil', 'galeri', 'alumni', 'berita-baca', 'jadwal'];
 
     function switchAppTab(tabName, updateHistory = true) {
       if (!allAppTabs.includes(tabName)) tabName = 'beranda';
@@ -5332,6 +5557,372 @@
       }
     }
     window.submitAdminTicker = submitAdminTicker;
+
+    // =====================================================================
+    // CONTROLLER ROSTER KBM & SERAGAM HARIAN (PRIORITAS 2)
+    // =====================================================================
+    let activeJadwalKelas = '7';
+    let activeJadwalHari = 'Senin';
+
+    const DATA_SERAGAM = {
+      'Senin': {
+        title: 'Seragam OSIS Putih - Biru Dongker',
+        desc: 'Kemeja Putih, Bawahan Biru Dongker, Dasi, Sabuk Madrasah, Peci Hitam / Jilbab Putih, Sepatu Hitam Bertali.'
+      },
+      'Selasa': {
+        title: 'Khas Batik Hijau MTs YASUA',
+        desc: 'Batik Hijau Khas MTs YASUA, Bawahan Hijau Tua, Peci Hitam / Jilbab Hijau, Sepatu Bebas Rapi.'
+      },
+      'Rabu': {
+        title: 'Seragam Pramuka Lengkap',
+        desc: 'Baju Pramuka Lengkap, Kacu Leher, Sabuk Madrasah, Baret/Topi Pramuka, Sepatu Hitam.'
+      },
+      'Kamis': {
+        title: 'Seragam Identitas Khas YASUA',
+        desc: 'Kemeja Hijau Toska Khas YASUA, Bawahan Hitam, Jilbab Bordir YASUA, Peci Hitam Madrasah.'
+      },
+      'Jumat': {
+        title: 'Busana Muslim Santun',
+        desc: 'Putra: Baju Koko Putih & Sarung Santri Rapi Berpeci. Putri: Busana Muslimah / Gamis Putih.'
+      },
+      'Sabtu': {
+        title: 'Kaos Olahraga Resmi Madrasah',
+        desc: 'Kaos Olahraga Resmi MTs YASUA, Sepatu Olahraga (Senam Pagi Sehat & Ekstrakurikuler).'
+      },
+      'Ahad': {
+        title: 'Hari Libur Madrasah',
+        desc: 'Istirahat dan belajar mandiri bersama keluarga di rumah.'
+      }
+    };
+
+    const DATA_ROSTER_KBM = {
+      '7': {
+        'Senin': [
+          { jam: '07.00 - 07.30', mapel: 'Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera', guru: 'Tim Kesiswaan & Pembina OSIS', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: "Al-Qur'an Hadits", guru: 'Hj. Thoibah Roudlotul Jannah, S.Ag.', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Matematika', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I & Kudapan Sehat', guru: 'Kantin Sehat Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Bahasa Indonesia', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah di Masjid', guru: 'Sie Keagamaan & Wali Kelas', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Aqidah Akhlak', guru: 'K.H. Salman, Lc.', type: 'mapel', ruang: 'R. 7-A/B/C' }
+        ],
+        'Selasa': [
+          { jam: '07.00 - 07.30', mapel: "Shalat Dhuha, Tadarus Al-Qur'an & Asmaul Husna", guru: 'Wali Kelas & Guru Jam 1', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Bahasa Arab', guru: "Ahmad Munif, S.Pd.I", type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Ilmu Pengetahuan Alam (IPA Terpadu)', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'Lab Sains / R. 7' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I & Refresing', guru: 'Lingkungan Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Fiqih / Kajian Fathul Qorib Dasar', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah di Masjid', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Bahasa Inggris', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' }
+        ],
+        'Rabu': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Pembiasaan Literasi Numerasi', guru: 'Wali Kelas', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Ilmu Pengetahuan Sosial (IPS)', guru: 'Budi Santoso, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Sejarah Kebudayaan Islam (SKI)', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Informatika & Literasi Digital CBT', guru: "Ali Mas'ud, S.Kom.", type: 'mapel', ruang: 'Lab Komputer' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Seni Budaya & Prakarya', guru: 'Dewi Ratnasari, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' }
+        ],
+        'Kamis': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Pembacaan Rotibul Haddad', guru: 'Dewan Asatidz', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Bahasa Inggris', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Pendidikan Pancasila & Kewarganegaraan (PPKn)', guru: 'Drs. Suwarno', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Matematika Terapan', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: "Tahfidzul Qur'an & Bimbingan Tartil", guru: 'Ustadzah Maryam, Al-Hafidzah', type: 'mapel', ruang: 'Musholla Madrasah' }
+        ],
+        'Jumat': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Istighosah Bersama Para Guru', guru: 'Dipimpin Para Kiai & Asatidz', type: 'ibadah' },
+          { jam: '07.30 - 08.40', mapel: 'Bimbingan Tahsin & Tajwid Al-Qur'an', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '08.40 - 09.50', mapel: 'Ke-NU-an / Risalah Ahlussunnah Wal Jama'ah', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '09.50 - 10.10', mapel: 'Istirahat & Minum Air Berkah', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.10 - 11.20', mapel: 'Kajian Adab & Akhlak Lil Banin/Banat', guru: 'Hj. Thoibah Roudlotul Jannah, S.Ag.', type: 'mapel', ruang: 'R. 7-A/B/C' },
+          { jam: '11.20 - 12.30', mapel: 'Persiapan & Sholat Jum'at Berjamaah di Masjid', guru: 'Seluruh Dewan Guru & Siswa', type: 'ibadah' }
+        ],
+        'Sabtu': [
+          { jam: '07.00 - 07.45', mapel: 'Senam Pagi Kesegaran Jasmani & Jalan Sehat', guru: 'Guru PJOK & OSIS', type: 'ibadah' },
+          { jam: '07.45 - 09.05', mapel: 'Pendidikan Jasmani & Olahraga (PJOK)', guru: 'Ahmad Fauzi, S.Pd.', type: 'mapel', ruang: 'Lapangan Madrasah' },
+          { jam: '09.05 - 09.30', mapel: 'Istirahat & Kudapan Bersama', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '09.30 - 11.00', mapel: 'Pengembangan Diri: Pramuka / Hadroh / Robotik', guru: 'Instruktur & Pembina Ekskul', type: 'mapel', ruang: 'Kampus Madrasah' },
+          { jam: '11.00 - 11.45', mapel: 'Operasi Bersih Lingkungan & Doa Pulang', guru: 'Wali Kelas 7', type: 'ibadah' }
+        ]
+      },
+      '8': {
+        'Senin': [
+          { jam: '07.00 - 07.30', mapel: 'Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera', guru: 'Tim Kesiswaan', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Matematika', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Bahasa Indonesia', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: "Al-Qur'an Hadits", guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'IPA Terpadu', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' }
+        ],
+        'Selasa': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Tadarus Al-Qur'an', guru: 'Wali Kelas 8', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'IPA Terpadu (Fisika & Biologi)', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'Lab IPA' },
+          { jam: '08.50 - 10.10', mapel: 'Bahasa Arab', guru: 'Ahmad Munif, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Bahasa Inggris', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Fiqih Mawaris & Muamalah', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' }
+        ],
+        'Rabu': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Muhadhoroh Tiga Bahasa', guru: 'Guru Bahasa', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Informatika & Pemrograman Dasar', guru: "Ali Mas'ud, S.Kom.", type: 'mapel', ruang: 'Lab CBT' },
+          { jam: '08.50 - 10.10', mapel: 'Ilmu Pengetahuan Sosial (IPS)', guru: 'Budi Santoso, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Sejarah Kebudayaan Islam (SKI)', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Aqidah Akhlak', guru: 'K.H. Salman, Lc.', type: 'mapel', ruang: 'R. 8-A/B/C' }
+        ],
+        'Kamis': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Pembacaan Rotibul Haddad', guru: 'Dewan Asatidz', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Pendidikan Pancasila (PPKn)', guru: 'Drs. Suwarno', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Matematika Aljabar', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: "Tahfidzul Qur'an & Setoran Juz", guru: 'Ustadzah Maryam, Al-Hafidzah', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Seni Kaligrafi & Budaya Islam', guru: 'Dewi Ratnasari, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' }
+        ],
+        'Jumat': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Istighosah Kubro Berjamaah', guru: 'Dewan Guru', type: 'ibadah' },
+          { jam: '07.30 - 08.40', mapel: 'Ke-NU-an & Wawasan Aswaja', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '08.40 - 09.50', mapel: 'Tahsin Tartil Al-Qur'an', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '09.50 - 10.10', mapel: 'Istirahat', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.10 - 11.20', mapel: 'Bimbingan Konseling & Motivasi Belajar', guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 8-A/B/C' },
+          { jam: '11.20 - 12.30', mapel: 'Sholat Jum'at di Masjid Jami'', guru: 'Guru & Siswa', type: 'ibadah' }
+        ],
+        'Sabtu': [
+          { jam: '07.00 - 07.45', mapel: 'Senam Pagi Bersama', guru: 'Guru PJOK', type: 'ibadah' },
+          { jam: '07.45 - 09.05', mapel: 'Pendidikan Jasmani (PJOK: Atletik/Futsal)', guru: 'Ahmad Fauzi, S.Pd.', type: 'mapel', ruang: 'Lapangan Olahraga' },
+          { jam: '09.05 - 09.30', mapel: 'Istirahat & Snack Pagi', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '09.30 - 11.00', mapel: 'Ekstrakurikuler Wajib: Pramuka & PMR', guru: 'Pembina Pramuka', type: 'mapel', ruang: 'Halaman Kampus' },
+          { jam: '11.00 - 11.45', mapel: 'Piket Bersih Kelas & Pengarahan Wali Kelas', guru: 'Wali Kelas 8', type: 'ibadah' }
+        ]
+      },
+      '9': {
+        'Senin': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Upacara Bendera Khidmat', guru: 'Tim Kesiswaan', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Pendalaman Materi: Matematika Ujian', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Bahasa Indonesia (Persiapan Asesmen)', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'IPA Terpadu (Fokus Bank Soal)', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: "Al-Qur'an Hadits", guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 9-A/B/C' }
+        ],
+        'Selasa': [
+          { jam: '07.00 - 07.30', mapel: "Shalat Dhuha & Khataman Al-Qur'an", guru: 'Wali Kelas 9', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Bahasa Inggris Terapan', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Bahasa Arab (Kaidah Nahwu Shorof)', guru: 'Ahmad Munif, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Fiqih Ubudiyah & Munakahat', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Bimbingan Karir & Masuk Aliyah/SMA', guru: 'Guru BK', type: 'mapel', ruang: 'R. 9-A/B/C' }
+        ],
+        'Rabu': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Doa Bersama Sukses Ujian', guru: 'Wali Kelas 9', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Ilmu Pengetahuan Sosial (IPS)', guru: 'Budi Santoso, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Simulasi Tryout Digital CBT', guru: "Ali Mas'ud, S.Kom.", type: 'mapel', ruang: 'Lab CBT 1 & 2' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Sejarah Kebudayaan Islam (SKI)', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: 'Aqidah Akhlak', guru: 'K.H. Salman, Lc.', type: 'mapel', ruang: 'R. 9-A/B/C' }
+        ],
+        'Kamis': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Rotibul Haddad Bersama', guru: 'Dewan Asatidz', type: 'ibadah' },
+          { jam: '07.30 - 08.50', mapel: 'Matematika Geometri & Statistik', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '08.50 - 10.10', mapel: 'Bahasa Indonesia (Menulis Esai/Karya Ilmiah)', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.30 - 11.50', mapel: 'Pendidikan Pancasila (PPKn)', guru: 'Drs. Suwarno', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
+          { jam: '12.35 - 13.55', mapel: "Tahfidzul Qur'an & Munaqosyah Uji Hafalan", guru: 'Ustadzah Maryam, Al-Hafidzah', type: 'mapel', ruang: 'Musholla' }
+        ],
+        'Jumat': [
+          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Istighosah Mujahadah Akbar', guru: 'Dipimpin Kiai Madrasah', type: 'ibadah' },
+          { jam: '07.30 - 08.40', mapel: 'Kajian Risalah Ahlussunnah Wal Jama'ah', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '08.40 - 09.50', mapel: 'Tahsin Qira'ah Al-Qur'an', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '09.50 - 10.10', mapel: 'Istirahat', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '10.10 - 11.20', mapel: 'Kajian Akhlak Terpuji (Ta'limul Muta'allim)', guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 9-A/B/C' },
+          { jam: '11.20 - 12.30', mapel: 'Shalat Jum'at Berjamaah', guru: 'Guru & Siswa', type: 'ibadah' }
+        ],
+        'Sabtu': [
+          { jam: '07.00 - 07.45', mapel: 'Senam Pagi Sehat', guru: 'Guru PJOK', type: 'ibadah' },
+          { jam: '07.45 - 09.05', mapel: 'PJOK: Senam & Bola Voli/Futsal', guru: 'Ahmad Fauzi, S.Pd.', type: 'mapel', ruang: 'Lapangan' },
+          { jam: '09.05 - 09.30', mapel: 'Istirahat & Minum Bersama', guru: 'Madrasah', type: 'istirahat' },
+          { jam: '09.30 - 11.00', mapel: 'Ekskul Peminatan & Pengayaan Ujian', guru: 'Guru Pembina', type: 'mapel', ruang: 'R. 9' },
+          { jam: '11.00 - 11.45', mapel: 'Evaluasi Mingguan & Pembagian Tugas Belajar', guru: 'Wali Kelas 9', type: 'ibadah' }
+        ]
+      }
+    };
+
+    function initJadwalToday() {
+      const now = new Date();
+      const days = ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const dayIndex = now.getDay();
+      const currentDayName = days[dayIndex];
+
+      // Jika hari Ahad (libur), set default tampilan ke Senin
+      activeJadwalHari = (currentDayName === 'Ahad') ? 'Senin' : currentDayName;
+
+      // Update Tampilan Info Hari Ini
+      const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = now.toLocaleDateString('id-ID', dateOptions);
+      const todayNameEl = document.getElementById('today-name-display');
+      if (todayNameEl) todayNameEl.textContent = formattedDate;
+
+      const uniformInfo = DATA_SERAGAM[currentDayName] || DATA_SERAGAM['Senin'];
+      const uTitleEl = document.getElementById('today-uniform-title');
+      const uDescEl = document.getElementById('today-uniform-desc');
+      if (uTitleEl) uTitleEl.textContent = uniformInfo.title;
+      if (uDescEl) uDescEl.textContent = uniformInfo.desc;
+
+      const statusBadge = document.getElementById('today-status-badge');
+      if (statusBadge) {
+        if (currentDayName === 'Ahad') {
+          statusBadge.textContent = 'Libur Akhir Pekan';
+          statusBadge.className = 'px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[9px] font-bold border border-rose-500/30';
+        } else {
+          statusBadge.textContent = 'KBM Aktif';
+          statusBadge.className = 'px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-bold border border-emerald-500/30';
+        }
+      }
+
+      renderJadwalButtons();
+      renderJadwalRoster();
+    }
+
+    function selectJadwalKelas(kelas) {
+      activeJadwalKelas = kelas;
+      renderJadwalButtons();
+      renderJadwalRoster();
+    }
+    window.selectJadwalKelas = selectJadwalKelas;
+
+    function selectJadwalHari(hari) {
+      activeJadwalHari = hari;
+      renderJadwalButtons();
+      renderJadwalRoster();
+    }
+    window.selectJadwalHari = selectJadwalHari;
+
+    function renderJadwalButtons() {
+      // Tombol Kelas
+      ['7', '8', '9'].forEach(k => {
+        const btn = document.getElementById('btnKelas-' + k);
+        if (btn) {
+          if (k === activeJadwalKelas) {
+            btn.className = 'py-2 px-2 rounded-xl bg-brand-primary text-white font-extrabold text-xs text-center transition-all shadow-xs cursor-pointer';
+          } else {
+            btn.className = 'py-2 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs text-center transition-all cursor-pointer';
+          }
+        }
+      });
+
+      // Tombol Hari
+      ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].forEach(h => {
+        const btn = document.getElementById('btnHari-' + h);
+        if (btn) {
+          if (h === activeJadwalHari) {
+            btn.className = 'py-1.5 px-1 rounded-lg bg-brand-primary text-white font-bold text-[11px] text-center transition-all shadow-xs cursor-pointer';
+          } else {
+            btn.className = 'py-1.5 px-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700 font-bold text-[11px] text-center transition-all cursor-pointer';
+          }
+        }
+      });
+
+      // Judul Roster Aktif
+      const tEl = document.getElementById('roster-active-title');
+      const stEl = document.getElementById('roster-active-subtitle');
+      if (tEl) tEl.textContent = 'Roster KBM: Kelas ' + activeJadwalKelas + ' • Hari ' + activeJadwalHari;
+      const countPelajaran = (DATA_ROSTER_KBM[activeJadwalKelas] && DATA_ROSTER_KBM[activeJadwalKelas][activeJadwalHari]) ? DATA_ROSTER_KBM[activeJadwalKelas][activeJadwalHari].filter(r => r.type === 'mapel').length : 0;
+      if (stEl) stEl.textContent = countPelajaran + ' Jam Mata Pelajaran + Pembiasaan Ibadah Berjamaah';
+    }
+
+    function renderJadwalRoster() {
+      const container = document.getElementById('roster-list-container');
+      if (!container) return;
+
+      const list = (DATA_ROSTER_KBM[activeJadwalKelas] && DATA_ROSTER_KBM[activeJadwalKelas][activeJadwalHari]) || [];
+      if (list.length === 0) {
+        container.innerHTML = '<div class="p-3 bg-slate-50 text-slate-500 rounded-xl text-center text-xs">Jadwal tidak tersedia.</div>';
+        return;
+      }
+
+      let html = '';
+      list.forEach((item, idx) => {
+        if (item.type === 'ibadah') {
+          html += '<div class="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/90 flex items-start gap-2.5">' +
+            '<div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 text-xs font-black">' +
+              '<i data-lucide="sun" class="w-3.5 h-3.5"></i>' +
+            '</div>' +
+            '<div class="flex-1 min-w-0">' +
+              '<div class="flex items-center justify-between">' +
+                '<strong class="text-emerald-950 font-black text-xs leading-tight">' + item.mapel + '</strong>' +
+                '<span class="text-[9.5px] font-mono font-bold text-emerald-800 bg-white px-2 py-0.5 rounded-md border border-emerald-200 shrink-0">' + item.jam + '</span>' +
+              '</div>' +
+              '<p class="text-[10px] text-emerald-700 mt-0.5 font-medium">' + item.guru + '</p>' +
+            '</div>' +
+          '</div>';
+        } else if (item.type === 'istirahat') {
+          html += '<div class="p-2 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between text-[11px]">' +
+            '<div class="flex items-center gap-2 text-amber-900 font-bold">' +
+              '<i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-600"></i>' +
+              '<span>' + item.mapel + '</span>' +
+            '</div>' +
+            '<span class="text-[9.5px] font-mono font-bold text-amber-800 bg-white px-2 py-0.5 rounded-md border border-amber-200">' + item.jam + '</span>' +
+          '</div>';
+        } else {
+          html += '<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/90 flex items-start gap-2.5 hover:bg-slate-100/80 transition-colors">' +
+            '<div class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center shrink-0 font-extrabold text-xs">' +
+              (idx) +
+            '</div>' +
+            '<div class="flex-1 min-w-0">' +
+              '<div class="flex items-center justify-between">' +
+                '<strong class="text-slate-900 font-black text-xs leading-tight">' + item.mapel + '</strong>' +
+                '<span class="text-[9.5px] font-mono font-bold text-slate-600 bg-white px-2 py-0.5 rounded-md border border-slate-200 shrink-0">' + item.jam + '</span>' +
+              '</div>' +
+              '<div class="flex items-center justify-between text-[10.5px] text-slate-500 mt-1">' +
+                '<span class="font-medium text-slate-700 flex items-center gap-1"><i data-lucide="user-check" class="w-3 h-3 text-emerald-600"></i> ' + item.guru + '</span>' +
+                (item.ruang ? '<span class="text-[9.5px] text-slate-400 bg-slate-200/70 px-1.5 py-0.2 rounded font-mono">' + item.ruang + '</span>' : '') +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }
+      });
+
+      container.innerHTML = html;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function printJadwalKbm() {
+      const list = (DATA_ROSTER_KBM[activeJadwalKelas] && DATA_ROSTER_KBM[activeJadwalKelas][activeJadwalHari]) || [];
+      const seragam = DATA_SERAGAM[activeJadwalHari] || DATA_SERAGAM['Senin'];
+      const printWin = window.open('', '_blank');
+      printWin.document.write('<!DOCTYPE html><html><head><title>Jadwal KBM Kelas ' + activeJadwalKelas + ' - MTs YASUA</title><style>body{font-family:sans-serif;padding:30px;color:#111} h2,h3{margin:0 0 5px;color:#047857} table{width:100%;border-collapse:collapse;margin-top:15px} th,td{border:1px solid #ccc;padding:8px 10px;font-size:13px;text-align:left} th{background:#f1f5f9;font-weight:bold} .seragam{background:#ecfdf5;border:1px solid #a7f3d0;padding:10px;border-radius:8px;margin-top:10px;font-size:13px} .footer{margin-top:20px;font-size:12px;color:#666}</style></head><body>');
+      printWin.document.write('<h2>MTs YASUA PILANGWETAN</h2>');
+      printWin.document.write('<h3>Roster KBM: KELAS ' + activeJadwalKelas + ' • HARI ' + activeJadwalHari.toUpperCase() + '</h3>');
+      printWin.document.write('<div class="seragam"><strong>Ketentuan Seragam:</strong> ' + seragam.title + ' — ' + seragam.desc + '</div>');
+      printWin.document.write('<table><thead><tr><th style="width:12%">Waktu</th><th>Mata Pelajaran / Kegiatan</th><th>Guru Pengampu / Pembina</th><th style="width:15%">Ruang</th></tr></thead><tbody>');
+      list.forEach(r => {
+        printWin.document.write('<tr><td><strong>' + r.jam + '</strong></td><td>' + r.mapel + '</td><td>' + r.guru + '</td><td>' + (r.ruang || '-') + '</td></tr>');
+      });
+      printWin.document.write('</tbody></table>');
+      printWin.document.write('<div class="footer"><p>Jadwal Pelajaran Resmi MTs YASUA Pilangwetan • Kebonagung, Demak • TP 2026/2027</p></div>');
+      printWin.document.write('<script>window.onload=function(){window.print();}</scr' + 'ipt>');
+      printWin.document.write('</body></html>');
+      printWin.document.close();
+    }
+    window.printJadwalKbm = printJadwalKbm;
+
+    // Panggil inisialisasi jadwal saat script dimuat
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initJadwalToday);
+    } else {
+      initJadwalToday();
+    }
+
 
     // =====================================================================
     // PPDB ONLINE CONTROLLER & RECEIPT GENERATOR
