@@ -2706,268 +2706,78 @@
             </div>
           </div>
 
-          <!-- 2. Subview Banners Promo (KHUSUS PROMOSI & QUICK ACTION) -->
+          <!-- 2. Subview Banners: KHUSUS BANNER PROMO MOBILE (3:1) -->
           <div id="admin-subview-banners" class="hidden space-y-4">
-            <!-- Header Kartu Ringkasan Banner Promo -->
+            <!-- Header Kartu Ringkasan Banner Promo Mobile -->
             <div style="background: linear-gradient(135deg, #b45309 0%, #78350f 100%);" class="text-white p-4 rounded-2xl shadow-md border border-amber-600/40 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-200">PROMOSI &amp; QUICK ACTION</span>
-                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">2 Kartu Live + 1 Brosur</span>
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-200">BANNER PROMO MOBILE (3:1)</span>
+                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">Aplikasi Mobile PWA</span>
               </div>
-              <h3 class="text-base font-black text-white">Banner Promosi &amp; Quick Action Card</h3>
+              <h3 class="text-base font-black text-white">Banner Promo Mobile App (3:1)</h3>
               <p class="text-xs text-amber-100/90 leading-relaxed">
-                Kelola kartu aksi cepat pendaftaran PPDB, banner infaq QRIS digital, serta spanduk promosi brosur madrasah.
+                Kelola 3 slide spanduk visual rasio 3:1 dan kartu aksi cepat (PPDB &amp; QRIS) yang tayang langsung di beranda aplikasi mobile MTs YASUA.
               </p>
               <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
                 <button type="button" onclick="switchAppTab('beranda')" class="px-3 py-1.5 rounded-xl bg-white text-amber-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-amber-50 transition cursor-pointer">
-                  <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-                  <span>Lihat Penempatan di Beranda</span>
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-700"></i>
+                  <span>Lihat Tampilan di Beranda App</span>
                 </button>
-                <a href="/admin?tab=banners" class="px-3 py-1.5 rounded-xl bg-amber-500/40 hover:bg-amber-500/60 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Editor Banner Desktop</span>
-                </a>
+                <button type="button" onclick="switchAppTab('ppdb')" class="px-3 py-1.5 rounded-xl bg-amber-500/40 hover:bg-amber-500/60 text-white font-bold flex items-center gap-1.5 border border-white/30 transition cursor-pointer">
+                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                  <span>Buka Form PPDB</span>
+                </button>
               </div>
             </div>
 
-            <!-- 4 Kartu KPI Banner Promo -->
+            <!-- 4 Kartu KPI Banner Promo Mobile -->
             <div class="grid grid-cols-2 gap-2.5">
               <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">BANNER AKTIF</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">BANNER SLIDE</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="image" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">2 Card +</h3>
-                  <p class="text-[10px] text-amber-100 font-medium mt-1">PPDB &amp; QRIS Infaq</p>
+                  <h3 class="text-xl font-black text-white">3 Slide</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Rasio 3:1 Widescreen</p>
                 </div>
                 <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
                   <span class="text-white/80">Penempatan</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Beranda Depan</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Beranda Mobile</span>
                 </div>
               </div>
 
               <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">STATUS FORM</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KARTU AKSI CEPAT</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
-                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">100% Live</h3>
-                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Direct SPA Link</p>
+                  <h3 class="text-xl font-black text-white">2 Tombol</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">PPDB &amp; Infaq QRIS</p>
                 </div>
                 <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
                   <span class="text-white/80">Integrasi</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Database TA 26/27</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">100% Direct SPA</span>
                 </div>
               </div>
             </div>
 
-            <!-- Daftar Live Banner Promosi -->
+            <!-- Daftar Live 3 Slide Banner Mobile (3:1) -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="layers" class="w-4 h-4 text-amber-600"></i>
-                  <span>Daftar Banner Promosi &amp; Aksi Cepat Live</span>
+                  <i data-lucide="sliders" class="w-4 h-4 text-amber-600"></i>
+                  <span>Daftar 3 Slide Banner Mobile App (3:1)</span>
                 </h4>
-                <span class="text-[9.5px] font-bold text-slate-400">2 Tombol Beranda</span>
+                <span class="text-[9.5px] font-bold text-slate-400">Autoplay 5s</span>
               </div>
 
               <div class="space-y-2.5 text-xs">
-                <!-- Banner 1: PPDB Online -->
-                <div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-                      <i data-lucide="user-plus" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <div class="flex items-center gap-1.5">
-                        <span class="text-[8.5px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-200 text-emerald-900">KARTU KIRI</span>
-                        <span class="text-[9px] font-bold text-emerald-700">&bull; Jalur Reguler &amp; Tahfidz</span>
-                      </div>
-                      <h5 class="font-extrabold text-slate-900 mt-0.5">PPDB Online TA 2026/2027</h5>
-                      <p class="text-[10px] text-slate-500">Target Klik: Membuka formulir pendaftaran santri baru langsung</p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
-                    <button type="button" onclick="switchAppTab('ppdb')" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] flex items-center gap-1 shadow-2xs cursor-pointer">
-                      <i data-lucide="external-link" class="w-3 h-3"></i>
-                      <span>Uji Tab PPDB</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Banner 2: QRIS Infaq -->
-                <div class="p-3 rounded-xl border border-amber-200 bg-amber-50/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-                      <i data-lucide="qr-code" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <div class="flex items-center gap-1.5">
-                        <span class="text-[8.5px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-200 text-amber-900">KARTU KANAN</span>
-                        <span class="text-[9px] font-bold text-amber-800">&bull; Infaq &amp; Sedekah</span>
-                      </div>
-                      <h5 class="font-extrabold text-slate-900 mt-0.5">QR Portal &amp; QRIS Madrasah</h5>
-                      <p class="text-[10px] text-slate-500">Target Klik: Membuka barcode QRIS Bank Jateng Syariah &amp; BSI</p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
-                    <button type="button" onclick="switchAppTab('beranda')" class="px-2.5 py-1 rounded-lg bg-amber-700 hover:bg-amber-800 text-white font-bold text-[10px] flex items-center gap-1 shadow-2xs cursor-pointer">
-                      <i data-lucide="eye" class="w-3 h-3"></i>
-                      <span>Lihat di Beranda</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Banner 3: Brosur Digital -->
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-                      <i data-lucide="file-text" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <div class="flex items-center gap-1.5">
-                        <span class="text-[8.5px] font-black uppercase px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-900">SPANDUK UNDUH</span>
-                        <span class="text-[9px] font-bold text-slate-500">&bull; Brosur Resmi</span>
-                      </div>
-                      <h5 class="font-extrabold text-slate-900 mt-0.5">Brosur Digital PPDB 2026/2027</h5>
-                      <p class="text-[10px] text-slate-500">Target Klik: Unduh PDF informasi pendaftaran &amp; alur seleksi</p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
-                    <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Tersedia</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Form Tambah / Update Banner Promo -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i>
-                  <span>Form Pengaturan Banner Promo Baru</span>
-                </h4>
-                <span class="text-[9px] text-slate-400">Promosi Beranda</span>
-              </div>
-              <form onsubmit="event.preventDefault(); if (typeof window.showToast === 'function') window.showToast('Pengaturan banner promo berhasil disimpan!');" class="space-y-3 text-xs">
-                <div>
-                  <label class="block font-bold text-slate-700 mb-1">Nama / Judul Banner Promo</label>
-                  <input type="text" required placeholder="Contoh: PPDB Gelombang 2 Dibuka" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div>
-                    <label class="block font-bold text-slate-700 mb-1">Posisi Penempatan</label>
-                    <select class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                      <option value="quick_left">Quick Action Kiri (Utama)</option>
-                      <option value="quick_right">Quick Action Kanan (Kedua)</option>
-                      <option value="popup">Pop-up Banner Beranda</option>
-                      <option value="footer_promo">Spanduk Bawah Berita</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block font-bold text-slate-700 mb-1">Aksen Warna Kartu</label>
-                    <select class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                      <option value="emerald">Emerald Green (PPDB)</option>
-                      <option value="amber">Warm Amber (Infaq/Donasi)</option>
-                      <option value="blue">Deep Indigo (Akademik)</option>
-                      <option value="rose">Rose Red (Pengumuman Darurat)</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label class="block font-bold text-slate-700 mb-1">Teks Subtitle / Keterangan Singkat</label>
-                  <input type="text" placeholder="Pendaftaran Siswa Baru TA 2026/2027" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                </div>
-                <div>
-                  <label class="block font-bold text-slate-700 mb-1">Tautan Aksi Target (URL / Tab)</label>
-                  <input type="text" placeholder="Contoh: /app/ppdb atau https://wa.me/..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                </div>
-                <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
-                  <i data-lucide="save" class="w-3.5 h-3.5"></i>
-                  <span>Simpan Pengaturan Banner Promo</span>
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <!-- 2B. Subview Slider (KHUSUS HERO SLIDER FOTO BERANDA 3:1) -->
-          <div id="admin-subview-slider" class="hidden space-y-4">
-            <!-- Header Kartu Ringkasan Hero Slider -->
-            <div style="background: linear-gradient(135deg, #0e7490 0%, #155e75 50%, #083344 100%);" class="text-white p-4 rounded-2xl shadow-md border border-cyan-600/40 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-200">HEADLINE CAROUSEL 3:1</span>
-                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">3 Slide Berputar &bull; Autoplay 5s</span>
-              </div>
-              <h3 class="text-base font-black text-white">Hero Slider Foto Beranda Depan</h3>
-              <p class="text-xs text-cyan-100/90 leading-relaxed">
-                Kelola foto sorotan utama, headline prestasi, dan slide berputar otomatis pada bilah atas beranda aplikasi MTs YASUA.
-              </p>
-              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
-                <button type="button" onclick="switchAppTab('beranda')" class="px-3 py-1.5 rounded-xl bg-white text-cyan-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-cyan-50 transition cursor-pointer">
-                  <i data-lucide="play-circle" class="w-3.5 h-3.5 text-cyan-700"></i>
-                  <span>Putar Uji di Beranda</span>
-                </button>
-                <a href="/admin?tab=banners" class="px-3 py-1.5 rounded-xl bg-cyan-500/30 hover:bg-cyan-500/50 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Editor Slider Desktop</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- 4 Kartu KPI Hero Slider -->
-            <div class="grid grid-cols-2 gap-2.5">
-              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
-                <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL SLIDE</span>
-                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-black text-white">3 Slide</h3>
-                  <p class="text-[10px] text-sky-100 font-medium mt-1">Sorotan Unggulan</p>
-                </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Kapasitas</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Maks 5 Foto</span>
-                </div>
-              </div>
-
-              <div style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
-                <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">RASIO &amp; WAKTU</span>
-                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
-                    <i data-lucide="timer" class="w-3.5 h-3.5"></i>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-black text-white">3:1 &bull; 5 Detik</h3>
-                  <p class="text-[10px] text-teal-100 font-medium mt-1">Transisi Halus</p>
-                </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Indikator</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Dots Kapsul</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Daftar Live Hero Slider (3 Slide Aktif) -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-                  <span>Slide Hero Tayang Aktif di Beranda</span>
-                </h4>
-                <span class="text-[9.5px] font-black px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200">3 Slide Berputar</span>
-              </div>
-
-              <div class="space-y-3">
                 <!-- Slide 1 -->
                 <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-white transition flex flex-col sm:flex-row gap-3">
                   <div class="w-full sm:w-36 h-20 rounded-lg overflow-hidden bg-slate-900 shrink-0 relative">
@@ -3024,47 +2834,304 @@
               </div>
             </div>
 
-            <!-- Form Tambah / Edit Slide Hero Beranda -->
+            <!-- Kartu Aksi Cepat (Quick Action Card) -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                 <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
-                  <i data-lucide="plus-circle" class="w-4 h-4 text-cyan-600"></i>
-                  <span>Form Tambah Slide Hero Beranda</span>
+                  <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-emerald-600"></i>
+                  <span>Kartu Aksi Cepat (Di Bawah Banner Mobile)</span>
                 </h4>
-                <span class="text-[9px] text-slate-400">Rasio 3:1 Widescreen</span>
+                <span class="text-[9.5px] font-bold text-slate-400">2 Tombol Live</span>
               </div>
-              <form onsubmit="event.preventDefault(); if (typeof window.showToast === 'function') window.showToast('Slide hero beranda berhasil ditambahkan!');" class="space-y-3 text-xs">
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200/80 space-y-1">
+                  <div class="flex items-center gap-1.5 text-emerald-800 font-extrabold text-[11px]">
+                    <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                    <span>PPDB Online</span>
+                  </div>
+                  <p class="text-[9.5px] text-emerald-700">Pendaftaran Siswa Baru TA 2026/2027</p>
+                  <span class="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-emerald-200/80 text-emerald-900">Aktif</span>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-50/80 border border-amber-200/80 space-y-1">
+                  <div class="flex items-center gap-1.5 text-amber-800 font-extrabold text-[11px]">
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+                    <span>QR Portal &amp; QRIS</span>
+                  </div>
+                  <p class="text-[9.5px] text-amber-700">Infaq &amp; Pembayaran Digital</p>
+                  <span class="inline-block text-[8px] font-bold px-1.5 py-0.5 rounded bg-amber-200/80 text-amber-900">Aktif</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Pengaturan Banner Promo Mobile -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i>
+                  <span>Form Tambah / Edit Banner Promo Mobile (3:1)</span>
+                </h4>
+                <span class="text-[9px] text-slate-400">Pembaruan Visual</span>
+              </div>
+              <form onsubmit="event.preventDefault(); if (typeof window.showToast === 'function') window.showToast('Banner promo mobile berhasil diperbarui!');" class="space-y-3 text-xs">
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">Judul Headline Slide</label>
-                  <input type="text" required placeholder="Contoh: Pembelajaran Berbasis Digital & Riset" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                  <input type="text" required placeholder="Contoh: Penerimaan Siswa Baru TA 2026/2027" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                   <div>
-                    <label class="block font-bold text-slate-700 mb-1">Tag Kategori Pill</label>
-                    <input type="text" required placeholder="Contoh: Madrasah Riset" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                    <label class="block font-bold text-slate-700 mb-1">Kategori Tag Pill</label>
+                    <input type="text" required placeholder="Contoh: PPDB Online / Prestasi" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
                   </div>
                   <div>
-                    <label class="block font-bold text-slate-700 mb-1">Urutan Tampil</label>
-                    <select class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-cyan-500 focus:outline-none">
-                      <option value="1">Slide 1 (Utama)</option>
-                      <option value="2">Slide 2</option>
-                      <option value="3">Slide 3</option>
-                      <option value="4">Slide 4</option>
-                      <option value="5">Slide 5</option>
-                    </select>
+                    <label class="block font-bold text-slate-700 mb-1">Rasio Banner</label>
+                    <input type="text" readonly value="3:1 (Widescreen Mobile)" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-600 text-xs">
                   </div>
                 </div>
                 <div>
-                  <label class="block font-bold text-slate-700 mb-1">URL Foto Slide (Rasio 3:1)</label>
-                  <input type="url" required placeholder="https://lh3.googleusercontent.com/..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                  <label class="block font-bold text-slate-700 mb-1">URL Foto Banner (Rasio 3:1)</label>
+                  <input type="url" required placeholder="https://lh3.googleusercontent.com/..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
                 </div>
                 <div>
-                  <label class="block font-bold text-slate-700 mb-1">Deskripsi Singkat / Tagline (1 Baris)</label>
-                  <input type="text" placeholder="Pengembangan potensi sains & pembiasaan akhlaqul karimah..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                  <label class="block font-bold text-slate-700 mb-1">Keterangan Singkat / Subtitle (1 Kalimat)</label>
+                  <input type="text" placeholder="Bimbingan tahfidz intensif, adab salaf, & kurikulum digital..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
                 </div>
-                <button type="submit" class="w-full py-2.5 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
                   <i data-lucide="save" class="w-3.5 h-3.5"></i>
-                  <span>Simpan Slide Hero ke Beranda</span>
+                  <span>Simpan Banner Promo Mobile</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- 2B. Subview Slider: KHUSUS HERO SLIDER DESKTOP (5 FOTO WEB - index.html) -->
+          <div id="admin-subview-slider" class="hidden space-y-4">
+            <!-- Header Kartu Ringkasan Hero Slider Desktop -->
+            <div style="background: linear-gradient(135deg, #065f46 0%, #047857 50%, #022c22 100%);" class="text-white p-4 rounded-2xl shadow-md border border-emerald-600/40 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-200">HERO SLIDER DESKTOP (5 FOTO WEB)</span>
+                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-amber-400 text-amber-950 font-black">Live Web (index.html)</span>
+              </div>
+              <h3 class="text-base font-black text-white">Hero Slider Desktop (5 Foto Web)</h3>
+              <p class="text-xs text-emerald-100/90 leading-relaxed">
+                Kelola 5 foto dokumentasi madrasah, judul, deskripsi, dan badge yang tampil berputar di beranda utama website (index.html).
+              </p>
+              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
+                <a href="index.html" target="_blank" class="px-3 py-1.5 rounded-xl bg-white text-emerald-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-emerald-50 transition">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5 text-emerald-700"></i>
+                  <span>Lihat Beranda Web (index.html)</span>
+                </a>
+                <a href="/admin?tab=banners" class="px-3 py-1.5 rounded-xl bg-emerald-500/30 hover:bg-emerald-500/50 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
+                  <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+                  <span>Editor Slider Desktop</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 4 Kartu KPI Hero Slider Desktop -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL FOTO</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-white">5 Foto</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Dokumentasi Kampus</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
+                  <span class="text-white/80">Rasio Tampilan</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">16:11 / 4:3 Web</span>
+                </div>
+              </div>
+
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">ROTASI OTOMATIS</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="timer" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-white">5 Detik</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Transisi Slider Web</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
+                  <span class="text-white/80">Status Web</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">index.html Aktif</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pratinjau Interaktif Hero Slider Desktop (16:11 / 4:3 Sesuai index.html) -->
+            <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-800">Pratinjau Interaktif Hero Desktop (16:11 / 4:3)</h4>
+                </div>
+                <span id="appHeroDesktopCounter" class="text-[10px] font-bold text-slate-500">1 / 5</span>
+              </div>
+
+              <!-- Main Hero Box Styled Exactly like index.html & admin.html -->
+              <div class="relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl overflow-hidden bg-emerald-950 shadow-md border border-emerald-900/60 select-none group">
+                <img id="appHeroDesktopImg" src="https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6" alt="Preview Hero Desktop" class="w-full h-full object-cover object-center transition-all duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+                
+                <!-- Top Badge -->
+                <div class="absolute top-3 left-3 bg-emerald-800/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/30 text-white text-[10px] font-bold flex items-center gap-1.5 shadow-md">
+                  <i data-lucide="building-2" class="w-3.5 h-3.5 text-amber-300"></i>
+                  <span id="appHeroDesktopBadge">Kampus MTs YASUA</span>
+                </div>
+
+                <!-- Text Overlay Bottom -->
+                <div class="absolute bottom-3 left-3.5 right-3.5 text-white space-y-0.5">
+                  <span id="appHeroDesktopJudul" class="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider block">Gedung Pembelajaran Terpadu</span>
+                  <p id="appHeroDesktopDeskripsi" class="text-xs sm:text-sm font-bold leading-tight">Lingkungan madrasah yang asri, nyaman, dan berwibawa di Pilangwetan.</p>
+                </div>
+              </div>
+
+              <!-- Thumbnail Bar 5 Foto (Klik untuk Melihat Pratinjau Langsung) -->
+              <div class="grid grid-cols-5 gap-1.5 pt-1">
+                <button type="button" onclick="selectAppHeroSlide(0)" class="app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border-2 border-emerald-600 shadow-xs cursor-pointer relative">
+                  <img src="https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6" alt="Slide 1" class="w-full h-full object-cover">
+                  <span class="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[7.5px] font-bold text-center">#1</span>
+                </button>
+                <button type="button" onclick="selectAppHeroSlide(1)" class="app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border border-slate-200 hover:border-emerald-500 shadow-2xs cursor-pointer relative opacity-75 hover:opacity-100">
+                  <img src="https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp" alt="Slide 2" class="w-full h-full object-cover">
+                  <span class="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[7.5px] font-bold text-center">#2</span>
+                </button>
+                <button type="button" onclick="selectAppHeroSlide(2)" class="app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border border-slate-200 hover:border-emerald-500 shadow-2xs cursor-pointer relative opacity-75 hover:opacity-100">
+                  <img src="https://lh3.googleusercontent.com/d/1aID6eBBBvG6qrNGkX23FRB4MUujp3e8P" alt="Slide 3" class="w-full h-full object-cover">
+                  <span class="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[7.5px] font-bold text-center">#3</span>
+                </button>
+                <button type="button" onclick="selectAppHeroSlide(3)" class="app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border border-slate-200 hover:border-emerald-500 shadow-2xs cursor-pointer relative opacity-75 hover:opacity-100">
+                  <img src="https://lh3.googleusercontent.com/d/1VpfpkDMRYqlf_rzgctWVR5Yjj6mxONer" alt="Slide 4" class="w-full h-full object-cover">
+                  <span class="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[7.5px] font-bold text-center">#4</span>
+                </button>
+                <button type="button" onclick="selectAppHeroSlide(4)" class="app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border border-slate-200 hover:border-emerald-500 shadow-2xs cursor-pointer relative opacity-75 hover:opacity-100">
+                  <img src="https://lh3.googleusercontent.com/d/1xyiEwouAo5sUvDhAwfjoUi0vBbw-pfeN" alt="Slide 5" class="w-full h-full object-cover">
+                  <span class="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[7.5px] font-bold text-center">#5</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Daftar 5 Foto Hero Slider Desktop dengan Tombol Edit -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="list-ordered" class="w-4 h-4 text-emerald-600"></i>
+                  <span>Daftar 5 Foto Dokumentasi Madrasah (Website Utama)</span>
+                </h4>
+                <span class="text-[9.5px] font-bold text-slate-400">5 Slot Penuh</span>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <!-- Slide 1 -->
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-2.5">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <img src="https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6" class="w-14 h-10 object-cover rounded-lg shrink-0 border border-slate-200">
+                    <div class="min-w-0">
+                      <span class="text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900">SLIDE 1 &bull; Kampus MTs YASUA</span>
+                      <h5 class="font-bold text-slate-900 truncate mt-0.5">Gedung Pembelajaran Terpadu</h5>
+                    </div>
+                  </div>
+                  <button type="button" onclick="editAppHeroSlide(0)" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] shrink-0 cursor-pointer">Edit</button>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-2.5">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <img src="https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp" class="w-14 h-10 object-cover rounded-lg shrink-0 border border-slate-200">
+                    <div class="min-w-0">
+                      <span class="text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-blue-100 text-blue-900">SLIDE 2 &bull; Kedisiplinan &amp; Akhlak</span>
+                      <h5 class="font-bold text-slate-900 truncate mt-0.5">Apel Pagi &amp; Pembinaan Siswa</h5>
+                    </div>
+                  </div>
+                  <button type="button" onclick="editAppHeroSlide(1)" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] shrink-0 cursor-pointer">Edit</button>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-2.5">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <img src="https://lh3.googleusercontent.com/d/1aID6eBBBvG6qrNGkX23FRB4MUujp3e8P" class="w-14 h-10 object-cover rounded-lg shrink-0 border border-slate-200">
+                    <div class="min-w-0">
+                      <span class="text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-900">SLIDE 3 &bull; Literasi Digital</span>
+                      <h5 class="font-bold text-slate-900 truncate mt-0.5">Praktik Komputer &amp; ANBK</h5>
+                    </div>
+                  </div>
+                  <button type="button" onclick="editAppHeroSlide(2)" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] shrink-0 cursor-pointer">Edit</button>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-2.5">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <img src="https://lh3.googleusercontent.com/d/1VpfpkDMRYqlf_rzgctWVR5Yjj6mxONer" class="w-14 h-10 object-cover rounded-lg shrink-0 border border-slate-200">
+                    <div class="min-w-0">
+                      <span class="text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">SLIDE 4 &bull; Pembiasaan Ibadah</span>
+                      <h5 class="font-bold text-slate-900 truncate mt-0.5">Shalat Berjamaah di Masjid</h5>
+                    </div>
+                  </div>
+                  <button type="button" onclick="editAppHeroSlide(3)" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] shrink-0 cursor-pointer">Edit</button>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-2.5">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <img src="https://lh3.googleusercontent.com/d/1xyiEwouAo5sUvDhAwfjoUi0vBbw-pfeN" class="w-14 h-10 object-cover rounded-lg shrink-0 border border-slate-200">
+                    <div class="min-w-0">
+                      <span class="text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-900">SLIDE 5 &bull; Bimbingan Siswi Putri</span>
+                      <h5 class="font-bold text-slate-900 truncate mt-0.5">Bimbingan Belajar &amp; Al-Qur'an</h5>
+                    </div>
+                  </div>
+                  <button type="button" onclick="editAppHeroSlide(4)" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] shrink-0 cursor-pointer">Edit</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Edit Hero Slider Desktop -->
+            <div id="appHeroDesktopFormCard" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h4 class="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="edit-3" class="w-4 h-4 text-emerald-600"></i>
+                  <span id="appHeroFormTitle">Form Edit Hero Slider Desktop (index.html)</span>
+                </h4>
+                <span class="text-[9px] text-slate-400">Rasio 16:11 / 4:3</span>
+              </div>
+              <form id="formAppHeroDesktop" onsubmit="saveAppHeroDesktop(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="appHeroFormIndex" value="0">
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Pilih Slot Slide</label>
+                    <select id="appHeroFormSlot" onchange="editAppHeroSlide(parseInt(this.value))" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                      <option value="0">Slide 1: Gedung Kampus</option>
+                      <option value="1">Slide 2: Apel Pagi Siswa</option>
+                      <option value="2">Slide 3: Lab Komputer</option>
+                      <option value="3">Slide 4: Sholat Berjamaah</option>
+                      <option value="4">Slide 5: Bimbingan Siswi Putri</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Badge Teks Label</label>
+                    <input type="text" id="appHeroFormBadge" required placeholder="Contoh: Kampus MTs YASUA" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                  </div>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Judul Sorotan Utama</label>
+                  <input type="text" id="appHeroFormJudul" required placeholder="Contoh: Gedung Pembelajaran Terpadu" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Deskripsi Singkat Dokumentasi</label>
+                  <input type="text" id="appHeroFormDeskripsi" required placeholder="Contoh: Lingkungan madrasah yang asri, nyaman, dan berwibawa di Pilangwetan." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">URL Foto Slider Web (Rasio 16:11 / 4:3)</label>
+                  <input type="url" id="appHeroFormImgUrl" required placeholder="https://lh3.googleusercontent.com/..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+                  <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                  <span>Simpan Perubahan ke Website (index.html)</span>
                 </button>
               </form>
             </div>
@@ -6837,6 +6904,132 @@
       renderAdminGuruUI();
     }
     window.setAdminGuruCategoryFilter = setAdminGuruCategoryFilter;
+
+    // =====================================================================
+    // CONTROLLER HERO SLIDER DESKTOP (5 FOTO WEB - index.html)
+    // =====================================================================
+    const APP_HERO_DESKTOP_DATA = [
+      {
+        id: 'HERO-1',
+        urutan: 1,
+        badge_text: 'Kampus MTs YASUA',
+        judul: 'Gedung Pembelajaran Terpadu',
+        deskripsi: 'Lingkungan madrasah yang asri, nyaman, dan berwibawa di Pilangwetan.',
+        gambar_url: 'https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6'
+      },
+      {
+        id: 'HERO-2',
+        urutan: 2,
+        badge_text: 'Kedisiplinan & Akhlak',
+        judul: 'Apel Pagi & Pembinaan Siswa',
+        deskripsi: 'Membiasakan ketertiban, adab, dan rasa kebersamaan seluruh siswa-siswi.',
+        gambar_url: 'https://lh3.googleusercontent.com/d/1KGvThRU0HKZZxk3o00f0RpmdVIVQibgp'
+      },
+      {
+        id: 'HERO-3',
+        urutan: 3,
+        badge_text: 'Literasi Digital',
+        judul: 'Praktik Komputer & ANBK',
+        deskripsi: 'Penguasaan teknologi modern untuk mencetak generasi cerdas digital.',
+        gambar_url: 'https://lh3.googleusercontent.com/d/1aID6eBBBvG6qrNGkX23FRB4MUujp3e8P'
+      },
+      {
+        id: 'HERO-4',
+        urutan: 4,
+        badge_text: 'Pembiasaan Ibadah',
+        judul: 'Shalat Berjamaah di Masjid',
+        deskripsi: 'Penanaman nilai iman, taqwa, dan khusyuk dalam ibadah harian siswa putra.',
+        gambar_url: 'https://lh3.googleusercontent.com/d/1VpfpkDMRYqlf_rzgctWVR5Yjj6mxONer'
+      },
+      {
+        id: 'HERO-5',
+        urutan: 5,
+        badge_text: 'Bimbingan Siswi Putri',
+        judul: 'Bimbingan Belajar & Al-Qur\'an',
+        deskripsi: 'Suasana khidmah pembinaan tahfidz Al-Qur\'an dan adab siswi.',
+        gambar_url: 'https://lh3.googleusercontent.com/d/1xyiEwouAo5sUvDhAwfjoUi0vBbw-pfeN'
+      }
+    ];
+
+    let currentAppHeroIndex = 0;
+
+    function selectAppHeroSlide(idx) {
+      if (idx < 0 || idx >= APP_HERO_DESKTOP_DATA.length) return;
+      currentAppHeroIndex = idx;
+      const data = APP_HERO_DESKTOP_DATA[idx];
+
+      const imgEl = document.getElementById('appHeroDesktopImg');
+      const badgeEl = document.getElementById('appHeroDesktopBadge');
+      const judulEl = document.getElementById('appHeroDesktopJudul');
+      const deskripsiEl = document.getElementById('appHeroDesktopDeskripsi');
+      const counterEl = document.getElementById('appHeroDesktopCounter');
+
+      if (imgEl) imgEl.src = data.gambar_url;
+      if (badgeEl) badgeEl.textContent = data.badge_text;
+      if (judulEl) judulEl.textContent = data.judul;
+      if (deskripsiEl) deskripsiEl.textContent = data.deskripsi;
+      if (counterEl) counterEl.textContent = (idx + 1) + ' / 5';
+
+      // Update highlight thumbnail
+      const thumbs = document.querySelectorAll('.app-hero-thumb');
+      thumbs.forEach((th, i) => {
+        if (i === idx) {
+          th.className = 'app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border-2 border-emerald-600 shadow-xs cursor-pointer relative';
+        } else {
+          th.className = 'app-hero-thumb aspect-[4/3] rounded-lg overflow-hidden border border-slate-200 hover:border-emerald-500 shadow-2xs cursor-pointer relative opacity-75 hover:opacity-100';
+        }
+      });
+    }
+    window.selectAppHeroSlide = selectAppHeroSlide;
+
+    function editAppHeroSlide(idx) {
+      selectAppHeroSlide(idx);
+      const data = APP_HERO_DESKTOP_DATA[idx];
+
+      const slotSelect = document.getElementById('appHeroFormSlot');
+      const badgeInput = document.getElementById('appHeroFormBadge');
+      const judulInput = document.getElementById('appHeroFormJudul');
+      const deskripsiInput = document.getElementById('appHeroFormDeskripsi');
+      const urlInput = document.getElementById('appHeroFormImgUrl');
+      const idxInput = document.getElementById('appHeroFormIndex');
+
+      if (slotSelect) slotSelect.value = idx;
+      if (idxInput) idxInput.value = idx;
+      if (badgeInput) badgeInput.value = data.badge_text;
+      if (judulInput) judulInput.value = data.judul;
+      if (deskripsiInput) deskripsiInput.value = data.deskripsi;
+      if (urlInput) urlInput.value = data.gambar_url;
+
+      const titleEl = document.getElementById('appHeroFormTitle');
+      if (titleEl) titleEl.textContent = 'Edit Slide ' + (idx + 1) + ': ' + data.badge_text;
+
+      const formCard = document.getElementById('appHeroDesktopFormCard');
+      if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    window.editAppHeroSlide = editAppHeroSlide;
+
+    function saveAppHeroDesktop(e) {
+      e.preventDefault();
+      const idx = parseInt(document.getElementById('appHeroFormIndex').value) || 0;
+      const badge = document.getElementById('appHeroFormBadge').value.trim();
+      const judul = document.getElementById('appHeroFormJudul').value.trim();
+      const deskripsi = document.getElementById('appHeroFormDeskripsi').value.trim();
+      const url = document.getElementById('appHeroFormImgUrl').value.trim();
+
+      if (APP_HERO_DESKTOP_DATA[idx]) {
+        APP_HERO_DESKTOP_DATA[idx].badge_text = badge;
+        APP_HERO_DESKTOP_DATA[idx].judul = judul;
+        APP_HERO_DESKTOP_DATA[idx].deskripsi = deskripsi;
+        APP_HERO_DESKTOP_DATA[idx].gambar_url = url;
+      }
+
+      selectAppHeroSlide(idx);
+
+      if (typeof window.showToast === 'function') {
+        window.showToast('Slide ' + (idx + 1) + ' Hero Website berhasil diperbarui!');
+      }
+    }
+    window.saveAppHeroDesktop = saveAppHeroDesktop;
 function openAdminModule(moduleName) {
       const header = document.getElementById('app-main-header');
       const dock = document.getElementById('mobileBottomDock');
