@@ -679,118 +679,118 @@
       </div>
 
       <!-- KARTU PINTASAN HARI INI (LIVE DYNAMIC HIGHLIGHT) -->
-      <div id="jadwal-today-card" class="bg-gradient-to-br from-indigo-950 via-slate-900 to-emerald-950 text-white p-4 rounded-2xl border-2 border-indigo-400/50 shadow-md space-y-3 relative overflow-hidden">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+      <div id="jadwal-today-card" style="background: linear-gradient(135deg, #033324 0%, #064e3b 50%, #022c22 100%); color: #ffffff;" class="p-4 rounded-2xl border-2 border-emerald-500/40 shadow-md space-y-3 relative overflow-hidden">
+        <div class="flex items-center justify-between border-b border-white/15 pb-2.5">
           <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs">
+            <div class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs shadow-xs">
               <i data-lucide="clock" class="w-4 h-4"></i>
             </div>
             <div>
               <span class="text-[9.5px] text-amber-300 uppercase tracking-widest font-black block">Info Hari Ini</span>
-              <h4 id="today-name-display" class="text-xs font-black text-white">Selasa, 10 November 2026</h4>
+              <h4 id="today-name-display" class="text-xs font-black text-white tracking-wide">Selasa, 10 November 2026</h4>
             </div>
           </div>
-          <span id="today-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-bold border border-emerald-500/30">
+          <span id="today-status-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/30 text-emerald-200 text-[9.5px] font-bold border border-emerald-400/40">
             KBM Aktif
           </span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
           <!-- Seragam Hari Ini -->
-          <div class="p-2.5 rounded-xl bg-white/10 border border-white/10 flex items-start gap-2.5">
-            <div class="w-8 h-8 rounded-lg bg-emerald-400/20 text-emerald-300 flex items-center justify-center shrink-0">
+          <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22);" class="p-3 rounded-xl flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center shrink-0 shadow-xs">
               <i data-lucide="shirt" class="w-4 h-4"></i>
             </div>
             <div class="min-w-0">
-              <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Seragam Hari Ini</span>
-              <strong id="today-uniform-title" class="text-white text-xs block truncate">Khas Batik Hijau MTs YASUA</strong>
-              <p id="today-uniform-desc" class="text-[10px] text-emerald-200 mt-0.5 leading-snug">Batik Hijau Madrasah, bawahan hijau tua, peci hitam / jilbab hijau.</p>
+              <span class="text-[9.5px] text-amber-300 uppercase tracking-wider block font-black">Seragam Hari Ini</span>
+              <strong id="today-uniform-title" class="text-white text-xs block font-extrabold truncate">Khas Batik Hijau MTs YASUA</strong>
+              <p id="today-uniform-desc" class="text-[10px] text-emerald-100 mt-0.5 leading-snug">Batik Hijau Madrasah, bawahan hijau tua, peci hitam / jilbab hijau.</p>
             </div>
           </div>
 
           <!-- Jam Masuk & Ibadah -->
-          <div class="p-2.5 rounded-xl bg-white/10 border border-white/10 flex items-start gap-2.5">
-            <div class="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0">
+          <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22);" class="p-3 rounded-xl flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-emerald-400 text-slate-950 flex items-center justify-center shrink-0 shadow-xs">
               <i data-lucide="bell" class="w-4 h-4"></i>
             </div>
             <div class="min-w-0">
-              <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Waktu Masuk Madrasah</span>
-              <strong class="text-white text-xs block">Pukul 07.00 WIB Tepat</strong>
-              <p class="text-[10px] text-amber-200 mt-0.5 leading-snug">Diawali Sholat Dhuha, tadarus Al-Qur'an &amp; Asmaul Husna berjamaah.</p>
+              <span class="text-[9.5px] text-emerald-200 uppercase tracking-wider block font-black">Waktu Masuk Madrasah</span>
+              <strong class="text-white text-xs block font-extrabold">Pukul 07.00 WIB Tepat</strong>
+              <p class="text-[10px] text-emerald-100 mt-0.5 leading-snug">Diawali Sholat Dhuha, tadarus Al-Qur'an &amp; Asmaul Husna berjamaah.</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- PANDUAN LENGKAP SERAGAM MINGGUAN (Senin - Sabtu) -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2.5">
-        <div class="flex items-center justify-between">
-          <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
             <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
             <span>Ketentuan Seragam Siswa-Siswi (Senin - Sabtu)</span>
           </h4>
-          <span class="text-[9.5px] text-slate-400">Tertib &amp; Rapi</span>
+          <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[9.5px] font-bold border border-emerald-200">Rapi &amp; Tertib</span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[10.5px]">
           <!-- Senin -->
-          <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80 space-y-1">
+          <div class="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="font-black text-blue-900 text-xs">SENIN</span>
-              <span class="px-1.5 py-0.2 rounded bg-blue-200 text-blue-800 text-[8.5px] font-bold">OSIS</span>
+              <span class="font-black text-blue-950 text-xs">SENIN</span>
+              <span class="px-1.5 py-0.5 rounded bg-blue-600 text-white text-[8.5px] font-black">OSIS</span>
             </div>
-            <strong class="text-slate-800 block text-[11px] leading-tight">Putih - Biru Dongker</strong>
-            <p class="text-[9.5px] text-slate-600 leading-snug">Dasi, sabuk madrasah, peci hitam/jilbab putih, sepatu hitam bertali.</p>
+            <strong class="text-slate-900 block text-[11px] leading-tight font-extrabold">Putih - Biru Dongker</strong>
+            <p class="text-[10px] text-slate-700 leading-snug">Dasi, sabuk madrasah, peci hitam / jilbab putih, sepatu hitam bertali.</p>
           </div>
 
           <!-- Selasa -->
-          <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 space-y-1">
+          <div class="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="font-black text-emerald-900 text-xs">SELASA</span>
-              <span class="px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-800 text-[8.5px] font-bold">BATIK</span>
+              <span class="font-black text-emerald-950 text-xs">SELASA</span>
+              <span class="px-1.5 py-0.5 rounded bg-emerald-700 text-white text-[8.5px] font-black">BATIK</span>
             </div>
-            <strong class="text-slate-800 block text-[11px] leading-tight">Khas Batik Hijau YASUA</strong>
-            <p class="text-[9.5px] text-slate-600 leading-snug">Kemeja batik hijau khas, bawahan hijau tua, peci hitam/jilbab hijau.</p>
+            <strong class="text-slate-900 block text-[11px] leading-tight font-extrabold">Khas Batik Hijau YASUA</strong>
+            <p class="text-[10px] text-slate-700 leading-snug">Kemeja batik hijau khas, bawahan hijau tua, peci hitam / jilbab hijau.</p>
           </div>
 
           <!-- Rabu -->
-          <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1">
+          <div class="p-2.5 rounded-xl bg-amber-50/80 border border-amber-200 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="font-black text-amber-900 text-xs">RABU</span>
-              <span class="px-1.5 py-0.2 rounded bg-amber-200 text-amber-800 text-[8.5px] font-bold">PRAMUKA</span>
+              <span class="font-black text-amber-950 text-xs">RABU</span>
+              <span class="px-1.5 py-0.5 rounded bg-amber-600 text-white text-[8.5px] font-black">PRAMUKA</span>
             </div>
-            <strong class="text-slate-800 block text-[11px] leading-tight">Pramuka Lengkap</strong>
-            <p class="text-[9.5px] text-slate-600 leading-snug">Baju pramuka atribut lengkap, kacu leher, baret/topi pramuka.</p>
+            <strong class="text-slate-900 block text-[11px] leading-tight font-extrabold">Pramuka Lengkap</strong>
+            <p class="text-[10px] text-slate-700 leading-snug">Baju pramuka atribut lengkap, kacu leher, baret / topi pramuka madrasah.</p>
           </div>
 
           <!-- Kamis -->
-          <div class="p-2.5 rounded-xl bg-teal-50/70 border border-teal-200/80 space-y-1">
+          <div class="p-2.5 rounded-xl bg-teal-50/80 border border-teal-200 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="font-black text-teal-900 text-xs">KAMIS</span>
-              <span class="px-1.5 py-0.2 rounded bg-teal-200 text-teal-800 text-[8.5px] font-bold">IDENTITAS</span>
+              <span class="font-black text-teal-950 text-xs">KAMIS</span>
+              <span class="px-1.5 py-0.5 rounded bg-teal-700 text-white text-[8.5px] font-black">IDENTITAS</span>
             </div>
-            <strong class="text-slate-800 block text-[11px] leading-tight">Kemeja Hijau Toska</strong>
-            <p class="text-[9.5px] text-slate-600 leading-snug">Bawahan hitam, jilbab bordir identitas YASUA, peci hitam madrasah.</p>
+            <strong class="text-slate-900 block text-[11px] leading-tight font-extrabold">Kemeja Hijau Toska</strong>
+            <p class="text-[10px] text-slate-700 leading-snug">Bawahan hitam, jilbab bordir identitas YASUA, peci hitam madrasah.</p>
           </div>
 
           <!-- Jumat -->
-          <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200/80 space-y-1">
+          <div class="p-2.5 rounded-xl bg-purple-50/80 border border-purple-200 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="font-black text-purple-900 text-xs">JUM'AT</span>
-              <span class="px-1.5 py-0.2 rounded bg-purple-200 text-purple-800 text-[8.5px] font-bold">MUSLIM</span>
+              <span class="font-black text-purple-950 text-xs">JUM'AT</span>
+              <span class="px-1.5 py-0.5 rounded bg-purple-700 text-white text-[8.5px] font-black">MUSLIM</span>
             </div>
-            <strong class="text-slate-800 block text-[11px] leading-tight">Busana Muslim Santun</strong>
-            <p class="text-[9.5px] text-slate-600 leading-snug">Putra: Koko putih &amp; sarung santri rapi. Putri: Gamis muslimah putih.</p>
+            <strong class="text-slate-900 block text-[11px] leading-tight font-extrabold">Busana Muslim Santun</strong>
+            <p class="text-[10px] text-slate-700 leading-snug">Putra: Koko putih &amp; sarung santri rapi. Putri: Gamis muslimah putih.</p>
           </div>
 
           <!-- Sabtu -->
-          <div class="p-2.5 rounded-xl bg-rose-50/70 border border-rose-200/80 space-y-1">
+          <div class="p-2.5 rounded-xl bg-rose-50/80 border border-rose-200 space-y-1">
             <div class="flex items-center justify-between">
-              <span class="font-black text-rose-900 text-xs">SABTU</span>
-              <span class="px-1.5 py-0.2 rounded bg-rose-200 text-rose-800 text-[8.5px] font-bold">OLAHRAGA</span>
+              <span class="font-black text-rose-950 text-xs">SABTU</span>
+              <span class="px-1.5 py-0.5 rounded bg-rose-600 text-white text-[8.5px] font-black">OLAHRAGA</span>
             </div>
-            <strong class="text-slate-800 block text-[11px] leading-tight">Kaos Olahraga Resmi</strong>
-            <p class="text-[9.5px] text-slate-600 leading-snug">Kaos olahraga madrasah, sepatu olahraga (Senam &amp; Ekstrakurikuler).</p>
+            <strong class="text-slate-900 block text-[11px] leading-tight font-extrabold">Kaos Olahraga Resmi</strong>
+            <p class="text-[10px] text-slate-700 leading-snug">Kaos olahraga madrasah, sepatu olahraga (Senam &amp; Ekstrakurikuler).</p>
           </div>
         </div>
       </div>
@@ -959,7 +959,7 @@
             <i data-lucide="users" class="w-3.5 h-3.5 text-brand-primary"></i>
             <span>Daftar Guru Pengajar</span>
           </h4>
-          <span id="appGuruCount" class="text-[10px] font-bold text-slate-400">6 Guru</span>
+          <span id="appGuruCount" class="text-[10px] font-bold text-slate-500">8 Pendidik &amp; Tendik</span>
         </div>
         <div id="appTeachersGrid" class="grid grid-cols-2 gap-2.5">
           <!-- Populated dynamically via JS -->
@@ -1105,7 +1105,7 @@
       </div>
     </div><!-- End #tab-program -->
 
-    <!-- ==================== TAB 6: PPDB SANTRI BARU ==================== -->
+    <!-- ==================== TAB 7: PPDB ONLINE ==================== -->
     <div id="tab-ppdb" class="hidden space-y-3.5">
       <!-- Header Banner Tab PPDB -->
       <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-700/80 flex items-center justify-between">
@@ -1123,222 +1123,441 @@
         </span>
       </div>
 
-      <!-- Hero Callout PPDB -->
-      <div class="bg-gradient-to-br from-brand-primary to-emerald-800 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-500/50 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5 text-amber-300 text-xs font-black">
-            <i data-lucide="award" class="w-4 h-4"></i>
-            <span>Pendaftaran Siswa Baru Dibuka!</span>
-          </div>
-          <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-200 text-[9.5px] font-bold border border-emerald-600/40">
-            TA 2026/2027
-          </span>
-        </div>
-        <p class="text-[11px] text-emerald-100 leading-relaxed">
-          Raih beasiswa bebas biaya pendaftaran dan beasiswa SPP bagi siswa-siswi berprestasi akademik, kejuaraan olahraga/seni, dan penghafal Al-Qur'an (Tahfidz).
-        </p>
-        <div class="pt-1 grid grid-cols-3 gap-1.5">
-          <button onclick="openPpdbRegistrationModal()" type="button" class="py-2 px-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[11px] text-center flex items-center justify-center gap-1 shadow-sm active:scale-98 transition-all cursor-pointer">
-            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-            <span>Form Online</span>
-          </button>
-          <button onclick="openPpdbStatusModal()" type="button" class="py-2 px-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-[11px] text-center flex items-center justify-center gap-1 shadow-xs active:scale-98 transition-all cursor-pointer">
-            <i data-lucide="search" class="w-3.5 h-3.5 text-amber-300"></i>
-            <span>Cek Status</span>
-          </button>
-          <button onclick="openBrochureModal()" type="button" class="py-2 px-1.5 rounded-xl bg-emerald-700/80 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 cursor-pointer active:scale-98 transition-all">
-            <i data-lucide="share-2" class="w-3.5 h-3.5 text-amber-300"></i>
-            <span>Brosur</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Card Banner Formulir Pendaftaran Mandiri Online -->
-      <div class="bg-gradient-to-br from-amber-500/10 via-emerald-50/50 to-teal-50/40 p-4 rounded-2xl border-2 border-emerald-600/40 shadow-xs space-y-3">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-sm shadow-emerald-950/20">
-            <i data-lucide="user-plus" class="w-5 h-5 text-amber-300"></i>
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-1.5">
-              <span class="px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider">Online &amp; Mandiri</span>
-              <span class="text-[10px] text-emerald-800 font-semibold">Tersimpan ke Database</span>
-            </div>
-            <h3 class="text-xs font-black text-slate-900 mt-1 leading-snug">Formulir Pendaftaran Online Mandiri</h3>
-            <p class="text-[10.5px] text-slate-600 mt-0.5 leading-relaxed">
-              Daftarkan putra-putri Anda secara mandiri dalam hitungan menit. Bukti pendaftaran resmi dan nomor registrasi langsung diterbitkan otomatis.
-            </p>
-          </div>
-        </div>
-
-        <div class="pt-1 flex flex-col sm:flex-row gap-2">
-          <button onclick="openPpdbRegistrationModal()" type="button" class="w-full py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer">
-            <i data-lucide="clipboard-pen" class="w-4 h-4 text-amber-400"></i>
-            <span>Isi Formulir Pendaftaran Siswa Baru</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Jalur Pendaftaran & Beasiswa -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2.5">
-        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
-          <span>Jalur Pendaftaran &amp; Beasiswa</span>
-        </h4>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-          <!-- Jalur 1 -->
-          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
-            <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-bold text-xs">01</div>
-            <div class="min-w-0">
-              <span class="font-bold text-slate-800 text-[11px] block">Jalur Prestasi Tahfidz Qur'an</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Bebas biaya pendaftaran dan beasiswa SPP bagi hafidz/hafidzah minimal 1 juz.</p>
-            </div>
-          </div>
-          <!-- Jalur 2 -->
-          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
-            <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-bold text-xs">02</div>
-            <div class="min-w-0">
-              <span class="font-bold text-slate-800 text-[11px] block">Jalur Prestasi Akademik</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Peringkat 1-3 di MI/SD asal atau juara lomba KSM/OSN tingkat kecamatan/kabupaten.</p>
-            </div>
-          </div>
-          <!-- Jalur 3 -->
-          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
-            <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 font-bold text-xs">03</div>
-            <div class="min-w-0">
-              <span class="font-bold text-slate-800 text-[11px] block">Jalur Minat Bakat (Olahraga &amp; Seni)</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Juara POPDA, bulutangkis, futsal, catur, rebana/hadroh, kaligrafi, pidato.</p>
-            </div>
-          </div>
-          <!-- Jalur 4 -->
-          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
-            <div class="w-7 h-7 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center shrink-0 font-bold text-xs">04</div>
-            <div class="min-w-0">
-              <span class="font-bold text-slate-800 text-[11px] block">Jalur Afirmasi / KIP</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Bantuan pendidikan penuh bagi siswa-siswi yatim, piatu, atau pemegang KIP/PKH.</p>
-            </div>
-          </div>
-          <!-- Jalur 5 -->
-          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2 sm:col-span-2">
-            <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-800 flex items-center justify-center shrink-0 font-bold text-xs">05</div>
-            <div class="min-w-0">
-              <span class="font-bold text-slate-800 text-[11px] block">Jalur Reguler Umum</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Terbuka untuk seluruh lulusan SD/MI negeri maupun swasta tanpa tes seleksi yang rumit.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 Langkah Alur Pendaftaran (Stepper) -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2.5">
-        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-primary"></i>
-          <span>Alur Pendaftaran Siswa Baru</span>
-        </h4>
-
-        <div class="space-y-2 text-xs">
-          <!-- Langkah 1 -->
-          <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <div class="w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-black flex items-center justify-center shrink-0">1</div>
-            <div class="flex-1 min-w-0">
-              <span class="font-extrabold text-slate-800 block text-[11.5px]">Isi Formulir Pendaftaran</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Daftar online melalui WhatsApp / Website atau datang langsung ke ruang panitia madrasah.</p>
-            </div>
-          </div>
-
-          <!-- Langkah 2 -->
-          <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <div class="w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-black flex items-center justify-center shrink-0">2</div>
-            <div class="flex-1 min-w-0">
-              <span class="font-extrabold text-slate-800 block text-[11.5px]">Penyerahan Berkas Persyaratan</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Menyerahkan fotokopi Kartu Keluarga (KK), Akta Kelahiran, dan Ijazah/SKL MI/SD.</p>
-            </div>
-          </div>
-
-          <!-- Langkah 3 -->
-          <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <div class="w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-black flex items-center justify-center shrink-0">3</div>
-            <div class="flex-1 min-w-0">
-              <span class="font-extrabold text-slate-800 block text-[11.5px]">Observasi &amp; Pemetaan Minat</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Tes baca Al-Qur'an fashahah dan wawancara peminatan program unggulan siswa.</p>
-            </div>
-          </div>
-
-          <!-- Langkah 4 -->
-          <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white text-[11px] font-black flex items-center justify-center shrink-0">4</div>
-            <div class="flex-1 min-w-0">
-              <span class="font-extrabold text-slate-800 block text-[11.5px]">Pengumuman &amp; Daftar Ulang</span>
-              <p class="text-[10px] text-slate-500 mt-0.5">Pengumuman kelulusan, pengukuran seragam madrasah, dan pembagian kelas siswa baru.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Syarat Berkas Pendaftaran -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2">
-        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="file-check" class="w-3.5 h-3.5 text-emerald-600"></i>
-          <span>Berkas yang Perlu Disiapkan</span>
-        </h4>
-        <div class="grid grid-cols-2 gap-2 text-[10.5px]">
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-            <span class="font-semibold text-slate-700">Fotokopi Kartu Keluarga (KK)</span>
-          </div>
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-            <span class="font-semibold text-slate-700">Fotokopi Akta Kelahiran</span>
-          </div>
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-            <span class="font-semibold text-slate-700">Ijazah / SKL MI/SD (3 lbr)</span>
-          </div>
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-            <span class="font-semibold text-slate-700">Pas Foto 3x4 (3 lembar)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card Cek Status Pendaftaran Mandiri -->
-      <div class="bg-gradient-to-r from-emerald-900 to-teal-950 text-white p-3.5 rounded-2xl border border-emerald-700/60 shadow-xs space-y-2">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5">
-            <i data-lucide="search-check" class="w-4 h-4 text-amber-300"></i>
-            <h4 class="text-xs font-black text-white">Sudah Mendaftar? Lacak Status</h4>
-          </div>
-          <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black">Live</span>
-        </div>
-        <p class="text-[10.5px] text-emerald-100 leading-relaxed">
-          Ketahui hasil verifikasi berkas, kelulusan, dan pengumuman seleksi siswa baru dengan memasukkan nomor pendaftaran atau nomor WhatsApp.
-        </p>
-        <button onclick="openPpdbStatusModal()" type="button" class="w-full py-2 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-white/10">
-          <i data-lucide="search" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span>Cek Status Pendaftaran Anda</span>
+      <!-- Segment Navigation Switcher (In-Page View, Tanpa Popup!) -->
+      <div class="grid grid-cols-3 p-1 bg-slate-100 rounded-2xl border border-slate-200 text-xs font-bold gap-1">
+        <button id="ppdbSegBtn-info" type="button" onclick="setPpdbSubTab('info')" class="py-2 rounded-xl bg-white text-brand-primary shadow-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1">
+          <i data-lucide="info" class="w-3.5 h-3.5"></i>
+          <span>Informasi</span>
+        </button>
+        <button id="ppdbSegBtn-form" type="button" onclick="setPpdbSubTab('form')" class="py-2 rounded-xl text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center justify-center gap-1">
+          <i data-lucide="clipboard-pen" class="w-3.5 h-3.5"></i>
+          <span>Formulir</span>
+        </button>
+        <button id="ppdbSegBtn-status" type="button" onclick="setPpdbSubTab('status')" class="py-2 rounded-xl text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center justify-center gap-1">
+          <i data-lucide="search-check" class="w-3.5 h-3.5"></i>
+          <span>Lacak Status</span>
         </button>
       </div>
 
-      <!-- Kontak Sekretariat PPDB -->
-      <div class="bg-slate-900 text-white p-3.5 rounded-2xl shadow-sm space-y-2">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] text-amber-300 font-extrabold uppercase tracking-wider">Sekretariat PPDB</span>
-          <span class="text-[10px] text-slate-400">Pukul 07.30 - 13.00 WIB</span>
+      <!-- ==================== SUB-VIEW 1: INFORMASI & ALUR PPDB ==================== -->
+      <div id="ppdbSubView-info" class="space-y-3.5">
+        <!-- Hero Callout PPDB -->
+        <div class="bg-gradient-to-br from-brand-primary to-emerald-800 text-white p-4 rounded-2xl shadow-sm border border-emerald-500/50 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-amber-300 text-xs font-black">
+              <i data-lucide="award" class="w-4 h-4"></i>
+              <span>Pendaftaran Siswa Baru Dibuka!</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-200 text-[9.5px] font-bold border border-emerald-600/40">
+              TA 2026/2027
+            </span>
+          </div>
+          <p class="text-[11px] text-emerald-100 leading-relaxed">
+            Raih beasiswa bebas biaya pendaftaran dan beasiswa SPP bagi siswa-siswi berprestasi akademik, kejuaraan olahraga/seni, dan penghafal Al-Qur'an (Tahfidz).
+          </p>
+          <div class="pt-1 grid grid-cols-2 gap-2">
+            <button onclick="setPpdbSubTab('form')" type="button" class="py-2.5 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs text-center flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer">
+              <i data-lucide="clipboard-pen" class="w-4 h-4"></i>
+              <span>Isi Formulir Online</span>
+            </button>
+            <button onclick="setPpdbSubTab('status')" type="button" class="py-2.5 px-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 shadow-xs active:scale-98 transition-all cursor-pointer">
+              <i data-lucide="search" class="w-4 h-4 text-amber-300"></i>
+              <span>Lacak Status</span>
+            </button>
+          </div>
         </div>
-        <p class="text-xs text-slate-200">
-          Gedung MTs YASUA Pilangwetan, Jl. Raya Pilangwetan, Kec. Kebonagung, Kab. Demak.
-        </p>
-        <div class="pt-1 flex items-center gap-2">
-          <a href="https://wa.me/6285649881966" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition-colors">
-            <i data-lucide="phone" class="w-3.5 h-3.5 text-amber-300"></i>
-            <span>Chat WA Panitia</span>
-          </a>
-          <a href="kontak.html" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors">
-            Lihat Peta Lokasi
-          </a>
+
+        <!-- Jalur Pendaftaran & Beasiswa -->
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+            <span>5 Jalur Pendaftaran &amp; Beasiswa</span>
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+              <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-bold text-xs">01</div>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-[11px] block">Jalur Prestasi Tahfidz Qur'an</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Bebas biaya pendaftaran &amp; beasiswa SPP bagi hafidz/hafidzah minimal 1 juz.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+              <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-bold text-xs">02</div>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-[11px] block">Jalur Prestasi Akademik</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Peringkat 1-3 di MI/SD asal atau juara lomba KSM/OSN tingkat kecamatan/kabupaten.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+              <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 font-bold text-xs">03</div>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-[11px] block">Jalur Minat Bakat (Olahraga &amp; Seni)</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Juara POPDA, bulutangkis, futsal, catur, rebana/hadroh, kaligrafi, pidato.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2">
+              <div class="w-7 h-7 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center shrink-0 font-bold text-xs">04</div>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-[11px] block">Jalur Afirmasi / KIP</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Bantuan pendidikan penuh bagi siswa-siswi yatim, piatu, atau pemegang KIP/PKH.</p>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2 sm:col-span-2">
+              <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-800 flex items-center justify-center shrink-0 font-bold text-xs">05</div>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-[11px] block">Jalur Reguler Umum</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Terbuka untuk seluruh lulusan SD/MI negeri maupun swasta tanpa tes seleksi rumit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Langkah Alur Pendaftaran -->
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-primary"></i>
+            <span>Alur 4 Langkah Pendaftaran</span>
+          </h4>
+
+          <div class="space-y-2 text-xs">
+            <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
+              <div class="w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-black flex items-center justify-center shrink-0">1</div>
+              <div class="flex-1 min-w-0">
+                <span class="font-extrabold text-slate-900 block text-[11.5px]">Isi Formulir Pendaftaran</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Isi form online melalui tab di atas atau datang langsung ke sekretariat madrasah.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
+              <div class="w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-black flex items-center justify-center shrink-0">2</div>
+              <div class="flex-1 min-w-0">
+                <span class="font-extrabold text-slate-900 block text-[11.5px]">Penyerahan Berkas Persyaratan</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Menyerahkan fotokopi Kartu Keluarga (KK), Akta Kelahiran, dan Ijazah/SKL MI/SD.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
+              <div class="w-6 h-6 rounded-full bg-brand-primary text-white text-[11px] font-black flex items-center justify-center shrink-0">3</div>
+              <div class="flex-1 min-w-0">
+                <span class="font-extrabold text-slate-900 block text-[11.5px]">Observasi &amp; Pemetaan Minat</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Tes baca Al-Qur'an fashahah dan wawancara peminatan program unggulan siswa.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5 p-2 rounded-xl bg-slate-50 border border-slate-100">
+              <div class="w-6 h-6 rounded-full bg-emerald-600 text-white text-[11px] font-black flex items-center justify-center shrink-0">4</div>
+              <div class="flex-1 min-w-0">
+                <span class="font-extrabold text-slate-900 block text-[11.5px]">Pengumuman &amp; Daftar Ulang</span>
+                <p class="text-[10px] text-slate-600 mt-0.5">Pengumuman kelulusan, pengukuran seragam madrasah, dan pembagian kelas siswa baru.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Syarat Berkas Pendaftaran -->
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <i data-lucide="file-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Berkas yang Perlu Disiapkan</span>
+          </h4>
+          <div class="grid grid-cols-2 gap-2 text-[10.5px]">
+            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+              <span class="font-semibold text-slate-700">Fotokopi Kartu Keluarga (KK)</span>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+              <span class="font-semibold text-slate-700">Fotokopi Akta Kelahiran</span>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+              <span class="font-semibold text-slate-700">Ijazah / SKL MI/SD (3 lbr)</span>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+              <span class="font-semibold text-slate-700">Pas Foto 3x4 (3 lembar)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kontak Sekretariat PPDB -->
+        <div class="bg-slate-900 text-white p-3.5 rounded-2xl shadow-sm space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] text-amber-300 font-extrabold uppercase tracking-wider">Sekretariat PPDB</span>
+            <span class="text-[10px] text-slate-400">Pukul 07.30 - 13.00 WIB</span>
+          </div>
+          <p class="text-xs text-slate-200">
+            Gedung MTs YASUA Pilangwetan, Jl. Raya Pilangwetan, Kec. Kebonagung, Kab. Demak.
+          </p>
+          <div class="pt-1 flex items-center gap-2">
+            <a href="https://wa.me/6285649881966" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition-colors">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-amber-300"></i>
+              <span>Chat WA Panitia</span>
+            </a>
+            <button onclick="openBrochureModal()" type="button" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors">
+              Unduh Brosur
+            </button>
+          </div>
         </div>
       </div>
+
+      <!-- ==================== SUB-VIEW 2: FORMULIR PENDAFTARAN ONLINE (IN-PAGE) ==================== -->
+      <div id="ppdbSubView-form" class="hidden space-y-3.5">
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs space-y-3.5">
+          
+          <!-- STEP 1: FORM PENGISIAN -->
+          <div id="ppdbFormView">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <div>
+                <h3 class="text-sm font-black text-slate-900">Formulir Pendaftaran Siswa Baru</h3>
+                <p class="text-[10.5px] text-emerald-700 font-semibold mt-0.5">Tersimpan otomatis ke database pendaftaran madrasah</p>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[9px]">Online</span>
+            </div>
+
+            <form id="ppdbRegistrationForm" onsubmit="handlePpdbSubmit(event)" class="space-y-3.5 pt-3">
+              <!-- SECTION A: JALUR & PROGRAM -->
+              <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-2.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
+                  <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  <span>1. Pilihan Jalur &amp; Program</span>
+                </span>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Jalur Pendaftaran <span class="text-rose-500">*</span></label>
+                    <select id="ppdbJalur" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option value="Reguler">Jalur Reguler (Umum)</option>
+                      <option value="Prestasi Tahfidz">Jalur Prestasi Tahfidz Al-Qur'an (Beasiswa)</option>
+                      <option value="Prestasi Akademik">Jalur Prestasi Akademik (Peringkat / Juara KSM)</option>
+                      <option value="Prestasi Minat Bakat">Jalur Minat Bakat (Olahraga / Seni / Rebana)</option>
+                      <option value="Afirmasi">Jalur Afirmasi / KIP / Yatim Piatu</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Program Pilihan <span class="text-rose-500">*</span></label>
+                    <select id="ppdbProgram" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                      <option value="Tahfidzul Qur'an & Kitab Salaf">Tahfidzul Qur'an &amp; Kitab Salaf (Unggulan)</option>
+                      <option value="Literasi Digital CBT">Literasi Digital CBT &amp; IT Madrasah</option>
+                      <option value="Literasi Bahasa">Literasi Bahasa (Bilingual Arab &amp; Inggris)</option>
+                      <option value="Reguler">Reguler Standar Nasional</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SECTION B: IDENTITAS CALON SISWA -->
+              <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-2.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
+                  <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                  <span>2. Identitas Calon Siswa</span>
+                </span>
+                
+                <div class="space-y-2">
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Lengkap Siswa <span class="text-rose-500">*</span></label>
+                    <input type="text" id="ppdbNama" required placeholder="Contoh: Muhammad Al-Fatih" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500 uppercase">
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div>
+                      <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Jenis Kelamin <span class="text-rose-500">*</span></label>
+                      <select id="ppdbGender" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="Laki-laki">Laki-laki (Putra)</option>
+                        <option value="Perempuan">Perempuan (Putri)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="block text-[10.5px] font-bold text-slate-700 mb-1">NISN <span class="text-slate-400 font-normal">(10 Digit jika ada)</span></label>
+                      <input type="text" id="ppdbNisn" maxlength="10" placeholder="Nomor Induk Siswa Nasional" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div>
+                      <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Tempat Lahir <span class="text-rose-500">*</span></label>
+                      <input type="text" id="ppdbTempatLahir" required placeholder="Contoh: Demak" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div>
+                      <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Tanggal Lahir <span class="text-rose-500">*</span></label>
+                      <input type="date" id="ppdbTanggalLahir" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Asal SD / MI <span class="text-rose-500">*</span></label>
+                    <input type="text" id="ppdbSekolahAsal" required placeholder="Contoh: MI Pilangwetan / SD Negeri 1 Pilangwetan" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500 uppercase">
+                  </div>
+                </div>
+              </div>
+
+              <!-- SECTION C: DATA WALI & KONTAK -->
+              <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-2.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                  <span>3. Data Orang Tua / Wali &amp; Alamat</span>
+                </span>
+                
+                <div class="space-y-2">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div>
+                      <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Orang Tua / Wali <span class="text-rose-500">*</span></label>
+                      <input type="text" id="ppdbNamaWali" required placeholder="Nama Ayah / Ibu / Wali" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div>
+                      <label class="block text-[10.5px] font-bold text-slate-700 mb-1">No. WhatsApp Aktif <span class="text-rose-500">*</span></label>
+                      <input type="tel" id="ppdbNoWa" required placeholder="08xxxxxxxxxx" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Alamat Tempat Tinggal / Desa</label>
+                    <input type="text" id="ppdbAlamatDesa" placeholder="Contoh: RT 02 RW 01 Desa Pilangwetan" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500">
+                  </div>
+
+                  <div>
+                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Catatan Tambahan / Prestasi yang Pernah Diraih</label>
+                    <textarea id="ppdbCatatan" rows="2" placeholder="Catatan khusus, hafalan juz, prestasi kejuaraan, dll." class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Alert Status & Submit Button -->
+              <div id="ppdbSubmitError" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold"></div>
+
+              <div class="pt-2 flex items-center justify-end gap-2">
+                <button onclick="setPpdbSubTab('info')" type="button" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
+                  Kembali ke Info
+                </button>
+                <button type="submit" id="btnSubmitPpdb" class="flex-1 py-3 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all cursor-pointer">
+                  <i data-lucide="send" class="w-4 h-4 text-amber-300"></i>
+                  <span>Kirim Pendaftaran Siswa Baru</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- STEP 2: TANDA TERIMA PENDAFTARAN DIGITAL (RECEIPT VIEW) -->
+          <div id="ppdbReceiptView" class="hidden space-y-4 py-2">
+            <div class="text-center space-y-1">
+              <div class="w-14 h-14 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2 shadow-inner">
+                <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-600"></i>
+              </div>
+              <h4 class="text-sm font-black text-slate-900">Alhamdulillah! Pendaftaran Berhasil Dikirim</h4>
+              <p class="text-xs text-slate-500">Data Anda telah resmi tersimpan di database seleksi PPDB MTs YASUA.</p>
+            </div>
+
+            <!-- Kartu Bukti Digital -->
+            <div id="ppdbReceiptCard" style="background: linear-gradient(135deg, #033324 0%, #064e3b 50%, #022c22 100%); color: #ffffff;" class="p-4 text-white rounded-2xl border-2 border-amber-400 shadow-lg space-y-3 relative overflow-hidden">
+              <div class="flex items-center justify-between border-b border-white/15 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs">
+                    MTs
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-black tracking-wide text-white">TANDA BUKTI PENDAFTARAN</h5>
+                    <p class="text-[9.5px] text-emerald-200">PPDB TA 2026/2027</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-700/90 text-emerald-100 text-[9px] font-bold border border-emerald-500/50" id="rcptStatus">
+                  Menunggu Verifikasi
+                </span>
+              </div>
+
+              <!-- Nomor Registrasi Prominent -->
+              <div class="bg-black/30 p-2.5 rounded-xl border border-amber-400/40 text-center space-y-0.5">
+                <span class="text-[9.5px] text-amber-300 uppercase tracking-widest font-black">Nomor Registrasi Resmi</span>
+                <div class="flex items-center justify-center gap-2">
+                  <span id="rcptRegId" class="text-lg font-black text-white tracking-wider font-mono">PPDB-2026-000</span>
+                  <button type="button" onclick="copyPpdbRegId()" class="p-1 rounded-md bg-white/10 hover:bg-white/20 text-amber-300 transition-colors" title="Salin Nomor Registrasi">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Rincian Data Siswa -->
+              <div class="grid grid-cols-2 gap-2 text-[10.5px] pt-1">
+                <div>
+                  <span class="text-emerald-200 block text-[9.5px]">Nama Calon Siswa:</span>
+                  <span id="rcptNama" class="font-extrabold text-white">NAMA LENGKAP</span>
+                </div>
+                <div>
+                  <span class="text-emerald-200 block text-[9.5px]">Asal Sekolah / MI:</span>
+                  <span id="rcptSekolah" class="font-semibold text-emerald-100">MI YASUA</span>
+                </div>
+                <div>
+                  <span class="text-emerald-200 block text-[9.5px]">Jalur Pendaftaran:</span>
+                  <span id="rcptJalur" class="font-semibold text-amber-300">Reguler</span>
+                </div>
+                <div>
+                  <span class="text-emerald-200 block text-[9.5px]">Program Pilihan:</span>
+                  <span id="rcptProgram" class="font-semibold text-white">Tahfidz &amp; Kitab Salaf</span>
+                </div>
+                <div class="col-span-2">
+                  <span class="text-emerald-200 block text-[9.5px]">Waktu Pendaftaran:</span>
+                  <span id="rcptTime" class="text-slate-200 text-[10px] font-mono">2026-11-10 12:00:00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons Pasca Pendaftaran -->
+            <div class="space-y-2 pt-1">
+              <button type="button" onclick="openPpdbWhatsAppConfirmation()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer">
+                <i data-lucide="message-circle" class="w-4 h-4 text-amber-300"></i>
+                <span>Konfirmasi Bukti ke WA Panitia PPDB</span>
+              </button>
+
+              <div class="flex gap-2">
+                <button type="button" onclick="printPpdbReceipt()" class="flex-1 py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+                  <i data-lucide="printer" class="w-3.5 h-3.5 text-slate-600"></i>
+                  <span>Cetak Bukti</span>
+                </button>
+                <button type="button" onclick="resetPpdbFormToNew()" class="flex-1 py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+                  <span>Daftar Lagi</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== SUB-VIEW 3: LACAK STATUS PENDAFTARAN (IN-PAGE) ==================== -->
+      <div id="ppdbSubView-status" class="hidden space-y-3.5">
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs space-y-3.5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+            <div>
+              <h3 class="text-sm font-black text-slate-900">Lacak Status Pendaftaran PPDB</h3>
+              <p class="text-[10.5px] text-slate-500 mt-0.5">Cek hasil verifikasi berkas dan pengumuman seleksi</p>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[9px]">Live Data</span>
+          </div>
+
+          <form onsubmit="checkPpdbStatus(event)" class="space-y-3">
+            <div>
+              <label class="block text-[10.5px] font-bold text-slate-700 mb-1">
+                Nomor Registrasi atau Nomor WhatsApp Pendaftar
+              </label>
+              <div class="flex gap-2">
+                <input type="text" id="inputPpdbQuery" required placeholder="Contoh: PPDB-2026-001 atau 081234..." class="flex-1 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 uppercase font-mono">
+                <button type="submit" id="btnCheckPpdb" class="py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer shrink-0">
+                  <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                  <span>Cari</span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Result Container (In-Page) -->
+          <div id="ppdbStatusResult" class="hidden">
+            <!-- Populated via checkPpdbStatus() -->
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 leading-relaxed">
+            <span class="font-bold text-slate-800 block mb-0.5">Butuh Bantuan?</span>
+            Jika nomor registrasi hilang atau ada kendala verifikasi, silakan hubungi Sekretariat PPDB melalui WhatsApp di <a href="https://wa.me/6285649881966" target="_blank" class="text-emerald-700 font-bold underline">0856-4988-1966</a>.
+          </div>
+        </div>
+      </div>
+
     </div><!-- End #tab-ppdb -->
 
     <!-- ==================== TAB 7: EKSTRAKURIKULER & KONTAK PEMBINA ==================== -->
@@ -1457,6 +1676,7 @@
 
     <!-- ==================== TAB 9: PROFIL MADRASAH ==================== -->
     <div id="tab-profil" class="hidden space-y-3.5">
+      <!-- Header Banner Tab Profil -->
       <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white p-3.5 rounded-2xl shadow-sm border border-emerald-700/80 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
@@ -1464,55 +1684,241 @@
           </button>
           <div>
             <h2 class="text-sm font-black text-white leading-tight">Profil MTs YASUA</h2>
-            <p class="text-[10px] text-emerald-200 mt-0.5">Identitas, Visi Misi, &amp; Legalitas</p>
+            <p class="text-[10px] text-emerald-200 mt-0.5">Identitas, Sejarah, Visi Misi &amp; Pimpinan</p>
           </div>
         </div>
-        <span class="text-[9.5px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-400 text-slate-950">
-          Akreditasi A
+        <span class="text-[9.5px] font-black uppercase px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 shadow-xs">
+          Akreditasi A Unggul
         </span>
       </div>
 
-      <!-- Kartu Identitas Resmi -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2">
-        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider">Identitas Resmi Madrasah</h4>
+      <!-- Kartu Identitas Resmi Legalitas -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+            <span>Identitas Resmi Madrasah</span>
+          </h4>
+          <span class="text-[9.5px] font-mono font-bold text-slate-400">Kemenag RI</span>
+        </div>
+
         <div class="grid grid-cols-2 gap-2 text-[10.5px]">
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <span class="text-slate-400 block text-[9.5px]">NPSN</span>
-            <span class="font-extrabold text-slate-800">20363229</span>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-slate-500 block text-[9.5px] font-semibold">NPSN Resmi</span>
+            <span class="font-black text-slate-900 text-xs font-mono">20364357</span>
           </div>
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <span class="text-slate-400 block text-[9.5px]">NSM (Kemenag)</span>
-            <span class="font-extrabold text-slate-800">121233210034</span>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-slate-500 block text-[9.5px] font-semibold">NSM (Nomor Statistik)</span>
+            <span class="font-black text-slate-900 text-xs font-mono">121233210034</span>
           </div>
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <span class="text-slate-400 block text-[9.5px]">Status Akreditasi</span>
-            <span class="font-extrabold text-emerald-700">Terakreditasi A (Unggul)</span>
+          <div class="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
+            <span class="text-emerald-700 block text-[9.5px] font-semibold">Status Akreditasi</span>
+            <span class="font-black text-emerald-900 text-xs">Peringkat A (Unggul)</span>
           </div>
-          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
-            <span class="text-slate-400 block text-[9.5px]">Naungan Yayasan</span>
-            <span class="font-extrabold text-slate-800">YASUA Pilangwetan</span>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-slate-500 block text-[9.5px] font-semibold">Naungan Yayasan</span>
+            <span class="font-black text-slate-900 text-xs">YASUA (Berdiri 1949)</span>
           </div>
         </div>
       </div>
 
-      <!-- Visi & Misi Ringkas -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2">
-        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider">Visi Madrasah</h4>
-        <p class="text-xs text-slate-700 italic font-semibold leading-relaxed p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-center">
-          “Terwujudnya Generasi Qur'ani yang Cerdas, Berakhlakul Karimah, Mandiri, dan Menguasai Teknologi Informasi.”
-        </p>
+      <!-- Spotlight Sambutan Kepala Madrasah -->
+      <div style="background: linear-gradient(135deg, #033324 0%, #064e3b 50%, #022c22 100%); color: #ffffff;" class="p-4 rounded-2xl border-2 border-emerald-500/40 shadow-md space-y-3 relative overflow-hidden">
+        <div class="flex items-center gap-3">
+          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-white/20 border-2 border-amber-400 shrink-0 shadow-md">
+            <img src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib" alt="Muthohar, S.Pd." class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/logo.png'">
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="inline-block px-2 py-0.5 rounded-md bg-amber-400 text-slate-950 font-black text-[8.5px] uppercase tracking-wider mb-0.5">
+              Sambutan Kepala Madrasah
+            </span>
+            <h3 class="text-xs sm:text-sm font-extrabold text-white leading-snug truncate">
+              Muthohar, S.Pd.
+            </h3>
+            <p class="text-[10px] text-emerald-200 line-clamp-1 mt-0.5">
+              Kepala MTs YASUA Pilangwetan
+            </p>
+          </div>
+        </div>
+        <blockquote class="text-[11px] text-emerald-100 italic bg-white/10 p-3 rounded-xl border border-white/15 leading-relaxed">
+          &ldquo;Selamat datang di MTs YASUA Pilangwetan. Kami berikhtiar mendidik generasi muda yang kokoh aqidah Ahlus Sunnah Wal Jama'ah, berakhlak mulia, cerdas dalam ilmu pengetahuan, dan cakap teknologi.&rdquo;
+        </blockquote>
       </div>
 
-      <!-- Lokasi & Peta -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-100/90 shadow-xs space-y-2">
-        <h4 class="text-xs font-black text-brand-dark uppercase tracking-wider">Lokasi Madrasah</h4>
-        <p class="text-xs text-slate-600 leading-relaxed">
-          Jl. Raya Pilangwetan, Desa Pilangwetan RT 02 / RW 01, Kec. Kebonagung, Kabupaten Demak, Jawa Tengah 59561.
+      <!-- Sejarah Perjalanan Madrasah (Sejak 1949) -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="history" class="w-4 h-4 text-amber-500"></i>
+            <span>Sejarah Berdirinya (Sejak 12 Sept 1949)</span>
+          </h4>
+          <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[9px] font-extrabold">77+ Tahun</span>
+        </div>
+
+        <p class="text-[11px] text-slate-700 leading-relaxed text-justify">
+          Madrasah didirikan atas kepedulian para sesepuh ulama dan tokoh masyarakat Pilangwetan pasca kemerdekaan RI. Beliau-beliau berikhtiar membimbing anak-anak menjadi muslim berilmu, bertaqwa, sholeh, dan bermanfaat bagi nusa, bangsa, serta agama.
         </p>
-        <a href="https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-primary text-white font-bold text-xs">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span>Buka di Google Maps</span>
-        </a>
+
+        <!-- 6 Tokoh Perintis Awal -->
+        <div class="space-y-1.5 pt-1">
+          <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 block">
+            6 Tokoh Perintis Awal (Muassis):
+          </span>
+          <div class="grid grid-cols-2 gap-1.5 text-[10.5px]">
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Bapak K. Ahmad</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Bapak Moh. Syuhadi</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Bapak H. Nuruddin</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Bapak H. Amin</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Bapak Shodiqun</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              <span>Bapak Muridan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visi & 5 Misi Strategis -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="target" class="w-4 h-4 text-brand-primary"></i>
+            <span>Visi &amp; 5 Misi Strategis</span>
+          </h4>
+        </div>
+
+        <!-- Visi -->
+        <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80">
+          <span class="text-[9.5px] font-black uppercase tracking-wider text-amber-900 block mb-1">Visi Madrasah:</span>
+          <p class="text-xs text-slate-800 italic font-semibold leading-relaxed">
+            &ldquo;Terwujudnya pendidikan yang islami, bermutu, memiliki sikap dan wawasan yang luas, beriman, bertaqwa, dan berakhlakul karimah, menguasai ilmu pengetahuan dan teknologi sesuai dengan perkembangan zaman.&rdquo;
+          </p>
+        </div>
+
+        <!-- 5 Misi -->
+        <div class="space-y-2 pt-1 text-[11px] text-slate-700">
+          <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 block">5 Misi Strategis:</span>
+          <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <span class="leading-relaxed">Melaksanakan pendidikan dan pengajaran agama Islam ala <strong>Ahlus Sunnah Wal Jama’ah</strong>.</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <span class="leading-relaxed">Memberikan pelayanan dan pengabdian tulus terhadap masyarakat, nusa, bangsa, dan <strong>NKRI</strong>.</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+            <span class="leading-relaxed">Meningkatkan pembelajaran aktif, kreatif, inovatif, dan menyenangkan penghasil lulusan bermutu.</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+            <span class="leading-relaxed">Mempersiapkan insan beriman, bertaqwa, berakhlak mulia, berpengetahuan luas, dan terampil.</span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">5</span>
+            <span class="leading-relaxed">Memenuhi kebutuhan pendidikan masyarakat sekitar sehingga menjadi madrasah idola dan terpercaya.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Struktur Pimpinan Madrasah -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+        <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+          <i data-lucide="users-2" class="w-4 h-4 text-emerald-600"></i>
+          <span>Struktur Pimpinan Madrasah</span>
+        </h4>
+        <div class="grid grid-cols-2 gap-2 text-[10.5px]">
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-[9.5px] text-slate-500 font-semibold block">Kepala Madrasah</span>
+            <strong class="text-slate-900 font-black text-xs block truncate">Muthohar, S.Pd.</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Kurikulum</span>
+            <strong class="text-slate-900 font-black text-xs block truncate">Hj. Thoibah R., S.Ag.</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Kesiswaan</span>
+            <strong class="text-slate-900 font-black text-xs block truncate">Aidiyah, S.Pd.</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Sarpras</span>
+            <strong class="text-slate-900 font-black text-xs block truncate">Hj. Inna M., S.Ag.</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 col-span-2">
+            <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Hubungan Masyarakat (Humas)</span>
+            <strong class="text-slate-900 font-black text-xs block truncate">Ahmad Wawahib, S.Pd.</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Sarana & Fasilitas Unggulan -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+        <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+          <i data-lucide="building-2" class="w-4 h-4 text-brand-primary"></i>
+          <span>Fasilitas &amp; Sarana Prasarana</span>
+        </h4>
+        <div class="grid grid-cols-2 gap-2 text-[10.5px]">
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+            <i data-lucide="monitor" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span class="font-bold text-slate-800">Lab Komputer CBT &amp; ANBK</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+            <i data-lucide="book" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span class="font-bold text-slate-800">Perpustakaan &amp; Kitab Klasik</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+            <i data-lucide="home" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span class="font-bold text-slate-800">Masjid Jami' Asnawiyyah</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+            <i data-lucide="activity" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span class="font-bold text-slate-800">Lapangan Olahraga Luas</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+            <i data-lucide="landmark" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span class="font-bold text-slate-800">Asrama Santri PPTQ Asnawiyyah</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+            <i data-lucide="wifi" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+            <span class="font-bold text-slate-800">Free WiFi Edukasi Madrasah</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lokasi & Peta Google Maps -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
+        <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
+          <i data-lucide="map-pin" class="w-4 h-4 text-rose-500"></i>
+          <span>Lokasi &amp; Kontak Madrasah</span>
+        </h4>
+        <p class="text-xs text-slate-700 leading-relaxed">
+          Jl. Raya Pilangwetan, RT 02 / RW 01, Desa Pilangwetan, Kecamatan Kebonagung, Kabupaten Demak, Jawa Tengah 59561.
+        </p>
+        <div class="pt-1 flex flex-wrap gap-2">
+          <a href="https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-bold text-xs shadow-xs transition-colors">
+            <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-300"></i>
+            <span>Buka Google Maps</span>
+          </a>
+          <a href="https://wa.me/6285649881966" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors">
+            <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Hubungi Sekretariat</span>
+          </a>
+        </div>
       </div>
     </div><!-- End #tab-profil -->
 
@@ -2810,290 +3216,9 @@
       </div>
     </div>
 
-    <!-- ==================== MODAL FORMULIR PPDB ONLINE MANDIRI ==================== -->
-    <div id="modalPpdbRegistration" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-2 sm:p-4 transition-opacity">
-      <div class="bg-white rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col shadow-2xl border border-emerald-200 relative animate-in fade-in zoom-in-95 text-slate-800 overflow-hidden">
-        
-        <!-- Modal Header -->
-        <div class="p-4 bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white flex items-center justify-between border-b border-emerald-800/80 shrink-0">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shadow-xs">
-              <i data-lucide="clipboard-pen" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h3 class="font-extrabold text-xs sm:text-sm text-white leading-tight">Formulir Pendaftaran Siswa Baru</h3>
-              <p class="text-[10px] text-emerald-200 mt-0.5">PPDB MTs YASUA Pilangwetan • TA 2026/2027</p>
-            </div>
-          </div>
-          <button onclick="closePpdbRegistrationModal()" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-colors" title="Tutup Formulir">
-            <i data-lucide="x" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- Modal Body (Scrollable) -->
-        <div class="p-4 overflow-y-auto space-y-4 text-left">
-          
-          <!-- STEP 1: FORM PENGISIAN -->
-          <div id="ppdbFormView">
-            <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200/80 text-[11px] text-emerald-900 leading-relaxed mb-3">
-              Silakan isi data calon siswa baru dengan benar. Data akan otomatis masuk ke database pendaftaran madrasah dan Anda akan mendapatkan nomor registrasi resmi.
-            </div>
-
-            <form id="ppdbRegistrationForm" onsubmit="handlePpdbSubmit(event)" class="space-y-3.5">
-              
-              <!-- SECTION A: JALUR & PROGRAM -->
-              <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2.5">
-                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
-                  <i data-lucide="award" class="w-3.5 h-3.5"></i>
-                  <span>1. Pilihan Jalur &amp; Program</span>
-                </span>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Jalur Pendaftaran <span class="text-rose-500">*</span></label>
-                    <select id="ppdbJalur" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                      <option value="Reguler">Jalur Reguler (Umum)</option>
-                      <option value="Prestasi Tahfidz">Jalur Prestasi Tahfidz Al-Qur'an (Beasiswa)</option>
-                      <option value="Prestasi Akademik">Jalur Prestasi Akademik (Peringkat / Juara KSM)</option>
-                      <option value="Prestasi Minat Bakat">Jalur Minat Bakat (Olahraga / Seni / Rebana)</option>
-                      <option value="Afirmasi">Jalur Afirmasi / KIP / Yatim Piatu</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Program Pilihan <span class="text-rose-500">*</span></label>
-                    <select id="ppdbProgram" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                      <option value="Tahfidzul Qur'an & Kitab Salaf">Tahfidzul Qur'an &amp; Kitab Salaf (Unggulan)</option>
-                      <option value="Literasi Digital CBT">Literasi Digital CBT &amp; IT Madrasah</option>
-                      <option value="Literasi Bahasa">Literasi Bahasa (Bilingual Arab &amp; Inggris)</option>
-                      <option value="Reguler">Reguler Standar Nasional</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SECTION B: DATA CALON SANTRI -->
-              <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2.5">
-                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
-                  <i data-lucide="user" class="w-3.5 h-3.5"></i>
-                  <span>2. Identitas Calon Siswa</span>
-                </span>
-
-                <div>
-                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Lengkap Siswa <span class="text-rose-500">*</span></label>
-                  <input type="text" id="ppdbNama" required placeholder="Contoh: MUHAMMAD ALFATIH" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500 uppercase">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Jenis Kelamin <span class="text-rose-500">*</span></label>
-                    <select id="ppdbGender" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                      <option value="Laki-laki (Putra)">Laki-laki (Putra)</option>
-                      <option value="Perempuan (Putri)">Perempuan (Putri)</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1 flex items-center justify-between">
-                      <span>NISN</span>
-                      <span class="text-[9px] text-slate-400 font-normal">10 Digit (Boleh Kosong)</span>
-                    </label>
-                    <input type="text" id="ppdbNisn" maxlength="12" placeholder="Nomor Induk Siswa Nasional" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Tempat Lahir <span class="text-rose-500">*</span></label>
-                    <input type="text" id="ppdbTempatLahir" required placeholder="Contoh: Demak" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                  </div>
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Tanggal Lahir <span class="text-rose-500">*</span></label>
-                    <input type="date" id="ppdbTanggalLahir" required class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                  </div>
-                </div>
-
-                <div>
-                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Asal SD / MI <span class="text-rose-500">*</span></label>
-                  <input type="text" id="ppdbSekolahAsal" required placeholder="Contoh: MI Yasua Pilangwetan / SD Negeri 1 Pilangwetan" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                </div>
-              </div>
-
-              <!-- SECTION C: DATA WALI & ALAMAT -->
-              <div class="p-3 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-2.5">
-                <span class="text-[10px] font-black uppercase tracking-wider text-brand-primary flex items-center gap-1">
-                  <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
-                  <span>3. Kontak Orang Tua / Wali</span>
-                </span>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Nama Orang Tua / Wali <span class="text-rose-500">*</span></label>
-                    <input type="text" id="ppdbNamaWali" required placeholder="Nama Ayah / Ibu / Wali" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                  </div>
-                  <div>
-                    <label class="block text-[10.5px] font-bold text-slate-700 mb-1">No. WhatsApp Aktif <span class="text-rose-500">*</span></label>
-                    <input type="tel" id="ppdbNoWa" required placeholder="Contoh: 081234567890" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                  </div>
-                </div>
-
-                <div>
-                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1">Alamat Tinggal (Desa &amp; Kecamatan) <span class="text-rose-500">*</span></label>
-                  <input type="text" id="ppdbAlamatDesa" required placeholder="Contoh: Desa Pilangwetan RT 02 / RW 01, Kec. Kebonagung" class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                </div>
-
-                <div>
-                  <label class="block text-[10.5px] font-bold text-slate-700 mb-1 flex items-center justify-between">
-                    <span>Catatan Tambahan (Opsional)</span>
-                    <span class="text-[9px] text-slate-400 font-normal">Misal: info beasiswa / prestasi</span>
-                  </label>
-                  <input type="text" id="ppdbCatatan" placeholder="Prestasi yang pernah diraih, dsb." class="w-full bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500">
-                </div>
-              </div>
-
-              <!-- Alert Status & Submit Button -->
-              <div id="ppdbSubmitError" class="hidden p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold"></div>
-
-              <div class="pt-1 flex items-center justify-end gap-2">
-                <button onclick="closePpdbRegistrationModal()" type="button" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
-                  Batal
-                </button>
-                <button type="submit" id="btnSubmitPpdb" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer">
-                  <i data-lucide="send" class="w-3.5 h-3.5 text-amber-300"></i>
-                  <span>Kirim Pendaftaran Siswa Baru</span>
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <!-- STEP 2: TANDA TERIMA PENDAFTARAN DIGITAL (RECEIPT VIEW) -->
-          <div id="ppdbReceiptView" class="hidden space-y-4 py-2">
-            <div class="text-center space-y-1">
-              <div class="w-14 h-14 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2 shadow-inner">
-                <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-600"></i>
-              </div>
-              <h4 class="text-sm font-black text-slate-900">Alhamdulillah! Pendaftaran Berhasil Dikirim</h4>
-              <p class="text-xs text-slate-500">Data Anda telah resmi tersimpan di database seleksi PPDB MTs YASUA.</p>
-            </div>
-
-            <!-- Kartu Bukti Digital -->
-            <div id="ppdbReceiptCard" class="p-4 bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-900 text-white rounded-2xl border-2 border-amber-400/80 shadow-lg space-y-3 relative overflow-hidden">
-              <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-amber-400/10 rounded-full blur-xl pointer-events-none"></div>
-
-              <div class="flex items-center justify-between border-b border-emerald-800/80 pb-2.5">
-                <div class="flex items-center gap-2">
-                  <div class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs">
-                    MTs
-                  </div>
-                  <div>
-                    <h5 class="text-xs font-black tracking-wide">TANDA BUKTI PENDAFTARAN</h5>
-                    <p class="text-[9.5px] text-emerald-300">PPDB TA 2026/2027</p>
-                  </div>
-                </div>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-700/80 text-emerald-100 text-[9px] font-bold" id="rcptStatus">
-                  Menunggu Verifikasi
-                </span>
-              </div>
-
-              <!-- Nomor Registrasi Prominent -->
-              <div class="bg-black/30 p-2.5 rounded-xl border border-amber-400/40 text-center space-y-0.5">
-                <span class="text-[9.5px] text-amber-300 uppercase tracking-widest font-bold">Nomor Registrasi Resmi</span>
-                <div class="flex items-center justify-center gap-2">
-                  <span id="rcptRegId" class="text-lg font-black text-white tracking-wider font-mono">PPDB-2026-000</span>
-                  <button type="button" onclick="copyPpdbRegId()" class="p-1 rounded-md bg-white/10 hover:bg-white/20 text-amber-300 transition-colors" title="Salin Nomor Registrasi">
-                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Rincian Data Siswa -->
-              <div class="grid grid-cols-2 gap-2 text-[10.5px] pt-1">
-                <div>
-                  <span class="text-slate-400 block text-[9.5px]">Nama Calon Siswa:</span>
-                  <span id="rcptNama" class="font-bold text-white">NAMA LENGKAP</span>
-                </div>
-                <div>
-                  <span class="text-slate-400 block text-[9.5px]">Asal Sekolah / MI:</span>
-                  <span id="rcptSekolah" class="font-semibold text-emerald-200">MI YASUA</span>
-                </div>
-                <div>
-                  <span class="text-slate-400 block text-[9.5px]">Jalur Pendaftaran:</span>
-                  <span id="rcptJalur" class="font-semibold text-amber-300">Reguler</span>
-                </div>
-                <div>
-                  <span class="text-slate-400 block text-[9.5px]">Program Pilihan:</span>
-                  <span id="rcptProgram" class="font-semibold text-white">Tahfidz &amp; Kitab Salaf</span>
-                </div>
-                <div class="col-span-2">
-                  <span class="text-slate-400 block text-[9.5px]">Waktu Pendaftaran:</span>
-                  <span id="rcptTime" class="text-slate-300 text-[10px] font-mono">2026-11-10 12:00:00</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Action Buttons Pasca Pendaftaran -->
-            <div class="space-y-2 pt-1">
-              <button type="button" onclick="openPpdbWhatsAppConfirmation()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer">
-                <i data-lucide="message-circle" class="w-4 h-4 text-amber-300"></i>
-                <span>Konfirmasi Bukti ke WA Panitia PPDB</span>
-              </button>
-
-              <div class="flex gap-2">
-                <button type="button" onclick="printPpdbReceipt()" class="flex-1 py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
-                  <i data-lucide="printer" class="w-3.5 h-3.5 text-slate-600"></i>
-                  <span>Cetak / Simpan</span>
-                </button>
-                <button type="button" onclick="closePpdbRegistrationModal()" class="flex-1 py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
-                  <span>Selesai</span>
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== MODAL CEK STATUS PPDB ==================== -->
-    <div id="modalPpdbStatus" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
-      <div class="bg-white rounded-3xl max-w-md w-full p-4 sm:p-5 shadow-2xl border border-emerald-200 flex flex-col relative animate-in fade-in zoom-in-95 space-y-3.5 text-slate-800">
-        
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center border border-emerald-200">
-              <i data-lucide="search" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-tight">Lacak Status Pendaftaran PPDB</h3>
-              <p class="text-[10px] text-emerald-700">MTs YASUA Pilangwetan • TA 2026/2027</p>
-            </div>
-          </div>
-          <button onclick="closePpdbStatusModal()" type="button" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center cursor-pointer">
-            <i data-lucide="x" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- Form Pencarian -->
-        <form onsubmit="checkPpdbStatus(event)" class="space-y-3">
-          <div>
-            <label class="block text-[10.5px] font-bold text-slate-700 mb-1">
-              Nomor Registrasi atau Nomor WhatsApp
-            </label>
-            <div class="flex gap-1.5">
-              <input type="text" id="inputPpdbQuery" required placeholder="Contoh: PPDB-2026-001 atau 0812..." class="flex-1 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 uppercase">
-              <button type="submit" id="btnCheckPpdb" class="py-2 px-3 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-bold text-xs flex items-center gap-1 shadow-xs transition-colors cursor-pointer">
-                <i data-lucide="search" class="w-3.5 h-3.5"></i>
-                <span>Cari</span>
-              </button>
-            </div>
-          </div>
-        </form>
-
-        <!-- Hasil Pencarian Status -->
-        <div id="ppdbStatusResult" class="hidden space-y-2.5"></div>
-
-      </div>
-    </div>
+    <!-- Modal PPDB dialihkan ke in-page sub-tabs (Tidak ada popup) -->
+    <div id="modalPpdbRegistration" class="hidden"></div>
+    <div id="modalPpdbStatus" class="hidden"></div>
 
     <!-- ==================== MODAL FORMULIR DAFTAR EKSKUL ==================== -->
     <div id="modalDaftarEkskul" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-4 transition-opacity">
@@ -4959,64 +5084,84 @@
     // --- 4. Guru & Tendik Engine ---
     let appTeachersData = [
       {
-        id: 'guru-1',
-        nama_lengkap: 'Susriandi, S.Pd.',
-        jabatan: 'Guru Bahasa Indonesia',
-        badge_bidang: 'Bahasa & Sastra',
-        kategori: 'bahasa',
-        foto_url: 'https://lh3.googleusercontent.com/d/1HubtowTyx6EnK99cuNdihp_FyUqDz5bi',
-        deskripsi: 'Membimbing literasi membaca, retorika berbicara, dan apresiasi sastra santri.',
-        pendidikan: 'Sarjana Pendidikan'
+        id: 'GURU-002',
+        nama_lengkap: 'Hj. Thoibah Roudlotul Jannah, S.Ag.',
+        jabatan: 'Waka Kurikulum / Guru SKI',
+        badge_bidang: 'Kurikulum & Agama',
+        kategori: 'agama',
+        foto_url: 'https://lh3.googleusercontent.com/d/1BAnqGfZKYAIgwGZJ4geLSfMw8FzqrGxN',
+        deskripsi: 'Mengampu Sejarah Kebudayaan Islam (SKI) & Al-Qur\'an Hadits serta memimpin pengembangan kurikulum madrasah.',
+        pendidikan: 'Sarjana Agama (S.Ag.)'
       },
       {
-        id: 'guru-2',
-        nama_lengkap: 'Arsyad Edi, SS.',
+        id: 'GURU-003',
+        nama_lengkap: 'Hj. Inna Mawaddah, S.Ag.',
+        jabatan: 'Waka Sarpras / Guru Fiqih',
+        badge_bidang: 'Sarpras & Fiqih',
+        kategori: 'agama',
+        foto_url: 'https://lh3.googleusercontent.com/d/1tIdWz-hi7ud8DLzuSgRip8b9INLYWmfD',
+        deskripsi: 'Mengampu Fiqih Ibadah & Muamalah serta membina sarana prasarana penunjang kegiatan belajar madrasah.',
+        pendidikan: 'Sarjana Agama Islam (S.Ag.)'
+      },
+      {
+        id: 'GURU-004',
+        nama_lengkap: 'Ahmad Wawahib, S.Pd.',
+        jabatan: 'Waka Humas / Guru Bahasa Arab',
+        badge_bidang: 'Humas & Bahasa',
+        kategori: 'bahasa',
+        foto_url: 'https://lh3.googleusercontent.com/d/1txOuLq70n63uFFXo5SjDmmmwl5gBJ7VE',
+        deskripsi: 'Mengampu Bahasa Arab & IPS serta membina relasi kemitraan masyarakat dan publikasi madrasah.',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)'
+      },
+      {
+        id: 'GURU-005',
+        nama_lengkap: 'Aidiyah, S.Pd.',
+        jabatan: 'Waka Kesiswaan / Guru Matematika',
+        badge_bidang: 'Kesiswaan & Sains',
+        kategori: 'sains',
+        foto_url: 'https://lh3.googleusercontent.com/d/1AAKCNISYYJwH-R2fGkfY7LFTwBBaPcrp',
+        deskripsi: 'Mengampu Matematika & Keagamaan serta memimpin pembinaan kedisiplinan dan bakat minat siswa-siswi.',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)'
+      },
+      {
+        id: 'GURU-006',
+        nama_lengkap: 'Tri Susilowati, S.Pd.',
         jabatan: 'Guru Bahasa Inggris',
         badge_bidang: 'Bahasa Asing',
         kategori: 'bahasa',
-        foto_url: 'https://lh3.googleusercontent.com/d/1HRy9qO89YNBaOKwI33K6e-6h2R5idTY5',
-        deskripsi: 'Mengembangkan percakapan bahasa Inggris aktif dan wawasan komunikasi global.',
-        pendidikan: 'Sarjana Sastra'
-      },
-      {
-        id: 'guru-3',
-        nama_lengkap: 'Hasbullah, S.Kom.',
-        jabatan: 'Guru Informatika & Ka. Lab Komputer',
-        badge_bidang: 'TIK & Digital',
-        kategori: 'sains',
-        foto_url: 'https://lh3.googleusercontent.com/d/1iM1T7qrSinQ6s08oeVKPJe3wQ7Bi5wTO',
-        deskripsi: 'Mengampu Informatika, pengelolaan laboratorium CBT, dan proktor teknis ANBK.',
-        pendidikan: 'Sarjana Komputer'
-      },
-      {
-        id: 'guru-4',
-        nama_lengkap: 'Aidiyah, S.Pd.',
-        jabatan: 'Guru Matematika',
-        badge_bidang: 'Sains & Matematika',
-        kategori: 'sains',
-        foto_url: 'https://lh3.googleusercontent.com/d/1kLUjzQLem-8fXDJhPowB4oE4t4-ySh0j',
-        deskripsi: 'Melatih kemampuan bernalar logis, numerasi, dan pembimbingan olimpiade sains.',
-        pendidikan: 'Sarjana Pendidikan'
-      },
-      {
-        id: 'guru-5',
-        nama_lengkap: 'Wahyuni Arida Agustina, S.Pd.',
-        jabatan: 'Guru PPKn & Karakter Siswa',
-        badge_bidang: 'Karakter & Kebangsaan',
-        kategori: 'karakter',
         foto_url: 'https://lh3.googleusercontent.com/d/1ELghDVz8TatUPrzoeVRjHcl1lIoOzyJs',
-        deskripsi: 'Menanamkan wawasan kebangsaan, cinta tanah air, dan adab santun bermasyarakat.',
-        pendidikan: 'Sarjana Pendidikan'
+        deskripsi: 'Mengembangkan percakapan aktif bahasa Inggris, literasi internasional, dan pembimbingan lomba kebahasaan.',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)'
       },
       {
-        id: 'guru-6',
-        nama_lengkap: 'Emi Sulastri, S.Pd.',
-        jabatan: 'Guru Ilmu Pengetahuan Sosial (IPS)',
-        badge_bidang: 'Sosial & Keagamaan',
+        id: 'GURU-007',
+        nama_lengkap: 'H. Cholilullah, S.Pd.',
+        jabatan: 'Guru Kitab Salaf & IPS',
+        badge_bidang: 'Kitab & Sosial',
         kategori: 'karakter',
-        foto_url: 'https://lh3.googleusercontent.com/d/1XDMmVJPTSsLrjUjJu6UFWXoCjNOs1kES',
-        deskripsi: 'Membina wawasan sejarah Islam, sosiologi, dan kepedulian sosial santri.',
-        pendidikan: 'Sarjana Pendidikan'
+        foto_url: 'https://lh3.googleusercontent.com/d/11aMRtcCeCsgNz0Z7Dei56vuvhoP7vyuV',
+        deskripsi: 'Membina pengajian kitab kuning klasik, wawasan sejarah Islam, kepedulian sosial, dan karakter santri.',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)'
+      },
+      {
+        id: 'GURU-008',
+        nama_lengkap: 'NURUN NISA\', S.Ag.',
+        jabatan: 'Guru Aqidah Akhlak & SKI',
+        badge_bidang: 'Aqidah & Akhlak',
+        kategori: 'agama',
+        foto_url: 'https://lh3.googleusercontent.com/d/1HubtowTyx6EnK99cuNdihp_FyUqDz5bi',
+        deskripsi: 'Membimbing pembiasaan akhlaqul karimah harian, keteladanan salafus sholih, dan pembinaan wali kelas.',
+        pendidikan: 'Sarjana Agama (S.Ag.)'
+      },
+      {
+        id: 'GURU-009',
+        nama_lengkap: 'Mita Aryani, S.Pd.',
+        jabatan: 'Guru IPA & Matematika',
+        badge_bidang: 'Sains Terpadu',
+        kategori: 'sains',
+        foto_url: 'https://lh3.googleusercontent.com/d/11EAVhmm-ePkV45r0EEA_5eSdB0bGmDZ6',
+        deskripsi: 'Mengampu Ilmu Pengetahuan Alam (IPA) eksperimen sains laboratorium dan penguatan numerasi siswa.',
+        pendidikan: 'Sarjana Pendidikan (S.Pd.)'
       }
     ];
 
@@ -5149,13 +5294,19 @@
         else if (t.badge_bidang.includes('Sains') || t.badge_bidang.includes('Matematika')) badgeColor = 'bg-amber-600 text-white';
         else if (t.badge_bidang.includes('TIK') || t.badge_bidang.includes('Digital')) badgeColor = 'bg-emerald-700 text-white';
         else if (t.badge_bidang.includes('Karakter') || t.badge_bidang.includes('Kebangsaan')) badgeColor = 'bg-red-600 text-white';
-        else if (t.badge_bidang.includes('Sosial') || t.badge_bidang.includes('Agama')) badgeColor = 'bg-purple-600 text-white';
+        else if (t.badge_bidang.includes('Sosial') || t.badge_bidang.includes('Agama') || t.badge_bidang.includes('Fiqih') || t.badge_bidang.includes('Kurikulum')) badgeColor = 'bg-emerald-800 text-white';
+
+        const initials = (t.nama_lengkap || '').replace(/^(Hj.|H.|Drs.|Dr.)\s*/i, '').split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase() || 'GT';
 
         return `
-          <div onclick="openGuruModal('${t.id}')" class="bg-white rounded-2xl p-2.5 border border-emerald-100/90 shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all flex flex-col justify-between cursor-pointer group">
+          <div onclick="openGuruModal('${t.id}')" class="bg-white rounded-2xl p-2.5 border border-slate-200 shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all flex flex-col justify-between cursor-pointer group">
             <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 mb-2 relative">
-                <img src="${t.foto_url}" alt="${t.nama_lengkap}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='/logo.png'">
+              <div class="aspect-[4/3] rounded-xl overflow-hidden bg-emerald-950 mb-2 relative flex items-center justify-center">
+                <img src="${t.foto_url}" alt="${t.nama_lengkap}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display:none;" class="w-full h-full bg-gradient-to-br from-emerald-900 to-slate-900 flex flex-col items-center justify-center text-white p-2 text-center">
+                  <div class="w-10 h-10 rounded-full bg-amber-400 text-slate-950 font-black text-sm flex items-center justify-center mb-1 shadow-sm">${initials}</div>
+                  <span class="text-[9px] font-bold text-emerald-200">MTs YASUA</span>
+                </div>
                 <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-full ${badgeColor} text-[8px] font-black shadow-xs">
                   ${t.badge_bidang}
                 </span>
@@ -5167,9 +5318,9 @@
                 ${t.jabatan}
               </p>
             </div>
-            <div class="pt-2 mt-2 border-t border-slate-50 flex items-center justify-between text-[9px] text-slate-400">
+            <div class="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-[9px] text-slate-500 font-semibold">
               <span class="truncate max-w-[80%]">${t.pendidikan}</span>
-              <i data-lucide="chevron-right" class="w-3 h-3 text-slate-300"></i>
+              <i data-lucide="chevron-right" class="w-3 h-3 text-slate-400"></i>
             </div>
           </div>
         `;
@@ -6605,46 +6756,46 @@
 
       const list = (DATA_ROSTER_KBM[activeJadwalKelas] && DATA_ROSTER_KBM[activeJadwalKelas][activeJadwalHari]) || [];
       if (list.length === 0) {
-        container.innerHTML = '<div class="p-3 bg-slate-50 text-slate-500 rounded-xl text-center text-xs">Jadwal tidak tersedia.</div>';
+        container.innerHTML = '<div class="p-4 bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl text-center text-xs font-semibold">Jadwal tidak tersedia untuk hari ini.</div>';
         return;
       }
 
       let html = '';
       list.forEach((item, idx) => {
         if (item.type === 'ibadah') {
-          html += '<div class="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/90 flex items-start gap-2.5">' +
-            '<div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 text-xs font-black">' +
+          html += '<div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start gap-2.5 shadow-2xs">' +
+            '<div class="w-7 h-7 rounded-lg bg-emerald-700 text-white flex items-center justify-center shrink-0 text-xs font-black shadow-xs">' +
               '<i data-lucide="sun" class="w-3.5 h-3.5"></i>' +
             '</div>' +
             '<div class="flex-1 min-w-0">' +
               '<div class="flex items-center justify-between">' +
                 '<strong class="text-emerald-950 font-black text-xs leading-tight">' + item.mapel + '</strong>' +
-                '<span class="text-[9.5px] font-mono font-bold text-emerald-800 bg-white px-2 py-0.5 rounded-md border border-emerald-200 shrink-0">' + item.jam + '</span>' +
+                '<span class="text-[10px] font-mono font-bold text-emerald-900 bg-white px-2 py-0.5 rounded-md border border-emerald-300 shadow-2xs shrink-0">' + item.jam + '</span>' +
               '</div>' +
-              '<p class="text-[10px] text-emerald-700 mt-0.5 font-medium">' + item.guru + '</p>' +
+              '<p class="text-[10.5px] text-emerald-800 mt-0.5 font-semibold">' + item.guru + '</p>' +
             '</div>' +
           '</div>';
         } else if (item.type === 'istirahat') {
-          html += '<div class="p-2 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between text-[11px]">' +
-            '<div class="flex items-center gap-2 text-amber-900 font-bold">' +
-              '<i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-600"></i>' +
+          html += '<div class="p-2 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between text-xs shadow-2xs">' +
+            '<div class="flex items-center gap-2 text-amber-950 font-extrabold">' +
+              '<i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-700"></i>' +
               '<span>' + item.mapel + '</span>' +
             '</div>' +
-            '<span class="text-[9.5px] font-mono font-bold text-amber-800 bg-white px-2 py-0.5 rounded-md border border-amber-200">' + item.jam + '</span>' +
+            '<span class="text-[10px] font-mono font-bold text-amber-900 bg-white px-2 py-0.5 rounded-md border border-amber-300 shadow-2xs">' + item.jam + '</span>' +
           '</div>';
         } else {
-          html += '<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/90 flex items-start gap-2.5 hover:bg-slate-100/80 transition-colors">' +
-            '<div class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center shrink-0 font-extrabold text-xs">' +
-              (idx) +
+          html += '<div class="p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-start gap-2.5 hover:border-emerald-300 transition-colors">' +
+            '<div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-900 flex items-center justify-center shrink-0 font-black text-xs">' +
+              idx +
             '</div>' +
             '<div class="flex-1 min-w-0">' +
               '<div class="flex items-center justify-between">' +
                 '<strong class="text-slate-900 font-black text-xs leading-tight">' + item.mapel + '</strong>' +
-                '<span class="text-[9.5px] font-mono font-bold text-slate-600 bg-white px-2 py-0.5 rounded-md border border-slate-200 shrink-0">' + item.jam + '</span>' +
+                '<span class="text-[10px] font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200 shrink-0">' + item.jam + '</span>' +
               '</div>' +
-              '<div class="flex items-center justify-between text-[10.5px] text-slate-500 mt-1">' +
-                '<span class="font-medium text-slate-700 flex items-center gap-1"><i data-lucide="user-check" class="w-3 h-3 text-emerald-600"></i> ' + item.guru + '</span>' +
-                (item.ruang ? '<span class="text-[9.5px] text-slate-400 bg-slate-200/70 px-1.5 py-0.2 rounded font-mono">' + item.ruang + '</span>' : '') +
+              '<div class="flex items-center justify-between text-[11px] text-slate-600 mt-1">' +
+                '<span class="font-bold text-slate-800 flex items-center gap-1"><i data-lucide="user-check" class="w-3 h-3 text-emerald-700"></i> ' + item.guru + '</span>' +
+                (item.ruang ? '<span class="text-[9.5px] text-slate-600 bg-slate-100 px-2 py-0.5 rounded font-mono font-bold border border-slate-200">' + item.ruang + '</span>' : '') +
               '</div>' +
             '</div>' +
           '</div>';
@@ -6652,129 +6803,57 @@
       });
 
       container.innerHTML = html;
-      if (window.lucide) lucide.createIcons();
+      if (window.lucide) window.lucide.createIcons();
     }
 
     function printJadwalKbm() {
-      const list = (DATA_ROSTER_KBM[activeJadwalKelas] && DATA_ROSTER_KBM[activeJadwalKelas][activeJadwalHari]) || [];
-      const seragam = DATA_SERAGAM[activeJadwalHari] || DATA_SERAGAM['Senin'];
-      const printWin = window.open('', '_blank');
-      printWin.document.write('<!DOCTYPE html><html><head><title>Jadwal KBM Kelas ' + activeJadwalKelas + ' - MTs YASUA</title><style>body{font-family:sans-serif;padding:30px;color:#111} h2,h3{margin:0 0 5px;color:#047857} table{width:100%;border-collapse:collapse;margin-top:15px} th,td{border:1px solid #ccc;padding:8px 10px;font-size:13px;text-align:left} th{background:#f1f5f9;font-weight:bold} .seragam{background:#ecfdf5;border:1px solid #a7f3d0;padding:10px;border-radius:8px;margin-top:10px;font-size:13px} .footer{margin-top:20px;font-size:12px;color:#666}</style></head><body>');
-      printWin.document.write('<h2>MTs YASUA PILANGWETAN</h2>');
-      printWin.document.write('<h3>Roster KBM: KELAS ' + activeJadwalKelas + ' • HARI ' + activeJadwalHari.toUpperCase() + '</h3>');
-      printWin.document.write('<div class="seragam"><strong>Ketentuan Seragam:</strong> ' + seragam.title + ' — ' + seragam.desc + '</div>');
-      printWin.document.write('<table><thead><tr><th style="width:12%">Waktu</th><th>Mata Pelajaran / Kegiatan</th><th>Guru Pengampu / Pembina</th><th style="width:15%">Ruang</th></tr></thead><tbody>');
-      list.forEach(r => {
-        printWin.document.write('<tr><td><strong>' + r.jam + '</strong></td><td>' + r.mapel + '</td><td>' + r.guru + '</td><td>' + (r.ruang || '-') + '</td></tr>');
-      });
-      printWin.document.write('</tbody></table>');
-      printWin.document.write('<div class="footer"><p>Jadwal Pelajaran Resmi MTs YASUA Pilangwetan • Kebonagung, Demak • TP 2026/2027</p></div>');
-      printWin.document.write('<script>window.onload=function(){window.print();}</scr' + 'ipt>');
-      printWin.document.write('</body></html>');
-      printWin.document.close();
+      window.print();
     }
     window.printJadwalKbm = printJadwalKbm;
 
-    // --- Sinkronisasi Otomatis dengan Spreadsheet Apps Script ---
-    async function fetchJadwalFromBackend() {
-      try {
-        const syncBadge = document.getElementById('jadwal-sync-badge');
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getJadwalData';
-        const res = await fetch(API_URL);
-        const resJson = await res.json();
-
-        if (resJson && resJson.status === 'success' && resJson.data) {
-          const { jadwal, seragam } = resJson.data;
-
-          // 1. Update data seragam jika tersedia dari Spreadsheet
-          if (Array.isArray(seragam) && seragam.length > 0) {
-            seragam.forEach(s => {
-              if (s.hari && s.nama_seragam) {
-                DATA_SERAGAM[s.hari] = {
-                  title: s.nama_seragam,
-                  desc: s.deskripsi_lengkap || s.nama_seragam
-                };
-              }
-            });
-          }
-
-          // 2. Update data roster jika tersedia dari Spreadsheet
-          if (Array.isArray(jadwal) && jadwal.length > 0) {
-            // Grouping jadwal berdasarkan kelas & hari
-            const grouped = {};
-            jadwal.forEach(j => {
-              const k = String(j.kelas || '7');
-              const h = String(j.hari || 'Senin');
-              if (!grouped[k]) grouped[k] = {};
-              if (!grouped[k][h]) grouped[k][h] = [];
-              grouped[k][h].push({
-                jam: j.waktu || '07.00 - 08.00',
-                mapel: j.mata_pelajaran || '-',
-                guru: j.nama_guru || '-',
-                ruang: j.ruang || '',
-                type: j.tipe || 'mapel'
-              });
-            });
-
-            // Timpa kelompok kelas yang ada
-            Object.keys(grouped).forEach(k => {
-              if (!DATA_ROSTER_KBM[k]) DATA_ROSTER_KBM[k] = {};
-              Object.keys(grouped[k]).forEach(h => {
-                DATA_ROSTER_KBM[k][h] = grouped[k][h];
-              });
-            });
-          }
-
-          if (syncBadge) {
-            syncBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span><span>Spreadsheet Sync</span>';
-          }
-
-          // Re-render tampilan dengan data terbaru dari spreadsheet
-          renderJadwalButtons();
-          renderJadwalRoster();
-          const uniformInfo = DATA_SERAGAM[activeJadwalHari] || DATA_SERAGAM['Senin'];
-          const uTitleEl = document.getElementById('today-uniform-title');
-          const uDescEl = document.getElementById('today-uniform-desc');
-          if (uTitleEl) uTitleEl.textContent = uniformInfo.title;
-          if (uDescEl) uDescEl.textContent = uniformInfo.desc;
+    
+    // Controller Segment In-Page PPDB
+    function setPpdbSubTab(tab) {
+      const views = ['info', 'form', 'status'];
+      views.forEach(v => {
+        const viewEl = document.getElementById('ppdbSubView-' + v);
+        const btnEl = document.getElementById('ppdbSegBtn-' + v);
+        if (viewEl) {
+          if (v === tab) viewEl.classList.remove('hidden');
+          else viewEl.classList.add('hidden');
         }
-      } catch (err) {
-        console.warn('Gagal memuat jadwal dari spreadsheet, menggunakan data offline lokal:', err);
-      }
-    }
-    window.fetchJadwalFromBackend = fetchJadwalFromBackend;
-
-    // Panggil inisialisasi jadwal saat script dimuat
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        initJadwalToday();
-        fetchJadwalFromBackend();
+        if (btnEl) {
+          if (v === tab) {
+            btnEl.className = 'py-2 rounded-xl bg-white text-brand-primary shadow-xs font-black transition-all cursor-pointer flex items-center justify-center gap-1';
+          } else {
+            btnEl.className = 'py-2 rounded-xl text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center justify-center gap-1';
+          }
+        }
       });
-    } else {
-      initJadwalToday();
-      fetchJadwalFromBackend();
+      if (window.lucide) window.lucide.createIcons();
     }
+    window.setPpdbSubTab = setPpdbSubTab;
 
-
-    // =====================================================================
-    // PPDB ONLINE CONTROLLER & RECEIPT GENERATOR
-    // =====================================================================
-    let lastRegisteredPpdbData = null;
-
-    function openPpdbRegistrationModal() {
-      const modal = document.getElementById('modalPpdbRegistration');
+    function resetPpdbFormToNew() {
       const formView = document.getElementById('ppdbFormView');
       const receiptView = document.getElementById('ppdbReceiptView');
-      const errorDiv = document.getElementById('ppdbSubmitError');
+      const form = document.getElementById('ppdbRegistrationForm');
+      if (form) form.reset();
+      if (formView) formView.classList.remove('hidden');
+      if (receiptView) receiptView.classList.add('hidden');
+      setPpdbSubTab('form');
+    }
+    window.resetPpdbFormToNew = resetPpdbFormToNew;
 
-      if (modal) {
-        modal.classList.remove('hidden');
-        if (formView) formView.classList.remove('hidden');
-        if (receiptView) receiptView.classList.add('hidden');
-        if (errorDiv) errorDiv.classList.add('hidden');
-        document.body.style.overflow = 'hidden';
-        if (window.lucide) lucide.createIcons();
-      }
+    function openPpdbRegistrationModal() {
+      switchAppTab('ppdb');
+      setPpdbSubTab('form');
+      const formView = document.getElementById('ppdbFormView');
+      const receiptView = document.getElementById('ppdbReceiptView');
+      if (formView) formView.classList.remove('hidden');
+      if (receiptView) receiptView.classList.add('hidden');
+      const form = document.getElementById('ppdbSubView-form');
+      if (form) form.scrollIntoView({ behavior: 'smooth' });
     }
     window.openPpdbRegistrationModal = openPpdbRegistrationModal;
 
@@ -6940,17 +7019,10 @@
 
     // --- Cek Status PPDB Controller ---
     function openPpdbStatusModal() {
-      const modal = document.getElementById('modalPpdbStatus');
-      const resDiv = document.getElementById('ppdbStatusResult');
-      if (modal) {
-        modal.classList.remove('hidden');
-        if (resDiv) {
-          resDiv.classList.add('hidden');
-          resDiv.innerHTML = '';
-        }
-        document.body.style.overflow = 'hidden';
-        if (window.lucide) lucide.createIcons();
-      }
+      switchAppTab('ppdb');
+      setPpdbSubTab('status');
+      const statusView = document.getElementById('ppdbSubView-status');
+      if (statusView) statusView.scrollIntoView({ behavior: 'smooth' });
     }
     window.openPpdbStatusModal = openPpdbStatusModal;
 
