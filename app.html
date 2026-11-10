@@ -1378,7 +1378,7 @@
         <p class="text-[10.5px] text-emerald-100 leading-relaxed">
           Setiap siswa wajib mengikuti ekstrakurikuler Pramuka (kelas 7-8) dan diperbolehkan memilih maksimal 2 ekskul peminatan bakat olahraga, seni, atau sains.
         </p>
-        <button onclick="openDaftarEkskulModal()" type="button" class="w-full py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-all cursor-pointer">
+            '<button onclick="openDaftarEkskulModal(\'' + encodeURIComponent(item.nama) + '\')" type="button" class="py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer">' +
           <i data-lucide="clipboard-pen" class="w-3.5 h-3.5"></i>
           <span>Daftar Peminatan Ekskul Online</span>
         </button>
@@ -5707,166 +5707,814 @@
     };
 
     const DATA_ROSTER_KBM = {
-      '7': {
-        'Senin': [
-          { jam: '07.00 - 07.30', mapel: 'Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera', guru: 'Tim Kesiswaan & Pembina OSIS', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: "Al-Qur'an Hadits", guru: 'Hj. Thoibah Roudlotul Jannah, S.Ag.', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Matematika', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I & Kudapan Sehat', guru: 'Kantin Sehat Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Bahasa Indonesia', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah di Masjid', guru: 'Sie Keagamaan & Wali Kelas', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Aqidah Akhlak', guru: 'K.H. Salman, Lc.', type: 'mapel', ruang: 'R. 7-A/B/C' }
-        ],
-        'Selasa': [
-          { jam: '07.00 - 07.30', mapel: "Shalat Dhuha, Tadarus Al-Qur'an & Asmaul Husna", guru: 'Wali Kelas & Guru Jam 1', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Bahasa Arab', guru: "Ahmad Munif, S.Pd.I", type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Ilmu Pengetahuan Alam (IPA Terpadu)', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'Lab Sains / R. 7' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I & Refresing', guru: 'Lingkungan Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Fiqih / Kajian Fathul Qorib Dasar', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah di Masjid', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Bahasa Inggris', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' }
-        ],
-        'Rabu': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Pembiasaan Literasi Numerasi', guru: 'Wali Kelas', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Ilmu Pengetahuan Sosial (IPS)', guru: 'Budi Santoso, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Sejarah Kebudayaan Islam (SKI)', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Informatika & Literasi Digital CBT', guru: "Ali Mas'ud, S.Kom.", type: 'mapel', ruang: 'Lab Komputer' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Seni Budaya & Prakarya', guru: 'Dewi Ratnasari, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' }
-        ],
-        'Kamis': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Pembacaan Rotibul Haddad', guru: 'Dewan Asatidz', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Bahasa Inggris', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Pendidikan Pancasila & Kewarganegaraan (PPKn)', guru: 'Drs. Suwarno', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Matematika Terapan', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: "Tahfidzul Qur'an & Bimbingan Tartil", guru: 'Ustadzah Maryam, Al-Hafidzah', type: 'mapel', ruang: 'Musholla Madrasah' }
-        ],
-        'Jumat': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Istighosah Bersama Para Guru', guru: 'Dipimpin Para Kiai & Asatidz', type: 'ibadah' },
-          { jam: '07.30 - 08.40', mapel: 'Bimbingan Tahsin & Tajwid Al-Qur'an', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '08.40 - 09.50', mapel: 'Ke-NU-an / Risalah Ahlussunnah Wal Jama'ah', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '09.50 - 10.10', mapel: 'Istirahat & Minum Air Berkah', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.10 - 11.20', mapel: 'Kajian Adab & Akhlak Lil Banin/Banat', guru: 'Hj. Thoibah Roudlotul Jannah, S.Ag.', type: 'mapel', ruang: 'R. 7-A/B/C' },
-          { jam: '11.20 - 12.30', mapel: 'Persiapan & Sholat Jum'at Berjamaah di Masjid', guru: 'Seluruh Dewan Guru & Siswa', type: 'ibadah' }
-        ],
-        'Sabtu': [
-          { jam: '07.00 - 07.45', mapel: 'Senam Pagi Kesegaran Jasmani & Jalan Sehat', guru: 'Guru PJOK & OSIS', type: 'ibadah' },
-          { jam: '07.45 - 09.05', mapel: 'Pendidikan Jasmani & Olahraga (PJOK)', guru: 'Ahmad Fauzi, S.Pd.', type: 'mapel', ruang: 'Lapangan Madrasah' },
-          { jam: '09.05 - 09.30', mapel: 'Istirahat & Kudapan Bersama', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '09.30 - 11.00', mapel: 'Pengembangan Diri: Pramuka / Hadroh / Robotik', guru: 'Instruktur & Pembina Ekskul', type: 'mapel', ruang: 'Kampus Madrasah' },
-          { jam: '11.00 - 11.45', mapel: 'Operasi Bersih Lingkungan & Doa Pulang', guru: 'Wali Kelas 7', type: 'ibadah' }
-        ]
+  "7": {
+    "Senin": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera",
+        "guru": "Tim Kesiswaan & Pembina OSIS",
+        "type": "ibadah"
       },
-      '8': {
-        'Senin': [
-          { jam: '07.00 - 07.30', mapel: 'Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera', guru: 'Tim Kesiswaan', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Matematika', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Bahasa Indonesia', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: "Al-Qur'an Hadits", guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'IPA Terpadu', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' }
-        ],
-        'Selasa': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Tadarus Al-Qur'an', guru: 'Wali Kelas 8', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'IPA Terpadu (Fisika & Biologi)', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'Lab IPA' },
-          { jam: '08.50 - 10.10', mapel: 'Bahasa Arab', guru: 'Ahmad Munif, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Bahasa Inggris', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Fiqih Mawaris & Muamalah', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' }
-        ],
-        'Rabu': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Muhadhoroh Tiga Bahasa', guru: 'Guru Bahasa', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Informatika & Pemrograman Dasar', guru: "Ali Mas'ud, S.Kom.", type: 'mapel', ruang: 'Lab CBT' },
-          { jam: '08.50 - 10.10', mapel: 'Ilmu Pengetahuan Sosial (IPS)', guru: 'Budi Santoso, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Sejarah Kebudayaan Islam (SKI)', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Aqidah Akhlak', guru: 'K.H. Salman, Lc.', type: 'mapel', ruang: 'R. 8-A/B/C' }
-        ],
-        'Kamis': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Pembacaan Rotibul Haddad', guru: 'Dewan Asatidz', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Pendidikan Pancasila (PPKn)', guru: 'Drs. Suwarno', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Matematika Aljabar', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: "Tahfidzul Qur'an & Setoran Juz", guru: 'Ustadzah Maryam, Al-Hafidzah', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Seni Kaligrafi & Budaya Islam', guru: 'Dewi Ratnasari, S.Pd.', type: 'mapel', ruang: 'R. 8-A/B/C' }
-        ],
-        'Jumat': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Istighosah Kubro Berjamaah', guru: 'Dewan Guru', type: 'ibadah' },
-          { jam: '07.30 - 08.40', mapel: 'Ke-NU-an & Wawasan Aswaja', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '08.40 - 09.50', mapel: 'Tahsin Tartil Al-Qur'an', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '09.50 - 10.10', mapel: 'Istirahat', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.10 - 11.20', mapel: 'Bimbingan Konseling & Motivasi Belajar', guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 8-A/B/C' },
-          { jam: '11.20 - 12.30', mapel: 'Sholat Jum'at di Masjid Jami'', guru: 'Guru & Siswa', type: 'ibadah' }
-        ],
-        'Sabtu': [
-          { jam: '07.00 - 07.45', mapel: 'Senam Pagi Bersama', guru: 'Guru PJOK', type: 'ibadah' },
-          { jam: '07.45 - 09.05', mapel: 'Pendidikan Jasmani (PJOK: Atletik/Futsal)', guru: 'Ahmad Fauzi, S.Pd.', type: 'mapel', ruang: 'Lapangan Olahraga' },
-          { jam: '09.05 - 09.30', mapel: 'Istirahat & Snack Pagi', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '09.30 - 11.00', mapel: 'Ekstrakurikuler Wajib: Pramuka & PMR', guru: 'Pembina Pramuka', type: 'mapel', ruang: 'Halaman Kampus' },
-          { jam: '11.00 - 11.45', mapel: 'Piket Bersih Kelas & Pengarahan Wali Kelas', guru: 'Wali Kelas 8', type: 'ibadah' }
-        ]
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Al-Qur'an Hadits",
+        "guru": "Hj. Thoibah Roudlotul Jannah, S.Ag.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
       },
-      '9': {
-        'Senin': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Upacara Bendera Khidmat', guru: 'Tim Kesiswaan', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Pendalaman Materi: Matematika Ujian', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Bahasa Indonesia (Persiapan Asesmen)', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'IPA Terpadu (Fokus Bank Soal)', guru: 'Fatimah Az-Zahra, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: "Al-Qur'an Hadits", guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 9-A/B/C' }
-        ],
-        'Selasa': [
-          { jam: '07.00 - 07.30', mapel: "Shalat Dhuha & Khataman Al-Qur'an", guru: 'Wali Kelas 9', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Bahasa Inggris Terapan', guru: 'Nur Hidayah, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Bahasa Arab (Kaidah Nahwu Shorof)', guru: 'Ahmad Munif, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Fiqih Ubudiyah & Munakahat', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Bimbingan Karir & Masuk Aliyah/SMA', guru: 'Guru BK', type: 'mapel', ruang: 'R. 9-A/B/C' }
-        ],
-        'Rabu': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Doa Bersama Sukses Ujian', guru: 'Wali Kelas 9', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Ilmu Pengetahuan Sosial (IPS)', guru: 'Budi Santoso, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Simulasi Tryout Digital CBT', guru: "Ali Mas'ud, S.Kom.", type: 'mapel', ruang: 'Lab CBT 1 & 2' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Sejarah Kebudayaan Islam (SKI)', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: 'Aqidah Akhlak', guru: 'K.H. Salman, Lc.', type: 'mapel', ruang: 'R. 9-A/B/C' }
-        ],
-        'Kamis': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Rotibul Haddad Bersama', guru: 'Dewan Asatidz', type: 'ibadah' },
-          { jam: '07.30 - 08.50', mapel: 'Matematika Geometri & Statistik', guru: 'Drs. H. Masykur', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '08.50 - 10.10', mapel: 'Bahasa Indonesia (Menulis Esai/Karya Ilmiah)', guru: 'Siti Aminah, S.Pd.', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '10.10 - 10.30', mapel: 'Istirahat I', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.30 - 11.50', mapel: 'Pendidikan Pancasila (PPKn)', guru: 'Drs. Suwarno', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '11.50 - 12.35', mapel: 'Shalat Dzuhur Berjamaah', guru: 'Sie Keagamaan', type: 'ibadah' },
-          { jam: '12.35 - 13.55', mapel: "Tahfidzul Qur'an & Munaqosyah Uji Hafalan", guru: 'Ustadzah Maryam, Al-Hafidzah', type: 'mapel', ruang: 'Musholla' }
-        ],
-        'Jumat': [
-          { jam: '07.00 - 07.30', mapel: 'Shalat Dhuha & Istighosah Mujahadah Akbar', guru: 'Dipimpin Kiai Madrasah', type: 'ibadah' },
-          { jam: '07.30 - 08.40', mapel: 'Kajian Risalah Ahlussunnah Wal Jama'ah', guru: 'H. Ahmad Zaini, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '08.40 - 09.50', mapel: 'Tahsin Qira'ah Al-Qur'an', guru: 'Ust. M. Ridwan, S.Pd.I', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '09.50 - 10.10', mapel: 'Istirahat', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '10.10 - 11.20', mapel: 'Kajian Akhlak Terpuji (Ta'limul Muta'allim)', guru: 'Hj. Thoibah, S.Ag.', type: 'mapel', ruang: 'R. 9-A/B/C' },
-          { jam: '11.20 - 12.30', mapel: 'Shalat Jum'at Berjamaah', guru: 'Guru & Siswa', type: 'ibadah' }
-        ],
-        'Sabtu': [
-          { jam: '07.00 - 07.45', mapel: 'Senam Pagi Sehat', guru: 'Guru PJOK', type: 'ibadah' },
-          { jam: '07.45 - 09.05', mapel: 'PJOK: Senam & Bola Voli/Futsal', guru: 'Ahmad Fauzi, S.Pd.', type: 'mapel', ruang: 'Lapangan' },
-          { jam: '09.05 - 09.30', mapel: 'Istirahat & Minum Bersama', guru: 'Madrasah', type: 'istirahat' },
-          { jam: '09.30 - 11.00', mapel: 'Ekskul Peminatan & Pengayaan Ujian', guru: 'Guru Pembina', type: 'mapel', ruang: 'R. 9' },
-          { jam: '11.00 - 11.45', mapel: 'Evaluasi Mingguan & Pembagian Tugas Belajar', guru: 'Wali Kelas 9', type: 'ibadah' }
-        ]
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Matematika",
+        "guru": "Drs. H. Masykur",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I & Kudapan Sehat",
+        "guru": "Kantin Sehat Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Siti Aminah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah di Masjid",
+        "guru": "Sie Keagamaan & Wali Kelas",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Aqidah Akhlak",
+        "guru": "K.H. Salman, Lc.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
       }
-    };
+    ],
+    "Selasa": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha, Tadarus Al-Qur'an & Asmaul Husna",
+        "guru": "Wali Kelas & Guru Jam 1",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Bahasa Arab",
+        "guru": "Ahmad Munif, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Ilmu Pengetahuan Alam (IPA Terpadu)",
+        "guru": "Fatimah Az-Zahra, S.Pd.",
+        "type": "mapel",
+        "ruang": "Lab Sains / R. 7"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I & Refresing",
+        "guru": "Lingkungan Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Fiqih / Kajian Fathul Qorib Dasar",
+        "guru": "Ust. M. Ridwan, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah di Masjid",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Bahasa Inggris",
+        "guru": "Nur Hidayah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      }
+    ],
+    "Rabu": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Pembiasaan Literasi Numerasi",
+        "guru": "Wali Kelas",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Ilmu Pengetahuan Sosial (IPS)",
+        "guru": "Budi Santoso, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Sejarah Kebudayaan Islam (SKI)",
+        "guru": "H. Ahmad Zaini, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Informatika & Literasi Digital CBT",
+        "guru": "Ali Mas'ud, S.Kom.",
+        "type": "mapel",
+        "ruang": "Lab Komputer"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Seni Budaya & Prakarya",
+        "guru": "Dewi Ratnasari, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      }
+    ],
+    "Kamis": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Pembacaan Rotibul Haddad",
+        "guru": "Dewan Asatidz",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Bahasa Inggris",
+        "guru": "Nur Hidayah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Pendidikan Pancasila & Kewarganegaraan (PPKn)",
+        "guru": "Drs. Suwarno",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Matematika Terapan",
+        "guru": "Drs. H. Masykur",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Tahfidzul Qur'an & Bimbingan Tartil",
+        "guru": "Ustadzah Maryam, Al-Hafidzah",
+        "type": "mapel",
+        "ruang": "Musholla"
+      }
+    ],
+    "Jumat": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Istighosah Bersama Para Guru",
+        "guru": "Dipimpin Para Kiai & Asatidz",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.40",
+        "mapel": "Bimbingan Tahsin & Tajwid Al-Qur'an",
+        "guru": "Ust. M. Ridwan, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "08.40 - 09.50",
+        "mapel": "Ke-NU-an / Risalah Ahlussunnah Wal Jama'ah",
+        "guru": "H. Ahmad Zaini, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "09.50 - 10.10",
+        "mapel": "Istirahat & Minum Air Berkah",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.10 - 11.20",
+        "mapel": "Kajian Adab & Akhlak Lil Banin/Banat",
+        "guru": "Hj. Thoibah Roudlotul Jannah, S.Ag.",
+        "type": "mapel",
+        "ruang": "R. 7-A/B/C"
+      },
+      {
+        "jam": "11.20 - 12.30",
+        "mapel": "Persiapan & Sholat Jum'at Berjamaah di Masjid",
+        "guru": "Seluruh Dewan Guru & Siswa",
+        "type": "ibadah"
+      }
+    ],
+    "Sabtu": [
+      {
+        "jam": "07.00 - 07.45",
+        "mapel": "Senam Pagi Kesegaran Jasmani & Jalan Sehat",
+        "guru": "Guru PJOK & OSIS",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.45 - 09.05",
+        "mapel": "Pendidikan Jasmani & Olahraga (PJOK)",
+        "guru": "Ahmad Fauzi, S.Pd.",
+        "type": "mapel",
+        "ruang": "Lapangan"
+      },
+      {
+        "jam": "09.05 - 09.30",
+        "mapel": "Istirahat & Kudapan Bersama",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "09.30 - 11.00",
+        "mapel": "Pengembangan Diri: Pramuka / Hadroh / Robotik",
+        "guru": "Instruktur & Pembina Ekskul",
+        "type": "mapel",
+        "ruang": "Kampus Madrasah"
+      },
+      {
+        "jam": "11.00 - 11.45",
+        "mapel": "Operasi Bersih Lingkungan & Doa Pulang",
+        "guru": "Wali Kelas 7",
+        "type": "ibadah"
+      }
+    ]
+  },
+  "8": {
+    "Senin": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Pembiasaan Pagi: Sholat Dhuha & Upacara Bendera",
+        "guru": "Tim Kesiswaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Matematika",
+        "guru": "Drs. H. Masykur",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Siti Aminah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Al-Qur'an Hadits",
+        "guru": "Hj. Thoibah, S.Ag.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "IPA Terpadu",
+        "guru": "Fatimah Az-Zahra, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      }
+    ],
+    "Selasa": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Tadarus Al-Qur'an",
+        "guru": "Wali Kelas 8",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "IPA Terpadu (Fisika & Biologi)",
+        "guru": "Fatimah Az-Zahra, S.Pd.",
+        "type": "mapel",
+        "ruang": "Lab IPA"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Bahasa Arab",
+        "guru": "Ahmad Munif, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Bahasa Inggris",
+        "guru": "Nur Hidayah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Fiqih Mawaris & Muamalah",
+        "guru": "Ust. M. Ridwan, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      }
+    ],
+    "Rabu": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Muhadhoroh Tiga Bahasa",
+        "guru": "Guru Bahasa",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Informatika & Pemrograman Dasar",
+        "guru": "Ali Mas'ud, S.Kom.",
+        "type": "mapel",
+        "ruang": "Lab CBT"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Ilmu Pengetahuan Sosial (IPS)",
+        "guru": "Budi Santoso, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Sejarah Kebudayaan Islam (SKI)",
+        "guru": "H. Ahmad Zaini, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Aqidah Akhlak",
+        "guru": "K.H. Salman, Lc.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      }
+    ],
+    "Kamis": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Pembacaan Rotibul Haddad",
+        "guru": "Dewan Asatidz",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Pendidikan Pancasila (PPKn)",
+        "guru": "Drs. Suwarno",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Matematika Aljabar",
+        "guru": "Drs. H. Masykur",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Tahfidzul Qur'an & Setoran Juz",
+        "guru": "Ustadzah Maryam, Al-Hafidzah",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Seni Kaligrafi & Budaya Islam",
+        "guru": "Dewi Ratnasari, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      }
+    ],
+    "Jumat": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Istighosah Kubro Berjamaah",
+        "guru": "Dewan Guru",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.40",
+        "mapel": "Ke-NU-an & Wawasan Aswaja",
+        "guru": "H. Ahmad Zaini, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "08.40 - 09.50",
+        "mapel": "Tahsin Tartil Al-Qur'an",
+        "guru": "Ust. M. Ridwan, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "09.50 - 10.10",
+        "mapel": "Istirahat",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.10 - 11.20",
+        "mapel": "Bimbingan Konseling & Motivasi Belajar",
+        "guru": "Hj. Thoibah, S.Ag.",
+        "type": "mapel",
+        "ruang": "R. 8-A/B/C"
+      },
+      {
+        "jam": "11.20 - 12.30",
+        "mapel": "Sholat Jum'at di Masjid Jami'",
+        "guru": "Guru & Siswa",
+        "type": "ibadah"
+      }
+    ],
+    "Sabtu": [
+      {
+        "jam": "07.00 - 07.45",
+        "mapel": "Senam Pagi Bersama",
+        "guru": "Guru PJOK",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.45 - 09.05",
+        "mapel": "Pendidikan Jasmani (PJOK: Atletik/Futsal)",
+        "guru": "Ahmad Fauzi, S.Pd.",
+        "type": "mapel",
+        "ruang": "Lapangan Olahraga"
+      },
+      {
+        "jam": "09.05 - 09.30",
+        "mapel": "Istirahat & Snack Pagi",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "09.30 - 11.00",
+        "mapel": "Ekstrakurikuler Wajib: Pramuka & PMR",
+        "guru": "Pembina Pramuka",
+        "type": "mapel",
+        "ruang": "Halaman Kampus"
+      },
+      {
+        "jam": "11.00 - 11.45",
+        "mapel": "Piket Bersih Kelas & Pengarahan Wali Kelas",
+        "guru": "Wali Kelas 8",
+        "type": "ibadah"
+      }
+    ]
+  },
+  "9": {
+    "Senin": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Upacara Bendera Khidmat",
+        "guru": "Tim Kesiswaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Pendalaman Materi: Matematika Ujian",
+        "guru": "Drs. H. Masykur",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Bahasa Indonesia (Persiapan Asesmen)",
+        "guru": "Siti Aminah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "IPA Terpadu (Fokus Bank Soal)",
+        "guru": "Fatimah Az-Zahra, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Al-Qur'an Hadits",
+        "guru": "Hj. Thoibah, S.Ag.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      }
+    ],
+    "Selasa": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Khataman Al-Qur'an",
+        "guru": "Wali Kelas 9",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Bahasa Inggris Terapan",
+        "guru": "Nur Hidayah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Bahasa Arab (Kaidah Nahwu Shorof)",
+        "guru": "Ahmad Munif, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Fiqih Ubudiyah & Munakahat",
+        "guru": "Ust. M. Ridwan, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Bimbingan Karir & Masuk Aliyah/SMA",
+        "guru": "Guru BK",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      }
+    ],
+    "Rabu": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Doa Bersama Sukses Ujian",
+        "guru": "Wali Kelas 9",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Ilmu Pengetahuan Sosial (IPS)",
+        "guru": "Budi Santoso, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Simulasi Tryout Digital CBT",
+        "guru": "Ali Mas'ud, S.Kom.",
+        "type": "mapel",
+        "ruang": "Lab CBT 1 & 2"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Sejarah Kebudayaan Islam (SKI)",
+        "guru": "H. Ahmad Zaini, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Aqidah Akhlak",
+        "guru": "K.H. Salman, Lc.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      }
+    ],
+    "Kamis": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Rotibul Haddad Bersama",
+        "guru": "Dewan Asatidz",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.50",
+        "mapel": "Matematika Geometri & Statistik",
+        "guru": "Drs. H. Masykur",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "08.50 - 10.10",
+        "mapel": "Bahasa Indonesia (Menulis Esai/Karya Ilmiah)",
+        "guru": "Siti Aminah, S.Pd.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "10.10 - 10.30",
+        "mapel": "Istirahat I",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.30 - 11.50",
+        "mapel": "Pendidikan Pancasila (PPKn)",
+        "guru": "Drs. Suwarno",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "11.50 - 12.35",
+        "mapel": "Shalat Dzuhur Berjamaah",
+        "guru": "Sie Keagamaan",
+        "type": "ibadah"
+      },
+      {
+        "jam": "12.35 - 13.55",
+        "mapel": "Tahfidzul Qur'an & Munaqosyah Uji Hafalan",
+        "guru": "Ustadzah Maryam, Al-Hafidzah",
+        "type": "mapel",
+        "ruang": "Musholla"
+      }
+    ],
+    "Jumat": [
+      {
+        "jam": "07.00 - 07.30",
+        "mapel": "Shalat Dhuha & Istighosah Mujahadah Akbar",
+        "guru": "Dipimpin Kiai Madrasah",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.30 - 08.40",
+        "mapel": "Kajian Risalah Ahlussunnah Wal Jama'ah",
+        "guru": "H. Ahmad Zaini, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "08.40 - 09.50",
+        "mapel": "Tahsin Qira'ah Al-Qur'an",
+        "guru": "Ust. M. Ridwan, S.Pd.I",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "09.50 - 10.10",
+        "mapel": "Istirahat",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "10.10 - 11.20",
+        "mapel": "Kajian Akhlak Terpuji (Ta'limul Muta'allim)",
+        "guru": "Hj. Thoibah, S.Ag.",
+        "type": "mapel",
+        "ruang": "R. 9-A/B/C"
+      },
+      {
+        "jam": "11.20 - 12.30",
+        "mapel": "Shalat Jum'at Berjamaah",
+        "guru": "Guru & Siswa",
+        "type": "ibadah"
+      }
+    ],
+    "Sabtu": [
+      {
+        "jam": "07.00 - 07.45",
+        "mapel": "Senam Pagi Sehat",
+        "guru": "Guru PJOK",
+        "type": "ibadah"
+      },
+      {
+        "jam": "07.45 - 09.05",
+        "mapel": "PJOK: Senam & Bola Voli/Futsal",
+        "guru": "Ahmad Fauzi, S.Pd.",
+        "type": "mapel",
+        "ruang": "Lapangan"
+      },
+      {
+        "jam": "09.05 - 09.30",
+        "mapel": "Istirahat & Minum Bersama",
+        "guru": "Madrasah",
+        "type": "istirahat"
+      },
+      {
+        "jam": "09.30 - 11.00",
+        "mapel": "Ekskul Peminatan & Pengayaan Ujian",
+        "guru": "Guru Pembina",
+        "type": "mapel",
+        "ruang": "R. 9"
+      },
+      {
+        "jam": "11.00 - 11.45",
+        "mapel": "Evaluasi Mingguan & Pembagian Tugas Belajar",
+        "guru": "Wali Kelas 9",
+        "type": "ibadah"
+      }
+    ]
+  }
+};
 
     function initJadwalToday() {
       const now = new Date();
@@ -6395,111 +7043,111 @@
     // =====================================================================
     let activeEkskulCategory = 'ALL';
     let MASTER_EKSKUL_DATA = [
-      {
-        id: 'EKS-01',
-        nama: 'Gerakan Pramuka (Gudep 07.125-07.126)',
-        kategori: 'Kepanduan',
-        hari: 'Sabtu',
-        jam: '09.30 - 11.00 WIB',
-        tempat: 'Halaman Utama Madrasah',
-        pembina: 'Kak Ahmad Fauzi, S.Pd.',
-        wa: '085649881966',
-        desc: 'Pendidikan karakter mandiri, kepemimpinan, pionering, tali-temali, sandi morse, & kemah bakti tahunan.',
-        icon: 'compass',
-        color: 'bg-amber-50 text-amber-600 border-amber-200'
-      },
-      {
-        id: 'EKS-02',
-        nama: 'Rebana & Hadroh El-YASUA',
-        kategori: 'Seni Islami',
-        hari: 'Kamis',
-        jam: '14.00 - 16.00 WIB',
-        tempat: 'Aula Pertemuan YASUA',
-        pembina: 'Ust. M. Ridwan, S.Pd.I',
-        wa: '085649881966',
-        desc: 'Seni shalawat Nabi, vokal banjari khas salafiyah, variasi pukulan terbang & bas, pengiring PHBI & hajatan.',
-        icon: 'music',
-        color: 'bg-emerald-50 text-emerald-700 border-emerald-200'
-      },
-      {
-        id: 'EKS-03',
-        nama: 'Futsal & Olahraga Prestasi',
-        kategori: 'Olahraga',
-        hari: 'Selasa & Sabtu',
-        jam: '15.30 - 17.00 WIB',
-        tempat: 'Lapangan Olahraga MTs YASUA',
-        pembina: 'Coach Budi Santoso, S.Pd.',
-        wa: '085649881966',
-        desc: 'Pengasahan teknik dasar futsal, taktik bermain beregu, stamina fisik, & persiapan turnamen POPDA Demak.',
-        icon: 'trophy',
-        color: 'bg-teal-50 text-teal-700 border-teal-200'
-      },
-      {
-        id: 'EKS-04',
-        nama: 'PMR Madya (Palang Merah Remaja)',
-        kategori: 'Kepanduan',
-        hari: 'Rabu',
-        jam: '14.15 - 15.45 WIB',
-        tempat: 'Ruang UKS Madrasah',
-        pembina: 'Fatimah Az-Zahra, S.Pd.',
-        wa: '085649881966',
-        desc: 'Pertolongan pertama (P3K), kesiapsiagaan bencana, donor darah, tandu darurat, & kepedulian bakti sosial.',
-        icon: 'cross',
-        color: 'bg-rose-50 text-rose-600 border-rose-200'
-      },
-      {
-        id: 'EKS-05',
-        nama: 'Seni Kaligrafi Islam (Khat & Hiasan)',
-        kategori: 'Seni Islami',
-        hari: 'Senin',
-        jam: '14.15 - 15.45 WIB',
-        tempat: 'Sanggar Seni Madrasah',
-        pembina: 'Ust. H. Ahmad Zaini, S.Pd.I',
-        wa: '085649881966',
-        desc: 'Kaidah khat naskhi, tsuluts, riq'ah, dekorasi hiasan mushaf Al-Qur'an, & persiapan kejuaraan MTQ.',
-        icon: 'pen-tool',
-        color: 'bg-purple-50 text-purple-600 border-purple-200'
-      },
-      {
-        id: 'EKS-06',
-        nama: 'Paskibra Madrasah (PBB Formasi)',
-        kategori: 'Kepanduan',
-        hari: 'Jum'at',
-        jam: '13.30 - 15.00 WIB',
-        tempat: 'Halaman Upacara Madrasah',
-        pembina: 'Drs. Suwarno',
-        wa: '085649881966',
-        desc: 'Peraturan baris berbaris (PBB), variasi formasi bendera, kedisiplinan, & pengibaran upacara HUT RI.',
-        icon: 'flag',
-        color: 'bg-blue-50 text-blue-600 border-blue-200'
-      },
-      {
-        id: 'EKS-07',
-        nama: 'Klub Sains & Robotika Terapan (MYRES)',
-        kategori: 'Sains & Teknologi',
-        hari: 'Rabu',
-        jam: '14.30 - 16.00 WIB',
-        tempat: 'Lab Komputer & Sains',
-        pembina: 'Ali Mas'ud, S.Kom.',
-        wa: '085649881966',
-        desc: 'Robotika mikrokontroler ramah lingkungan, coding dasar, IoT terapan, & riset sains madrasah (MYRES).',
-        icon: 'cpu',
-        color: 'bg-indigo-50 text-indigo-600 border-indigo-200'
-      },
-      {
-        id: 'EKS-08',
-        nama: 'English & Arabic Club (Khitobah & Bahasa)',
-        kategori: 'Bahasa & Pidato',
-        hari: 'Selasa',
-        jam: '14.15 - 15.30 WIB',
-        tempat: 'Perpustakaan Digital',
-        pembina: 'Nur Hidayah, S.Pd. & Ust. Ahmad Munif',
-        wa: '085649881966',
-        desc: 'Percakapan bilingual aktif (muhadatsah & conversation), debat ilmiah, & bimbingan pidato tiga bahasa.',
-        icon: 'languages',
-        color: 'bg-amber-50 text-amber-800 border-amber-200'
-      }
-    ];
+  {
+    "id": "EKS-01",
+    "nama": "Gerakan Pramuka (Gudep 07.125-07.126)",
+    "kategori": "Kepanduan",
+    "hari": "Sabtu",
+    "jam": "09.30 - 11.00 WIB",
+    "tempat": "Halaman Utama Madrasah",
+    "pembina": "Kak Ahmad Fauzi, S.Pd.",
+    "wa": "085649881966",
+    "desc": "Pendidikan karakter mandiri, kepemimpinan, pionering, tali-temali, sandi morse, & kemah bakti tahunan.",
+    "icon": "compass",
+    "color": "bg-amber-50 text-amber-600 border-amber-200"
+  },
+  {
+    "id": "EKS-02",
+    "nama": "Rebana & Hadroh El-YASUA",
+    "kategori": "Seni Islami",
+    "hari": "Kamis",
+    "jam": "14.00 - 16.00 WIB",
+    "tempat": "Aula Pertemuan YASUA",
+    "pembina": "Ust. M. Ridwan, S.Pd.I",
+    "wa": "085649881966",
+    "desc": "Seni shalawat Nabi, vokal banjari khas salafiyah, variasi pukulan terbang & bas, pengiring PHBI & hajatan.",
+    "icon": "music",
+    "color": "bg-emerald-50 text-emerald-700 border-emerald-200"
+  },
+  {
+    "id": "EKS-03",
+    "nama": "Futsal & Olahraga Prestasi",
+    "kategori": "Olahraga",
+    "hari": "Selasa & Sabtu",
+    "jam": "15.30 - 17.00 WIB",
+    "tempat": "Lapangan Olahraga MTs YASUA",
+    "pembina": "Coach Budi Santoso, S.Pd.",
+    "wa": "085649881966",
+    "desc": "Pengasahan teknik dasar futsal, taktik bermain beregu, stamina fisik, & persiapan turnamen POPDA Demak.",
+    "icon": "trophy",
+    "color": "bg-teal-50 text-teal-700 border-teal-200"
+  },
+  {
+    "id": "EKS-04",
+    "nama": "PMR Madya (Palang Merah Remaja)",
+    "kategori": "Kepanduan",
+    "hari": "Rabu",
+    "jam": "14.15 - 15.45 WIB",
+    "tempat": "Ruang UKS Madrasah",
+    "pembina": "Fatimah Az-Zahra, S.Pd.",
+    "wa": "085649881966",
+    "desc": "Pertolongan pertama (P3K), kesiapsiagaan bencana, donor darah, tandu darurat, & kepedulian bakti sosial.",
+    "icon": "cross",
+    "color": "bg-rose-50 text-rose-600 border-rose-200"
+  },
+  {
+    "id": "EKS-05",
+    "nama": "Seni Kaligrafi Islam (Khat & Hiasan)",
+    "kategori": "Seni Islami",
+    "hari": "Senin",
+    "jam": "14.15 - 15.45 WIB",
+    "tempat": "Sanggar Seni Madrasah",
+    "pembina": "Ust. H. Ahmad Zaini, S.Pd.I",
+    "wa": "085649881966",
+    "desc": "Kaidah khat naskhi, tsuluts, riq'ah, dekorasi hiasan mushaf Al-Qur'an, & persiapan kejuaraan MTQ.",
+    "icon": "pen-tool",
+    "color": "bg-purple-50 text-purple-600 border-purple-200"
+  },
+  {
+    "id": "EKS-06",
+    "nama": "Paskibra Madrasah (PBB Formasi)",
+    "kategori": "Kepanduan",
+    "hari": "Jum'at",
+    "jam": "13.30 - 15.00 WIB",
+    "tempat": "Halaman Upacara Madrasah",
+    "pembina": "Drs. Suwarno",
+    "wa": "085649881966",
+    "desc": "Peraturan baris berbaris (PBB), variasi formasi bendera, kedisiplinan, & pengibaran upacara HUT RI.",
+    "icon": "flag",
+    "color": "bg-blue-50 text-blue-600 border-blue-200"
+  },
+  {
+    "id": "EKS-07",
+    "nama": "Klub Sains & Robotika Terapan (MYRES)",
+    "kategori": "Sains & Teknologi",
+    "hari": "Rabu",
+    "jam": "14.30 - 16.00 WIB",
+    "tempat": "Lab Komputer & Sains",
+    "pembina": "Ali Mas'ud, S.Kom.",
+    "wa": "085649881966",
+    "desc": "Robotika mikrokontroler ramah lingkungan, coding dasar, IoT terapan, & riset sains madrasah (MYRES).",
+    "icon": "cpu",
+    "color": "bg-indigo-50 text-indigo-600 border-indigo-200"
+  },
+  {
+    "id": "EKS-08",
+    "nama": "English & Arabic Club (Khitobah & Bahasa)",
+    "kategori": "Bahasa & Pidato",
+    "hari": "Selasa",
+    "jam": "14.15 - 15.30 WIB",
+    "tempat": "Perpustakaan Digital",
+    "pembina": "Nur Hidayah, S.Pd. & Ust. Ahmad Munif",
+    "wa": "085649881966",
+    "desc": "Percakapan bilingual aktif (muhadatsah & conversation), debat ilmiah, & bimbingan pidato tiga bahasa.",
+    "icon": "languages",
+    "color": "bg-amber-50 text-amber-800 border-amber-200"
+  }
+];
 
     function filterEkskulKategori(kat) {
       activeEkskulCategory = kat;
@@ -6573,7 +7221,7 @@
               '<i data-lucide="message-circle" class="w-3.5 h-3.5 text-amber-300"></i>' +
               '<span>Chat Pembina</span>' +
             '</a>' +
-            '<button onclick="openDaftarEkskulModal('' + item.nama.replace(/'/g, "\'") + '')" type="button" class="py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer">' +
+            '<button onclick="openDaftarEkskulModal(\'' + encodeURIComponent(item.nama) + '\')" type="button" class="py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer">' +
               '<i data-lucide="user-plus" class="w-3.5 h-3.5 text-slate-600"></i>' +
               '<span>Daftar</span>' +
             '</button>' +
@@ -6630,6 +7278,9 @@
     window.fetchEkskulFromBackend = fetchEkskulFromBackend;
 
     function openDaftarEkskulModal(ekskulName) {
+      if (ekskulName) {
+        try { ekskulName = decodeURIComponent(ekskulName); } catch(e) {}
+      }
       const modal = document.getElementById('modalDaftarEkskul');
       const select = document.getElementById('regEkskulPilihan');
       const err = document.getElementById('ekskulRegError');
