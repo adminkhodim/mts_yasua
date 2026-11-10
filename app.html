@@ -2384,13 +2384,13 @@
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Mutaba'ah</span>
             </button>
 
-            <!-- 9. Agenda -->
-            <button type="button" onclick="switchAppTab('kalender')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/70 hover:border-sky-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <!-- 9. Jadwal KBM -->
+            <button type="button" onclick="openAdminModule('jadwal')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/70 hover:border-sky-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="calendar" class="w-4 h-4 text-sky-700"></i>
+                <i data-lucide="calendar-days" class="w-4 h-4 text-sky-700"></i>
               </div>
-              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Agenda</span>
-              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">KBM</span>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Jadwal KBM</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Roster Belajar</span>
             </button>
 
             <!-- 10. PPDB -->
@@ -2442,6 +2442,10 @@
 
             <!-- Baris 2: Tombol Aksi [+ Tulis Berita Baru] dan [🔄] -->
             <div id="admin-subview-actions" class="flex items-center space-x-2 pt-0.5">
+              <button type="button" id="admin-jadwal-toggle-btn" onclick="toggleAdminJadwalForm()" class="hidden flex-1 py-2 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                <i data-lucide="plus-circle" class="w-3.5 h-3.5" id="admin-jadwal-toggle-icon"></i>
+                <span id="admin-jadwal-toggle-text">Tambah Jam KBM</span>
+              </button>
               <button type="button" id="admin-guru-toggle-btn" onclick="toggleAdminGuruForm()" class="hidden flex-1 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
                 <i data-lucide="user-plus" class="w-3.5 h-3.5" id="admin-guru-toggle-icon"></i>
                 <span id="admin-guru-toggle-text">Tambah Guru Baru</span>
@@ -3553,6 +3557,288 @@
                   <span>Buka Buku Mutaba'ah Tahfidz Spreadsheet</span>
                 </a>
               </div>
+            </div>
+          </div>
+
+          <!-- 7B. Subview Jadwal KBM & Roster Pelajaran -->
+          <div id="admin-subview-jadwal" class="hidden space-y-4">
+
+            <!-- 1. Header Kartu Ringkasan KBM (Sky-Indigo Gradient) -->
+            <div style="background: linear-gradient(135deg, #0369a1 0%, #1e40af 100%);" class="text-white p-4 rounded-2xl shadow-md border border-sky-500/40 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-sky-200">MANAJEMEN KBM &amp; ROSTER</span>
+                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">Semester Genap 2026/2027</span>
+              </div>
+              <h3 class="text-base font-black text-white">Jadwal Pelajaran, Seragam &amp; Roster KBM</h3>
+              <p class="text-xs text-sky-100/90 leading-relaxed">
+                Kelola jadwal mata pelajaran 9 rombel kelas (VII, VIII, IX), alokasi guru pengampu, jam efektif belajar, serta ketentuan seragam mingguan madrasah.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
+                <button type="button" onclick="switchAppTab('jadwal')" class="px-3 py-1.5 rounded-xl bg-white text-sky-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-sky-50 transition cursor-pointer">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-sky-700"></i>
+                  <span>Lihat Jadwal di App Publik</span>
+                </button>
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="px-3 py-1.5 rounded-xl bg-sky-500/30 hover:bg-sky-500/50 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
+                  <i data-lucide="table" class="w-3.5 h-3.5"></i>
+                  <span>Sheet jadwal_kbm</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 2. 4 Kartu KPI KBM -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">ROMBEL KELAS</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-white">9 Kelas</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">VII-A s.d. IX-C</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
+                  <span class="text-white/80">Alokasi Waktu</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">40 Menit / JP</span>
+                </div>
+              </div>
+
+              <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">BEBAN HARIAN</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-white">8 JP / Hari</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">07.00 - 13.50 WIB</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
+                  <span class="text-white/80">Hari Efektif</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Senin - Sabtu</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. KONTROL KETENTUAN SERAGAM SISWA MINGGUAN -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center">
+                    <i data-lucide="shirt" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-xs text-slate-800">Ketentuan Seragam Mingguan Siswa</h4>
+                    <p class="text-[9.5px] text-slate-400">Pakaian Wajib Senin s.d. Sabtu</p>
+                  </div>
+                </div>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Terjadwal</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-[11px] text-slate-800">Senin</span>
+                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-blue-100 text-blue-900">OSIS</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-600 leading-snug">Putih - Biru Dongker, dasi, sabuk madrasah, peci hitam / jilbab putih.</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-[11px] text-slate-800">Selasa</span>
+                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900">BATIK</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-600 leading-snug">Batik Hijau Khas MTs YASUA, bawahan hijau tua, peci hitam / jilbab hijau.</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-[11px] text-slate-800">Rabu</span>
+                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">PRAMUKA</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-600 leading-snug">Pramuka Lengkap Penggalang, hasduk/setangan leher, tali komando.</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-[11px] text-slate-800">Kamis</span>
+                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-teal-100 text-teal-900">IDENTITAS</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-600 leading-snug">Kemeja Hijau Toska Kejuruan, bawahan hitam rapi, peci/jilbab toska.</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-[11px] text-slate-800">Jumat</span>
+                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-purple-100 text-purple-900">BUSANA MUSLIM</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-600 leading-snug">Baju Koko Putih Takwa, celana panjang hitam santri / rok panjang putih.</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-[11px] text-slate-800">Sabtu</span>
+                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-orange-100 text-orange-900">OLAHRAGA/EKSKUL</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-600 leading-snug">Kaos Olahraga Resmi MTs YASUA / Seragam ekskul wajib madrasah.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. FORMULIR INPUT / EDIT JAM PELAJARAN KBM (COLLAPSIBLE) -->
+            <section id="admin-jadwal-form-card" class="hidden bg-white p-4 rounded-2xl shadow-sm border border-slate-200/90 space-y-3.5 animate-in fade-in duration-200">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <div class="flex items-center space-x-2">
+                  <div class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
+                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h3 id="admin-jadwal-form-title" class="font-bold text-xs md:text-sm text-slate-800">Tambah / Edit Jam Pelajaran KBM</h3>
+                    <p class="text-[10px] text-slate-400">Atur alokasi mata pelajaran, guru pengampu &amp; waktu</p>
+                  </div>
+                </div>
+                <button type="button" onclick="toggleAdminJadwalForm(false)" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition active:scale-95 cursor-pointer">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <form id="formAdminJadwal" onsubmit="saveAdminJadwalItem(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="admJadwalSlotIndex" value="">
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Rombel Kelas <span class="text-rose-500">*</span></label>
+                    <select id="admJadwalFormKelas" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                      <option value="7">Kelas VII (7-A/B/C)</option>
+                      <option value="8">Kelas VIII (8-A/B/C)</option>
+                      <option value="9">Kelas IX (9-A/B/C)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Hari Belajar <span class="text-rose-500">*</span></label>
+                    <select id="admJadwalFormHari" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                      <option value="Senin">Senin</option>
+                      <option value="Selasa">Selasa</option>
+                      <option value="Rabu">Rabu</option>
+                      <option value="Kamis">Kamis</option>
+                      <option value="Jumat">Jumat</option>
+                      <option value="Sabtu">Sabtu</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Jam Pelajaran Ke- <span class="text-rose-500">*</span></label>
+                    <select id="admJadwalFormJamKe" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                      <option value="0">Pembiasaan Pagi (07.00 - 07.30)</option>
+                      <option value="1">Jam Ke-1 (07.30 - 08.10)</option>
+                      <option value="2">Jam Ke-2 (08.10 - 08.50)</option>
+                      <option value="3">Jam Ke-3 (08.50 - 09.30)</option>
+                      <option value="4">Jam Ke-4 (09.30 - 10.10)</option>
+                      <option value="istirahat">Istirahat Pagi (10.10 - 10.30)</option>
+                      <option value="5">Jam Ke-5 (10.30 - 11.10)</option>
+                      <option value="6">Jam Ke-6 (11.10 - 11.50)</option>
+                      <option value="dzuhur">Shalat Dzuhur Berjamaah (11.50 - 12.30)</option>
+                      <option value="7">Jam Ke-7 (12.30 - 13.10)</option>
+                      <option value="8">Jam Ke-8 (13.10 - 13.50)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 mb-1">Rentang Waktu</label>
+                    <input type="text" id="admJadwalFormWaktu" placeholder="07.30 - 08.50" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Mata Pelajaran (Mapel) <span class="text-rose-500">*</span></label>
+                  <input type="text" id="admJadwalFormMapel" required placeholder="Contoh: Fiqih Ibadah & Muamalah" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Guru Pengampu <span class="text-rose-500">*</span></label>
+                  <select id="admJadwalFormGuru" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none font-medium">
+                    <option value="Muthohar, S.Pd.">Muthohar, S.Pd. (Kepala Madrasah)</option>
+                    <option value="H. Ahmad Rusydi, S.Pd.I">H. Ahmad Rusydi, S.Pd.I (Waka Kurikulum / Fiqih)</option>
+                    <option value="Siti Nurul Laili, S.Pd.">Siti Nurul Laili, S.Pd. (Waka Kesiswaan / IPA)</option>
+                    <option value="Ahmad Wawahib, S.Pd.">Ahmad Wawahib, S.Pd. (Waka Humas / B. Arab)</option>
+                    <option value="Hj. Inna Mawaddah, S.Ag.">Hj. Inna Mawaddah, S.Ag. (Waka Sarpras / Fiqih)</option>
+                    <option value="M. Syaifuddin, S.Kom.">M. Syaifuddin, S.Kom. (Informatika &amp; IT)</option>
+                    <option value="Hj. Fatimatuz Zahro, S.Ag.">Hj. Fatimatuz Zahro, S.Ag. (Tahfidz &amp; Qur'an)</option>
+                    <option value="Tri Susilowati, S.Pd.">Tri Susilowati, S.Pd. (Bahasa Inggris)</option>
+                    <option value="Mita Aryani, S.Pd.">Mita Aryani, S.Pd. (Matematika &amp; IPA)</option>
+                    <option value="H. Cholilullah, S.Pd.">H. Cholilullah, S.Pd. (Kitab Salaf &amp; IPS)</option>
+                    <option value="NURUN NISA', S.Ag.">NURUN NISA', S.Ag. (Aqidah Akhlak &amp; SKI)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Ruang / Lokasi Belajar</label>
+                  <input type="text" id="admJadwalFormRuang" placeholder="Contoh: R. 7-A / Lab Komputer CBT / Masjid" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                </div>
+
+                <div class="pt-2 flex items-center space-x-2">
+                  <button type="submit" id="btnSubmitAdminJadwal" class="flex-1 py-2.5 px-4 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                    <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                    <span>Simpan Jam Pelajaran</span>
+                  </button>
+                  <button type="button" onclick="toggleAdminJadwalForm(false)" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition active:scale-95 cursor-pointer">
+                    Batal
+                  </button>
+                </div>
+              </form>
+            </section>
+
+            <!-- 5. FILTER KELAS & HARI ROSTER PELAJARAN -->
+            <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-4 h-4 text-sky-600"></i>
+                  <h4 class="font-bold text-xs text-slate-800">Timeline Roster KBM</h4>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span id="admJadwalStatusBadge" class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200">Kelas VII &bull; Senin</span>
+                </div>
+              </div>
+
+              <!-- Filter Kelas -->
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-wider">Pilih Rombel Kelas:</span>
+                <div class="grid grid-cols-3 gap-1.5">
+                  <button type="button" onclick="setAdminJadwalKelas('7', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-sky-700 text-white shadow-2xs cursor-pointer transition">Kelas VII</button>
+                  <button type="button" onclick="setAdminJadwalKelas('8', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Kelas VIII</button>
+                  <button type="button" onclick="setAdminJadwalKelas('9', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Kelas IX</button>
+                </div>
+              </div>
+
+              <!-- Filter Hari -->
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-wider">Pilih Hari KBM:</span>
+                <div class="grid grid-cols-6 gap-1 text-center font-bold text-[10.5px]">
+                  <button type="button" onclick="setAdminJadwalHari('Senin', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-sky-700 text-white shadow-2xs cursor-pointer transition">Sen</button>
+                  <button type="button" onclick="setAdminJadwalHari('Selasa', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Sel</button>
+                  <button type="button" onclick="setAdminJadwalHari('Rabu', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Rab</button>
+                  <button type="button" onclick="setAdminJadwalHari('Kamis', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Kam</button>
+                  <button type="button" onclick="setAdminJadwalHari('Jumat', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Jum</button>
+                  <button type="button" onclick="setAdminJadwalHari('Sabtu', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Sab</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. DAFTAR TIMELINE JAM PELAJARAN KBM -->
+            <div id="adminJadwalTimelineContainer" class="space-y-2">
+              <!-- Rendered via renderAdminJadwalTimeline() -->
+            </div>
+
+            <!-- 7. TAUTAN SPREADSHEET MASTER JADWAL KBM -->
+            <div class="pt-1 flex gap-2">
+              <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex-1 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-2xs">
+                <i data-lucide="sheet" class="w-3.5 h-3.5 text-sky-700"></i>
+                <span>Buka Master Spreadsheet jadwal_kbm</span>
+              </a>
             </div>
           </div>
 
@@ -7030,6 +7316,199 @@
       }
     }
     window.saveAppHeroDesktop = saveAppHeroDesktop;
+
+    // =====================================================================
+    // CONTROLLER JADWAL KBM & ROSTER PELAJARAN (ADMIN SPA ENGINE)
+    // =====================================================================
+    let currentAdminJadwalKelas = '7';
+    let currentAdminJadwalHari = 'Senin';
+
+    function loadAdminJadwalData() {
+      renderAdminJadwalTimeline();
+    }
+    window.loadAdminJadwalData = loadAdminJadwalData;
+
+    function renderAdminJadwalTimeline() {
+      const container = document.getElementById('adminJadwalTimelineContainer');
+      const badgeStatus = document.getElementById('admJadwalStatusBadge');
+      if (!container) return;
+
+      if (badgeStatus) {
+        badgeStatus.textContent = 'Kelas ' + (currentAdminJadwalKelas === '7' ? 'VII' : (currentAdminJadwalKelas === '8' ? 'VIII' : 'IX')) + ' • ' + currentAdminJadwalHari;
+      }
+
+      // Ambil roster dari DATA_ROSTER_KBM runtime
+      let rosterList = [];
+      if (typeof DATA_ROSTER_KBM !== 'undefined' && DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]) {
+        rosterList = DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari];
+      }
+
+      if (rosterList.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center text-xs text-slate-400 space-y-2 bg-slate-50/60 rounded-2xl border border-slate-100 p-4">
+            <i data-lucide="calendar" class="w-8 h-8 text-slate-300 mx-auto"></i>
+            <p class="font-medium text-slate-500">Belum ada jadwal KBM pada hari ini.</p>
+            <button type="button" onclick="toggleAdminJadwalForm(true)" class="mt-1 px-3 py-1.5 bg-sky-700 text-white rounded-xl font-bold text-xs">Tambah Jam Pelajaran</button>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = rosterList.map((item, idx) => {
+        const isBreak = item.type === 'istirahat' || item.type === 'ibadah';
+        const typeBadge = isBreak 
+          ? '<span class="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">KEGIATAN / ISTIRAHAT</span>'
+          : '<span class="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-sky-100 text-sky-900">JAM KE-' + (idx + 1) + '</span>';
+
+        const bgClass = isBreak ? 'bg-amber-50/40 border-amber-200/80' : 'bg-slate-50/80 hover:bg-white border-slate-200/80 hover:border-sky-300';
+
+        return `
+          <div class="p-3 rounded-2xl border ${bgClass} shadow-2xs space-y-1.5 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                ${typeBadge}
+                <span class="text-[10px] font-bold text-slate-600 flex items-center gap-1">
+                  <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
+                  <span>${item.jam}</span>
+                </span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2 py-0.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 font-bold text-[9.5px] cursor-pointer">
+                  Edit
+                </button>
+              </div>
+            </div>
+            <div>
+              <h5 class="text-xs md:text-sm font-bold text-slate-900 leading-snug">${item.mapel}</h5>
+              <p class="text-[10px] text-slate-600 font-medium truncate mt-0.5">${item.guru || 'Tim Pengajar MTs YASUA'}</p>
+            </div>
+            ${item.ruang ? `<span class="inline-block text-[9px] text-slate-400 font-semibold">${item.ruang}</span>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderAdminJadwalTimeline = renderAdminJadwalTimeline;
+
+    function setAdminJadwalKelas(kelas, btn) {
+      currentAdminJadwalKelas = kelas;
+      const allBtns = document.querySelectorAll('.adm-jadwal-kelas-btn');
+      allBtns.forEach(b => {
+        b.className = 'adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition';
+      });
+      if (btn) btn.className = 'adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-sky-700 text-white shadow-2xs cursor-pointer transition';
+      renderAdminJadwalTimeline();
+    }
+    window.setAdminJadwalKelas = setAdminJadwalKelas;
+
+    function setAdminJadwalHari(hari, btn) {
+      currentAdminJadwalHari = hari;
+      const allBtns = document.querySelectorAll('.adm-jadwal-hari-btn');
+      allBtns.forEach(b => {
+        b.className = 'adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition';
+      });
+      if (btn) btn.className = 'adm-jadwal-hari-btn py-1.5 rounded-lg bg-sky-700 text-white shadow-2xs cursor-pointer transition';
+      renderAdminJadwalTimeline();
+    }
+    window.setAdminJadwalHari = setAdminJadwalHari;
+
+    function toggleAdminJadwalForm(show) {
+      const card = document.getElementById('admin-jadwal-form-card');
+      const toggleBtn = document.getElementById('admin-jadwal-toggle-btn');
+      const toggleText = document.getElementById('admin-jadwal-toggle-text');
+      const toggleIcon = document.getElementById('admin-jadwal-toggle-icon');
+      if (!card) return;
+
+      const isHidden = card.classList.contains('hidden');
+      const shouldShow = (typeof show === 'boolean') ? show : isHidden;
+      card.classList.toggle('hidden', !shouldShow);
+
+      if (toggleBtn) {
+        if (shouldShow) {
+          toggleBtn.className = 'flex-1 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer';
+          if (toggleText) toggleText.textContent = 'Tutup Form KBM';
+          if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'chevron-up');
+        } else {
+          toggleBtn.className = 'flex-1 py-2 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer';
+          if (toggleText) toggleText.textContent = 'Tambah Jam KBM';
+          if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'plus-circle');
+        }
+      }
+
+      if (shouldShow) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.toggleAdminJadwalForm = toggleAdminJadwalForm;
+
+    function editAdminJadwalSlot(idx) {
+      if (typeof DATA_ROSTER_KBM === 'undefined') return;
+      const slot = DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari][idx];
+      if (!slot) return;
+
+      document.getElementById('admJadwalSlotIndex').value = idx;
+      document.getElementById('admJadwalFormKelas').value = currentAdminJadwalKelas;
+      document.getElementById('admJadwalFormHari').value = currentAdminJadwalHari;
+      document.getElementById('admJadwalFormWaktu').value = slot.jam || '';
+      document.getElementById('admJadwalFormMapel').value = slot.mapel || '';
+      document.getElementById('admJadwalFormGuru').value = slot.guru || '';
+      document.getElementById('admJadwalFormRuang').value = slot.ruang || '';
+
+      document.getElementById('admin-jadwal-form-title').textContent = 'Edit Jadwal: ' + slot.mapel;
+      toggleAdminJadwalForm(true);
+    }
+    window.editAdminJadwalSlot = editAdminJadwalSlot;
+
+    function saveAdminJadwalItem(e) {
+      e.preventDefault();
+      const idxStr = document.getElementById('admJadwalSlotIndex').value;
+      const kelas = document.getElementById('admJadwalFormKelas').value;
+      const hari = document.getElementById('admJadwalFormHari').value;
+      const waktu = document.getElementById('admJadwalFormWaktu').value.trim() || '07.30 - 08.50';
+      const mapel = document.getElementById('admJadwalFormMapel').value.trim();
+      const guru = document.getElementById('admJadwalFormGuru').value.trim();
+      const ruang = document.getElementById('admJadwalFormRuang').value.trim() || 'R. Kelas';
+
+      if (typeof DATA_ROSTER_KBM !== 'undefined') {
+        if (!DATA_ROSTER_KBM[kelas]) DATA_ROSTER_KBM[kelas] = {};
+        if (!DATA_ROSTER_KBM[kelas][hari]) DATA_ROSTER_KBM[kelas][hari] = [];
+
+        if (idxStr !== '' && !isNaN(parseInt(idxStr))) {
+          const idx = parseInt(idxStr);
+          DATA_ROSTER_KBM[kelas][hari][idx] = {
+            jam: waktu,
+            mapel: mapel,
+            guru: guru,
+            ruang: ruang,
+            type: 'mapel'
+          };
+        } else {
+          DATA_ROSTER_KBM[kelas][hari].push({
+            jam: waktu,
+            mapel: mapel,
+            guru: guru,
+            ruang: ruang,
+            type: 'mapel'
+          });
+        }
+      }
+
+      toggleAdminJadwalForm(false);
+      renderAdminJadwalTimeline();
+
+      if (typeof window.showToast === 'function') {
+        window.showToast('Jadwal KBM berhasil diperbarui!');
+      }
+
+      // Update jadwal publik jika sedang dibuka
+      if (typeof renderRosterKBM === 'function') {
+        renderRosterKBM();
+      }
+    }
+    window.saveAdminJadwalItem = saveAdminJadwalItem;
 function openAdminModule(moduleName) {
       const header = document.getElementById('app-main-header');
       const dock = document.getElementById('mobileBottomDock');
@@ -7047,7 +7526,7 @@ function openAdminModule(moduleName) {
       if (container) container.classList.remove('hidden');
 
       // 2. Sembunyikan Semua Subview Lain
-      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'prestasi', 'alumni'];
+      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni'];
       allSubviews.forEach(s => {
         const el = document.getElementById('admin-subview-' + s);
         if (el) el.classList.add('hidden');
@@ -7074,7 +7553,8 @@ function openAdminModule(moduleName) {
         alumni: { title: 'Jejaring Alumni Madrasah', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' },
         santri: { title: 'Master Data Siswa & Santri', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' },
         presensi: { title: 'Presensi Guru & Pegawai', icon: 'user-check', color: 'bg-indigo-50 text-indigo-600' },
-        tahfidz: { title: "Mutaba'ah Tahfidz Al-Qur'an", icon: 'book-open', color: 'bg-emerald-50 text-emerald-600' }
+        tahfidz: { title: "Mutaba'ah Tahfidz Al-Qur'an", icon: 'book-open', color: 'bg-emerald-50 text-emerald-600' },
+        jadwal: { title: 'Manajemen Jadwal KBM & Roster', icon: 'calendar-days', color: 'bg-sky-50 text-sky-700' }
       };
 
       const currentMeta = meta[moduleName] || { title: 'Portal Kontrol Admin', icon: 'layout-grid', color: 'bg-emerald-50 text-emerald-600' };
@@ -7087,6 +7567,10 @@ function openAdminModule(moduleName) {
         newsToggleBtn.style.display = (targetViewName === 'news') ? 'flex' : 'none';
       }
 
+      const jadwalToggleBtn = document.getElementById('admin-jadwal-toggle-btn');
+      if (jadwalToggleBtn) {
+        jadwalToggleBtn.style.display = (targetViewName === 'jadwal') ? 'flex' : 'none';
+      }
       const guruToggleBtn = document.getElementById('admin-guru-toggle-btn');
       if (guruToggleBtn) {
         guruToggleBtn.style.display = (targetViewName === 'guru') ? 'flex' : 'none';
@@ -7096,6 +7580,8 @@ function openAdminModule(moduleName) {
         loadAdminNewsList();
       } else if (targetViewName === 'guru') {
         loadAdminGuruList();
+      } else if (targetViewName === 'jadwal') {
+        loadAdminJadwalData();
       } else if (targetViewName === 'ticker') {
         const tickerArea = document.getElementById('admTickerText');
         if (tickerArea && !tickerArea.value) {
