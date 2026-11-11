@@ -10,7 +10,7 @@
   "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
   "orientation": "portrait-primary",
   "background_color": "#F0FDFA",
-  "theme_color": "#088395",
+  "theme_color": "#005F73",
   "lang": "id",
   "dir": "ltr",
   "categories": ["education", "social", "productivity"],
