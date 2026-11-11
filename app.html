@@ -3573,13 +3573,13 @@
               <p class="text-xs text-sky-100/90 leading-relaxed">
                 Kelola jadwal mata pelajaran 9 rombel kelas (VII, VIII, IX), alokasi guru pengampu, jam efektif belajar, serta ketentuan seragam mingguan madrasah.
               </p>
-              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
-                <button type="button" onclick="switchAppTab('jadwal')" class="px-3 py-1.5 rounded-xl bg-white text-sky-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-sky-50 transition cursor-pointer">
-                  <i data-lucide="eye" class="w-3.5 h-3.5 text-sky-700"></i>
-                  <span>Lihat Jadwal di App Publik</span>
+              <div class="pt-2 flex flex-wrap gap-2">
+                <button type="button" onclick="switchAppTab('jadwal')" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white text-sky-950 text-xs font-bold shadow-xs hover:bg-sky-50 transition cursor-pointer shrink-0">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5 text-sky-700"></i>
+                  <span>Buka Jadwal Publik (App)</span>
                 </button>
-                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="px-3 py-1.5 rounded-xl bg-sky-500/30 hover:bg-sky-500/50 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
-                  <i data-lucide="table" class="w-3.5 h-3.5"></i>
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-bold border border-white/30 transition cursor-pointer shrink-0">
+                  <i data-lucide="table" class="w-3.5 h-3.5 text-sky-200"></i>
                   <span>Sheet jadwal_kbm</span>
                 </a>
               </div>
@@ -7324,6 +7324,15 @@
     let currentAdminJadwalHari = 'Senin';
 
     function loadAdminJadwalData() {
+      try {
+        const saved = localStorage.getItem('mts_admin_roster_kbm');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            Object.assign(DATA_ROSTER_KBM, parsed);
+          }
+        }
+      } catch (e) {}
       renderAdminJadwalTimeline();
     }
     window.loadAdminJadwalData = loadAdminJadwalData;
@@ -7374,8 +7383,11 @@
                 </span>
               </div>
               <div class="flex items-center gap-1">
-                <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2 py-0.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 font-bold text-[9.5px] cursor-pointer">
+                <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 font-bold text-[10px] cursor-pointer">
                   Edit
+                </button>
+                <button type="button" onclick="deleteAdminJadwalSlot(${idx})" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-[10px] cursor-pointer" title="Hapus slot jam ini">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
                 </button>
               </div>
             </div>
@@ -7387,7 +7399,6 @@
           </div>
         `;
       }).join('');
-
       if (window.lucide) window.lucide.createIcons();
     }
     window.renderAdminJadwalTimeline = renderAdminJadwalTimeline;
@@ -7462,7 +7473,28 @@
     }
     window.editAdminJadwalSlot = editAdminJadwalSlot;
 
-    function saveAdminJadwalItem(e) {
+    
+    function deleteAdminJadwalSlot(idx) {
+      if (typeof DATA_ROSTER_KBM === 'undefined') return;
+      if (!DATA_ROSTER_KBM[currentAdminJadwalKelas] || !DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]) return;
+
+      const slot = DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari][idx];
+      const slotName = slot ? slot.mapel : 'jam pelajaran ini';
+      if (!window.confirm('Hapus ' + slotName + ' dari jadwal ' + currentAdminJadwalHari + '?')) return;
+
+      DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari].splice(idx, 1);
+
+      // Simpan ke localStorage
+      try {
+        localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(DATA_ROSTER_KBM));
+      } catch (e) {}
+
+      renderAdminJadwalTimeline();
+      if (typeof window.showToast === 'function') window.showToast('Jam pelajaran berhasil dihapus!');
+      if (typeof renderRosterKBM === 'function') renderRosterKBM();
+    }
+    window.deleteAdminJadwalSlot = deleteAdminJadwalSlot;
+  function saveAdminJadwalItem(e) {
       e.preventDefault();
       const idxStr = document.getElementById('admJadwalSlotIndex').value;
       const kelas = document.getElementById('admJadwalFormKelas').value;
@@ -7499,6 +7531,9 @@
       toggleAdminJadwalForm(false);
       renderAdminJadwalTimeline();
 
+      try {
+        localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(DATA_ROSTER_KBM));
+      } catch (err) {}
       if (typeof window.showToast === 'function') {
         window.showToast('Jadwal KBM berhasil diperbarui!');
       }
@@ -7569,11 +7604,23 @@ function openAdminModule(moduleName) {
 
       const jadwalToggleBtn = document.getElementById('admin-jadwal-toggle-btn');
       if (jadwalToggleBtn) {
-        jadwalToggleBtn.style.display = (targetViewName === 'jadwal') ? 'flex' : 'none';
+        if (targetViewName === 'jadwal') {
+          jadwalToggleBtn.classList.remove('hidden');
+          jadwalToggleBtn.style.display = 'flex';
+        } else {
+          jadwalToggleBtn.classList.add('hidden');
+          jadwalToggleBtn.style.display = 'none';
+        }
       }
       const guruToggleBtn = document.getElementById('admin-guru-toggle-btn');
       if (guruToggleBtn) {
-        guruToggleBtn.style.display = (targetViewName === 'guru') ? 'flex' : 'none';
+        if (targetViewName === 'guru') {
+          guruToggleBtn.classList.remove('hidden');
+          guruToggleBtn.style.display = 'flex';
+        } else {
+          guruToggleBtn.classList.add('hidden');
+          guruToggleBtn.style.display = 'none';
+        }
       }
       
       if (targetViewName === 'news') {
