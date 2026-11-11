@@ -836,10 +836,32 @@
       const masehiEl = document.getElementById('home-date-masehi');
       if (masehiEl) masehiEl.textContent = masehiStr;
 
-      // Tanggal Hijriyah (Approximate Islamic Lunar for 2026/2027)
+      // Tanggal Hijriyah Dinamis & Sinkron Real-Time (Umm al-Qura Standard)
       const hijriEl = document.getElementById('home-date-hijri');
-      if (hijriEl && !hijriEl.textContent.trim()) {
-        hijriEl.textContent = '15 Jumadil Ula 1448 H';
+      if (hijriEl) {
+        try {
+          const hijriMonths = [
+            '', 'Muharram', 'Safar', "Rabi'ul Awwal", "Rabi'ul Akhir",
+            'Jumadil Ula', 'Jumadil Akhirah', 'Rajab', "Sya'ban",
+            'Ramadhan', 'Syawal', "Dzulqa'dah", 'Dzulhijjah'
+          ];
+          const intlFormatter = new Intl.DateTimeFormat('id-ID-u-ca-islamic-umalqura', {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric'
+          });
+          const parts = intlFormatter.formatToParts(now);
+          let hDay = 1, hMonth = 1, hYear = 1448;
+          parts.forEach(p => {
+            if (p.type === 'day') hDay = parseInt(p.value, 10);
+            if (p.type === 'month') hMonth = parseInt(p.value, 10);
+            if (p.type === 'year') hYear = parseInt(p.value, 10);
+          });
+          const hMonthName = hijriMonths[hMonth] || 'Hijriyah';
+          hijriEl.textContent = `${hDay} ${hMonthName} ${hYear} H`;
+        } catch (e) {
+          hijriEl.textContent = '1 Jumadil Akhirah 1448 H';
+        }
       }
 
       // Waktu Shalat Demak (Kemenag standard approx)
