@@ -52,27 +52,29 @@
     <span>Anda sedang dalam mode offline. Membuka konten cache tersimpan.</span>
   </div>
 
-  <!-- Header Bar App Mobile (Sticky Native Style) -->
-  <header id="app-main-header" style="background: linear-gradient(135deg, #005F73 0%, #088395 50%, #40E0D0 100%);" class="sticky top-0 z-30 w-full text-white shadow-md border-b border-[#40e0d0]/40 pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-3 px-3.5 sm:px-4">
+  <!-- Header Bar App Mobile (Sticky Native Style - Compact Match to Bottom Dock) -->
+  <header id="app-main-header" style="background: linear-gradient(135deg, #005F73 0%, #088395 50%, #40E0D0 100%);" class="sticky top-0 z-30 w-full text-white shadow-xs border-b border-[#40e0d0]/40 pt-[max(0.35rem,env(safe-area-inset-top,0px))] pb-1.5 px-3 sm:px-4">
     <div class="max-w-xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <img src="logo.png" alt="Logo MTs YASUA" class="w-10 h-10 object-contain drop-shadow p-0.5 bg-white/10 rounded-xl shrink-0">
-        <div class="flex flex-col">
-          <span class="arabic-font text-amber-300 text-xs sm:text-sm leading-none font-bold">المدرسة الثانوية الإسلامية ياسوا</span>
-          <span class="font-extrabold text-white text-base sm:text-lg tracking-wide leading-tight mt-0.5">MTs YASUA</span>
-          <span class="text-[10px] font-bold tracking-wide text-emerald-200 mt-0.5">Pilangwetan - Demak</span>
+      <div class="flex items-center gap-2">
+        <img src="logo.png" alt="Logo MTs YASUA" class="w-8 h-8 object-contain drop-shadow p-0.5 bg-white/10 rounded-lg shrink-0">
+        <div class="flex flex-col justify-center leading-tight">
+          <span class="arabic-font text-amber-300 text-[10px] leading-none font-bold">المدرسة الثانوية الإسلامية ياسوا</span>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <span class="font-black text-white text-sm tracking-wide leading-none">MTs YASUA</span>
+            <span class="text-[9.5px] font-semibold text-emerald-100 leading-none">• Pilangwetan</span>
+          </div>
         </div>
       </div>
       <div class="flex items-center gap-1.5">
         <!-- Cari Informasi -->
-        <button onclick="openSearchModal()" type="button" class="w-8 h-8 rounded-full bg-[#004e57]/40 hover:bg-[#004e57]/60 active:scale-95 flex items-center justify-center text-white border border-white/20 transition-all cursor-pointer" title="Cari Informasi" aria-label="Cari">
-          <i data-lucide="search" class="w-4 h-4"></i>
+        <button onclick="openSearchModal()" type="button" class="w-7 h-7 rounded-full bg-[#004e57]/40 hover:bg-[#004e57]/60 active:scale-95 flex items-center justify-center text-white border border-white/20 transition-all cursor-pointer" title="Cari Informasi" aria-label="Cari">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
         </button>
         <!-- Notifikasi & Pengaturan (Native Tab 5) -->
-        <button onclick="switchAppTab('pengaturan')" type="button" class="w-8 h-8 rounded-full bg-[#004e57]/40 hover:bg-[#004e57]/60 active:scale-95 flex items-center justify-center text-amber-300 border border-white/20 relative transition-all cursor-pointer" title="Pengaturan Aplikasi" aria-label="Pengaturan">
-          <i data-lucide="bell" class="w-4 h-4"></i>
-          <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-          <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400"></span>
+        <button onclick="switchAppTab('pengaturan')" type="button" class="w-7 h-7 rounded-full bg-[#004e57]/40 hover:bg-[#004e57]/60 active:scale-95 flex items-center justify-center text-amber-300 border border-white/20 relative transition-all cursor-pointer" title="Pengaturan Aplikasi" aria-label="Pengaturan">
+          <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+          <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+          <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-amber-400"></span>
         </button>
       </div>
     </div>
