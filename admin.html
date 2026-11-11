@@ -3248,6 +3248,18 @@
         webPublikLabel.textContent = 'Web Publik (berita.html)';
 
         renderNews();
+      } else if (view === 'jadwal') {
+        if (viewJadwal) viewJadwal.classList.remove('hidden');
+        if (navBtnJadwal) navBtnJadwal.className = activeClass;
+
+        breadcrumbCat.textContent = 'Kesiswaan & SDM';
+        breadcrumbPage.textContent = 'Jadwal KBM & Seragam';
+        webPublikBtn.href = 'app.html#tab-jadwal';
+        webPublikLabel.textContent = 'Aplikasi Siswa (#tab-jadwal)';
+
+        if (typeof renderDesktopJadwalModule === 'function') {
+          renderDesktopJadwalModule();
+        }
       } else if (view === 'gallery') {
         if (viewGallery) viewGallery.classList.remove('hidden');
         if (navBtnGallery) navBtnGallery.className = activeClass;
@@ -7294,20 +7306,25 @@
       if (!tbody) return;
 
       const kelasRoman = currentDesktopJadwalKelas === '7' ? 'VII' : (currentDesktopJadwalKelas === '8' ? 'VIII' : 'IX');
+      const subRombel = currentDesktopJadwalSubRombel || 'A';
       if (subtitle) {
-        subtitle.textContent = 'Menampilkan jadwal resmi Kelas ' + kelasRoman + ' • Hari ' + currentDesktopJadwalHari;
+        subtitle.innerHTML = 'Menampilkan jadwal resmi <strong>Kelas ' + kelasRoman + '-' + subRombel + '</strong> • Hari <strong>' + currentDesktopJadwalHari + '</strong> <span class="ml-2 text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full font-bold">Terpadu 9 Rombel</span>';
       }
 
       const dataset = getDesktopRosterDataset();
-      const list = (dataset[currentDesktopJadwalKelas] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari]) || [];
+      const storageKey = currentDesktopJadwalKelas + '-' + subRombel;
+      // Fallback ke kelas biasa jika subrombel spesifik belum dikustomisasi terpisah
+      const list = (dataset[storageKey] && dataset[storageKey][currentDesktopJadwalHari]) || 
+                   (dataset[currentDesktopJadwalKelas] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari]) || [];
 
       if (list.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="7" class="py-10 text-center text-xs text-slate-400">
-              <i data-lucide="calendar" class="w-8 h-8 text-slate-300 mx-auto mb-2"></i>
-              <p class="font-bold text-slate-600">Belum ada jam pelajaran terjadwal pada hari ini.</p>
-              <button onclick="openAddJadwalModalDesktop()" class="mt-2 px-3 py-1.5 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer">
+            <td colspan="7" class="py-12 text-center text-xs text-slate-400">
+              <i data-lucide="calendar" class="w-9 h-9 text-slate-300 mx-auto mb-2"></i>
+              <p class="font-bold text-slate-600 text-sm">Belum ada jam pelajaran terjadwal pada hari ini.</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">Tambahkan jam pelajaran atau kegiatan rutin madrasah.</p>
+              <button onclick="openAddJadwalModalDesktop()" class="mt-3 px-3.5 py-1.5 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer shadow-sm">
                 <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                 <span>Tambah Jam Pelajaran</span>
               </button>
@@ -7319,34 +7336,85 @@
       }
 
       tbody.innerHTML = list.map((item, idx) => {
-        const isBreak = item.type === 'istirahat' || item.type === 'ibadah';
-        const typeBadge = isBreak
-          ? '<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 font-black text-[9px]">KEGIATAN / IBADAH</span>'
-          : '<span class="px-2 py-0.5 rounded-md bg-sky-100 text-sky-900 font-black text-[9px]">JAM PELAJARAN</span>';
+        // Deteksi apakah slot merupakan slot khusus yang terkunci
+        const isUpacara = (item.mapel && item.mapel.toLowerCase().includes('upacara')) || item.type === 'upacara';
+        const isIstirahat = (item.mapel && item.mapel.toLowerCase().includes('istirahat')) || item.type === 'istirahat';
+        const isSholat = (item.mapel && (item.mapel.toLowerCase().includes('sholat') || item.mapel.toLowerCase().includes('ibadah') || item.mapel.toLowerCase().includes('dzuhur') || item.mapel.toLowerCase().includes('jum\'at') || item.mapel.toLowerCase().includes('dhuha'))) || item.type === 'ibadah' || item.type === 'sholat';
 
-        const rowBg = isBreak ? 'bg-amber-50/20' : 'hover:bg-slate-50/80';
+        const isLocked = isUpacara || isIstirahat || isSholat || item.locked === true;
+
+        let typeBadge = '';
+        let rowBg = 'hover:bg-slate-50/80';
+        let iconName = 'book-open';
+
+        if (isUpacara) {
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-indigo-100 text-indigo-900 border border-indigo-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-indigo-700"></i> UPACARA TERKUNCI</span>';
+          rowBg = 'bg-indigo-50/25 border-l-4 border-l-indigo-600';
+          iconName = 'flag';
+        } else if (isIstirahat) {
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-amber-700"></i> ISTIRAHAT TERKUNCI</span>';
+          rowBg = 'bg-amber-50/25 border-l-4 border-l-amber-500';
+          iconName = 'coffee';
+        } else if (isSholat) {
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-emerald-700"></i> SHOLAT TERKUNCI</span>';
+          rowBg = 'bg-emerald-50/25 border-l-4 border-l-emerald-600';
+          iconName = 'heart-handshake';
+        } else {
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-sky-100 text-sky-900 border border-sky-200 font-black text-[9px]"><i data-lucide="book-open" class="w-3 h-3 text-sky-700"></i> JAM PELAJARAN</span>';
+          rowBg = 'hover:bg-sky-50/20';
+          iconName = 'graduation-cap';
+        }
+
+        // Tombol aksi untuk slot terkunci vs mapel biasa
+        let actionButtons = '';
+        if (isLocked) {
+          actionButtons = `
+            <div class="flex items-center justify-center gap-1.5">
+              <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 cursor-pointer" title="Sesuaikan Waktu Jam Rutin">
+                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+              </button>
+              <button type="button" disabled class="p-1.5 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60" title="Slot rutinitas madrasah terkunci otomatis (tidak dapat dihapus)">
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          `;
+        } else {
+          actionButtons = `
+            <div class="flex items-center justify-center gap-1.5">
+              <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 cursor-pointer" title="Edit Jam">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+              </button>
+              <button type="button" onclick="deleteDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 cursor-pointer" title="Hapus Slot">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          `;
+        }
 
         return `
-          <tr class="${rowBg} transition">
+          <tr class="${rowBg} transition border-b border-slate-100">
             <td class="py-3 px-3.5 font-bold text-slate-500 text-center">${idx + 1}</td>
-            <td class="py-3 px-3.5 font-bold text-slate-800 flex items-center gap-1.5">
-              <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
-              <span>${item.jam}</span>
+            <td class="py-3 px-3.5 font-bold text-slate-800 whitespace-nowrap">
+              <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white/80 border border-slate-200 text-slate-700 text-xs">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-500"></i>
+                <span>${item.jam}</span>
+              </span>
             </td>
-            <td class="py-3 px-3.5 font-black text-slate-900">${item.mapel}</td>
-            <td class="py-3 px-3.5 font-medium text-slate-700">${item.guru || 'Tim Pengajar MTs YASUA'}</td>
-            <td class="py-3 px-3.5 text-slate-600">${item.ruang || 'Ruang Kelas'}</td>
-            <td class="py-3 px-3.5 text-center">${typeBadge}</td>
-            <td class="py-3 px-3.5 text-center">
-              <div class="flex items-center justify-center gap-1.5">
-                <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 cursor-pointer" title="Edit Jam">
-                  <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-                </button>
-                <button type="button" onclick="deleteDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 cursor-pointer" title="Hapus Slot">
-                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                </button>
+            <td class="py-3 px-3.5">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-lg bg-white shadow-2xs border border-slate-200 text-slate-700">
+                  <i data-lucide="${iconName}" class="w-4 h-4"></i>
+                </span>
+                <div>
+                  <h6 class="font-black text-slate-900 text-xs leading-snug">${item.mapel}</h6>
+                  ${isLocked ? '<span class="text-[9.5px] font-bold text-slate-500">Kegiatan Wajib Madrasah</span>' : ''}
+                </div>
               </div>
             </td>
+            <td class="py-3 px-3.5 font-medium text-slate-700 text-xs">${item.guru || 'Tim Pengajar MTs YASUA'}</td>
+            <td class="py-3 px-3.5 text-slate-600 text-xs font-medium">${item.ruang || 'Ruang Kelas'}</td>
+            <td class="py-3 px-3.5 text-center whitespace-nowrap">${typeBadge}</td>
+            <td class="py-3 px-3.5 text-center whitespace-nowrap">${actionButtons}</td>
           </tr>
         `;
       }).join('');
@@ -7421,13 +7489,26 @@
 
     function deleteDesktopJadwalSlot(idx) {
       const dataset = getDesktopRosterDataset();
-      if (!dataset[currentDesktopJadwalKelas] || !dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari]) return;
+      const storageKey = currentDesktopJadwalKelas + '-' + (currentDesktopJadwalSubRombel || 'A');
+      const list = (dataset[storageKey] && dataset[storageKey][currentDesktopJadwalHari]) || 
+                   (dataset[currentDesktopJadwalKelas] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari]);
+      if (!list) return;
 
-      const slot = dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari][idx];
+      const slot = list[idx];
+      if (slot) {
+        const isUpacara = (slot.mapel && slot.mapel.toLowerCase().includes('upacara')) || slot.type === 'upacara';
+        const isIstirahat = (slot.mapel && slot.mapel.toLowerCase().includes('istirahat')) || slot.type === 'istirahat';
+        const isSholat = (slot.mapel && (slot.mapel.toLowerCase().includes('sholat') || slot.mapel.toLowerCase().includes('ibadah') || slot.mapel.toLowerCase().includes('dzuhur'))) || slot.type === 'ibadah';
+        if (isUpacara || isIstirahat || isSholat || slot.locked === true) {
+          alert('Slot rutinitas madrasah (Upacara, Istirahat, Sholat) otomatis terkunci dan tidak dapat dihapus.');
+          return;
+        }
+      }
+
       const slotName = slot ? slot.mapel : 'jam pelajaran ini';
       if (!window.confirm('Hapus ' + slotName + ' dari roster ' + currentDesktopJadwalHari + '?')) return;
 
-      dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari].splice(idx, 1);
+      list.splice(idx, 1);
       saveDesktopRosterDataset(dataset);
       renderDesktopJadwalTable();
       alert('Jam pelajaran berhasil dihapus!');
