@@ -504,8 +504,8 @@
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-8 gap-2.5 sm:gap-3">
               <button onclick="switchAdminView('jadwal')"
-                class="p-3 rounded-2xl bg-slate-50 hover:bg-sky-50 text-slate-800 hover:text-sky-700 border border-slate-200/80 hover:border-sky-200 transition-all flex flex-col items-center text-center gap-1.5 cursor-pointer group">
-                <i data-lucide="calendar-days" class="w-5 h-5 text-sky-600 group-hover:scale-110 transition-transform"></i>
+                class="p-3 rounded-2xl bg-slate-50 hover:bg-emerald-50 text-slate-800 hover:text-emerald-800 border border-slate-200/80 hover:border-emerald-300 transition-all flex flex-col items-center text-center gap-1.5 cursor-pointer group">
+                <i data-lucide="calendar-days" class="w-5 h-5 text-emerald-600 group-hover:scale-110 transition-transform"></i>
                 <span class="text-[11px] font-bold">Jadwal KBM</span>
               </button>
               <button onclick="openModalAddNews()"
@@ -1515,158 +1515,174 @@
         <!-- =================================================================== -->
         <div id="viewJadwal" class="space-y-6 hidden">
           <!-- Header Banner -->
-          <div class="bg-gradient-to-r from-sky-500/10 via-emerald-500/10 to-indigo-500/10 border border-sky-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+          <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border border-emerald-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-sky-700 text-white flex items-center justify-center shrink-0 shadow-sm">
-                <i data-lucide="calendar-days" class="w-5 h-5 text-sky-200"></i>
+              <div class="w-11 h-11 rounded-2xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-sm">
+                <i data-lucide="calendar-days" class="w-6 h-6 text-emerald-100"></i>
               </div>
               <div>
                 <div class="flex items-center gap-2">
                   <h2 class="text-sm sm:text-base font-black text-slate-900">Manajemen Jadwal KBM &amp; Roster Pelajaran</h2>
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-100 text-sky-900 font-bold text-[10px]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-ping"></span> Semester Genap 2026/2027
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Semester Genap 2026/2027
                   </span>
                 </div>
                 <p class="text-xs text-slate-600 mt-0.5">Kelola alokasi mata pelajaran 9 rombel kelas (VII, VIII, IX), alokasi guru pengampu, jam efektif belajar, serta ketentuan seragam harian madrasah.</p>
               </div>
             </div>
 
-            <div class="flex items-center gap-2 w-full sm:w-auto">
+            <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <button onclick="openAddJadwalModalDesktop()"
-                class="px-4 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
-                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
+                <i data-lucide="plus" class="w-4 h-4"></i>
                 <span>+ Tambah Jam KBM</span>
               </button>
               <button onclick="openEditSeragamModalDesktop('Senin')"
-                class="px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
+                class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
                 <i data-lucide="shirt" class="w-3.5 h-3.5 text-emerald-600"></i>
                 <span>Ubah Seragam</span>
               </button>
-              <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank"
-                class="px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
+              <a href="https://docs.google.com/spreadsheets/d/1B-cM89QpQ3Y_hQ-3K0Q" target="_blank"
+                class="hidden xl:flex px-3 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all items-center gap-1.5 shadow-2xs">
                 <i data-lucide="sheet" class="w-3.5 h-3.5 text-emerald-600"></i>
                 <span>Sheet jadwal_kbm</span>
               </a>
-              <a href="/app/jadwal" target="_blank"
-                class="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-emerald-700"></i>
+              <a href="app.html#tab-jadwal" target="_blank"
+                class="hidden lg:flex px-3 py-2 rounded-xl bg-emerald-100 border border-emerald-300 hover:bg-emerald-200 text-emerald-900 text-xs font-bold transition-all items-center gap-1.5 shadow-2xs">
+                <i data-lucide="external-link" class="w-3.5 h-3.5 text-emerald-800"></i>
                 <span>App Publik</span>
               </a>
             </div>
           </div>
 
-          <!-- 4 Kartu KPI Widescreen Desktop -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-            <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
+          <!-- 4 Metric Cards (Jadwal KBM) dengan Solid High-Contrast Madrasah Colors -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <!-- Card 1: Total Rombel -->
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-4 text-white shadow-sm flex items-center justify-between">
               <div>
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">TOTAL ROMBEL</span>
-                <h4 class="text-2xl font-black text-slate-900 mt-0.5">9 Kelas</h4>
-                <p class="text-[11px] text-sky-700 font-semibold mt-0.5">VII-A s.d. IX-C</p>
+                <span class="text-xs font-semibold text-emerald-100 block">TOTAL ROMBEL KELAS</span>
+                <h3 class="text-2xl font-black mt-1">9 Rombel</h3>
+                <span class="text-[10px] text-emerald-200">VII-A s.d. IX-C Terpadu</span>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center">
-                <i data-lucide="layers" class="w-5 h-5"></i>
+              <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center">
+                <i data-lucide="layers" class="w-6 h-6 text-white"></i>
               </div>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
+            <!-- Card 2: Beban Harian -->
+            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-4 text-white shadow-sm flex items-center justify-between">
               <div>
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">BEBAN HARIAN</span>
-                <h4 class="text-2xl font-black text-slate-900 mt-0.5">8 JP / Hari</h4>
-                <p class="text-[11px] text-emerald-700 font-semibold mt-0.5">07.00 - 13.50 WIB</p>
+                <span class="text-xs font-semibold text-blue-100 block">BEBAN HARIAN BELAJAR</span>
+                <h3 class="text-2xl font-black mt-1">8 JP / Hari</h3>
+                <span class="text-[10px] text-blue-200">07.00 - 13.50 WIB</span>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-                <i data-lucide="clock" class="w-5 h-5"></i>
+              <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center">
+                <i data-lucide="clock" class="w-6 h-6 text-white"></i>
               </div>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
+            <!-- Card 3: Durasi KBM -->
+            <div class="bg-gradient-to-br from-purple-600 to-pink-700 rounded-2xl p-4 text-white shadow-sm flex items-center justify-between">
               <div>
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">DURASI KBM</span>
-                <h4 class="text-2xl font-black text-slate-900 mt-0.5">40 Menit</h4>
-                <p class="text-[11px] text-indigo-700 font-semibold mt-0.5">Alokasi per Jam Pelajaran</p>
+                <span class="text-xs font-semibold text-purple-100 block">DURASI JAM PELAJARAN</span>
+                <h3 class="text-2xl font-black mt-1">40 Menit</h3>
+                <span class="text-[10px] text-purple-200">Standar Kurikulum Kemenag</span>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center">
-                <i data-lucide="hourglass" class="w-5 h-5"></i>
+              <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center">
+                <i data-lucide="hourglass" class="w-6 h-6 text-white"></i>
               </div>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
+            <!-- Card 4: Seragam Harian -->
+            <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-4 text-white shadow-sm flex items-center justify-between">
               <div>
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">SERAGAM HARIAN</span>
-                <h4 class="text-2xl font-black text-slate-900 mt-0.5">6 Hari</h4>
-                <p class="text-[11px] text-amber-700 font-semibold mt-0.5">Senin s.d. Sabtu Wajib</p>
+                <span class="text-xs font-semibold text-amber-100 block">KETENTUAN SERAGAM</span>
+                <h3 class="text-2xl font-black mt-1">6 Hari</h3>
+                <span class="text-[10px] text-amber-200">Senin s.d. Sabtu Terjadwal</span>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center">
-                <i data-lucide="shirt" class="w-5 h-5"></i>
+              <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center">
+                <i data-lucide="shirt" class="w-6 h-6 text-white"></i>
               </div>
             </div>
           </div>
 
           <!-- Panel Ketentuan Seragam Mingguan Siswa (Senin s.d. Sabtu) -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm space-y-3">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
-                  <i data-lucide="shirt" class="w-4 h-4"></i>
+                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                  <i data-lucide="shirt" class="w-5 h-5 text-emerald-700"></i>
                 </div>
                 <div>
-                  <h3 class="font-extrabold text-sm text-slate-800">Ketentuan Seragam Mingguan Siswa-Siswi</h3>
-                  <p class="text-xs text-slate-500">Klik tombol edit pada tiap hari untuk memperbarui rincian pakaian dan atribut</p>
+                  <h3 class="font-extrabold text-sm text-slate-900">Ketentuan Seragam Mingguan Siswa-Siswi</h3>
+                  <p class="text-xs text-slate-500">Klik tombol Ubah pada tiap hari untuk memperbarui rincian seragam dan atribut resmi</p>
                 </div>
               </div>
-              <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Terjadwal Resmi</span>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Terjadwal Resmi</span>
             </div>
 
             <div id="desktopSeragamGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
-              <!-- Rendered via JS -->
+              <!-- Rendered via renderDesktopSeragamCards() -->
             </div>
           </div>
 
           <!-- Panel Roster Pelajaran Desktop (Filter Kelas, Hari & Tabel) -->
           <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm space-y-4">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-              <div>
-                <h3 class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
-                  <i data-lucide="list-ordered" class="w-4 h-4 text-sky-600"></i>
-                  <span>Tabel Roster Pelajaran KBM Terjadwal</span>
-                </h3>
-                <p id="desktopRosterSubtitle" class="text-xs text-slate-500 mt-0.5">Menampilkan jadwal Kelas VII &bull; Hari Senin</p>
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                  <i data-lucide="calendar" class="w-5 h-5 text-emerald-700"></i>
+                </div>
+                <div>
+                  <h3 class="font-extrabold text-sm text-slate-900">Tabel Roster Pelajaran KBM Terjadwal</h3>
+                  <p id="desktopRosterSubtitle" class="text-xs text-slate-500">Menampilkan jadwal resmi Kelas VII-A • Hari Senin</p>
+                </div>
               </div>
 
-              <!-- Filter Kelas Pills -->
-              <div class="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-bold">
-                <button type="button" onclick="selectDesktopJadwalKelas('7', this)" class="desktop-jadwal-kelas-btn px-3 py-1.5 rounded-lg bg-sky-700 text-white shadow-2xs transition cursor-pointer">Kelas VII</button>
-                <button type="button" onclick="selectDesktopJadwalKelas('8', this)" class="desktop-jadwal-kelas-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">Kelas VIII</button>
-                <button type="button" onclick="selectDesktopJadwalKelas('9', this)" class="desktop-jadwal-kelas-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">Kelas IX</button>
+              <!-- Filter Rombel: Tingkat Kelas & Sub-Rombel -->
+              <div class="flex flex-wrap items-center gap-3">
+                <!-- Tingkat Kelas VII, VIII, IX -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl text-xs font-bold border border-slate-200">
+                  <button type="button" onclick="selectDesktopJadwalKelas('7', this)" class="desktop-jadwal-kelas-btn px-3.5 py-1.5 rounded-lg bg-brand-primary text-white font-bold shadow-sm transition cursor-pointer">Kelas VII</button>
+                  <button type="button" onclick="selectDesktopJadwalKelas('8', this)" class="desktop-jadwal-kelas-btn px-3.5 py-1.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-200 font-bold transition cursor-pointer">Kelas VIII</button>
+                  <button type="button" onclick="selectDesktopJadwalKelas('9', this)" class="desktop-jadwal-kelas-btn px-3.5 py-1.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-200 font-bold transition cursor-pointer">Kelas IX</button>
+                </div>
+                <!-- Sub-Rombel A, B, C -->
+                <div class="flex items-center bg-emerald-50 p-1 rounded-xl text-xs font-bold border border-emerald-200">
+                  <span class="text-[10px] text-emerald-800 font-extrabold uppercase px-2">Rombel:</span>
+                  <button type="button" onclick="selectDesktopJadwalSubRombel('A', this)" class="desktop-jadwal-subrombel-btn px-2.5 py-1 rounded-md text-xs font-black bg-brand-primary text-white shadow-xs transition cursor-pointer">A</button>
+                  <button type="button" onclick="selectDesktopJadwalSubRombel('B', this)" class="desktop-jadwal-subrombel-btn px-2.5 py-1 rounded-md text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition cursor-pointer">B</button>
+                  <button type="button" onclick="selectDesktopJadwalSubRombel('C', this)" class="desktop-jadwal-subrombel-btn px-2.5 py-1 rounded-md text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition cursor-pointer">C</button>
+                </div>
               </div>
             </div>
 
-            <!-- Filter Hari Tabs -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-bold">
-              <button type="button" onclick="selectDesktopJadwalHari('Senin', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-sky-700 text-white shadow-xs transition cursor-pointer">Senin</button>
-              <button type="button" onclick="selectDesktopJadwalHari('Selasa', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer">Selasa</button>
-              <button type="button" onclick="selectDesktopJadwalHari('Rabu', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer">Rabu</button>
-              <button type="button" onclick="selectDesktopJadwalHari('Kamis', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer">Kamis</button>
-              <button type="button" onclick="selectDesktopJadwalHari('Jumat', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer">Jumat</button>
-              <button type="button" onclick="selectDesktopJadwalHari('Sabtu', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer">Sabtu</button>
+            <!-- Tab Filter Hari (Senin s.d. Sabtu) -->
+            <div class="flex flex-wrap items-center gap-2 pt-1 pb-1">
+              <button type="button" onclick="selectDesktopJadwalHari('Senin', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-brand-primary text-white font-black text-xs shadow-md transition cursor-pointer">Senin</button>
+              <button type="button" onclick="selectDesktopJadwalHari('Selasa', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition cursor-pointer">Selasa</button>
+              <button type="button" onclick="selectDesktopJadwalHari('Rabu', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition cursor-pointer">Rabu</button>
+              <button type="button" onclick="selectDesktopJadwalHari('Kamis', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition cursor-pointer">Kamis</button>
+              <button type="button" onclick="selectDesktopJadwalHari('Jumat', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition cursor-pointer">Jum'at</button>
+              <button type="button" onclick="selectDesktopJadwalHari('Sabtu', this)" class="desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition cursor-pointer">Sabtu</button>
             </div>
 
-            <!-- Tabel Roster Pelajaran Desktop -->
+            <!-- Tabel Interaktif Jadwal Pelajaran -->
             <div class="overflow-x-auto rounded-xl border border-slate-200">
               <table class="w-full text-left text-xs">
-                <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-700">
+                <thead class="bg-slate-100 border-b border-slate-200 font-black text-slate-700 uppercase tracking-wider">
                   <tr>
-                    <th class="py-3 px-3.5 w-14 text-center">No</th>
-                    <th class="py-3 px-3.5 w-32">Waktu KBM</th>
-                    <th class="py-3 px-3.5">Mata Pelajaran</th>
-                    <th class="py-3 px-3.5">Guru Pengampu</th>
-                    <th class="py-3 px-3.5">Ruang / Lab</th>
-                    <th class="py-3 px-3.5 w-28 text-center">Tipe</th>
-                    <th class="py-3 px-3.5 w-28 text-center">Aksi</th>
+                    <th class="py-3.5 px-3.5 w-14 text-center">No</th>
+                    <th class="py-3.5 px-3.5 w-36">Waktu KBM</th>
+                    <th class="py-3.5 px-3.5">Mata Pelajaran / Kegiatan</th>
+                    <th class="py-3.5 px-3.5">Guru Pengampu</th>
+                    <th class="py-3.5 px-3.5">Ruang / Lab</th>
+                    <th class="py-3.5 px-3.5 w-36 text-center">Tipe Slot</th>
+                    <th class="py-3.5 px-3.5 w-28 text-center">Aksi</th>
                   </tr>
                 </thead>
                 <tbody id="desktopJadwalTbody" class="divide-y divide-slate-100">
-                  <!-- Rendered via JS -->
+                  <!-- Rendered via renderDesktopJadwalTable() -->
                 </tbody>
               </table>
             </div>
@@ -7266,28 +7282,38 @@
       const hariList = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
       const badgeColor = {
-        'Senin': 'bg-blue-100 text-blue-900',
-        'Selasa': 'bg-emerald-100 text-emerald-900',
-        'Rabu': 'bg-amber-100 text-amber-900',
-        'Kamis': 'bg-teal-100 text-teal-900',
-        'Jumat': 'bg-purple-100 text-purple-900',
-        'Sabtu': 'bg-orange-100 text-orange-900'
+        'Senin': 'bg-blue-100 text-blue-900 border border-blue-200',
+        'Selasa': 'bg-emerald-100 text-emerald-900 border border-emerald-200',
+        'Rabu': 'bg-amber-100 text-amber-900 border border-amber-200',
+        'Kamis': 'bg-teal-100 text-teal-900 border border-teal-200',
+        'Jumat': 'bg-purple-100 text-purple-900 border border-purple-200',
+        'Sabtu': 'bg-orange-100 text-orange-900 border border-orange-200'
+      };
+
+      const borderCol = {
+        'Senin': 'border-blue-200 bg-blue-50/20',
+        'Selasa': 'border-emerald-200 bg-emerald-50/20',
+        'Rabu': 'border-amber-200 bg-amber-50/20',
+        'Kamis': 'border-teal-200 bg-teal-50/20',
+        'Jumat': 'border-purple-200 bg-purple-50/20',
+        'Sabtu': 'border-orange-200 bg-orange-50/20'
       };
 
       container.innerHTML = hariList.map(h => {
         const s = seragamData[h] || { title: 'Seragam Harian', desc: 'Sesuai ketentuan madrasah.' };
+        const labelHari = h === 'Jumat' ? "Jum'at" : h;
         return `
-          <div class="p-3 rounded-xl border border-slate-200/90 bg-slate-50/60 hover:bg-white transition flex flex-col justify-between space-y-2">
+          <div class="p-3.5 rounded-2xl border ${borderCol[h] || 'border-slate-200 bg-white'} shadow-2xs hover:shadow-xs transition flex flex-col justify-between space-y-2.5">
             <div>
               <div class="flex items-center justify-between">
-                <span class="font-extrabold text-slate-800">${h}</span>
-                <span class="text-[8.5px] font-black px-1.5 py-0.5 rounded ${badgeColor[h] || 'bg-slate-200 text-slate-800'}">${s.title.split(' ')[0]}</span>
+                <span class="font-black text-slate-900 text-xs">${labelHari}</span>
+                <span class="text-[9px] font-black px-1.5 py-0.5 rounded-md ${badgeColor[h] || 'bg-slate-200 text-slate-800'}">${s.title.split(' ')[0]}</span>
               </div>
-              <h5 class="font-bold text-slate-900 text-[11px] mt-1.5 leading-snug">${s.title}</h5>
-              <p class="text-[10px] text-slate-500 leading-snug mt-1">${s.desc}</p>
+              <h5 class="font-bold text-slate-900 text-xs mt-1.5 leading-snug">${s.title}</h5>
+              <p class="text-[10.5px] text-slate-600 leading-relaxed mt-1 line-clamp-3">${s.desc}</p>
             </div>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-end">
-              <button type="button" onclick="openEditSeragamModalDesktop('${h}')" class="text-[10.5px] font-bold text-emerald-700 hover:text-emerald-800 hover:underline cursor-pointer flex items-center gap-1">
+            <div class="pt-2 border-t border-slate-200/80 flex items-center justify-end">
+              <button type="button" onclick="openEditSeragamModalDesktop('${h}')" class="text-xs font-extrabold text-emerald-800 hover:text-emerald-950 hover:underline cursor-pointer flex items-center gap-1">
                 <i data-lucide="edit-3" class="w-3 h-3"></i>
                 <span>Ubah</span>
               </button>
@@ -7307,13 +7333,14 @@
 
       const kelasRoman = currentDesktopJadwalKelas === '7' ? 'VII' : (currentDesktopJadwalKelas === '8' ? 'VIII' : 'IX');
       const subRombel = currentDesktopJadwalSubRombel || 'A';
+      const labelHari = currentDesktopJadwalHari === 'Jumat' ? "Jum'at" : currentDesktopJadwalHari;
+
       if (subtitle) {
-        subtitle.innerHTML = 'Menampilkan jadwal resmi <strong>Kelas ' + kelasRoman + '-' + subRombel + '</strong> • Hari <strong>' + currentDesktopJadwalHari + '</strong> <span class="ml-2 text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full font-bold">Terpadu 9 Rombel</span>';
+        subtitle.innerHTML = 'Menampilkan jadwal resmi <strong>Kelas ' + kelasRoman + '-' + subRombel + '</strong> • Hari <strong>' + labelHari + '</strong> <span class="ml-2 text-[10px] bg-emerald-100 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full font-extrabold">Terpadu 9 Rombel</span>';
       }
 
       const dataset = getDesktopRosterDataset();
       const storageKey = currentDesktopJadwalKelas + '-' + subRombel;
-      // Fallback ke kelas biasa jika subrombel spesifik belum dikustomisasi terpisah
       const list = (dataset[storageKey] && dataset[storageKey][currentDesktopJadwalHari]) || 
                    (dataset[currentDesktopJadwalKelas] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari]) || [];
 
@@ -7324,7 +7351,7 @@
               <i data-lucide="calendar" class="w-9 h-9 text-slate-300 mx-auto mb-2"></i>
               <p class="font-bold text-slate-600 text-sm">Belum ada jam pelajaran terjadwal pada hari ini.</p>
               <p class="text-[11px] text-slate-400 mt-0.5">Tambahkan jam pelajaran atau kegiatan rutin madrasah.</p>
-              <button onclick="openAddJadwalModalDesktop()" class="mt-3 px-3.5 py-1.5 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer shadow-sm">
+              <button onclick="openAddJadwalModalDesktop()" class="mt-3 px-4 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer shadow-md">
                 <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                 <span>Tambah Jam Pelajaran</span>
               </button>
@@ -7336,7 +7363,6 @@
       }
 
       tbody.innerHTML = list.map((item, idx) => {
-        // Deteksi apakah slot merupakan slot khusus yang terkunci
         const isUpacara = (item.mapel && item.mapel.toLowerCase().includes('upacara')) || item.type === 'upacara';
         const isIstirahat = (item.mapel && item.mapel.toLowerCase().includes('istirahat')) || item.type === 'istirahat';
         const isSholat = (item.mapel && (item.mapel.toLowerCase().includes('sholat') || item.mapel.toLowerCase().includes('ibadah') || item.mapel.toLowerCase().includes('dzuhur') || item.mapel.toLowerCase().includes('jum\'at') || item.mapel.toLowerCase().includes('dhuha'))) || item.type === 'ibadah' || item.type === 'sholat';
@@ -7348,32 +7374,31 @@
         let iconName = 'book-open';
 
         if (isUpacara) {
-          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-indigo-100 text-indigo-900 border border-indigo-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-indigo-700"></i> UPACARA TERKUNCI</span>';
-          rowBg = 'bg-indigo-50/25 border-l-4 border-l-indigo-600';
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-900 border border-indigo-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-indigo-700"></i> UPACARA TERKUNCI</span>';
+          rowBg = 'bg-indigo-50/50 border-l-4 border-l-indigo-600';
           iconName = 'flag';
         } else if (isIstirahat) {
-          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-amber-700"></i> ISTIRAHAT TERKUNCI</span>';
-          rowBg = 'bg-amber-50/25 border-l-4 border-l-amber-500';
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-amber-700"></i> ISTIRAHAT TERKUNCI</span>';
+          rowBg = 'bg-amber-50/50 border-l-4 border-l-amber-500';
           iconName = 'coffee';
         } else if (isSholat) {
-          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-emerald-700"></i> SHOLAT TERKUNCI</span>';
-          rowBg = 'bg-emerald-50/25 border-l-4 border-l-emerald-600';
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200 font-black text-[9px]"><i data-lucide="lock" class="w-3 h-3 text-emerald-700"></i> SHOLAT TERKUNCI</span>';
+          rowBg = 'bg-emerald-50/50 border-l-4 border-l-emerald-600';
           iconName = 'heart-handshake';
         } else {
-          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-sky-100 text-sky-900 border border-sky-200 font-black text-[9px]"><i data-lucide="book-open" class="w-3 h-3 text-sky-700"></i> JAM PELAJARAN</span>';
-          rowBg = 'hover:bg-sky-50/20';
+          typeBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-black text-[9px]"><i data-lucide="book-open" class="w-3 h-3 text-emerald-700"></i> JAM PELAJARAN</span>';
+          rowBg = 'hover:bg-emerald-50/20';
           iconName = 'graduation-cap';
         }
 
-        // Tombol aksi untuk slot terkunci vs mapel biasa
         let actionButtons = '';
         if (isLocked) {
           actionButtons = `
             <div class="flex items-center justify-center gap-1.5">
-              <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 cursor-pointer" title="Sesuaikan Waktu Jam Rutin">
+              <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 cursor-pointer shadow-2xs" title="Sesuaikan Waktu Jam Rutin">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
               </button>
-              <button type="button" disabled class="p-1.5 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60" title="Slot rutinitas madrasah terkunci otomatis (tidak dapat dihapus)">
+              <button type="button" disabled class="p-2 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60" title="Slot rutinitas madrasah terkunci otomatis (tidak dapat dihapus)">
                 <i data-lucide="lock" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -7381,10 +7406,10 @@
         } else {
           actionButtons = `
             <div class="flex items-center justify-center gap-1.5">
-              <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 cursor-pointer" title="Edit Jam">
+              <button type="button" onclick="editDesktopJadwalSlot(${idx})" class="p-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 cursor-pointer shadow-2xs" title="Edit Jam Pelajaran">
                 <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
               </button>
-              <button type="button" onclick="deleteDesktopJadwalSlot(${idx})" class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 cursor-pointer" title="Hapus Slot">
+              <button type="button" onclick="deleteDesktopJadwalSlot(${idx})" class="p-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 cursor-pointer shadow-2xs" title="Hapus Slot">
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -7393,26 +7418,26 @@
 
         return `
           <tr class="${rowBg} transition border-b border-slate-100">
-            <td class="py-3 px-3.5 font-bold text-slate-500 text-center">${idx + 1}</td>
+            <td class="py-3 px-3.5 font-black text-slate-600 text-center">${idx + 1}</td>
             <td class="py-3 px-3.5 font-bold text-slate-800 whitespace-nowrap">
-              <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white/80 border border-slate-200 text-slate-700 text-xs">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-800 text-xs shadow-2xs">
                 <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-500"></i>
                 <span>${item.jam}</span>
               </span>
             </td>
             <td class="py-3 px-3.5">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 rounded-lg bg-white shadow-2xs border border-slate-200 text-slate-700">
-                  <i data-lucide="${iconName}" class="w-4 h-4"></i>
+              <div class="flex items-center gap-2.5">
+                <span class="p-2 rounded-xl bg-white shadow-2xs border border-slate-200 text-slate-700">
+                  <i data-lucide="${iconName}" class="w-4 h-4 text-emerald-700"></i>
                 </span>
                 <div>
                   <h6 class="font-black text-slate-900 text-xs leading-snug">${item.mapel}</h6>
-                  ${isLocked ? '<span class="text-[9.5px] font-bold text-slate-500">Kegiatan Wajib Madrasah</span>' : ''}
+                  ${isLocked ? '<span class="text-[10px] font-bold text-slate-500">Kegiatan Wajib Madrasah</span>' : ''}
                 </div>
               </div>
             </td>
-            <td class="py-3 px-3.5 font-medium text-slate-700 text-xs">${item.guru || 'Tim Pengajar MTs YASUA'}</td>
-            <td class="py-3 px-3.5 text-slate-600 text-xs font-medium">${item.ruang || 'Ruang Kelas'}</td>
+            <td class="py-3 px-3.5 font-bold text-slate-700 text-xs">${item.guru || 'Tim Pengajar MTs YASUA'}</td>
+            <td class="py-3 px-3.5 text-slate-600 text-xs font-semibold">${item.ruang || 'Ruang Kelas'}</td>
             <td class="py-3 px-3.5 text-center whitespace-nowrap">${typeBadge}</td>
             <td class="py-3 px-3.5 text-center whitespace-nowrap">${actionButtons}</td>
           </tr>
@@ -7427,35 +7452,53 @@
       currentDesktopJadwalKelas = kelas;
       const allBtns = document.querySelectorAll('.desktop-jadwal-kelas-btn');
       allBtns.forEach(b => {
-        b.className = 'desktop-jadwal-kelas-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer';
+        b.className = 'desktop-jadwal-kelas-btn px-3.5 py-1.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-200 font-bold transition cursor-pointer';
       });
-      if (btn) btn.className = 'desktop-jadwal-kelas-btn px-3 py-1.5 rounded-lg bg-sky-700 text-white shadow-2xs transition cursor-pointer';
+      if (btn) btn.className = 'desktop-jadwal-kelas-btn px-3.5 py-1.5 rounded-lg bg-brand-primary text-white font-bold shadow-sm transition cursor-pointer';
       renderDesktopJadwalTable();
     }
     window.selectDesktopJadwalKelas = selectDesktopJadwalKelas;
+
+    function selectDesktopJadwalSubRombel(sub, btn) {
+      currentDesktopJadwalSubRombel = sub;
+      const allSubBtns = document.querySelectorAll('.desktop-jadwal-subrombel-btn');
+      allSubBtns.forEach(b => {
+        b.className = 'desktop-jadwal-subrombel-btn px-2.5 py-1 rounded-md text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition cursor-pointer';
+      });
+      if (btn) btn.className = 'desktop-jadwal-subrombel-btn px-2.5 py-1 rounded-md text-xs font-black bg-brand-primary text-white shadow-xs transition cursor-pointer';
+      renderDesktopJadwalTable();
+    }
+    window.selectDesktopJadwalSubRombel = selectDesktopJadwalSubRombel;
 
     function selectDesktopJadwalHari(hari, btn) {
       currentDesktopJadwalHari = hari;
       const allBtns = document.querySelectorAll('.desktop-jadwal-hari-btn');
       allBtns.forEach(b => {
-        b.className = 'desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer';
+        b.className = 'desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition cursor-pointer';
       });
-      if (btn) btn.className = 'desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-sky-700 text-white shadow-xs transition cursor-pointer';
+      if (btn) btn.className = 'desktop-jadwal-hari-btn px-4 py-2 rounded-xl bg-brand-primary text-white font-black text-xs shadow-md transition cursor-pointer';
       renderDesktopJadwalTable();
     }
     window.selectDesktopJadwalHari = selectDesktopJadwalHari;
 
-    function openAddJadwalModalDesktop() {
-      const modal = document.getElementById('desktopJadwalModal');
-      const form = document.getElementById('desktopJadwalForm');
-      if (form) form.reset();
+    function renderDesktopJadwalModule() {
+      renderDesktopSeragamCards();
+      renderDesktopJadwalTable();
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderDesktopJadwalModule = renderDesktopJadwalModule;
 
+    function openAddJadwalModalDesktop() {
       document.getElementById('desktopJadwalSlotIdx').value = '';
       document.getElementById('desktopJadwalFormKelas').value = currentDesktopJadwalKelas;
       document.getElementById('desktopJadwalFormHari').value = currentDesktopJadwalHari;
-      document.getElementById('desktopJadwalFormWaktu').value = '07.30 - 08.50';
-      document.getElementById('desktopJadwalModalTitle').textContent = 'Tambah Jam KBM Baru';
+      document.getElementById('desktopJadwalFormWaktu').value = '';
+      document.getElementById('desktopJadwalFormMapel').value = '';
+      document.getElementById('desktopJadwalFormGuru').value = '';
+      document.getElementById('desktopJadwalFormRuang').value = 'R. Kelas';
 
+      document.getElementById('desktopJadwalModalTitle').textContent = 'Tambah Jam KBM Baru';
+      const modal = document.getElementById('desktopJadwalModal');
       if (modal) modal.classList.remove('hidden');
       if (window.lucide) window.lucide.createIcons();
     }
@@ -7469,7 +7512,10 @@
 
     function editDesktopJadwalSlot(idx) {
       const dataset = getDesktopRosterDataset();
-      const slot = dataset[currentDesktopJadwalKelas] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari][idx];
+      const storageKey = currentDesktopJadwalKelas + '-' + (currentDesktopJadwalSubRombel || 'A');
+      const list = (dataset[storageKey] && dataset[storageKey][currentDesktopJadwalHari]) || 
+                   (dataset[currentDesktopJadwalKelas] && dataset[currentDesktopJadwalKelas][currentDesktopJadwalHari]);
+      const slot = list && list[idx];
       if (!slot) return;
 
       document.getElementById('desktopJadwalSlotIdx').value = idx;
@@ -7526,8 +7572,9 @@
       const ruang = document.getElementById('desktopJadwalFormRuang').value.trim() || 'R. Kelas';
 
       const dataset = getDesktopRosterDataset();
-      if (!dataset[kelas]) dataset[kelas] = {};
-      if (!dataset[kelas][hari]) dataset[kelas][hari] = [];
+      const storageKey = kelas + '-' + (currentDesktopJadwalSubRombel || 'A');
+      if (!dataset[storageKey]) dataset[storageKey] = {};
+      if (!dataset[storageKey][hari]) dataset[storageKey][hari] = [];
 
       const payload = {
         jam: waktu,
@@ -7538,9 +7585,9 @@
       };
 
       if (idxStr !== '' && !isNaN(parseInt(idxStr))) {
-        dataset[kelas][hari][parseInt(idxStr)] = payload;
+        dataset[storageKey][hari][parseInt(idxStr)] = payload;
       } else {
-        dataset[kelas][hari].push(payload);
+        dataset[storageKey][hari].push(payload);
       }
 
       saveDesktopRosterDataset(dataset);
@@ -7552,9 +7599,17 @@
 
     function openEditSeragamModalDesktop(hari) {
       const modal = document.getElementById('desktopSeragamModal');
-      const hariSelect = document.getElementById('desktopSeragamFormHari');
-      if (hariSelect) hariSelect.value = hari || 'Senin';
-      loadSeragamFormForHari(hari || 'Senin');
+      const hariSelect = document.getElementById('desktopSeragamHari');
+      const titleInput = document.getElementById('desktopSeragamTitle');
+      const descInput = document.getElementById('desktopSeragamDesc');
+
+      const seragamData = getDesktopSeragamDataset();
+      const curHari = hari || 'Senin';
+      if (hariSelect) hariSelect.value = curHari;
+
+      const item = seragamData[curHari] || { title: '', desc: '' };
+      if (titleInput) titleInput.value = item.title;
+      if (descInput) descInput.value = item.desc;
 
       if (modal) modal.classList.remove('hidden');
       if (window.lucide) window.lucide.createIcons();
@@ -7567,25 +7622,16 @@
     }
     window.closeDesktopSeragamModal = closeDesktopSeragamModal;
 
-    function loadSeragamFormForHari(hari) {
-      const dataset = getDesktopSeragamDataset();
-      const s = dataset[hari] || { title: '', desc: '' };
-      document.getElementById('desktopSeragamFormTitle').value = s.title || '';
-      document.getElementById('desktopSeragamFormDesc').value = s.desc || '';
-      document.getElementById('desktopSeragamModalTitle').textContent = 'Ubah Seragam Hari ' + hari;
-    }
-    window.loadSeragamFormForHari = loadSeragamFormForHari;
-
     function handleSaveDesktopSeragam(e) {
       e.preventDefault();
-      const hari = document.getElementById('desktopSeragamFormHari').value;
-      const title = document.getElementById('desktopSeragamFormTitle').value.trim();
-      const desc = document.getElementById('desktopSeragamFormDesc').value.trim();
+      const hari = document.getElementById('desktopSeragamHari').value;
+      const title = document.getElementById('desktopSeragamTitle').value.trim();
+      const desc = document.getElementById('desktopSeragamDesc').value.trim();
 
-      const dataset = getDesktopSeragamDataset();
-      dataset[hari] = { title: title, desc: desc };
+      const seragamData = getDesktopSeragamDataset();
+      seragamData[hari] = { title, desc };
+      saveDesktopSeragamDataset(seragamData);
 
-      saveDesktopSeragamDataset(dataset);
       closeDesktopSeragamModal();
       renderDesktopSeragamCards();
       alert('Ketentuan seragam hari ' + hari + ' berhasil diperbarui!');
@@ -7598,10 +7644,10 @@
   <!-- MODAL: TAMBAH / EDIT JAM JADWAL KBM DESKTOP                         -->
   <!-- =================================================================== -->
   <div id="desktopJadwalModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-sky-100 p-6 space-y-4 animate-in fade-in zoom-in-95 duration-200">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-emerald-100 p-6 space-y-4 animate-in fade-in zoom-in-95 duration-200">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-sky-50 text-sky-700 flex items-center justify-center border border-sky-100 font-bold">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-800 flex items-center justify-center border border-emerald-100 font-bold">
             <i data-lucide="calendar-plus" class="w-5 h-5"></i>
           </div>
           <div>
@@ -7620,7 +7666,7 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-bold text-slate-700 mb-1">Kelas <span class="text-rose-500">*</span></label>
-            <select id="desktopJadwalFormKelas" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 font-medium">
+            <select id="desktopJadwalFormKelas" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium">
               <option value="7">Kelas VII (7-A/B/C)</option>
               <option value="8">Kelas VIII (8-A/B/C)</option>
               <option value="9">Kelas IX (9-A/B/C)</option>
@@ -7628,7 +7674,7 @@
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">Hari <span class="text-rose-500">*</span></label>
-            <select id="desktopJadwalFormHari" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 font-medium">
+            <select id="desktopJadwalFormHari" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium">
               <option value="Senin">Senin</option>
               <option value="Selasa">Selasa</option>
               <option value="Rabu">Rabu</option>
@@ -7641,17 +7687,17 @@
 
         <div>
           <label class="block font-bold text-slate-700 mb-1">Rentang Waktu KBM <span class="text-rose-500">*</span></label>
-          <input type="text" id="desktopJadwalFormWaktu" required placeholder="Contoh: 07.30 - 08.50" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+          <input type="text" id="desktopJadwalFormWaktu" required placeholder="Contoh: 07.30 - 08.50" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
         </div>
 
         <div>
           <label class="block font-bold text-slate-700 mb-1">Mata Pelajaran <span class="text-rose-500">*</span></label>
-          <input type="text" id="desktopJadwalFormMapel" required placeholder="Contoh: Al-Qur'an Hadits / Matematika" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+          <input type="text" id="desktopJadwalFormMapel" required placeholder="Contoh: Al-Qur'an Hadits / Matematika" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
         </div>
 
         <div>
           <label class="block font-bold text-slate-700 mb-1">Guru Pengampu <span class="text-rose-500">*</span></label>
-          <select id="desktopJadwalFormGuru" required class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 font-medium">
+          <select id="desktopJadwalFormGuru" required class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium">
             <option value="Muthohar, S.Pd.">Muthohar, S.Pd. (Kepala Madrasah)</option>
             <option value="Hj. Thoibah Roudlotul Jannah, S.Ag.">Hj. Thoibah Roudlotul Jannah, S.Ag. (Waka Kurikulum / SKI)</option>
             <option value="H. Ahmad Rusydi, S.Pd.I">H. Ahmad Rusydi, S.Pd.I (Waka Kurikulum / Fiqih)</option>
@@ -7670,12 +7716,12 @@
 
         <div>
           <label class="block font-bold text-slate-700 mb-1">Ruang Kelas / Laboratorium</label>
-          <input type="text" id="desktopJadwalFormRuang" placeholder="Contoh: R. 7-A / Lab Komputer CBT / Masjid" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+          <input type="text" id="desktopJadwalFormRuang" placeholder="Contoh: R. 7-A / Lab Komputer CBT / Masjid" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
         </div>
 
         <div class="pt-2 flex items-center justify-end gap-2">
           <button type="button" onclick="closeDesktopJadwalModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 font-bold hover:bg-slate-50 transition">Batal</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold transition shadow-md">Simpan Jam KBM</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white font-bold transition shadow-md">Simpan Jam KBM</button>
         </div>
       </form>
     </div>
