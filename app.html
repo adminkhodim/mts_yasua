@@ -2442,9 +2442,9 @@
 
             <!-- Baris 2: Tombol Aksi [+ Tulis Berita Baru] dan [🔄] -->
             <div id="admin-subview-actions" class="flex items-center space-x-2 pt-0.5">
-              <button type="button" id="admin-jadwal-toggle-btn" onclick="toggleAdminJadwalForm()" class="hidden flex-1 py-2 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
-                <i data-lucide="plus-circle" class="w-3.5 h-3.5" id="admin-jadwal-toggle-icon"></i>
-                <span id="admin-jadwal-toggle-text">Tambah Jam KBM</span>
+              <button type="button" id="admin-jadwal-toggle-btn" onclick="toggleAdminJadwalForm()" class="hidden flex-1 py-2 bg-brand-primary hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                <i data-lucide="plus" class="w-3.5 h-3.5" id="admin-jadwal-toggle-icon"></i>
+                <span id="admin-jadwal-toggle-text">+ Tambah Jam KBM</span>
               </button>
               <button type="button" id="admin-guru-toggle-btn" onclick="toggleAdminGuruForm()" class="hidden flex-1 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
                 <i data-lucide="user-plus" class="w-3.5 h-3.5" id="admin-guru-toggle-icon"></i>
@@ -3560,140 +3560,148 @@
             </div>
           </div>
 
-          <!-- 7B. Subview Jadwal KBM & Roster Pelajaran -->
+          <!-- 7B. Subview Jadwal KBM & Roster Pelajaran (Selaras dengan Desktop Admin) -->
           <div id="admin-subview-jadwal" class="hidden space-y-4">
 
-            <!-- 1. Header Kartu Ringkasan KBM (Sky-Indigo Gradient) -->
-            <div style="background: linear-gradient(135deg, #0369a1 0%, #1e40af 100%);" class="text-white p-4 rounded-2xl shadow-md border border-sky-500/40 space-y-2">
+            <!-- 1. Header Banner Modul KBM (Selaras dengan Desktop Admin) -->
+            <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-3 shadow-2xs">
               <div class="flex items-center justify-between">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-sky-200">MANAJEMEN KBM &amp; ROSTER</span>
-                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">Semester Genap 2026/2027</span>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-brand-primary text-white flex items-center justify-center shadow-xs shrink-0">
+                    <i data-lucide="calendar-days" class="w-5 h-5 text-emerald-100"></i>
+                  </div>
+                  <div>
+                    <span class="text-[9.5px] font-black uppercase tracking-wider text-emerald-900 block leading-tight">MANAJEMEN KBM &amp; ROSTER</span>
+                    <h3 class="text-xs font-black text-slate-900 leading-tight mt-0.5">Jadwal Pelajaran &amp; Seragam</h3>
+                  </div>
+                </div>
+                <span class="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 shrink-0">Semester Genap 2026/2027</span>
               </div>
-              <h3 class="text-base font-black text-white">Jadwal Pelajaran, Seragam &amp; Roster KBM</h3>
-              <p class="text-xs text-sky-100/90 leading-relaxed">
-                Kelola jadwal mata pelajaran 9 rombel kelas (VII, VIII, IX), alokasi guru pengampu, jam efektif belajar, serta ketentuan seragam mingguan madrasah.
+              <p class="text-[11px] text-slate-600 leading-relaxed">
+                Kelola alokasi mata pelajaran 9 rombel kelas (VII, VIII, IX), alokasi guru pengampu, jam efektif belajar, serta ketentuan seragam mingguan madrasah.
               </p>
-              <div class="pt-2 flex flex-wrap gap-2">
-                <button type="button" onclick="switchAppTab('jadwal')" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white text-sky-950 text-xs font-bold shadow-xs hover:bg-sky-50 transition cursor-pointer shrink-0">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 text-sky-700"></i>
-                  <span>Buka Jadwal Publik (App)</span>
+              <div class="pt-1 flex flex-wrap gap-2">
+                <button type="button" onclick="toggleAdminJadwalForm(true)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-primary text-white text-xs font-bold shadow-xs hover:bg-emerald-700 transition cursor-pointer active:scale-95">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                  <span>+ Tambah Jam KBM</span>
                 </button>
-                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-bold border border-white/30 transition cursor-pointer shrink-0">
-                  <i data-lucide="table" class="w-3.5 h-3.5 text-sky-200"></i>
+                <button type="button" onclick="openEditSeragamModalMobile('Senin')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold shadow-2xs transition cursor-pointer active:scale-95">
+                  <i data-lucide="shirt" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  <span>Ubah Seragam</span>
+                </button>
+                <button type="button" onclick="switchAppTab('jadwal')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold shadow-2xs hover:bg-emerald-200 transition cursor-pointer active:scale-95">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5 text-emerald-800"></i>
+                  <span>Buka Jadwal Publik</span>
+                </button>
+                <a href="https://docs.google.com/spreadsheets/d/1B-cM89QpQ3Y_hQ-3K0Q" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold shadow-2xs transition cursor-pointer">
+                  <i data-lucide="sheet" class="w-3.5 h-3.5 text-emerald-600"></i>
                   <span>Sheet jadwal_kbm</span>
                 </a>
               </div>
             </div>
 
-            <!-- 2. 4 Kartu KPI KBM -->
+            <!-- 2. 4 Kartu KPI Metrik KBM (Grid 2x2 High-Contrast Solid Madrasah) -->
             <div class="grid grid-cols-2 gap-2.5">
-              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+              <!-- Card 1: Total Rombel -->
+              <div class="bg-gradient-to-br from-emerald-600 to-teal-700 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">ROMBEL KELAS</span>
+                  <span class="text-[9.5px] font-bold text-emerald-100 uppercase tracking-wider">TOTAL ROMBEL</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="layers" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">9 Kelas</h3>
-                  <p class="text-[10px] text-sky-100 font-medium mt-1">VII-A s.d. IX-C</p>
+                  <h3 class="text-xl font-black text-white">9 Rombel</h3>
+                  <p class="text-[9.5px] text-emerald-100 font-medium mt-0.5">VII-A s.d. IX-C Terpadu</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Alokasi Waktu</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">40 Menit / JP</span>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
+                  <span class="text-white/80">Struktur</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">3 Tingkatan</span>
                 </div>
               </div>
 
-              <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+              <!-- Card 2: Beban Harian -->
+              <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">BEBAN HARIAN</span>
+                  <span class="text-[9.5px] font-bold text-blue-100 uppercase tracking-wider">BEBAN HARIAN</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="clock" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-black text-white">8 JP / Hari</h3>
-                  <p class="text-[10px] text-emerald-100 font-medium mt-1">07.00 - 13.50 WIB</p>
+                  <p class="text-[9.5px] text-blue-100 font-medium mt-0.5">07.00 - 13.50 WIB</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
                   <span class="text-white/80">Hari Efektif</span>
                   <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Senin - Sabtu</span>
                 </div>
               </div>
-            </div>
 
-            <!-- 3. KONTROL KETENTUAN SERAGAM SISWA MINGGUAN -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <div class="flex items-center gap-2">
-                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center">
-                    <i data-lucide="shirt" class="w-4 h-4"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-xs text-slate-800">Ketentuan Seragam Mingguan Siswa</h4>
-                    <p class="text-[9.5px] text-slate-400">Pakaian Wajib Senin s.d. Sabtu</p>
+              <!-- Card 3: Durasi KBM -->
+              <div class="bg-gradient-to-br from-purple-600 to-pink-700 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[9.5px] font-bold text-purple-100 uppercase tracking-wider">DURASI KBM</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="hourglass" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Terjadwal</span>
+                <div>
+                  <h3 class="text-xl font-black text-white">40 Menit</h3>
+                  <p class="text-[9.5px] text-purple-100 font-medium mt-0.5">Standar Kurikulum Kemenag</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
+                  <span class="text-white/80">Alokasi</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Per JP</span>
+                </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-2 text-xs">
-                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <span class="font-extrabold text-[11px] text-slate-800">Senin</span>
-                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-blue-100 text-blue-900">OSIS</span>
+              <!-- Card 4: Seragam Harian -->
+              <div class="bg-gradient-to-br from-amber-500 to-orange-600 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between">
+                  <span class="text-[9.5px] font-bold text-amber-100 uppercase tracking-wider">SERAGAM HARIAN</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="shirt" class="w-3.5 h-3.5"></i>
                   </div>
-                  <p class="text-[9.5px] text-slate-600 leading-snug">Putih - Biru Dongker, dasi, sabuk madrasah, peci hitam / jilbab putih.</p>
                 </div>
+                <div>
+                  <h3 class="text-xl font-black text-white">6 Hari</h3>
+                  <p class="text-[9.5px] text-amber-100 font-medium mt-0.5">Senin s.d. Sabtu Wajib</p>
+                </div>
+                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
+                  <span class="text-white/80">Jadwal</span>
+                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Terjadwal Resmi</span>
+                </div>
+              </div>
+            </div>
 
-                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <span class="font-extrabold text-[11px] text-slate-800">Selasa</span>
-                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900">BATIK</span>
+            <!-- 3. KONTROL KETENTUAN SERAGAM SISWA MINGGUAN (Dinamis + Tombol Ubah) -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/90 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                    <i data-lucide="shirt" class="w-4 h-4 text-emerald-700"></i>
                   </div>
-                  <p class="text-[9.5px] text-slate-600 leading-snug">Batik Hijau Khas MTs YASUA, bawahan hijau tua, peci hitam / jilbab hijau.</p>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-900">Ketentuan Seragam Mingguan Siswa</h4>
+                    <p class="text-[9.5px] text-slate-500">Klik Ubah pada hari untuk memperbarui rincian seragam</p>
+                  </div>
                 </div>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Terjadwal Resmi</span>
+              </div>
 
-                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <span class="font-extrabold text-[11px] text-slate-800">Rabu</span>
-                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">PRAMUKA</span>
-                  </div>
-                  <p class="text-[9.5px] text-slate-600 leading-snug">Pramuka Lengkap Penggalang, hasduk/setangan leher, tali komando.</p>
-                </div>
-
-                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <span class="font-extrabold text-[11px] text-slate-800">Kamis</span>
-                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-teal-100 text-teal-900">IDENTITAS</span>
-                  </div>
-                  <p class="text-[9.5px] text-slate-600 leading-snug">Kemeja Hijau Toska Kejuruan, bawahan hitam rapi, peci/jilbab toska.</p>
-                </div>
-
-                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <span class="font-extrabold text-[11px] text-slate-800">Jumat</span>
-                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-purple-100 text-purple-900">BUSANA MUSLIM</span>
-                  </div>
-                  <p class="text-[9.5px] text-slate-600 leading-snug">Baju Koko Putih Takwa, celana panjang hitam santri / rok panjang putih.</p>
-                </div>
-
-                <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <span class="font-extrabold text-[11px] text-slate-800">Sabtu</span>
-                    <span class="text-[8px] font-black px-1.5 py-0.5 rounded bg-orange-100 text-orange-900">OLAHRAGA/EKSKUL</span>
-                  </div>
-                  <p class="text-[9.5px] text-slate-600 leading-snug">Kaos Olahraga Resmi MTs YASUA / Seragam ekskul wajib madrasah.</p>
-                </div>
+              <!-- Grid 6 Hari Seragam Dinamis Mobile -->
+              <div id="adminMobileSeragamGrid" class="grid grid-cols-2 gap-2 text-xs">
+                <!-- Rendered via renderAdminMobileSeragamCards() -->
               </div>
             </div>
 
             <!-- 4. FORMULIR INPUT / EDIT JAM PELAJARAN KBM (COLLAPSIBLE) -->
-            <section id="admin-jadwal-form-card" class="hidden bg-white p-4 rounded-2xl shadow-sm border border-slate-200/90 space-y-3.5 animate-in fade-in duration-200">
+            <section id="admin-jadwal-form-card" class="hidden bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 space-y-3.5 animate-in fade-in duration-200">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center space-x-2">
-                  <div class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
-                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                    <i data-lucide="calendar-plus" class="w-4 h-4 text-emerald-700"></i>
                   </div>
                   <div>
                     <h3 id="admin-jadwal-form-title" class="font-bold text-xs md:text-sm text-slate-800">Tambah / Edit Jam Pelajaran KBM</h3>
@@ -3711,7 +3719,7 @@
                 <div class="grid grid-cols-2 gap-2">
                   <div>
                     <label class="block font-bold text-slate-700 mb-1">Rombel Kelas <span class="text-rose-500">*</span></label>
-                    <select id="admJadwalFormKelas" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <select id="admJadwalFormKelas" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
                       <option value="7">Kelas VII (7-A/B/C)</option>
                       <option value="8">Kelas VIII (8-A/B/C)</option>
                       <option value="9">Kelas IX (9-A/B/C)</option>
@@ -3719,12 +3727,12 @@
                   </div>
                   <div>
                     <label class="block font-bold text-slate-700 mb-1">Hari Belajar <span class="text-rose-500">*</span></label>
-                    <select id="admJadwalFormHari" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <select id="admJadwalFormHari" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
                       <option value="Senin">Senin</option>
                       <option value="Selasa">Selasa</option>
                       <option value="Rabu">Rabu</option>
                       <option value="Kamis">Kamis</option>
-                      <option value="Jumat">Jumat</option>
+                      <option value="Jumat">Jum'at</option>
                       <option value="Sabtu">Sabtu</option>
                     </select>
                   </div>
@@ -3732,8 +3740,8 @@
 
                 <div class="grid grid-cols-2 gap-2">
                   <div>
-                    <label class="block font-bold text-slate-700 mb-1">Jam Pelajaran Ke- <span class="text-rose-500">*</span></label>
-                    <select id="admJadwalFormJamKe" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <label class="block font-bold text-slate-700 mb-1">Jam Pelajaran Ke-</label>
+                    <select id="admJadwalFormJamKe" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
                       <option value="0">Pembiasaan Pagi (07.00 - 07.30)</option>
                       <option value="1">Jam Ke-1 (07.30 - 08.10)</option>
                       <option value="2">Jam Ke-2 (08.10 - 08.50)</option>
@@ -3748,23 +3756,25 @@
                     </select>
                   </div>
                   <div>
-                    <label class="block font-bold text-slate-700 mb-1">Rentang Waktu</label>
-                    <input type="text" id="admJadwalFormWaktu" placeholder="07.30 - 08.50" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <label class="block font-bold text-slate-700 mb-1">Rentang Waktu <span class="text-rose-500">*</span></label>
+                    <input type="text" id="admJadwalFormWaktu" required placeholder="07.30 - 08.50" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                   </div>
                 </div>
 
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">Mata Pelajaran (Mapel) <span class="text-rose-500">*</span></label>
-                  <input type="text" id="admJadwalFormMapel" required placeholder="Contoh: Fiqih Ibadah & Muamalah" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                  <input type="text" id="admJadwalFormMapel" required placeholder="Contoh: Fiqih Ibadah &amp; Muamalah" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">Guru Pengampu <span class="text-rose-500">*</span></label>
-                  <select id="admJadwalFormGuru" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none font-medium">
+                  <select id="admJadwalFormGuru" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
                     <option value="Muthohar, S.Pd.">Muthohar, S.Pd. (Kepala Madrasah)</option>
+                    <option value="Hj. Thoibah Roudlotul Jannah, S.Ag.">Hj. Thoibah Roudlotul Jannah, S.Ag. (Waka Kurikulum / SKI)</option>
                     <option value="H. Ahmad Rusydi, S.Pd.I">H. Ahmad Rusydi, S.Pd.I (Waka Kurikulum / Fiqih)</option>
                     <option value="Siti Nurul Laili, S.Pd.">Siti Nurul Laili, S.Pd. (Waka Kesiswaan / IPA)</option>
                     <option value="Ahmad Wawahib, S.Pd.">Ahmad Wawahib, S.Pd. (Waka Humas / B. Arab)</option>
+                    <option value="Aidiyah, S.Pd.">Aidiyah, S.Pd. (Waka Kesiswaan / Matematika)</option>
                     <option value="Hj. Inna Mawaddah, S.Ag.">Hj. Inna Mawaddah, S.Ag. (Waka Sarpras / Fiqih)</option>
                     <option value="M. Syaifuddin, S.Kom.">M. Syaifuddin, S.Kom. (Informatika &amp; IT)</option>
                     <option value="Hj. Fatimatuz Zahro, S.Ag.">Hj. Fatimatuz Zahro, S.Ag. (Tahfidz &amp; Qur'an)</option>
@@ -3777,11 +3787,11 @@
 
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">Ruang / Lokasi Belajar</label>
-                  <input type="text" id="admJadwalFormRuang" placeholder="Contoh: R. 7-A / Lab Komputer CBT / Masjid" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                  <input type="text" id="admJadwalFormRuang" placeholder="Contoh: R. 7-A / Lab Komputer CBT / Masjid" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div class="pt-2 flex items-center space-x-2">
-                  <button type="submit" id="btnSubmitAdminJadwal" class="flex-1 py-2.5 px-4 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
+                  <button type="submit" id="btnSubmitAdminJadwal" class="flex-1 py-2.5 px-4 bg-brand-primary hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer">
                     <i data-lucide="save" class="w-3.5 h-3.5"></i>
                     <span>Simpan Jam Pelajaran</span>
                   </button>
@@ -3792,53 +3802,103 @@
               </form>
             </section>
 
-            <!-- 5. FILTER KELAS & HARI ROSTER PELAJARAN -->
+            <!-- 5. FILTER KELAS, SUB-ROMBEL (9 ROMBEL) & HARI ROSTER PELAJARAN -->
             <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                 <div class="flex items-center gap-2">
-                  <i data-lucide="calendar" class="w-4 h-4 text-sky-600"></i>
-                  <h4 class="font-bold text-xs text-slate-800">Timeline Roster KBM</h4>
+                  <i data-lucide="calendar" class="w-4 h-4 text-emerald-700"></i>
+                  <h4 class="font-extrabold text-xs text-slate-900">Timeline Roster KBM</h4>
                 </div>
                 <div class="flex items-center gap-1.5">
-                  <span id="admJadwalStatusBadge" class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200">Kelas VII &bull; Senin</span>
+                  <span id="admJadwalStatusBadge" class="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200">Kelas VII-A &bull; Senin</span>
                 </div>
               </div>
 
-              <!-- Filter Kelas -->
-              <div class="space-y-1">
-                <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-wider">Pilih Rombel Kelas:</span>
+              <!-- Filter Tingkat Kelas (VII, VIII, IX) & Sub-Rombel (A, B, C) -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9.5px] font-black text-slate-500 uppercase tracking-wider">Tingkat Kelas:</span>
+                  <span class="text-[9px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">9 Rombel Terpadu</span>
+                </div>
                 <div class="grid grid-cols-3 gap-1.5">
-                  <button type="button" onclick="setAdminJadwalKelas('7', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-sky-700 text-white shadow-2xs cursor-pointer transition">Kelas VII</button>
-                  <button type="button" onclick="setAdminJadwalKelas('8', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Kelas VIII</button>
-                  <button type="button" onclick="setAdminJadwalKelas('9', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Kelas IX</button>
+                  <button type="button" onclick="setAdminJadwalKelas('7', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-black text-xs bg-brand-primary text-white shadow-2xs cursor-pointer transition">Kelas VII</button>
+                  <button type="button" onclick="setAdminJadwalKelas('8', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Kelas VIII</button>
+                  <button type="button" onclick="setAdminJadwalKelas('9', this)" class="adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Kelas IX</button>
+                </div>
+
+                <!-- Sub-Rombel A, B, C -->
+                <div class="flex items-center bg-emerald-50 p-1 rounded-xl text-xs font-bold border border-emerald-200 mt-1">
+                  <span class="text-[9.5px] text-emerald-900 font-black uppercase px-2">Sub-Rombel:</span>
+                  <button type="button" onclick="setAdminJadwalSubRombel('A', this)" class="adm-jadwal-subrombel-btn flex-1 py-1 rounded-lg text-xs font-black bg-brand-primary text-white shadow-xs transition cursor-pointer">Rombel A</button>
+                  <button type="button" onclick="setAdminJadwalSubRombel('B', this)" class="adm-jadwal-subrombel-btn flex-1 py-1 rounded-lg text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition cursor-pointer">Rombel B</button>
+                  <button type="button" onclick="setAdminJadwalSubRombel('C', this)" class="adm-jadwal-subrombel-btn flex-1 py-1 rounded-lg text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition cursor-pointer">Rombel C</button>
                 </div>
               </div>
 
-              <!-- Filter Hari -->
-              <div class="space-y-1">
-                <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-wider">Pilih Hari KBM:</span>
+              <!-- Filter Hari (Senin s.d. Sabtu) -->
+              <div class="space-y-1 pt-1">
+                <span class="text-[9.5px] font-black text-slate-500 block uppercase tracking-wider">Pilih Hari KBM:</span>
                 <div class="grid grid-cols-6 gap-1 text-center font-bold text-[10.5px]">
-                  <button type="button" onclick="setAdminJadwalHari('Senin', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-sky-700 text-white shadow-2xs cursor-pointer transition">Sen</button>
-                  <button type="button" onclick="setAdminJadwalHari('Selasa', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Sel</button>
-                  <button type="button" onclick="setAdminJadwalHari('Rabu', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Rab</button>
-                  <button type="button" onclick="setAdminJadwalHari('Kamis', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Kam</button>
-                  <button type="button" onclick="setAdminJadwalHari('Jumat', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Jum</button>
-                  <button type="button" onclick="setAdminJadwalHari('Sabtu', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition">Sab</button>
+                  <button type="button" onclick="setAdminJadwalHari('Senin', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-brand-primary text-white font-black shadow-2xs cursor-pointer transition">Sen</button>
+                  <button type="button" onclick="setAdminJadwalHari('Selasa', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Sel</button>
+                  <button type="button" onclick="setAdminJadwalHari('Rabu', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Rab</button>
+                  <button type="button" onclick="setAdminJadwalHari('Kamis', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Kam</button>
+                  <button type="button" onclick="setAdminJadwalHari('Jumat', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Jum</button>
+                  <button type="button" onclick="setAdminJadwalHari('Sabtu', this)" class="adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition">Sab</button>
                 </div>
               </div>
             </div>
 
-            <!-- 6. DAFTAR TIMELINE JAM PELAJARAN KBM -->
-            <div id="adminJadwalTimelineContainer" class="space-y-2">
+            <!-- 6. LIST TIMELINE JADWAL PELAJARAN (Interaktif dengan Proteksi Terkunci) -->
+            <div id="adminJadwalTimelineContainer" class="space-y-2.5">
               <!-- Rendered via renderAdminJadwalTimeline() -->
             </div>
 
-            <!-- 7. TAUTAN SPREADSHEET MASTER JADWAL KBM -->
-            <div class="pt-1 flex gap-2">
-              <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="flex-1 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-2xs">
-                <i data-lucide="sheet" class="w-3.5 h-3.5 text-sky-700"></i>
-                <span>Buka Master Spreadsheet jadwal_kbm</span>
-              </a>
+          </div>
+
+          <!-- MODAL EDIT SERAGAM MOBILE -->
+          <div id="adminSeragamModalMobile" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-emerald-100 p-5 space-y-3.5 animate-in fade-in zoom-in-95 duration-200">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                    <i data-lucide="shirt" class="w-4 h-4 text-emerald-700"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-extrabold text-slate-900 text-xs">Ubah Ketentuan Seragam</h3>
+                    <p class="text-[10px] text-slate-500">Perbarui rincian seragam siswa</p>
+                  </div>
+                </div>
+                <button type="button" onclick="closeEditSeragamModalMobile()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer">
+                  <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+
+              <form id="formAdminSeragamMobile" onsubmit="handleSaveAdminSeragamMobile(event)" class="space-y-3 text-xs">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Hari Seragam</label>
+                  <select id="admSeragamMobileHari" class="w-full px-3 py-2 rounded-xl border border-slate-200 font-bold bg-slate-50">
+                    <option value="Senin">Senin</option>
+                    <option value="Selasa">Selasa</option>
+                    <option value="Rabu">Rabu</option>
+                    <option value="Kamis">Kamis</option>
+                    <option value="Jumat">Jum'at</option>
+                    <option value="Sabtu">Sabtu</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Nama / Kategori Seragam <span class="text-rose-500">*</span></label>
+                  <input type="text" id="admSeragamMobileTitle" required placeholder="Contoh: Seragam OSIS Putih - Biru Dongker" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium">
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Rincian Kelengkapan Seragam <span class="text-rose-500">*</span></label>
+                  <textarea id="admSeragamMobileDesc" rows="3" required placeholder="Kemeja, bawahan, dasi, peci/jilbab, sepatu..." class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium leading-relaxed"></textarea>
+                </div>
+                <div class="pt-2 flex items-center justify-end gap-2">
+                  <button type="button" onclick="closeEditSeragamModalMobile()" class="px-3.5 py-2 rounded-xl border border-slate-200 text-slate-700 font-bold hover:bg-slate-50 transition">Batal</button>
+                  <button type="submit" class="px-4 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white font-bold transition shadow-md">Simpan Seragam</button>
+                </div>
+              </form>
             </div>
           </div>
 
@@ -7321,7 +7381,145 @@
     // CONTROLLER JADWAL KBM & ROSTER PELAJARAN (ADMIN SPA ENGINE)
     // =====================================================================
     let currentAdminJadwalKelas = '7';
+    let currentAdminJadwalSubRombel = 'A';
     let currentAdminJadwalHari = 'Senin';
+
+    const MOBILE_DEFAULT_SERAGAM = {
+      'Senin': {
+        title: 'Seragam OSIS Putih - Biru Dongker',
+        desc: 'Kemeja Putih, Bawahan Biru Dongker, Dasi, Sabuk Madrasah, Peci Hitam / Jilbab Putih, Sepatu Hitam Bertali.'
+      },
+      'Selasa': {
+        title: 'Khas Batik Hijau MTs YASUA',
+        desc: 'Batik Hijau Khas MTs YASUA, Bawahan Hijau Tua, Peci Hitam / Jilbab Hijau, Sepatu Bebas Rapi.'
+      },
+      'Rabu': {
+        title: 'Pramuka Lengkap Penggalang',
+        desc: 'Pramuka Lengkap Penggalang, Hasduk/Setangan Leher, Tali Komando, Baret/Topi Pramuka, Sepatu Hitam.'
+      },
+      'Kamis': {
+        title: 'Kemeja Identitas Hijau Toska',
+        desc: 'Kemeja Hijau Toska Kejuruan, Bawahan Hitam Rapi, Peci Hitam / Jilbab Toska, Sepatu Bebas Rapi.'
+      },
+      'Jumat': {
+        title: 'Busana Muslim Putih Bersih',
+        desc: 'Baju Koko Putih Takwa, Celana Panjang Hitam Santri / Rok Panjang Putih, Peci Hitam / Jilbab Putih.'
+      },
+      'Sabtu': {
+        title: 'Kaos Olahraga Resmi Madrasah',
+        desc: 'Kaos Olahraga Resmi MTs YASUA / Seragam Ekskul Pilihan, Sepatu Kets Olahraga.'
+      }
+    };
+
+    function getAdminMobileSeragamDataset() {
+      try {
+        const saved = localStorage.getItem('mts_admin_seragam');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') return parsed;
+        }
+      } catch (e) {}
+      return MOBILE_DEFAULT_SERAGAM;
+    }
+
+    function renderAdminMobileSeragamCards() {
+      const container = document.getElementById('adminMobileSeragamGrid');
+      if (!container) return;
+
+      const seragamData = getAdminMobileSeragamDataset();
+      const hariList = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+      const badgeColor = {
+        'Senin': 'bg-blue-100 text-blue-900 border border-blue-200',
+        'Selasa': 'bg-emerald-100 text-emerald-900 border border-emerald-200',
+        'Rabu': 'bg-amber-100 text-amber-900 border border-amber-200',
+        'Kamis': 'bg-teal-100 text-teal-900 border border-teal-200',
+        'Jumat': 'bg-purple-100 text-purple-900 border border-purple-200',
+        'Sabtu': 'bg-orange-100 text-orange-900 border border-orange-200'
+      };
+
+      const borderCol = {
+        'Senin': 'border-blue-200 bg-blue-50/20',
+        'Selasa': 'border-emerald-200 bg-emerald-50/20',
+        'Rabu': 'border-amber-200 bg-amber-50/20',
+        'Kamis': 'border-teal-200 bg-teal-50/20',
+        'Jumat': 'border-purple-200 bg-purple-50/20',
+        'Sabtu': 'border-orange-200 bg-orange-50/20'
+      };
+
+      container.innerHTML = hariList.map(h => {
+        const s = seragamData[h] || { title: 'Seragam Harian', desc: 'Sesuai ketentuan madrasah.' };
+        const labelHari = h === 'Jumat' ? "Jum'at" : h;
+        return `
+          <div class="p-2.5 rounded-xl border ${borderCol[h] || 'border-slate-200 bg-white'} shadow-2xs flex flex-col justify-between space-y-1.5">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-black text-slate-900 text-xs">${labelHari}</span>
+                <span class="text-[8.5px] font-black px-1.5 py-0.5 rounded ${badgeColor[h] || 'bg-slate-200 text-slate-800'}">${s.title.split(' ')[0]}</span>
+              </div>
+              <h5 class="font-bold text-slate-900 text-[11px] mt-1 leading-snug line-clamp-1">${s.title}</h5>
+              <p class="text-[9.5px] text-slate-600 leading-snug mt-0.5 line-clamp-2">${s.desc}</p>
+            </div>
+            <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end">
+              <button type="button" onclick="openEditSeragamModalMobile('${h}')" class="text-[10px] font-black text-emerald-800 hover:text-emerald-950 hover:underline cursor-pointer flex items-center gap-1">
+                <i data-lucide="edit-3" class="w-2.5 h-2.5"></i>
+                <span>Ubah</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderAdminMobileSeragamCards = renderAdminMobileSeragamCards;
+
+    function openEditSeragamModalMobile(hari) {
+      const modal = document.getElementById('adminSeragamModalMobile');
+      const hariSelect = document.getElementById('admSeragamMobileHari');
+      const titleInput = document.getElementById('admSeragamMobileTitle');
+      const descInput = document.getElementById('admSeragamMobileDesc');
+
+      const seragamData = getAdminMobileSeragamDataset();
+      const curHari = hari || 'Senin';
+      if (hariSelect) hariSelect.value = curHari;
+
+      const item = seragamData[curHari] || { title: '', desc: '' };
+      if (titleInput) titleInput.value = item.title;
+      if (descInput) descInput.value = item.desc;
+
+      if (modal) modal.classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.openEditSeragamModalMobile = openEditSeragamModalMobile;
+
+    function closeEditSeragamModalMobile() {
+      const modal = document.getElementById('adminSeragamModalMobile');
+      if (modal) modal.classList.add('hidden');
+    }
+    window.closeEditSeragamModalMobile = closeEditSeragamModalMobile;
+
+    function handleSaveAdminSeragamMobile(e) {
+      e.preventDefault();
+      const hari = document.getElementById('admSeragamMobileHari').value;
+      const title = document.getElementById('admSeragamMobileTitle').value.trim();
+      const desc = document.getElementById('admSeragamMobileDesc').value.trim();
+
+      const seragamData = getAdminMobileSeragamDataset();
+      seragamData[hari] = { title, desc };
+
+      try {
+        localStorage.setItem('mts_admin_seragam', JSON.stringify(seragamData));
+      } catch (e) {}
+
+      closeEditSeragamModalMobile();
+      renderAdminMobileSeragamCards();
+      if (typeof renderJadwalRoster === 'function') {
+        renderJadwalRoster();
+      }
+      alert('Ketentuan seragam hari ' + hari + ' berhasil disimpan!');
+    }
+    window.handleSaveAdminSeragamMobile = handleSaveAdminSeragamMobile;
 
     function loadAdminJadwalData() {
       try {
@@ -7333,6 +7531,7 @@
           }
         }
       } catch (e) {}
+      renderAdminMobileSeragamCards();
       renderAdminJadwalTimeline();
     }
     window.loadAdminJadwalData = loadAdminJadwalData;
@@ -7342,22 +7541,32 @@
       const badgeStatus = document.getElementById('admJadwalStatusBadge');
       if (!container) return;
 
+      const kelasRoman = currentAdminJadwalKelas === '7' ? 'VII' : (currentAdminJadwalKelas === '8' ? 'VIII' : 'IX');
+      const subRombel = currentAdminJadwalSubRombel || 'A';
+      const labelHari = currentAdminJadwalHari === 'Jumat' ? "Jum'at" : currentAdminJadwalHari;
+
       if (badgeStatus) {
-        badgeStatus.textContent = 'Kelas ' + (currentAdminJadwalKelas === '7' ? 'VII' : (currentAdminJadwalKelas === '8' ? 'VIII' : 'IX')) + ' • ' + currentAdminJadwalHari;
+        badgeStatus.textContent = 'Kelas ' + kelasRoman + '-' + subRombel + ' • ' + labelHari;
       }
 
       // Ambil roster dari DATA_ROSTER_KBM runtime
+      const storageKey = currentAdminJadwalKelas + '-' + subRombel;
       let rosterList = [];
-      if (typeof DATA_ROSTER_KBM !== 'undefined' && DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]) {
-        rosterList = DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari];
+      if (typeof DATA_ROSTER_KBM !== 'undefined') {
+        rosterList = (DATA_ROSTER_KBM[storageKey] && DATA_ROSTER_KBM[storageKey][currentAdminJadwalHari]) || 
+                     (DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]) || [];
       }
 
       if (rosterList.length === 0) {
         container.innerHTML = `
           <div class="py-8 text-center text-xs text-slate-400 space-y-2 bg-slate-50/60 rounded-2xl border border-slate-100 p-4">
             <i data-lucide="calendar" class="w-8 h-8 text-slate-300 mx-auto"></i>
-            <p class="font-medium text-slate-500">Belum ada jadwal KBM pada hari ini.</p>
-            <button type="button" onclick="toggleAdminJadwalForm(true)" class="mt-1 px-3 py-1.5 bg-sky-700 text-white rounded-xl font-bold text-xs">Tambah Jam Pelajaran</button>
+            <p class="font-bold text-slate-600">Belum ada jadwal KBM pada hari ini.</p>
+            <p class="text-[10px] text-slate-400">Tambahkan jam pelajaran untuk Kelas ${kelasRoman}-${subRombel}</p>
+            <button type="button" onclick="toggleAdminJadwalForm(true)" class="mt-1 px-3.5 py-1.5 bg-brand-primary hover:bg-emerald-700 text-white rounded-xl font-bold text-xs inline-flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Tambah Jam Pelajaran</span>
+            </button>
           </div>
         `;
         if (window.lucide) window.lucide.createIcons();
@@ -7367,33 +7576,38 @@
       container.innerHTML = rosterList.map((item, idx) => {
         const isUpacara = (item.mapel && item.mapel.toLowerCase().includes('upacara')) || item.type === 'upacara';
         const isIstirahat = (item.mapel && item.mapel.toLowerCase().includes('istirahat')) || item.type === 'istirahat';
-        const isSholat = (item.mapel && (item.mapel.toLowerCase().includes('sholat') || item.mapel.toLowerCase().includes('ibadah') || item.mapel.toLowerCase().includes('dzuhur') || item.mapel.toLowerCase().includes('dhuha'))) || item.type === 'ibadah';
+        const isSholat = (item.mapel && (item.mapel.toLowerCase().includes('sholat') || item.mapel.toLowerCase().includes('ibadah') || item.mapel.toLowerCase().includes('dzuhur') || item.mapel.toLowerCase().includes('dhuha'))) || item.type === 'ibadah' || item.type === 'sholat';
         const isLocked = isUpacara || isIstirahat || isSholat || item.locked === true;
 
         let typeBadge = '';
-        let bgClass = 'bg-slate-50/80 hover:bg-white border-slate-200/80 hover:border-sky-300';
+        let bgClass = 'bg-white hover:bg-emerald-50/20 border-slate-200/90 hover:border-emerald-300';
+        let iconName = 'book-open';
 
         if (isUpacara) {
-          typeBadge = '<span class="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-900 border border-indigo-200 flex items-center gap-1"><i data-lucide="lock" class="w-2.5 h-2.5"></i> UPACARA TERKUNCI</span>';
+          typeBadge = '<span class="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-900 border border-indigo-200 flex items-center gap-1"><i data-lucide="lock" class="w-2.5 h-2.5"></i> UPACARA TERKUNCI</span>';
           bgClass = 'bg-indigo-50/30 border-l-4 border-l-indigo-600 border-indigo-200';
+          iconName = 'flag';
         } else if (isIstirahat) {
-          typeBadge = '<span class="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-200 flex items-center gap-1"><i data-lucide="lock" class="w-2.5 h-2.5"></i> ISTIRAHAT TERKUNCI</span>';
+          typeBadge = '<span class="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200 flex items-center gap-1"><i data-lucide="lock" class="w-2.5 h-2.5"></i> ISTIRAHAT TERKUNCI</span>';
           bgClass = 'bg-amber-50/30 border-l-4 border-l-amber-500 border-amber-200';
+          iconName = 'coffee';
         } else if (isSholat) {
-          typeBadge = '<span class="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-200 flex items-center gap-1"><i data-lucide="lock" class="w-2.5 h-2.5"></i> SHOLAT TERKUNCI</span>';
+          typeBadge = '<span class="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200 flex items-center gap-1"><i data-lucide="lock" class="w-2.5 h-2.5"></i> SHOLAT TERKUNCI</span>';
           bgClass = 'bg-emerald-50/30 border-l-4 border-l-emerald-600 border-emerald-200';
+          iconName = 'heart-handshake';
         } else {
-          typeBadge = '<span class="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-sky-100 text-sky-900 border border-sky-200">JAM KE-' + (idx + 1) + '</span>';
+          typeBadge = '<span class="text-[8px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200">JAM KE-' + (idx + 1) + '</span>';
+          iconName = 'graduation-cap';
         }
 
         let actionBtns = '';
         if (isLocked) {
           actionBtns = `
             <div class="flex items-center gap-1">
-              <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-[10px] cursor-pointer" title="Sesuaikan Waktu Jam Rutin">
+              <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-[10px] cursor-pointer shadow-2xs active:scale-95" title="Sesuaikan Waktu">
                 Waktu
               </button>
-              <button type="button" disabled class="p-1 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60" title="Slot rutinitas terkunci otomatis">
+              <button type="button" disabled class="p-1.5 rounded-lg bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60" title="Slot rutinitas terkunci otomatis">
                 <i data-lucide="lock" class="w-3 h-3"></i>
               </button>
             </div>
@@ -7401,10 +7615,10 @@
         } else {
           actionBtns = `
             <div class="flex items-center gap-1">
-              <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 font-bold text-[10px] cursor-pointer">
+              <button type="button" onclick="editAdminJadwalSlot(${idx})" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-[10px] cursor-pointer shadow-2xs active:scale-95">
                 Edit
               </button>
-              <button type="button" onclick="deleteAdminJadwalSlot(${idx})" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-[10px] cursor-pointer" title="Hapus slot jam ini">
+              <button type="button" onclick="deleteAdminJadwalSlot(${idx})" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-[10px] cursor-pointer shadow-2xs active:scale-95" title="Hapus slot jam ini">
                 <i data-lucide="trash-2" class="w-3 h-3"></i>
               </button>
             </div>
@@ -7412,22 +7626,27 @@
         }
 
         return `
-          <div class="p-3 rounded-2xl border ${bgClass} shadow-2xs space-y-1.5 transition">
+          <div class="p-3.5 rounded-2xl border ${bgClass} shadow-2xs space-y-2 transition">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-1.5">
                 ${typeBadge}
-                <span class="text-[10px] font-bold text-slate-600 flex items-center gap-1">
-                  <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
+                <span class="text-[10px] font-black text-slate-700 flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-100">
+                  <i data-lucide="clock" class="w-3 h-3 text-slate-500"></i>
                   <span>${item.jam}</span>
                 </span>
               </div>
               ${actionBtns}
             </div>
-            <div>
-              <h5 class="text-xs md:text-sm font-bold text-slate-900 leading-snug">${item.mapel}</h5>
-              <p class="text-[10px] text-slate-600 font-medium truncate mt-0.5">${item.guru || 'Tim Pengajar MTs YASUA'}</p>
+            <div class="flex items-start gap-2.5">
+              <span class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-emerald-700 shrink-0">
+                <i data-lucide="${iconName}" class="w-4 h-4"></i>
+              </span>
+              <div class="min-w-0 flex-1">
+                <h5 class="text-xs font-black text-slate-900 leading-snug">${item.mapel}</h5>
+                <p class="text-[10.5px] text-slate-600 font-medium truncate mt-0.5">${item.guru || 'Tim Pengajar MTs YASUA'}</p>
+                ${item.ruang ? `<span class="inline-block text-[9.5px] text-slate-500 font-semibold mt-0.5 bg-slate-100 px-1.5 py-0.5 rounded">${item.ruang}</span>` : ''}
+              </div>
             </div>
-            ${item.ruang ? `<span class="inline-block text-[9px] text-slate-500 font-semibold">${item.ruang}</span>` : ''}
           </div>
         `;
       }).join('');
@@ -7439,20 +7658,31 @@
       currentAdminJadwalKelas = kelas;
       const allBtns = document.querySelectorAll('.adm-jadwal-kelas-btn');
       allBtns.forEach(b => {
-        b.className = 'adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition';
+        b.className = 'adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition';
       });
-      if (btn) btn.className = 'adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-bold text-xs bg-sky-700 text-white shadow-2xs cursor-pointer transition';
+      if (btn) btn.className = 'adm-jadwal-kelas-btn py-1.5 px-2 rounded-xl font-black text-xs bg-brand-primary text-white shadow-2xs cursor-pointer transition';
       renderAdminJadwalTimeline();
     }
     window.setAdminJadwalKelas = setAdminJadwalKelas;
+
+    function setAdminJadwalSubRombel(sub, btn) {
+      currentAdminJadwalSubRombel = sub;
+      const allSubBtns = document.querySelectorAll('.adm-jadwal-subrombel-btn');
+      allSubBtns.forEach(b => {
+        b.className = 'adm-jadwal-subrombel-btn flex-1 py-1 rounded-lg text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition cursor-pointer';
+      });
+      if (btn) btn.className = 'adm-jadwal-subrombel-btn flex-1 py-1 rounded-lg text-xs font-black bg-brand-primary text-white shadow-xs transition cursor-pointer';
+      renderAdminJadwalTimeline();
+    }
+    window.setAdminJadwalSubRombel = setAdminJadwalSubRombel;
 
     function setAdminJadwalHari(hari, btn) {
       currentAdminJadwalHari = hari;
       const allBtns = document.querySelectorAll('.adm-jadwal-hari-btn');
       allBtns.forEach(b => {
-        b.className = 'adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer transition';
+        b.className = 'adm-jadwal-hari-btn py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition font-bold';
       });
-      if (btn) btn.className = 'adm-jadwal-hari-btn py-1.5 rounded-lg bg-sky-700 text-white shadow-2xs cursor-pointer transition';
+      if (btn) btn.className = 'adm-jadwal-hari-btn py-1.5 rounded-lg bg-brand-primary text-white font-black shadow-2xs cursor-pointer transition';
       renderAdminJadwalTimeline();
     }
     window.setAdminJadwalHari = setAdminJadwalHari;
@@ -7474,9 +7704,9 @@
           if (toggleText) toggleText.textContent = 'Tutup Form KBM';
           if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'chevron-up');
         } else {
-          toggleBtn.className = 'flex-1 py-2 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer';
-          if (toggleText) toggleText.textContent = 'Tambah Jam KBM';
-          if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'plus-circle');
+          toggleBtn.className = 'flex-1 py-2 bg-brand-primary hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer';
+          if (toggleText) toggleText.textContent = '+ Tambah Jam KBM';
+          if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'plus');
         }
       }
 
@@ -7489,7 +7719,10 @@
 
     function editAdminJadwalSlot(idx) {
       if (typeof DATA_ROSTER_KBM === 'undefined') return;
-      const slot = DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari][idx];
+      const storageKey = currentAdminJadwalKelas + '-' + (currentAdminJadwalSubRombel || 'A');
+      const list = (DATA_ROSTER_KBM[storageKey] && DATA_ROSTER_KBM[storageKey][currentAdminJadwalHari]) || 
+                   (DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]);
+      const slot = list && list[idx];
       if (!slot) return;
 
       document.getElementById('admJadwalSlotIndex').value = idx;
@@ -7505,12 +7738,14 @@
     }
     window.editAdminJadwalSlot = editAdminJadwalSlot;
 
-    
     function deleteAdminJadwalSlot(idx) {
       if (typeof DATA_ROSTER_KBM === 'undefined') return;
-      if (!DATA_ROSTER_KBM[currentAdminJadwalKelas] || !DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]) return;
+      const storageKey = currentAdminJadwalKelas + '-' + (currentAdminJadwalSubRombel || 'A');
+      const list = (DATA_ROSTER_KBM[storageKey] && DATA_ROSTER_KBM[storageKey][currentAdminJadwalHari]) || 
+                   (DATA_ROSTER_KBM[currentAdminJadwalKelas] && DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari]);
+      if (!list) return;
 
-      const targetSlot = DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari][idx];
+      const targetSlot = list[idx];
       if (targetSlot) {
         const isUpacara = (targetSlot.mapel && targetSlot.mapel.toLowerCase().includes('upacara')) || targetSlot.type === 'upacara';
         const isIstirahat = (targetSlot.mapel && targetSlot.mapel.toLowerCase().includes('istirahat')) || targetSlot.type === 'istirahat';
@@ -7524,19 +7759,20 @@
       const slotTitle = targetSlot ? targetSlot.mapel : 'jam pelajaran ini';
       if (!window.confirm('Hapus ' + slotTitle + ' dari roster ' + currentAdminJadwalHari + '?')) return;
 
-      DATA_ROSTER_KBM[currentAdminJadwalKelas][currentAdminJadwalHari].splice(idx, 1);
+      list.splice(idx, 1);
       try {
         localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(DATA_ROSTER_KBM));
       } catch (e) {}
 
       renderAdminJadwalTimeline();
-      if (typeof renderJadwalView === 'function') {
-        renderJadwalView();
+      if (typeof renderJadwalRoster === 'function') {
+        renderJadwalRoster();
       }
       alert('Jam pelajaran berhasil dihapus!');
     }
     window.deleteAdminJadwalSlot = deleteAdminJadwalSlot;
-  function saveAdminJadwalItem(e) {
+
+    function saveAdminJadwalItem(e) {
       e.preventDefault();
       const idxStr = document.getElementById('admJadwalSlotIndex').value;
       const kelas = document.getElementById('admJadwalFormKelas').value;
@@ -7547,42 +7783,34 @@
       const ruang = document.getElementById('admJadwalFormRuang').value.trim() || 'R. Kelas';
 
       if (typeof DATA_ROSTER_KBM !== 'undefined') {
-        if (!DATA_ROSTER_KBM[kelas]) DATA_ROSTER_KBM[kelas] = {};
-        if (!DATA_ROSTER_KBM[kelas][hari]) DATA_ROSTER_KBM[kelas][hari] = [];
+        const storageKey = kelas + '-' + (currentAdminJadwalSubRombel || 'A');
+        if (!DATA_ROSTER_KBM[storageKey]) DATA_ROSTER_KBM[storageKey] = {};
+        if (!DATA_ROSTER_KBM[storageKey][hari]) DATA_ROSTER_KBM[storageKey][hari] = [];
+
+        const payload = {
+          jam: waktu,
+          mapel: mapel,
+          guru: guru,
+          ruang: ruang,
+          type: 'mapel'
+        };
 
         if (idxStr !== '' && !isNaN(parseInt(idxStr))) {
-          const idx = parseInt(idxStr);
-          DATA_ROSTER_KBM[kelas][hari][idx] = {
-            jam: waktu,
-            mapel: mapel,
-            guru: guru,
-            ruang: ruang,
-            type: 'mapel'
-          };
+          DATA_ROSTER_KBM[storageKey][hari][parseInt(idxStr)] = payload;
         } else {
-          DATA_ROSTER_KBM[kelas][hari].push({
-            jam: waktu,
-            mapel: mapel,
-            guru: guru,
-            ruang: ruang,
-            type: 'mapel'
-          });
+          DATA_ROSTER_KBM[storageKey][hari].push(payload);
         }
-      }
 
-      toggleAdminJadwalForm(false);
-      renderAdminJadwalTimeline();
+        try {
+          localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(DATA_ROSTER_KBM));
+        } catch (e) {}
 
-      try {
-        localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(DATA_ROSTER_KBM));
-      } catch (err) {}
-      if (typeof window.showToast === 'function') {
-        window.showToast('Jadwal KBM berhasil diperbarui!');
-      }
-
-      // Update jadwal publik jika sedang dibuka
-      if (typeof renderRosterKBM === 'function') {
-        renderRosterKBM();
+        renderAdminJadwalTimeline();
+        if (typeof renderJadwalView === 'function') {
+          renderJadwalRoster();
+        }
+        toggleAdminJadwalForm(false);
+        alert('Jadwal pelajaran berhasil disimpan!');
       }
     }
     window.saveAdminJadwalItem = saveAdminJadwalItem;
@@ -7649,6 +7877,7 @@ function openAdminModule(moduleName) {
         if (targetViewName === 'jadwal') {
           jadwalToggleBtn.classList.remove('hidden');
           jadwalToggleBtn.style.display = 'flex';
+          loadAdminJadwalData();
         } else {
           jadwalToggleBtn.classList.add('hidden');
           jadwalToggleBtn.style.display = 'none';
