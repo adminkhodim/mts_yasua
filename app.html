@@ -48,7 +48,7 @@
   </div>
 
   <!-- Header Bar App Mobile (Sticky Native Style) -->
-  <header id="app-main-header" class="sticky top-0 z-30 w-full bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white shadow-md border-b border-[#40e0d0]/40 pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-3 px-3.5 sm:px-4">
+  <header id="app-main-header" style="background: linear-gradient(135deg, #005F73 0%, #088395 50%, #40E0D0 100%);" class="sticky top-0 z-30 w-full text-white shadow-md border-b border-[#40e0d0]/40 pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-3 px-3.5 sm:px-4">
     <div class="max-w-xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2.5">
         <img src="logo.png" alt="Logo MTs YASUA" class="w-10 h-10 object-contain drop-shadow p-0.5 bg-white/10 rounded-xl shrink-0">
@@ -60,11 +60,11 @@
       </div>
       <div class="flex items-center gap-1.5">
         <!-- Cari Informasi -->
-        <button onclick="openSearchModal()" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-white transition-all cursor-pointer" title="Cari Informasi" aria-label="Cari">
+        <button onclick="openSearchModal()" type="button" class="w-8 h-8 rounded-full bg-[#004e57]/40 hover:bg-[#004e57]/60 active:scale-95 flex items-center justify-center text-white border border-white/20 transition-all cursor-pointer" title="Cari Informasi" aria-label="Cari">
           <i data-lucide="search" class="w-4 h-4"></i>
         </button>
         <!-- Notifikasi & Pengaturan (Native Tab 5) -->
-        <button onclick="switchAppTab('pengaturan')" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-amber-300 relative transition-all cursor-pointer" title="Pengaturan Aplikasi" aria-label="Pengaturan">
+        <button onclick="switchAppTab('pengaturan')" type="button" class="w-8 h-8 rounded-full bg-[#004e57]/40 hover:bg-[#004e57]/60 active:scale-95 flex items-center justify-center text-amber-300 border border-white/20 relative transition-all cursor-pointer" title="Pengaturan Aplikasi" aria-label="Pengaturan">
           <i data-lucide="bell" class="w-4 h-4"></i>
           <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
           <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400"></span>
@@ -84,7 +84,7 @@
     <div id="tab-beranda" class="space-y-2.5">
 
     <!-- Widget Lokasi & Jadwal Sholat Demak Real-Time (Persis Asnawiyyah) -->
-    <section class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white px-3.5 py-2.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 relative overflow-hidden space-y-2">
+    <section style="background: linear-gradient(135deg, #004E57 0%, #006D77 55%, #40E0D0 100%);" class="text-white px-3.5 py-2.5 rounded-2xl shadow-sm border border-[#40e0d0]/50 relative overflow-hidden space-y-2">
       <!-- Watermark Background -->
       <div class="absolute -right-4 -bottom-4 text-white/5 pointer-events-none">
         <i data-lucide="moon" class="w-24 h-24"></i>
@@ -197,7 +197,7 @@
     </div>
 
     <!-- Card Pintasan Portal Alumni IKAMAS -->
-    <div onclick="switchAppTab('alumni')" class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl border border-[#40e0d0]/40 shadow-xs flex items-center justify-between cursor-pointer active:scale-98 transition-transform">
+    <div onclick="switchAppTab('alumni')" style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl border border-[#40e0d0]/40 shadow-xs flex items-center justify-between cursor-pointer active:scale-98 transition-transform">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-teal-500/30">
           <i data-lucide="users" class="w-5 h-5"></i>
@@ -366,7 +366,7 @@
     <!-- ==================== TAB 2: BERITA & WARTA MADRASAH ==================== -->
     <div id="tab-berita" class="hidden space-y-3.5">
       <!-- Header Banner Tab Berita -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-amber-300">
             <i data-lucide="newspaper" class="w-5 h-5"></i>
@@ -529,7 +529,7 @@
     <!-- ==================== TAB 3: KALENDER ISLAM & PASARAN JAWA ==================== -->
     <div id="tab-kalender" class="hidden space-y-3.5">
       <!-- Header Banner Tab Kalender -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shadow-xs">
             <i data-lucide="calendar" class="w-5 h-5"></i>
@@ -640,7 +640,7 @@
     <!-- ==================== TAB JADWAL: ROSTER KBM & SERAGAM HARIAN ==================== -->
     <div id="tab-jadwal" class="hidden space-y-3.5">
       <!-- Header Banner Tab Jadwal -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -871,7 +871,7 @@
     <!-- ==================== TAB 4: DEWAN GURU & TENDIK ==================== -->
     <div id="tab-guru" class="hidden space-y-3.5">
       <!-- Header Banner Tab Guru -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -953,7 +953,7 @@
     <!-- ==================== TAB 5: PROGRAM PILIHAN & UNGGULAN ==================== -->
     <div id="tab-program" class="hidden space-y-3.5">
       <!-- Header Banner Tab Program -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -1091,7 +1091,7 @@
     <!-- ==================== TAB 7: PPDB ONLINE ==================== -->
     <div id="tab-ppdb" class="hidden space-y-3.5">
       <!-- Header Banner Tab PPDB -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -1546,7 +1546,7 @@
     <!-- ==================== TAB 7: EKSTRAKURIKULER & KONTAK PEMBINA ==================== -->
     <div id="tab-ekskul" class="hidden space-y-3.5">
       <!-- Header Banner Tab Ekskul -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -1660,7 +1660,7 @@
     <!-- ==================== TAB 9: PROFIL MADRASAH ==================== -->
     <div id="tab-profil" class="hidden space-y-3.5">
       <!-- Header Banner Tab Profil -->
-      <div class="bg-gradient-to-r from-[#005f73] via-[#088395] to-[#0a9396] text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
+      <div style="background: linear-gradient(135deg, #005F73 0%, #088395 60%, #40E0D0 100%);" class="text-white p-3.5 rounded-2xl shadow-sm border border-[#40e0d0]/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <button onclick="switchAppTab('beranda')" type="button" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Kembali ke Beranda">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
