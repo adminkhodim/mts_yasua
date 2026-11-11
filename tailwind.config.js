@@ -8,12 +8,12 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          dark: '#033324',
-          primary: '#065F46',
-          medium: '#0D7B58',
-          light: '#10B981',
-          pale: '#ECFDF5',
-          surface: '#F4FBF7',
+          dark: '#043B3E',
+          primary: '#085458',
+          medium: '#0D9488',
+          light: '#40E0D0',
+          pale: '#CCFBF1',
+          surface: '#F0FDFA',
           accent: '#F59E0B',
           accentHover: '#D97706',
           gold: '#FBBF24'
@@ -24,7 +24,7 @@ module.exports = {
         arabic: ['Amiri', 'serif']
       },
       boxShadow: {
-        'glow-green': '0 10px 30px -10px rgba(6, 95, 70, 0.35)',
+        'glow-green': '0 10px 30px -10px rgba(8, 84, 88, 0.35)',
         'glow-gold': '0 10px 25px -5px rgba(245, 158, 11, 0.4)'
       }
     }

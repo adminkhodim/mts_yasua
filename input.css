@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: #F4FBF7;
+  background-color: #F0FDFA;
   font-family: 'Plus Jakarta Sans', sans-serif;
   padding-bottom: calc(5rem + env(safe-area-inset-bottom, 16px));
   min-height: 100vh;
