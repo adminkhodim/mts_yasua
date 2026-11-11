@@ -3593,7 +3593,7 @@
                   <i data-lucide="external-link" class="w-3.5 h-3.5 text-emerald-800"></i>
                   <span>Buka Jadwal Publik</span>
                 </button>
-                <a href="https://docs.google.com/spreadsheets/d/1B-cM89QpQ3Y_hQ-3K0Q" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold shadow-2xs transition cursor-pointer">
+                <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit?gid=1988172114#gid=1988172114" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold shadow-2xs transition cursor-pointer">
                   <i data-lucide="sheet" class="w-3.5 h-3.5 text-emerald-600"></i>
                   <span>Sheet jadwal_kbm</span>
                 </a>
@@ -7521,6 +7521,82 @@
     }
     window.handleSaveAdminSeragamMobile = handleSaveAdminSeragamMobile;
 
+    async function fetchMobileJadwalFromBackend(force = false) {
+      if (typeof API_URL === 'undefined') return;
+      try {
+        const res = await fetch(`${API_URL}?action=getJadwalData`);
+        const json = await res.json();
+        if (json.status === 'success' && json.data) {
+          // 1. Roster Jadwal dari Spreadsheet
+          if (Array.isArray(json.data.jadwal) && json.data.jadwal.length > 0) {
+            const rosterMap = {};
+            json.data.jadwal.forEach(row => {
+              const k = String(row.kelas || '7').trim();
+              const h = String(row.hari || 'Senin').trim();
+              if (!rosterMap[k]) rosterMap[k] = {};
+              if (!rosterMap[k][h]) rosterMap[k][h] = [];
+
+              rosterMap[k][h].push({
+                id: row.id,
+                jam: row.waktu || '07.30 - 08.50',
+                jam_ke: row.jam_ke,
+                mapel: row.mata_pelajaran || '',
+                guru: row.nama_guru || 'Tim Pengajar MTs YASUA',
+                ruang: row.ruang || 'Ruang Kelas',
+                type: row.tipe || 'mapel',
+                locked: (row.tipe === 'ibadah' || row.tipe === 'istirahat' || row.tipe === 'upacara' || (row.mata_pelajaran && (row.mata_pelajaran.toLowerCase().includes('upacara') || row.mata_pelajaran.toLowerCase().includes('istirahat') || row.mata_pelajaran.toLowerCase().includes('sholat'))))
+              });
+            });
+
+            // Urutkan tiap slot berdasarkan jam_ke
+            Object.keys(rosterMap).forEach(k => {
+              Object.keys(rosterMap[k]).forEach(h => {
+                rosterMap[k][h].sort((a, b) => (Number(a.jam_ke) || 0) - (Number(b.jam_ke) || 0));
+              });
+            });
+
+            if (typeof DATA_ROSTER_KBM !== 'undefined') {
+              Object.assign(DATA_ROSTER_KBM, rosterMap);
+            }
+            try {
+              localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(rosterMap));
+            } catch (e) {}
+          }
+
+          // 2. Data Seragam dari Spreadsheet
+          if (Array.isArray(json.data.seragam) && json.data.seragam.length > 0) {
+            const seragamMap = {};
+            json.data.seragam.forEach(row => {
+              if (row.hari) {
+                seragamMap[row.hari] = {
+                  title: row.nama_seragam || 'Seragam Harian',
+                  desc: row.deskripsi_lengkap || '',
+                  sepatu: row.sepatu || '',
+                  catatan: row.catatan || ''
+                };
+              }
+            });
+            try {
+              localStorage.setItem('mts_admin_seragam', JSON.stringify(seragamMap));
+            } catch (e) {}
+          }
+
+          renderAdminMobileSeragamCards();
+          renderAdminJadwalTimeline();
+          if (typeof renderJadwalRoster === 'function') {
+            renderJadwalRoster();
+          }
+
+          if (force) {
+            alert('Jadwal KBM & Seragam berhasil disinkronkan dari Database Spreadsheet!');
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal fetch jadwal backend di mobile (menggunakan cache lokal):', err);
+      }
+    }
+    window.fetchMobileJadwalFromBackend = fetchMobileJadwalFromBackend;
+
     function loadAdminJadwalData() {
       try {
         const saved = localStorage.getItem('mts_admin_roster_kbm');
@@ -7533,6 +7609,8 @@
       } catch (e) {}
       renderAdminMobileSeragamCards();
       renderAdminJadwalTimeline();
+      // Tarik update terbaru dari Google Spreadsheet secara asynchronous
+      fetchMobileJadwalFromBackend(false);
     }
     window.loadAdminJadwalData = loadAdminJadwalData;
 
@@ -7563,10 +7641,16 @@
             <i data-lucide="calendar" class="w-8 h-8 text-slate-300 mx-auto"></i>
             <p class="font-bold text-slate-600">Belum ada jadwal KBM pada hari ini.</p>
             <p class="text-[10px] text-slate-400">Tambahkan jam pelajaran untuk Kelas ${kelasRoman}-${subRombel}</p>
-            <button type="button" onclick="toggleAdminJadwalForm(true)" class="mt-1 px-3.5 py-1.5 bg-brand-primary hover:bg-emerald-700 text-white rounded-xl font-bold text-xs inline-flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
-              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-              <span>Tambah Jam Pelajaran</span>
-            </button>
+            <div class="mt-2 flex items-center justify-center gap-2">
+              <button type="button" onclick="toggleAdminJadwalForm(true)" class="px-3 py-1.5 bg-brand-primary hover:bg-emerald-700 text-white rounded-xl font-bold text-xs inline-flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>Tambah Jam Pelajaran</span>
+              </button>
+              <button type="button" onclick="fetchMobileJadwalFromBackend(true)" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs inline-flex items-center gap-1.5 active:scale-95 cursor-pointer">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-brand-primary"></i>
+                <span>Tarik Database</span>
+              </button>
+            </div>
           </div>
         `;
         if (window.lucide) window.lucide.createIcons();
@@ -7738,7 +7822,7 @@
     }
     window.editAdminJadwalSlot = editAdminJadwalSlot;
 
-    function deleteAdminJadwalSlot(idx) {
+    async function deleteAdminJadwalSlot(idx) {
       if (typeof DATA_ROSTER_KBM === 'undefined') return;
       const storageKey = currentAdminJadwalKelas + '-' + (currentAdminJadwalSubRombel || 'A');
       const list = (DATA_ROSTER_KBM[storageKey] && DATA_ROSTER_KBM[storageKey][currentAdminJadwalHari]) || 
@@ -7759,7 +7843,7 @@
       const slotTitle = targetSlot ? targetSlot.mapel : 'jam pelajaran ini';
       if (!window.confirm('Hapus ' + slotTitle + ' dari roster ' + currentAdminJadwalHari + '?')) return;
 
-      list.splice(idx, 1);
+      const deletedSlot = list.splice(idx, 1)[0];
       try {
         localStorage.setItem('mts_admin_roster_kbm', JSON.stringify(DATA_ROSTER_KBM));
       } catch (e) {}
@@ -7768,11 +7852,26 @@
       if (typeof renderJadwalRoster === 'function') {
         renderJadwalRoster();
       }
+
+      // Sinkronisasi hapus ke Google Spreadsheet Backend
+      if (deletedSlot && deletedSlot.id && typeof API_URL !== 'undefined') {
+        try {
+          fetch(API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'deleteJadwalSlot',
+              admin_password: localStorage.getItem('mts_admin_pass') || 'adminyasua2026',
+              id: deletedSlot.id
+            })
+          }).catch(err => console.warn('Sync deleteJadwalSlot ke backend failed:', err));
+        } catch (e) {}
+      }
+
       alert('Jam pelajaran berhasil dihapus!');
     }
     window.deleteAdminJadwalSlot = deleteAdminJadwalSlot;
 
-    function saveAdminJadwalItem(e) {
+    async function saveAdminJadwalItem(e) {
       e.preventDefault();
       const idxStr = document.getElementById('admJadwalSlotIndex').value;
       const kelas = document.getElementById('admJadwalFormKelas').value;
@@ -7787,7 +7886,15 @@
         if (!DATA_ROSTER_KBM[storageKey]) DATA_ROSTER_KBM[storageKey] = {};
         if (!DATA_ROSTER_KBM[storageKey][hari]) DATA_ROSTER_KBM[storageKey][hari] = [];
 
+        let existingSlot = null;
+        if (idxStr !== '' && !isNaN(parseInt(idxStr))) {
+          existingSlot = DATA_ROSTER_KBM[storageKey][hari][parseInt(idxStr)];
+        }
+
+        const slotId = (existingSlot && existingSlot.id) ? existingSlot.id : ('JDW-' + kelas + '-' + hari.substring(0, 3).toUpperCase() + '-' + Date.now().toString().slice(-4));
+
         const payload = {
+          id: slotId,
           jam: waktu,
           mapel: mapel,
           guru: guru,
@@ -7806,11 +7913,35 @@
         } catch (e) {}
 
         renderAdminJadwalTimeline();
-        if (typeof renderJadwalView === 'function') {
+        if (typeof renderJadwalRoster === 'function') {
           renderJadwalRoster();
         }
         toggleAdminJadwalForm(false);
-        alert('Jadwal pelajaran berhasil disimpan!');
+
+        // Sinkronisasi Simpan ke Google Spreadsheet Backend
+        if (typeof API_URL !== 'undefined') {
+          try {
+            fetch(API_URL, {
+              method: 'POST',
+              body: JSON.stringify({
+                action: 'saveJadwalSlot',
+                admin_password: localStorage.getItem('mts_admin_pass') || 'adminyasua2026',
+                data: {
+                  id: slotId,
+                  kelas: kelas,
+                  hari: hari,
+                  waktu: waktu,
+                  mata_pelajaran: mapel,
+                  nama_guru: guru,
+                  ruang: ruang,
+                  tipe: 'mapel'
+                }
+              })
+            }).catch(err => console.warn('Sync saveJadwalSlot ke backend failed:', err));
+          } catch (e) {}
+        }
+
+        alert('Jadwal pelajaran berhasil disimpan & disinkronkan ke Spreadsheet!');
       }
     }
     window.saveAdminJadwalItem = saveAdminJadwalItem;

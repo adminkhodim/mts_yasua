@@ -308,6 +308,17 @@ function doPost(e) {
 
     let result;
     switch (action) {
+      // Jadwal KBM & Seragam Harian
+      case 'saveJadwalSlot':
+        result = saveOrUpdateJadwalSlot(payload.data || payload);
+        return createJsonResponse({ status: 'success', data: result, message: 'Jadwal KBM berhasil disimpan di database' });
+      case 'deleteJadwalSlot':
+        result = deleteJadwalSlotById(payload.id || (payload.data && payload.data.id));
+        return createJsonResponse({ status: 'success', message: 'Slot jadwal berhasil dihapus dari database' });
+      case 'updateSeragamHari':
+        result = updateSeragamHarianData(payload.hari, payload.data || payload);
+        return createJsonResponse({ status: 'success', data: result, message: 'Ketentuan seragam berhasil disimpan di database' });
+
       // Guru
       case 'addTeacher':
         result = addNewTeacher(payload.data);
@@ -1568,6 +1579,149 @@ function fetchFullJadwalData() {
       seragam: seragamItems
     }
   };
+}
+
+function saveOrUpdateJadwalSlot(slotData) {
+  const sJadwal = ensureJadwalKbmSheet();
+  const data = sJadwal.getDataRange().getValues();
+  const headers = data[0];
+  const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+
+  const kelas = String(slotData.kelas || '7');
+  const hari = String(slotData.hari || 'Senin');
+  const jamKe = Number(slotData.jam_ke !== undefined ? slotData.jam_ke : 1);
+  const waktu = String(slotData.waktu || slotData.jam || '');
+  const mapel = String(slotData.mata_pelajaran || slotData.mapel || '');
+  const guru = String(slotData.nama_guru || slotData.guru || 'Tim Pengajar MTs YASUA');
+  const ruang = String(slotData.ruang || 'Ruang Kelas');
+  const tipe = String(slotData.tipe || slotData.type || 'mapel');
+
+  let slotId = slotData.id;
+  let rowIndex = -1;
+
+  if (slotId) {
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][0]) === String(slotId)) {
+        rowIndex = i + 1;
+        break;
+      }
+    }
+  }
+
+  // Jika ID tidak disediakan, coba cari berdasarkan kelas + hari + jam_ke/waktu
+  if (rowIndex === -1) {
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][1]) === kelas && String(data[i][2]) === hari && (String(data[i][4]) === waktu || Number(data[i][3]) === jamKe)) {
+        rowIndex = i + 1;
+        slotId = data[i][0];
+        break;
+      }
+    }
+  }
+
+  if (rowIndex !== -1) {
+    // Update baris yang sudah ada
+    const rowObj = {
+      id: slotId,
+      kelas: kelas,
+      hari: hari,
+      jam_ke: jamKe,
+      waktu: waktu,
+      mata_pelajaran: mapel,
+      nama_guru: guru,
+      ruang: ruang,
+      tipe: tipe,
+      updated_at: nowStr
+    };
+    const rowValues = headers.map(h => rowObj[h] !== undefined ? rowObj[h] : '');
+    sJadwal.getRange(rowIndex, 1, 1, rowValues.length).setValues([rowValues]);
+    return { id: slotId, updated: true };
+  } else {
+    // Tambah baris baru
+    const hariAbbr = hari.substring(0, 3).toUpperCase();
+    slotId = 'JDW-' + kelas + '-' + hariAbbr + '-' + Date.now().toString().slice(-4);
+    const rowObj = {
+      id: slotId,
+      kelas: kelas,
+      hari: hari,
+      jam_ke: jamKe,
+      waktu: waktu,
+      mata_pelajaran: mapel,
+      nama_guru: guru,
+      ruang: ruang,
+      tipe: tipe,
+      updated_at: nowStr
+    };
+    const rowValues = headers.map(h => rowObj[h] !== undefined ? rowObj[h] : '');
+    sJadwal.appendRow(rowValues);
+    return { id: slotId, created: true };
+  }
+}
+
+function deleteJadwalSlotById(id) {
+  if (!id) throw new Error('ID jadwal tidak valid');
+  const sJadwal = ensureJadwalKbmSheet();
+  const data = sJadwal.getDataRange().getValues();
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][0]) === String(id)) {
+      sJadwal.deleteRow(i + 1);
+      return true;
+    }
+  }
+  return false;
+}
+
+function updateSeragamHarianData(hari, seragamData) {
+  if (!hari) throw new Error('Hari seragam tidak valid');
+  const sSeragam = ensureSeragamHarianSheet();
+  const data = sSeragam.getDataRange().getValues();
+  const headers = data[0];
+  const nowStr = Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd HH:mm:ss');
+
+  const title = seragamData.title || seragamData.nama_seragam || '';
+  const desc = seragamData.desc || seragamData.deskripsi_lengkap || '';
+  const kategori = seragamData.kategori || title.split(' ')[0] || 'SERAGAM';
+  const sepatu = seragamData.sepatu || 'Bebas Rapi';
+  const catatan = seragamData.catatan || 'Ketentuan seragam resmi madrasah';
+
+  let found = false;
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][1]).toLowerCase() === String(hari).toLowerCase()) {
+      const rowId = data[i][0];
+      const rowObj = {
+        id: rowId,
+        hari: hari,
+        nama_seragam: title,
+        kategori: kategori,
+        deskripsi_lengkap: desc,
+        sepatu: sepatu,
+        catatan: catatan,
+        updated_at: nowStr
+      };
+      const rowValues = headers.map(h => rowObj[h] !== undefined ? rowObj[h] : data[i][headers.indexOf(h)]);
+      sSeragam.getRange(i + 1, 1, 1, rowValues.length).setValues([rowValues]);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    const newId = 'SRG-' + (data.length);
+    const rowObj = {
+      id: newId,
+      hari: hari,
+      nama_seragam: title,
+      kategori: kategori,
+      deskripsi_lengkap: desc,
+      sepatu: sepatu,
+      catatan: catatan,
+      updated_at: nowStr
+    };
+    const rowValues = headers.map(h => rowObj[h] !== undefined ? rowObj[h] : '');
+    sSeragam.appendRow(rowValues);
+  }
+
+  return { hari: hari, updated: true };
 }
 
 

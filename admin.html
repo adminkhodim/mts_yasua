@@ -1542,7 +1542,11 @@
                 <i data-lucide="shirt" class="w-3.5 h-3.5 text-emerald-600"></i>
                 <span>Ubah Seragam</span>
               </button>
-              <a href="https://docs.google.com/spreadsheets/d/1B-cM89QpQ3Y_hQ-3K0Q" target="_blank"
+              <button type="button" onclick="fetchDesktopJadwalFromBackend(true)" id="btnRefreshJadwalDesktop" class="px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer">
+                <i data-lucide="refresh-cw" id="iconRefreshJadwalDesktop" class="w-3.5 h-3.5 text-brand-primary"></i>
+                <span>Segarkan Data</span>
+              </button>
+              <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit?gid=1988172114#gid=1988172114" target="_blank"
                 class="hidden xl:flex px-3 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all items-center gap-1.5 shadow-2xs">
                 <i data-lucide="sheet" class="w-3.5 h-3.5 text-emerald-600"></i>
                 <span>Sheet jadwal_kbm</span>
@@ -3275,6 +3279,7 @@
 
         if (typeof renderDesktopJadwalModule === 'function') {
           renderDesktopJadwalModule();
+        if (typeof fetchDesktopJadwalFromBackend === 'function') fetchDesktopJadwalFromBackend();
         }
       } else if (view === 'gallery') {
         if (viewGallery) viewGallery.classList.remove('hidden');
@@ -7274,6 +7279,80 @@
       } catch (e) {}
     }
 
+    // ========================================================
+    // BACKEND SINKRONISASI DUA ARAH (GOOGLE SPREADSHEET API)
+    // ========================================================
+    async function fetchDesktopJadwalFromBackend(force = false) {
+      const icon = document.getElementById('iconRefreshJadwalDesktop');
+      if (icon) icon.classList.add('animate-spin');
+
+      try {
+        const res = await fetch(`${API_URL}?action=getJadwalData`);
+        const json = await res.json();
+        if (json.status === 'success' && json.data) {
+          // 1. Proses Data Jadwal dari Spreadsheet
+          if (Array.isArray(json.data.jadwal) && json.data.jadwal.length > 0) {
+            const rosterMap = {};
+            json.data.jadwal.forEach(row => {
+              const k = String(row.kelas || '7').trim();
+              const h = String(row.hari || 'Senin').trim();
+              if (!rosterMap[k]) rosterMap[k] = {};
+              if (!rosterMap[k][h]) rosterMap[k][h] = [];
+
+              rosterMap[k][h].push({
+                id: row.id,
+                jam: row.waktu || '07.30 - 08.50',
+                jam_ke: row.jam_ke,
+                mapel: row.mata_pelajaran || '',
+                guru: row.nama_guru || 'Tim Pengajar MTs YASUA',
+                ruang: row.ruang || 'Ruang Kelas',
+                type: row.tipe || 'mapel',
+                locked: (row.tipe === 'ibadah' || row.tipe === 'istirahat' || row.tipe === 'upacara' || (row.mata_pelajaran && (row.mata_pelajaran.toLowerCase().includes('upacara') || row.mata_pelajaran.toLowerCase().includes('istirahat') || row.mata_pelajaran.toLowerCase().includes('sholat'))))
+              });
+            });
+
+            // Urutkan tiap slot berdasarkan jam / jam_ke
+            Object.keys(rosterMap).forEach(k => {
+              Object.keys(rosterMap[k]).forEach(h => {
+                rosterMap[k][h].sort((a, b) => (Number(a.jam_ke) || 0) - (Number(b.jam_ke) || 0));
+              });
+            });
+
+            saveDesktopRosterDataset(rosterMap);
+          }
+
+          // 2. Proses Data Seragam dari Spreadsheet
+          if (Array.isArray(json.data.seragam) && json.data.seragam.length > 0) {
+            const seragamMap = {};
+            json.data.seragam.forEach(row => {
+              if (row.hari) {
+                seragamMap[row.hari] = {
+                  title: row.nama_seragam || 'Seragam Harian',
+                  desc: row.deskripsi_lengkap || '',
+                  sepatu: row.sepatu || '',
+                  catatan: row.catatan || ''
+                };
+              }
+            });
+            saveDesktopSeragamDataset(seragamMap);
+          }
+
+          renderDesktopJadwalModule();
+          if (force && typeof showToast === 'function') {
+            showToast('Jadwal KBM & Seragam berhasil disinkronkan dari Database Spreadsheet!', 'success');
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal fetch jadwal dari backend (menggunakan cache lokal):', err);
+        if (force && typeof showToast === 'function') {
+          showToast('Menggunakan cache jadwal lokal (Offline Ready).', 'info');
+        }
+      } finally {
+        if (icon) icon.classList.remove('animate-spin');
+      }
+    }
+    window.fetchDesktopJadwalFromBackend = fetchDesktopJadwalFromBackend;
+
     function renderDesktopSeragamCards() {
       const container = document.getElementById('desktopSeragamGrid');
       if (!container) return;
@@ -7336,7 +7415,7 @@
       const labelHari = currentDesktopJadwalHari === 'Jumat' ? "Jum'at" : currentDesktopJadwalHari;
 
       if (subtitle) {
-        subtitle.innerHTML = 'Menampilkan jadwal resmi <strong>Kelas ' + kelasRoman + '-' + subRombel + '</strong> • Hari <strong>' + labelHari + '</strong> <span class="ml-2 text-[10px] bg-emerald-100 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full font-extrabold">Terpadu 9 Rombel</span>';
+        subtitle.innerHTML = 'Menampilkan jadwal resmi <strong>Kelas ' + kelasRoman + '-' + subRombel + '</strong> • Hari <strong>' + labelHari + '</strong> <span class="ml-2 text-[10px] bg-emerald-100 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full font-extrabold">Terhubung Database</span>';
       }
 
       const dataset = getDesktopRosterDataset();
@@ -7350,11 +7429,17 @@
             <td colspan="7" class="py-12 text-center text-xs text-slate-400">
               <i data-lucide="calendar" class="w-9 h-9 text-slate-300 mx-auto mb-2"></i>
               <p class="font-bold text-slate-600 text-sm">Belum ada jam pelajaran terjadwal pada hari ini.</p>
-              <p class="text-[11px] text-slate-400 mt-0.5">Tambahkan jam pelajaran atau kegiatan rutin madrasah.</p>
-              <button onclick="openAddJadwalModalDesktop()" class="mt-3 px-4 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer shadow-md">
-                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                <span>Tambah Jam Pelajaran</span>
-              </button>
+              <p class="text-[11px] text-slate-400 mt-0.5">Tambahkan jam pelajaran atau sinkronkan dari database spreadsheet.</p>
+              <div class="mt-3 flex items-center justify-center gap-2">
+                <button onclick="openAddJadwalModalDesktop()" class="px-4 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer shadow-md">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                  <span>Tambah Jam Pelajaran</span>
+                </button>
+                <button onclick="fetchDesktopJadwalFromBackend(true)" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-brand-primary"></i>
+                  <span>Tarik dari Database</span>
+                </button>
+              </div>
             </td>
           </tr>
         `;
@@ -7533,7 +7618,7 @@
     }
     window.editDesktopJadwalSlot = editDesktopJadwalSlot;
 
-    function deleteDesktopJadwalSlot(idx) {
+    async function deleteDesktopJadwalSlot(idx) {
       const dataset = getDesktopRosterDataset();
       const storageKey = currentDesktopJadwalKelas + '-' + (currentDesktopJadwalSubRombel || 'A');
       const list = (dataset[storageKey] && dataset[storageKey][currentDesktopJadwalHari]) || 
@@ -7554,14 +7639,33 @@
       const slotName = slot ? slot.mapel : 'jam pelajaran ini';
       if (!window.confirm('Hapus ' + slotName + ' dari roster ' + currentDesktopJadwalHari + '?')) return;
 
-      list.splice(idx, 1);
+      const deletedSlot = list.splice(idx, 1)[0];
       saveDesktopRosterDataset(dataset);
       renderDesktopJadwalTable();
-      alert('Jam pelajaran berhasil dihapus!');
+
+      // Sinkronisasi hapus ke Google Spreadsheet Backend
+      if (deletedSlot && deletedSlot.id) {
+        try {
+          fetch(API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'deleteJadwalSlot',
+              admin_password: getAdminPassword(),
+              id: deletedSlot.id
+            })
+          }).catch(err => console.warn('Sync deleteJadwalSlot ke backend failed:', err));
+        } catch (e) {}
+      }
+
+      if (typeof showToast === 'function') {
+        showToast('Jam pelajaran berhasil dihapus!', 'success');
+      } else {
+        alert('Jam pelajaran berhasil dihapus!');
+      }
     }
     window.deleteDesktopJadwalSlot = deleteDesktopJadwalSlot;
 
-    function handleSaveDesktopJadwal(e) {
+    async function handleSaveDesktopJadwal(e) {
       e.preventDefault();
       const idxStr = document.getElementById('desktopJadwalSlotIdx').value;
       const kelas = document.getElementById('desktopJadwalFormKelas').value;
@@ -7576,7 +7680,15 @@
       if (!dataset[storageKey]) dataset[storageKey] = {};
       if (!dataset[storageKey][hari]) dataset[storageKey][hari] = [];
 
+      let existingSlot = null;
+      if (idxStr !== '' && !isNaN(parseInt(idxStr))) {
+        existingSlot = dataset[storageKey][hari][parseInt(idxStr)];
+      }
+
+      const slotId = (existingSlot && existingSlot.id) ? existingSlot.id : ('JDW-' + kelas + '-' + hari.substring(0, 3).toUpperCase() + '-' + Date.now().toString().slice(-4));
+
       const payload = {
+        id: slotId,
         jam: waktu,
         mapel: mapel,
         guru: guru,
@@ -7593,7 +7705,33 @@
       saveDesktopRosterDataset(dataset);
       closeDesktopJadwalModal();
       renderDesktopJadwalTable();
-      alert('Jadwal KBM berhasil disimpan!');
+
+      // Sinkronisasi Simpan ke Google Spreadsheet Backend
+      try {
+        fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'saveJadwalSlot',
+            admin_password: getAdminPassword(),
+            data: {
+              id: slotId,
+              kelas: kelas,
+              hari: hari,
+              waktu: waktu,
+              mata_pelajaran: mapel,
+              nama_guru: guru,
+              ruang: ruang,
+              tipe: 'mapel'
+            }
+          })
+        }).catch(err => console.warn('Sync saveJadwalSlot ke backend failed:', err));
+      } catch (e) {}
+
+      if (typeof showToast === 'function') {
+        showToast('Jadwal KBM berhasil disimpan & disinkronkan ke Spreadsheet!', 'success');
+      } else {
+        alert('Jadwal KBM berhasil disimpan!');
+      }
     }
     window.handleSaveDesktopJadwal = handleSaveDesktopJadwal;
 
@@ -7622,7 +7760,7 @@
     }
     window.closeDesktopSeragamModal = closeDesktopSeragamModal;
 
-    function handleSaveDesktopSeragam(e) {
+    async function handleSaveDesktopSeragam(e) {
       e.preventDefault();
       const hari = document.getElementById('desktopSeragamHari').value;
       const title = document.getElementById('desktopSeragamTitle').value.trim();
@@ -7634,7 +7772,28 @@
 
       closeDesktopSeragamModal();
       renderDesktopSeragamCards();
-      alert('Ketentuan seragam hari ' + hari + ' berhasil diperbarui!');
+
+      // Sinkronisasi Simpan Seragam ke Google Spreadsheet Backend
+      try {
+        fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'updateSeragamHari',
+            admin_password: getAdminPassword(),
+            hari: hari,
+            data: {
+              nama_seragam: title,
+              deskripsi_lengkap: desc
+            }
+          })
+        }).catch(err => console.warn('Sync updateSeragamHari ke backend failed:', err));
+      } catch (e) {}
+
+      if (typeof showToast === 'function') {
+        showToast('Ketentuan seragam hari ' + hari + ' berhasil diperbarui di Spreadsheet!', 'success');
+      } else {
+        alert('Ketentuan seragam hari ' + hari + ' berhasil diperbarui!');
+      }
     }
     window.handleSaveDesktopSeragam = handleSaveDesktopSeragam;
   
