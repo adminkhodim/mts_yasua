@@ -4503,12 +4503,12 @@
         if (btn) {
           const svg = btn.querySelector('svg');
           if (t === dockTabToHighlight) {
-            btn.classList.remove('text-slate-500');
-            btn.classList.add('text-brand-primary', 'font-bold');
+            btn.classList.remove('text-white/70');
+            btn.classList.add('text-amber-300', 'font-black');
             if (svg) svg.classList.add('stroke-[2.5]');
           } else {
-            btn.classList.remove('text-brand-primary', 'font-bold');
-            btn.classList.add('text-slate-500');
+            btn.classList.remove('text-amber-300', 'font-black');
+            btn.classList.add('text-white/70');
             if (svg) svg.classList.remove('stroke-[2.5]');
           }
         }
