@@ -4,8 +4,8 @@
  * Version: 3.6.0
  */
 
-const SHELL_CACHE_NAME = 'mts-yasua-shell-v4.4';
-const DATA_CACHE_NAME = 'mts-yasua-data-v4.4';
+const SHELL_CACHE_NAME = 'mts-yasua-shell-v4.5';
+const DATA_CACHE_NAME = 'mts-yasua-data-v4.5';
 const OFFLINE_URL = 'offline.html';
 
 // Critical core assets to pre-cache on install (App Shell)

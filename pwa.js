@@ -211,13 +211,44 @@
     }
 
     // C. Mobile Bottom Dock (App-Like Quick Navigation - Active in App Dashboard Mode)
+    if (!document.getElementById('mobileBottomDockStyles')) {
+      const dockStyle = document.createElement('style');
+      dockStyle.id = 'mobileBottomDockStyles';
+      dockStyle.textContent = `
+        #mobileBottomDock {
+          background: linear-gradient(180deg, #005F73 0%, #088395 100%) !important;
+        }
+        #mobileBottomDock .dock-btn {
+          color: rgba(255, 255, 255, 0.7) !important;
+          transition: all 0.2s ease;
+        }
+        #mobileBottomDock .dock-btn svg {
+          stroke: rgba(255, 255, 255, 0.7) !important;
+          transition: all 0.2s ease;
+        }
+        #mobileBottomDock .dock-btn.active {
+          color: #FBBF24 !important;
+          font-weight: 800 !important;
+        }
+        #mobileBottomDock .dock-btn.active svg {
+          stroke: #FBBF24 !important;
+          stroke-width: 2.6px !important;
+          filter: drop-shadow(0 2px 6px rgba(251, 191, 36, 0.6));
+        }
+        #mobileBottomDock .dock-btn.active .dock-dot {
+          display: block !important;
+        }
+      `;
+      document.head.appendChild(dockStyle);
+    }
+
     if (!document.getElementById('mobileBottomDock')) {
       const currentPath = window.location.pathname.toLowerCase().replace(/\/+$/, '') || '/';
       const isAppSlug = currentPath === '/app' || currentPath.startsWith('/app/') || currentPath.includes('app.html');
-      const isHome = currentPath === '/' || currentPath.endsWith('/index.html') || currentPath === '/app' || currentPath.includes('app.html');
       const isNews = currentPath.includes('berita') || currentPath.includes('kabar') || currentPath.includes('artikel');
       const isCalendar = currentPath.includes('agenda') || currentPath.includes('kalender') || currentPath.includes('jadwal');
       const isSettings = currentPath.includes('pengaturan') || currentPath.includes('setting');
+      const isHome = !isNews && !isCalendar && !isSettings;
       const homeLink = (isStandalone || isAppSlug) ? '/app' : '/';
 
       const dock = document.createElement('nav');
@@ -228,35 +259,41 @@
       dock.innerHTML = `
         <div class="max-w-md mx-auto grid grid-cols-5 items-center text-center">
           <!-- 1. Beranda -->
-          <button type="button" onclick="window.handleDockClick('beranda', '${homeLink}')" id="dockBtn-beranda" class="flex flex-col items-center justify-center py-1 ${isHome ? 'text-amber-300 font-black' : 'text-white/70 hover:text-white'} transition-colors cursor-pointer">
-            <svg class="w-5 h-5 ${isHome ? 'stroke-[2.5]' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          <button type="button" onclick="window.handleDockClick('beranda', '${homeLink}')" id="dockBtn-beranda" class="dock-btn flex flex-col items-center justify-center py-1 ${isHome ? 'active' : ''} cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             <span class="text-[9.5px] tracking-tight mt-0.5">Beranda</span>
+            <span class="dock-dot hidden w-1.5 h-1.5 rounded-full bg-amber-400 mx-auto mt-0.5 shadow-xs"></span>
           </button>
 
           <!-- 2. Berita -->
-          <button type="button" onclick="window.handleDockClick('berita', '/app/berita')" id="dockBtn-berita" class="flex flex-col items-center justify-center py-1 ${isNews ? 'text-amber-300 font-black' : 'text-white/70 hover:text-white'} transition-colors cursor-pointer">
-            <svg class="w-5 h-5 ${isNews ? 'stroke-[2.5]' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+          <button type="button" onclick="window.handleDockClick('berita', '/app/berita')" id="dockBtn-berita" class="dock-btn flex flex-col items-center justify-center py-1 ${isNews ? 'active' : ''} cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
             <span class="text-[9.5px] tracking-tight mt-0.5">Berita</span>
+            <span class="dock-dot hidden w-1.5 h-1.5 rounded-full bg-amber-400 mx-auto mt-0.5 shadow-xs"></span>
           </button>
 
-          <!-- 3. QR Code (Highlight Center Button) -->
+          <!-- 3. QR Code (Highlight Center Button - Bingkai Putih Isi Emas & Barcode Putih) -->
           <button onclick="window.openQrModal()" type="button" class="flex flex-col items-center justify-center -mt-5 group cursor-pointer focus:outline-none" title="Pindai & Tampilkan QR Code" aria-label="QR Code">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-400 to-amber-500 text-slate-950 flex items-center justify-center shadow-glow-gold group-active:scale-95 transition-transform border-2 border-white/90">
-              <svg class="w-5 h-5 text-slate-950 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+            <div style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg group-active:scale-95 transition-transform border-2 border-white">
+              <svg class="w-6 h-6 stroke-white" fill="none" stroke="#FFFFFF" viewBox="0 0 24 24" style="stroke: #FFFFFF !important;">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+              </svg>
             </div>
-            <span class="text-[10px] font-black text-amber-300 mt-0.5">QR Code</span>
+            <span class="text-[10px] font-extrabold text-amber-300 mt-0.5">QR Code</span>
           </button>
 
           <!-- 4. Kalender -->
-          <button type="button" onclick="window.handleDockClick('kalender', '/app/kalender')" id="dockBtn-kalender" class="flex flex-col items-center justify-center py-1 ${isCalendar ? 'text-amber-300 font-black' : 'text-white/70 hover:text-white'} transition-colors cursor-pointer">
-            <svg class="w-5 h-5 ${isCalendar ? 'stroke-[2.5]' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <button type="button" onclick="window.handleDockClick('kalender', '/app/kalender')" id="dockBtn-kalender" class="dock-btn flex flex-col items-center justify-center py-1 ${isCalendar ? 'active' : ''} cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             <span class="text-[9.5px] tracking-tight mt-0.5">Kalender</span>
+            <span class="dock-dot hidden w-1.5 h-1.5 rounded-full bg-amber-400 mx-auto mt-0.5 shadow-xs"></span>
           </button>
 
           <!-- 5. Pengaturan (Native Tab 5 ala Asnawiyyah) -->
-          <button type="button" onclick="window.handleDockClick('pengaturan', '/app/pengaturan')" id="dockBtn-pengaturan" class="flex flex-col items-center justify-center py-1 ${isSettings ? 'text-amber-300 font-black' : 'text-white/70 hover:text-white'} transition-colors cursor-pointer" title="Pusat Akses & Pengaturan" aria-label="Buka Pengaturan">
-            <svg class="w-5 h-5 ${isSettings ? 'stroke-[2.5]' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <button type="button" onclick="window.handleDockClick('pengaturan', '/app/pengaturan')" id="dockBtn-pengaturan" class="dock-btn flex flex-col items-center justify-center py-1 ${isSettings ? 'active' : ''} cursor-pointer" title="Pusat Akses & Pengaturan" aria-label="Buka Pengaturan">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             <span class="text-[9.5px] tracking-tight mt-0.5">Pengaturan</span>
+            <span class="dock-dot hidden w-1.5 h-1.5 rounded-full bg-amber-400 mx-auto mt-0.5 shadow-xs"></span>
           </button>
         </div>
       `;

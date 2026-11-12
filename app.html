@@ -27,6 +27,31 @@
   <style>
     html { background-color: #005F73; }
     body { background-color: #F0FDFA; min-height: 100vh; }
+
+    /* Bottom Dock Theme & Active Highlight */
+    #mobileBottomDock {
+      background: linear-gradient(180deg, #005F73 0%, #088395 100%) !important;
+    }
+    #mobileBottomDock .dock-btn {
+      color: rgba(255, 255, 255, 0.7) !important;
+      transition: all 0.2s ease;
+    }
+    #mobileBottomDock .dock-btn svg {
+      stroke: rgba(255, 255, 255, 0.7) !important;
+      transition: all 0.2s ease;
+    }
+    #mobileBottomDock .dock-btn.active {
+      color: #FBBF24 !important;
+      font-weight: 800 !important;
+    }
+    #mobileBottomDock .dock-btn.active svg {
+      stroke: #FBBF24 !important;
+      stroke-width: 2.6px !important;
+      filter: drop-shadow(0 2px 6px rgba(251, 191, 36, 0.6));
+    }
+    #mobileBottomDock .dock-btn.active .dock-dot {
+      display: block !important;
+    }
   </style>
 
   <!-- Compiled Production Tailwind CSS -->
@@ -41,7 +66,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Search & PWA Controller -->
   <script src="/search.js" defer></script>
-  <script src="/pwa.js" defer></script>
+  <script src="/pwa.js?v=4.5" defer></script>
 </head>
 
 <body class="is-pwa-standalone text-slate-800">
@@ -4501,15 +4526,10 @@
       ['beranda', 'berita', 'kalender', 'pengaturan'].forEach(t => {
         const btn = document.getElementById('dockBtn-' + t);
         if (btn) {
-          const svg = btn.querySelector('svg');
           if (t === dockTabToHighlight) {
-            btn.classList.remove('text-white/70');
-            btn.classList.add('text-amber-300', 'font-black');
-            if (svg) svg.classList.add('stroke-[2.5]');
+            btn.classList.add('active');
           } else {
-            btn.classList.remove('text-amber-300', 'font-black');
-            btn.classList.add('text-white/70');
-            if (svg) svg.classList.remove('stroke-[2.5]');
+            btn.classList.remove('active');
           }
         }
       });
