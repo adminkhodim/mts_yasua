@@ -80,6 +80,16 @@
     </div>
   </header>
 
+  <!-- Pull to Refresh Visual Indicator -->
+  <div id="pullToRefreshIndicator" class="fixed top-12 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-200 transform -translate-y-20 opacity-0 flex items-center justify-center">
+    <div class="bg-white/95 backdrop-blur-md text-[#088395] rounded-full px-3.5 py-1.5 shadow-lg border border-teal-200 flex items-center justify-center gap-2">
+      <svg id="pullRefreshIcon" class="w-4 h-4 text-[#088395] transition-transform duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+      </svg>
+      <span id="pullRefreshText" class="text-[10.5px] font-extrabold text-[#005F73]">Tarik ke bawah...</span>
+    </div>
+  </div>
+
   <!-- Area Konten Utama Mobile App -->
   <main class="max-w-xl mx-auto px-3 pt-2.5 pb-6 space-y-2.5">
 
@@ -235,48 +245,50 @@
       </div>
     </div>
 
-    <!-- Widget Pilihan Peran Pengguna (Wali Murid, Guru, Kepala) -->
-    <div class="bg-white p-3.5 rounded-2xl border border-teal-100 shadow-xs space-y-2.5">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-4 bg-[#088395] rounded-full"></span>
-          <div>
-            <h3 class="font-black text-slate-900 text-xs sm:text-sm leading-tight">Pintu Masuk &amp; Pilihan Peran</h3>
-            <p class="text-[10px] text-slate-500 font-medium">Akses layanan digital sesuai peran madrasah</p>
-          </div>
+    <!-- Widget Pilihan Peran Pengguna (1 Baris 4 Menu ala Menu Utama) -->
+    <div class="bg-white p-2.5 sm:p-3 rounded-2xl border border-teal-100/90 shadow-xs space-y-2">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-1.5 px-0.5">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-3.5 bg-[#088395] rounded-full"></span>
+          <h3 class="font-black text-slate-900 text-[11px] sm:text-xs">Pintu Masuk &amp; Pilihan Peran</h3>
         </div>
-        <button type="button" onclick="switchAppTab('pengaturan')" class="text-[11px] font-bold text-[#088395] hover:text-[#005F73] flex items-center gap-0.5 cursor-pointer">
+        <button type="button" onclick="window.bukaKelolaAkses()" class="text-[10.5px] font-bold text-[#088395] hover:text-[#005F73] flex items-center gap-0.5 cursor-pointer">
           <span>Kelola</span>
-          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          <i data-lucide="chevron-right" class="w-3 h-3"></i>
         </button>
       </div>
 
-      <div class="grid grid-cols-3 gap-2">
-        <!-- 1. Peran Wali Murid -->
-        <button type="button" onclick="window.goToRoleLogin('WALI')" class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-gradient-to-b from-emerald-50/80 to-emerald-50/20 border border-emerald-200/80 hover:border-emerald-400 hover:shadow-xs active:scale-95 transition-all text-center group cursor-pointer">
-          <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-1.5">
+      <div class="grid grid-cols-4 gap-x-2 py-0.5 text-center">
+        <!-- 1. Wali Murid -->
+        <button type="button" onclick="window.goToRoleLogin('WALI')" class="flex flex-col items-center group active:scale-95 transition-transform cursor-pointer">
+          <div class="w-11 h-11 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-base shadow-2xs border border-emerald-200 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
             <i data-lucide="users" class="w-5 h-5"></i>
           </div>
-          <span class="text-[11px] font-black text-slate-900 leading-tight">Wali Murid</span>
-          <span class="text-[9px] font-bold text-emerald-700 bg-emerald-100/90 px-1.5 py-0.5 rounded-full mt-1">Pantau Anak</span>
+          <span class="text-[10px] mt-1.5 font-bold text-slate-800 leading-tight">Wali Murid</span>
         </button>
 
-        <!-- 2. Peran Guru & Tendik -->
-        <button type="button" onclick="window.goToRoleLogin('GURU')" class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-gradient-to-b from-sky-50/80 to-sky-50/20 border border-sky-200/80 hover:border-sky-400 hover:shadow-xs active:scale-95 transition-all text-center group cursor-pointer">
-          <div class="w-10 h-10 rounded-xl bg-[#088395] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-1.5">
-            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        <!-- 2. Guru -->
+        <button type="button" onclick="window.goToRoleLogin('GURU')" class="flex flex-col items-center group active:scale-95 transition-transform cursor-pointer">
+          <div class="w-11 h-11 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-base shadow-2xs border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <i data-lucide="user-check" class="w-5 h-5"></i>
           </div>
-          <span class="text-[11px] font-black text-slate-900 leading-tight">Guru</span>
-          <span class="text-[9px] font-bold text-teal-800 bg-teal-100/90 px-1.5 py-0.5 rounded-full mt-1">Presensi KBM</span>
+          <span class="text-[10px] mt-1.5 font-bold text-slate-800 leading-tight">Guru</span>
         </button>
 
-        <!-- 3. Peran Kepala Madrasah -->
-        <button type="button" onclick="window.goToRoleLogin('PIMPINAN')" class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-gradient-to-b from-amber-50/80 to-amber-50/20 border border-amber-200/80 hover:border-amber-400 hover:shadow-xs active:scale-95 transition-all text-center group cursor-pointer">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-1.5">
-            <i data-lucide="award" class="w-5 h-5 text-slate-950"></i>
+        <!-- 3. Pegawai -->
+        <button type="button" onclick="window.goToRoleLogin('ADMIN')" class="flex flex-col items-center group active:scale-95 transition-transform cursor-pointer">
+          <div class="w-11 h-11 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-base shadow-2xs border border-indigo-200 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
           </div>
-          <span class="text-[11px] font-black text-slate-900 leading-tight">Kepala</span>
-          <span class="text-[9px] font-bold text-amber-900 bg-amber-200/90 px-1.5 py-0.5 rounded-full mt-1">Supervisi</span>
+          <span class="text-[10px] mt-1.5 font-bold text-slate-800 leading-tight">Pegawai</span>
+        </button>
+
+        <!-- 4. Kepala -->
+        <button type="button" onclick="window.goToRoleLogin('PIMPINAN')" class="flex flex-col items-center group active:scale-95 transition-transform cursor-pointer">
+          <div class="w-11 h-11 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-base shadow-2xs border border-amber-300 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <span class="text-[10px] mt-1.5 font-bold text-slate-800 leading-tight">Kepala</span>
         </button>
       </div>
     </div>
@@ -4958,6 +4970,96 @@
         }
       }, 120);
     };
+
+    window.bukaKelolaAkses = function() {
+      if (typeof switchAppTab === 'function') {
+        switchAppTab('pengaturan');
+      }
+      setTimeout(() => {
+        const drop = document.getElementById('dropdown-pintu-akses');
+        const icon = document.getElementById('icon-pintu-akses');
+        if (drop && drop.classList.contains('hidden')) {
+          drop.classList.remove('hidden');
+          if (icon) icon.setAttribute('data-lucide', 'chevron-up');
+          if (window.lucide) window.lucide.createIcons();
+        }
+        const btn = document.getElementById('btn-pintu-akses');
+        if (btn) {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 150);
+    };
+
+    // Mobile App Pull-to-Refresh Gesture Handler
+    (function initPullToRefresh() {
+      const indicator = document.getElementById('pullToRefreshIndicator');
+      const icon = document.getElementById('pullRefreshIcon');
+      const text = document.getElementById('pullRefreshText');
+      if (!indicator || !icon || !text) return;
+
+      let startY = 0;
+      let pullDistance = 0;
+      let isPulling = false;
+      let isRefreshing = false;
+      const threshold = 65;
+
+      window.addEventListener('touchstart', (e) => {
+        if (isRefreshing) return;
+        if (window.scrollY <= 5 && e.touches.length === 1) {
+          startY = e.touches[0].clientY;
+          isPulling = true;
+        } else {
+          isPulling = false;
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isPulling || isRefreshing) return;
+        const currentY = e.touches[0].clientY;
+        const diffY = currentY - startY;
+
+        if (diffY > 0 && window.scrollY <= 5) {
+          pullDistance = Math.min(diffY * 0.45, 100);
+          const progress = Math.min(pullDistance / threshold, 1);
+          
+          indicator.style.transform = `translate(-50%, ${pullDistance}px)`;
+          indicator.style.opacity = `${progress}`;
+          icon.style.transform = `rotate(${pullDistance * 4.5}deg)`;
+
+          if (pullDistance >= threshold) {
+            text.textContent = 'Lepaskan untuk memuat ulang...';
+          } else {
+            text.textContent = 'Tarik ke bawah...';
+          }
+        } else {
+          pullDistance = 0;
+          indicator.style.transform = 'translate(-50%, -80px)';
+          indicator.style.opacity = '0';
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (!isPulling || isRefreshing) return;
+        isPulling = false;
+
+        if (pullDistance >= threshold) {
+          isRefreshing = true;
+          indicator.style.transform = 'translate(-50%, 65px)';
+          indicator.style.opacity = '1';
+          icon.classList.add('animate-spin');
+          text.textContent = 'Memuat data terbaru...';
+          
+          setTimeout(() => {
+            window.location.reload();
+          }, 650);
+        } else {
+          indicator.style.transform = 'translate(-50%, -80px)';
+          indicator.style.opacity = '0';
+          icon.style.transform = 'rotate(0deg)';
+          pullDistance = 0;
+        }
+      }, { passive: true });
+    })();
 
     // Expose globally for pwa.js dock
 
