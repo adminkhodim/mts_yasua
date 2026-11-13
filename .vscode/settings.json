@@ -4,5 +4,6 @@
   "css.lint.unknownAtRules": "ignore",
   "css.lint.zeroUnits": "ignore",
   "css.lint.duplicateProperties": "ignore",
-  "css.lint.emptyRules": "ignore"
+  "css.lint.emptyRules": "ignore",
+  "css.lint.unknownProperties": "ignore"
 }
