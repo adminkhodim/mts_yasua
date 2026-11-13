@@ -973,83 +973,87 @@
 
             <!-- CARDS RINGKASAN DATA NOTIFIKASI (BERWARNA VIBRANT PERSIS ASNAWIYYAH) -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3">
-              <!-- 1. Total Warta (Rose Gradient) -->
-              <div class="bg-gradient-to-br from-[#f43f5e] to-[#e11d48] text-white p-3 md:p-3.5 rounded-2xl shadow-lg shadow-rose-500/20 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
+              <!-- 1. Total Warta (Rose / Crimson Vibrant Gradient) -->
+              <div style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%) !important; color: #ffffff !important;"
+                class="p-3 md:p-3.5 rounded-2xl shadow-lg shadow-rose-500/30 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[11px] font-medium text-white/90 block truncate drop-shadow-2xs">TOTAL WARTA</span>
-                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-[10px] shrink-0 backdrop-blur-xs shadow-2xs">
+                  <span class="text-[11px] font-bold text-white/95 block truncate drop-shadow-sm tracking-wide">TOTAL WARTA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/25 text-white flex items-center justify-center text-[10px] shrink-0 shadow-xs backdrop-blur-xs">
                     <i class="fa-solid fa-bullhorn"></i>
                   </div>
                 </div>
                 <div>
-                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-2xs flex items-center gap-1">
+                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-sm flex items-center gap-1">
                     <span id="admin-notif-kpi-total">0</span>
-                    <span class="text-xs font-bold text-white/80">Warta ↑</span>
+                    <span class="text-xs font-bold text-white/90">Warta ↑</span>
                   </h4>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-white/90 pt-1 border-t border-white/10">
-                  <span class="truncate font-normal text-[10px] opacity-90">Semua notifikasi dibuat</span>
-                  <span class="px-2 py-0.5 rounded-full bg-white text-rose-700 font-black shadow-xs shrink-0 text-[9px]">Arsip Warta</span>
+                <div class="flex items-center justify-between text-[10px] text-white/95 pt-1.5 border-t border-white/20">
+                  <span class="truncate font-normal text-[10px] opacity-95">Semua notifikasi dibuat</span>
+                  <span style="background: #ffffff !important; color: #e11d48 !important;" class="px-2 py-0.5 rounded-full font-black shadow-xs shrink-0 text-[9px]">Arsip Warta</span>
                 </div>
               </div>
 
-              <!-- 2. Warta Aktif (Emerald Gradient) -->
-              <div class="bg-gradient-to-br from-[#22c55e] to-[#16a34a] text-white p-3 md:p-3.5 rounded-2xl shadow-lg shadow-emerald-500/20 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
+              <!-- 2. Warta Aktif (Emerald Vibrant Gradient) -->
+              <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important; color: #ffffff !important;"
+                class="p-3 md:p-3.5 rounded-2xl shadow-lg shadow-emerald-500/30 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[11px] font-medium text-white/90 block truncate drop-shadow-2xs">WARTA AKTIF</span>
-                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-[10px] shrink-0 backdrop-blur-xs shadow-2xs">
+                  <span class="text-[11px] font-bold text-white/95 block truncate drop-shadow-sm tracking-wide">WARTA AKTIF</span>
+                  <div class="w-6 h-6 rounded-full bg-white/25 text-white flex items-center justify-center text-[10px] shrink-0 shadow-xs backdrop-blur-xs">
                     <i class="fa-solid fa-circle-check"></i>
                   </div>
                 </div>
                 <div>
-                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-2xs flex items-center gap-1">
+                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-sm flex items-center gap-1">
                     <span id="admin-notif-kpi-active">0</span>
-                    <span class="text-xs font-bold text-white/80">Aktif</span>
+                    <span class="text-xs font-bold text-white/90">Aktif</span>
                   </h4>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-white/90 pt-1 border-t border-white/10">
-                  <span class="truncate font-normal text-[10px] opacity-90">Tayang di aplikasi santri</span>
-                  <span class="px-2 py-0.5 rounded-full bg-white text-emerald-700 font-black shadow-xs shrink-0 text-[9px]">Tayang</span>
+                <div class="flex items-center justify-between text-[10px] text-white/95 pt-1.5 border-t border-white/20">
+                  <span class="truncate font-normal text-[10px] opacity-95">Tayang di aplikasi santri</span>
+                  <span style="background: #ffffff !important; color: #059669 !important;" class="px-2 py-0.5 rounded-full font-black shadow-xs shrink-0 text-[9px]">Tayang</span>
                 </div>
               </div>
 
-              <!-- 3. Pop-up Modal (Amber Gradient) -->
-              <div class="bg-gradient-to-br from-[#f59e0b] to-[#ea580c] text-white p-3 md:p-3.5 rounded-2xl shadow-lg shadow-amber-500/20 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
+              <!-- 3. Pop-up Modal (Amber / Orange Vibrant Gradient) -->
+              <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important; color: #ffffff !important;"
+                class="p-3 md:p-3.5 rounded-2xl shadow-lg shadow-amber-500/30 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[11px] font-medium text-white/90 block truncate drop-shadow-2xs">POP-UP MODAL</span>
-                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-[10px] shrink-0 backdrop-blur-xs shadow-2xs">
+                  <span class="text-[11px] font-bold text-white/95 block truncate drop-shadow-sm tracking-wide">POP-UP MODAL</span>
+                  <div class="w-6 h-6 rounded-full bg-white/25 text-white flex items-center justify-center text-[10px] shrink-0 shadow-xs backdrop-blur-xs">
                     <i class="fa-solid fa-window-restore"></i>
                   </div>
                 </div>
                 <div>
-                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-2xs flex items-center gap-1">
+                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-sm flex items-center gap-1">
                     <span id="admin-notif-kpi-popup">0</span>
-                    <span class="text-xs font-bold text-white/80">Pop-up</span>
+                    <span class="text-xs font-bold text-white/90">Pop-up</span>
                   </h4>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-white/90 pt-1 border-t border-white/10">
-                  <span class="truncate font-normal text-[10px] opacity-90">Auto dialog beranda</span>
-                  <span class="px-2 py-0.5 rounded-full bg-white text-amber-700 font-black shadow-xs shrink-0 text-[9px]">Pop-up</span>
+                <div class="flex items-center justify-between text-[10px] text-white/95 pt-1.5 border-t border-white/20">
+                  <span class="truncate font-normal text-[10px] opacity-95">Auto dialog beranda</span>
+                  <span style="background: #ffffff !important; color: #d97706 !important;" class="px-2 py-0.5 rounded-full font-black shadow-xs shrink-0 text-[9px]">Pop-up</span>
                 </div>
               </div>
 
-              <!-- 4. Nonaktif / Diarsipkan (Purple Gradient) -->
-              <div class="bg-gradient-to-br from-[#a855f7] to-[#7c3aed] text-white p-3 md:p-3.5 rounded-2xl shadow-lg shadow-purple-500/20 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
+              <!-- 4. Nonaktif / Diarsipkan (Purple / Violet Vibrant Gradient) -->
+              <div style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%) !important; color: #ffffff !important;"
+                class="p-3 md:p-3.5 rounded-2xl shadow-lg shadow-purple-500/30 flex flex-col justify-between space-y-1.5 transition-all duration-300 hover:-translate-y-0.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[11px] font-medium text-white/90 block truncate drop-shadow-2xs">NONAKTIF</span>
-                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-[10px] shrink-0 backdrop-blur-xs shadow-2xs">
+                  <span class="text-[11px] font-bold text-white/95 block truncate drop-shadow-sm tracking-wide">NONAKTIF</span>
+                  <div class="w-6 h-6 rounded-full bg-white/25 text-white flex items-center justify-center text-[10px] shrink-0 shadow-xs backdrop-blur-xs">
                     <i class="fa-solid fa-circle-xmark"></i>
                   </div>
                 </div>
                 <div>
-                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-2xs flex items-center gap-1">
+                  <h4 class="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-sm flex items-center gap-1">
                     <span id="admin-notif-kpi-inactive">0</span>
-                    <span class="text-xs font-bold text-white/80">Nonaktif</span>
+                    <span class="text-xs font-bold text-white/90">Nonaktif</span>
                   </h4>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-white/90 pt-1 border-t border-white/10">
-                  <span class="truncate font-normal text-[10px] opacity-90">Selesai masa tayang</span>
-                  <span class="px-2 py-0.5 rounded-full bg-white text-purple-700 font-black shadow-xs shrink-0 text-[9px]">Arsip</span>
+                <div class="flex items-center justify-between text-[10px] text-white/95 pt-1.5 border-t border-white/20">
+                  <span class="truncate font-normal text-[10px] opacity-95">Selesai masa tayang</span>
+                  <span style="background: #ffffff !important; color: #6d28d9 !important;" class="px-2 py-0.5 rounded-full font-black shadow-xs shrink-0 text-[9px]">Arsip</span>
                 </div>
               </div>
             </div>
@@ -1116,22 +1120,78 @@
                       class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition">
                   </div>
 
-                  <!-- Gambar / Poster (File atau URL) -->
+                  <!-- Gambar / Poster (File atau URL) dengan Pratinjau Luas & Jelas -->
                   <div class="md:col-span-2">
                     <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
                       Gambar / Poster Pengumuman (Opsional)
                     </label>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
-                      <input type="text" id="admin-notif-gambar-url"
-                        placeholder="https://... atau URL Google Drive"
-                        class="w-full px-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-rose-500 focus:outline-none transition">
-                      <div class="flex items-center space-x-2">
-                        <input type="file" id="admin-notif-file" accept="image/*"
-                          onchange="previewAdminNotifImage(event)"
-                          class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100 cursor-pointer">
-                        <div class="w-12 h-10 rounded-lg border border-slate-200 overflow-hidden shrink-0 bg-slate-50 flex items-center justify-center">
-                          <img id="admin-notif-preview-img" src="" alt="Prev" class="w-full h-full object-cover hidden">
-                          <span id="admin-notif-preview-placeholder" class="text-[9px] text-slate-400 text-center">Foto</span>
+                    <div class="flex flex-col md:flex-row gap-4 items-start bg-slate-50/80 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80">
+                      <!-- Kolom Input (URL & File) -->
+                      <div class="flex-1 space-y-3 w-full">
+                        <div>
+                          <label class="text-[10px] font-bold text-slate-600 uppercase flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-link text-rose-500 text-xs"></i>
+                            <span>URL Gambar Langsung atau Google Drive</span>
+                          </label>
+                          <input type="text" id="admin-notif-gambar-url"
+                            oninput="updateNotifImagePreviewFromUrl()"
+                            placeholder="https://... atau tempel URL share Google Drive"
+                            class="w-full px-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition font-mono">
+                          <p class="text-[10px] text-slate-400 mt-1">Tautan Google Drive (drive.google.com/file/d/...) otomatis diubah ke tautan gambar langsung.</p>
+                        </div>
+
+                        <div>
+                          <label class="text-[10px] font-bold text-slate-600 uppercase flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-cloud-arrow-up text-rose-500 text-xs"></i>
+                            <span>Atau Unggah Poster dari Perangkat</span>
+                          </label>
+                          <input type="file" id="admin-notif-file" accept="image/*"
+                            onchange="previewAdminNotifImage(event)"
+                            class="w-full text-xs text-slate-500 file:mr-2.5 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-rose-100 file:text-rose-700 hover:file:bg-rose-200 cursor-pointer">
+                        </div>
+
+                        <div class="flex items-center gap-2 pt-1 border-t border-slate-200/60">
+                          <button type="button" onclick="clearAdminNotifImage()"
+                            class="px-3 py-1.5 text-[11px] font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition border border-rose-200 flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-trash-can text-[10px]"></i>
+                            <span>Hapus Gambar</span>
+                          </button>
+                          <button type="button" onclick="previewCurrentAdminNotifikasiForm()"
+                            class="px-3 py-1.5 text-[11px] font-bold text-slate-700 bg-white hover:bg-slate-100 rounded-xl transition border border-slate-200 flex items-center gap-1.5 cursor-pointer shadow-2xs">
+                            <i class="fa-solid fa-eye text-rose-500 text-[10px]"></i>
+                            <span>Pratinjau Pop-up Modal</span>
+                          </button>
+                          <span class="text-[10px] text-slate-400 hidden sm:inline ml-auto">Rekomendasi rasio poster: 4:5 Instagram.</span>
+                        </div>
+                      </div>
+
+                      <!-- Kotak Pratinjau Poster yang Jelas & Proporsional -->
+                      <div class="w-full md:w-44 shrink-0 flex flex-col items-center">
+                        <div class="flex items-center justify-between w-full mb-1">
+                          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Pratinjau Poster</span>
+                          <span class="text-[9px] font-bold text-slate-400 bg-slate-200/70 px-1.5 py-0.5 rounded">Rasio 4:5</span>
+                        </div>
+                        <div class="w-36 h-44 sm:w-40 sm:h-48 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-100/80 overflow-hidden relative flex items-center justify-center shadow-xs group">
+                          <!-- Gambar Preview -->
+                          <img id="admin-notif-preview-img" src="" alt="Pratinjau Poster"
+                            class="w-full h-full object-cover hidden transition-all duration-300 group-hover:scale-105">
+
+                          <!-- Placeholder jika belum ada gambar -->
+                          <div id="admin-notif-preview-placeholder" class="text-center p-3 text-slate-400 space-y-1.5">
+                            <div class="w-10 h-10 rounded-full bg-slate-200/80 text-slate-400 flex items-center justify-center mx-auto text-lg">
+                              <i class="fa-regular fa-image"></i>
+                            </div>
+                            <p class="text-[10px] font-bold text-slate-500 leading-tight">Belum Ada Poster</p>
+                            <p class="text-[9px] text-slate-400 leading-tight">Tempel URL atau pilih file foto</p>
+                          </div>
+
+                          <!-- Zoom / Pratinjau Overlay Button -->
+                          <button type="button" id="admin-notif-preview-zoom-btn" onclick="previewCurrentAdminNotifikasiForm()"
+                            class="absolute inset-0 bg-black/50 text-white font-bold text-xs flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200 backdrop-blur-2xs cursor-pointer hidden"
+                            title="Klik untuk melihat pratinjau dialog pop-up">
+                            <i class="fa-solid fa-magnifying-glass-plus text-base mb-1 text-amber-300"></i>
+                            <span>Buka Pop-up</span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -5290,9 +5350,13 @@
       if (item.gambar) {
         if (previewImg) { previewImg.src = item.gambar; previewImg.classList.remove('hidden'); }
         if (previewPlaceholder) previewPlaceholder.classList.add('hidden');
+        const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+        if (zoomBtn) zoomBtn.classList.remove('hidden');
       } else {
-        if (previewImg) previewImg.classList.add('hidden');
+        if (previewImg) { previewImg.src = ''; previewImg.classList.add('hidden'); }
         if (previewPlaceholder) previewPlaceholder.classList.remove('hidden');
+        const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+        if (zoomBtn) zoomBtn.classList.add('hidden');
       }
 
       const title = document.getElementById('admin-notif-form-title');
@@ -5314,10 +5378,7 @@
       document.getElementById('admin-notif-old-gambar').value = '';
       document.getElementById('admin-notif-tanggal').value = new Date().toISOString().split('T')[0];
 
-      const previewImg = document.getElementById('admin-notif-preview-img');
-      const previewPlaceholder = document.getElementById('admin-notif-preview-placeholder');
-      if (previewImg) previewImg.classList.add('hidden');
-      if (previewPlaceholder) previewPlaceholder.classList.remove('hidden');
+      clearAdminNotifImage();
 
       const title = document.getElementById('admin-notif-form-title');
       const cancelBtn = document.getElementById('admin-notif-cancel-btn');
@@ -5325,6 +5386,70 @@
       if (title) title.innerHTML = '<i class="fa-solid fa-bullhorn text-rose-600 mr-2"></i> Tambah Notifikasi Baru';
       if (cancelBtn) cancelBtn.classList.add('hidden');
       if (submitText) submitText.textContent = 'Simpan & Publikasikan';
+    }
+
+    
+    function updateNotifImagePreviewFromUrl() {
+      const urlInput = document.getElementById('admin-notif-gambar-url');
+      if (!urlInput) return;
+      let url = urlInput.value.trim();
+      const previewImg = document.getElementById('admin-notif-preview-img');
+      const placeholder = document.getElementById('admin-notif-preview-placeholder');
+      const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+
+      if (url) {
+        // Otomatis ubah Google Drive link ke direct lh3 link
+        if (url.includes('drive.google.com') || url.includes('docs.google.com')) {
+          const match = url.match(/(?:id=|d\/|open\?id=)([a-zA-Z0-9_-]{25,})/);
+          if (match && match[1]) {
+            url = 'https://lh3.googleusercontent.com/d/' + match[1];
+            urlInput.value = url;
+          }
+        }
+
+        if (previewImg) {
+          previewImg.src = url;
+          previewImg.classList.remove('hidden');
+        }
+        if (placeholder) placeholder.classList.add('hidden');
+        if (zoomBtn) zoomBtn.classList.remove('hidden');
+      } else {
+        const oldGambar = document.getElementById('admin-notif-old-gambar');
+        if (oldGambar && oldGambar.value) {
+          if (previewImg) {
+            previewImg.src = oldGambar.value;
+            previewImg.classList.remove('hidden');
+          }
+          if (placeholder) placeholder.classList.add('hidden');
+          if (zoomBtn) zoomBtn.classList.remove('hidden');
+        } else {
+          if (previewImg) {
+            previewImg.src = '';
+            previewImg.classList.add('hidden');
+          }
+          if (placeholder) placeholder.classList.remove('hidden');
+          if (zoomBtn) zoomBtn.classList.add('hidden');
+        }
+      }
+    }
+
+    function clearAdminNotifImage() {
+      const urlInput = document.getElementById('admin-notif-gambar-url');
+      const fileInput = document.getElementById('admin-notif-file');
+      const oldGambar = document.getElementById('admin-notif-old-gambar');
+      const previewImg = document.getElementById('admin-notif-preview-img');
+      const placeholder = document.getElementById('admin-notif-preview-placeholder');
+      const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+
+      if (urlInput) urlInput.value = '';
+      if (fileInput) fileInput.value = '';
+      if (oldGambar) oldGambar.value = '';
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.classList.add('hidden');
+      }
+      if (placeholder) placeholder.classList.remove('hidden');
+      if (zoomBtn) zoomBtn.classList.add('hidden');
     }
 
     function previewAdminNotifImage(event) {
@@ -5337,6 +5462,8 @@
         reader.onload = function (e) {
           if (previewImg) { previewImg.src = e.target.result; previewImg.classList.remove('hidden'); }
           if (previewPlaceholder) previewPlaceholder.classList.add('hidden');
+          const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+          if (zoomBtn) zoomBtn.classList.remove('hidden');
         };
         reader.readAsDataURL(file);
       }
