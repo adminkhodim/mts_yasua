@@ -26,6 +26,7 @@ const CONFIG = {
   SHEET_SERAGAM: 'seragam_harian',
   SHEET_EKSKUL: 'ekskul_list',
   SHEET_EKSKUL_REG: 'ekskul_registrations',
+  SHEET_NOTIFIKASI: 'notifikasi',
   DEFAULT_ADMIN_PASS: 'adminyasua2026'
 };
 
@@ -157,7 +158,51 @@ function setupDatabase() {
     sheetSettings.setFrozenRows(1);
   }
 
-  return { status: 'success', message: 'Semua tabel (teachers, banners, hero_slides, news, settings) berhasil diinisialisasi!' };
+  
+  // F. Setup Sheet 'notifikasi' (Manajemen Notifikasi & Pop-up Beranda)
+  let sheetNotif = ss.getSheetByName(CONFIG.SHEET_NOTIFIKASI);
+  if (!sheetNotif) {
+    sheetNotif = ss.insertSheet(CONFIG.SHEET_NOTIFIKASI);
+    const headersNotif = [
+      'id', 'judul', 'kategori', 'tanggal', 'ringkasan',
+      'isi', 'gambar', 'is_popup', 'status', 'created_at', 'updated_at'
+    ];
+    sheetNotif.appendRow(headersNotif);
+    sheetNotif.getRange(1, 1, 1, headersNotif.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sheetNotif.setFrozenRows(1);
+
+    const defaultNotif = [
+      [
+        'NOTIF-001',
+        'Pendaftaran Santri Baru (PPDB Online) Tahun Ajaran 2026/2027',
+        'Administrasi & PPDB',
+        new Date().toISOString().split('T')[0],
+        'Pendaftaran Santri Baru MTs YASUA Pilangwetan telah dibuka. Dapatkan fasilitas beasiswa santri berprestasi!',
+        '<p class="mb-3">Panitia Penerimaan Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan resmi membuka pendaftaran santri baru untuk Tahun Ajaran 2026/2027.</p><p class="mb-3">Tersedia jalur beasiswa tahfidz serta fasilitas sarana pembelajaran modern digital islami. Pendaftaran dapat dilakukan langsung di sekretariat madrasah atau online melalui aplikasi resmi.</p>',
+        'https://lh3.googleusercontent.com/d/1mzADFLjLjb0KerlSO1LsX_B9xbDjYbNd',
+        true,
+        'Aktif',
+        new Date().toISOString(),
+        new Date().toISOString()
+      ],
+      [
+        'NOTIF-002',
+        'Pelaksanaan Penilaian Tengah Semester (PTS) Gasal Terpadu',
+        'Akademik & Ujian',
+        new Date().toISOString().split('T')[0],
+        'Seluruh santri kelas VII, VIII, dan IX bersiap menghadapi ujian asesmen terpadu.',
+        '<p class="mb-3">PTS Gasal menggabungkan ujian materi keagamaan salaf dan Computer Based Test (CBT) di laboratorium madrasah.</p>',
+        '',
+        false,
+        'Aktif',
+        new Date().toISOString(),
+        new Date().toISOString()
+      ]
+    ];
+    defaultNotif.forEach(function(row) { sheetNotif.appendRow(row); });
+  }
+
+  return { status: 'success', message: 'Semua tabel (teachers, banners, hero_slides, news, settings, notifikasi) berhasil diinisialisasi!' };
 }
 
 /**
@@ -176,6 +221,10 @@ function doGet(e) {
         return createJsonResponse({ status: 'success', data: fetchAllHeroSlides() });
       case 'getNews':
         return createJsonResponse({ status: 'success', data: fetchAllNews() });
+      case 'getNotifikasi':
+        return createJsonResponse({ status: 'success', data: fetchAllNotifikasi() });
+      case 'initNotifikasiSheet':
+        return createJsonResponse(setupNotifikasiDatabase());
       case 'incrementViews':
         return createJsonResponse({ status: 'success', data: incrementNewsViewsBackend(e.parameter.id || e.parameter.slug) });
       case 'getSettings':
@@ -220,7 +269,8 @@ function doGet(e) {
           teachers: fetchAllTeachers().length,
           banners: fetchAllBanners().length,
           heroSlides: fetchAllHeroSlides().length,
-          news: fetchAllNews().length
+          news: fetchAllNews().length,
+          notifikasi: fetchAllNotifikasi().length
         });
       default:
         return createJsonResponse({ status: 'error', message: 'Action tidak dikenal' });
@@ -292,7 +342,7 @@ function doPost(e) {
       'addNews', 'updateNews', 'deleteNews', 'uploadNewsPhoto',
       'updateHeroSlide', 'saveAllHeroSlides', 'uploadHeroPhoto',
       'saveAllBanners', 'uploadBannerPhoto', 'saveAnnouncement',
-      'toggleGalleryStatus', 'deleteGallery'
+      'toggleGalleryStatus', 'deleteGallery', 'saveNotifikasi', 'deleteNotifikasi', 'uploadNotifikasiPhoto'
     ];
     const kesiswaanActions = [
       'addTeacher', 'updateTeacher', 'deleteTeacher', 'uploadTeacherPhoto',
@@ -350,6 +400,17 @@ function doPost(e) {
         return createJsonResponse({ status: 'success', data: result });
       case 'uploadBannerPhoto':
         result = uploadPhotoToDrive(payload.filename, payload.base64, 'BANNER');
+        return createJsonResponse({ status: 'success', data: result });
+
+            // Notifikasi & Pop-up Beranda (ala Asnawiyyah)
+      case 'saveNotifikasi':
+        result = saveOrUpdateNotifikasi(payload.data || payload);
+        return createJsonResponse({ status: 'success', data: result, message: 'Notifikasi berhasil disimpan di database' });
+      case 'deleteNotifikasi':
+        result = deleteNotifikasiById(payload.id || (payload.data && payload.data.id));
+        return createJsonResponse({ status: 'success', message: 'Notifikasi berhasil dihapus dari database' });
+      case 'uploadNotifikasiPhoto':
+        result = uploadPhotoToDrive(payload.filename, payload.base64, 'NOTIF');
         return createJsonResponse({ status: 'success', data: result });
 
       // Berita & Pengumuman
@@ -1894,4 +1955,231 @@ function submitEkskulRegistration(regData) {
       status: 'Terdaftar'
     }
   };
+}
+
+
+/**
+ * ===================================================================
+ * MODUL NOTIFIKASI & POP-UP BERANDA (PERSIS ASNAWIYYAH)
+ * ===================================================================
+ */
+function ensureNotifikasiSheet(ss) {
+  const targetSs = ss || SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = targetSs.getSheetByName(CONFIG.SHEET_NOTIFIKASI);
+  if (!sheet) {
+    sheet = targetSs.insertSheet(CONFIG.SHEET_NOTIFIKASI);
+    const headers = [
+      'id', 'judul', 'kategori', 'tanggal', 'ringkasan',
+      'isi', 'gambar', 'is_popup', 'status', 'created_at', 'updated_at'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+
+    const defaultNotif = [
+      [
+        'NOTIF-001',
+        'Pendaftaran Santri Baru (PPDB Online) Tahun Ajaran 2026/2027',
+        'Administrasi & PPDB',
+        new Date().toISOString().split('T')[0],
+        'Pendaftaran Santri Baru MTs YASUA Pilangwetan telah dibuka. Dapatkan fasilitas beasiswa santri berprestasi!',
+        '<p class="mb-3">Panitia Penerimaan Peserta Didik Baru (PPDB) MTs YASUA Pilangwetan resmi membuka pendaftaran santri baru untuk Tahun Ajaran 2026/2027.</p><p class="mb-3">Tersedia jalur beasiswa tahfidz serta fasilitas sarana pembelajaran modern digital islami. Pendaftaran dapat dilakukan langsung di sekretariat madrasah atau online melalui aplikasi resmi.</p>',
+        'https://lh3.googleusercontent.com/d/1mzADFLjLjb0KerlSO1LsX_B9xbDjYbNd',
+        true,
+        'Aktif',
+        new Date().toISOString(),
+        new Date().toISOString()
+      ]
+    ];
+    defaultNotif.forEach(function(row) { sheet.appendRow(row); });
+  }
+  return sheet;
+}
+
+function setupNotifikasiDatabase() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  const sheet = ensureNotifikasiSheet(ss);
+  return {
+    status: 'success',
+    message: 'Tabel notifikasi berhasil diinisialisasi',
+    sheet: sheet.getName(),
+    total_rows: Math.max(0, sheet.getLastRow() - 1)
+  };
+}
+
+function fetchAllNotifikasi() {
+  const sheet = ensureNotifikasiSheet();
+  const rows = sheet.getDataRange().getValues();
+  if (rows.length <= 1) return [];
+
+  const headers = rows[0].map(function(h) { return String(h).trim().toLowerCase(); });
+  const list = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    if (!row[0]) continue;
+
+    const obj = {};
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j]] = row[j];
+    }
+
+    // Normalisasi nilai is_popup
+    const isPopupRaw = obj.is_popup;
+    obj.is_popup = (isPopupRaw === true || isPopupRaw === 1 || String(isPopupRaw) === '1' || String(isPopupRaw).toLowerCase() === 'true');
+
+    // Normalisasi tanggal
+    if (obj.tanggal && obj.tanggal instanceof Date) {
+      obj.tanggal = Utilities.formatDate(obj.tanggal, 'Asia/Jakarta', 'yyyy-MM-dd');
+    }
+
+    list.push(obj);
+  }
+
+  // Urutkan terbaru ke terlama
+  list.sort(function(a, b) {
+    const timeA = new Date(a.updated_at || a.created_at || a.tanggal || 0).getTime();
+    const timeB = new Date(b.updated_at || b.created_at || b.tanggal || 0).getTime();
+    return timeB - timeA;
+  });
+
+  return list;
+}
+
+function saveOrUpdateNotifikasi(notifData) {
+  if (!notifData) throw new Error('Data notifikasi tidak boleh kosong');
+
+  const sheet = ensureNotifikasiSheet();
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0].map(function(h) { return String(h).trim().toLowerCase(); });
+  const now = new Date().toISOString();
+
+  let targetId = notifData.id ? String(notifData.id).trim() : '';
+  let rowIndex = -1;
+
+  if (targetId) {
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][0]).trim() === targetId) {
+        rowIndex = i + 1; // 1-based index untuk Sheets
+        break;
+      }
+    }
+  }
+
+  // Jika baru, buat ID unik
+  if (rowIndex === -1) {
+    if (!targetId) {
+      const nextNum = data.length;
+      targetId = 'NOTIF-' + String(nextNum).padStart(3, '0');
+    }
+  }
+
+  const judul = String(notifData.judul || 'Pengumuman Madrasah').trim();
+  const kategori = String(notifData.kategori || 'Pengumuman').trim();
+  const tanggal = notifData.tanggal ? String(notifData.tanggal) : Utilities.formatDate(new Date(), 'Asia/Jakarta', 'yyyy-MM-dd');
+  const ringkasan = String(notifData.ringkasan || '').trim();
+  const isi = String(notifData.isi || '').trim();
+  let gambar = String(notifData.gambar || notifData.gambar_url || '').trim();
+
+  // Jika ada file upload base64
+  if (notifData.file && notifData.file.base64) {
+    const uploadRes = uploadPhotoToDrive(notifData.file.name || 'poster.jpg', notifData.file.base64, 'NOTIF');
+    gambar = uploadRes.direct_url;
+  }
+
+  const isPopupVal = (notifData.is_popup === true || notifData.is_popup === 1 || String(notifData.is_popup) === '1' || String(notifData.is_popup).toLowerCase() === 'true');
+  const statusVal = (notifData.status === 'Nonaktif' || notifData.status === false) ? 'Nonaktif' : 'Aktif';
+
+  // Jika dijadikan popup dan aktif, nonaktifkan flag popup notifikasi lain agar tidak bertumpuk
+  if (isPopupVal && statusVal === 'Aktif') {
+    const isPopupColIdx = headers.indexOf('is_popup');
+    if (isPopupColIdx !== -1) {
+      for (let i = 1; i < data.length; i++) {
+        if (rowIndex === -1 || i + 1 !== rowIndex) {
+          sheet.getRange(i + 1, isPopupColIdx + 1).setValue(false);
+        }
+      }
+    }
+  }
+
+  if (rowIndex !== -1) {
+    // UPDATE
+    const existingCreatedAt = data[rowIndex - 1][headers.indexOf('created_at')] || now;
+    const rowObj = {
+      id: targetId,
+      judul: judul,
+      kategori: kategori,
+      tanggal: tanggal,
+      ringkasan: ringkasan,
+      isi: isi,
+      gambar: gambar,
+      is_popup: isPopupVal,
+      status: statusVal,
+      created_at: existingCreatedAt,
+      updated_at: now
+    };
+    const rowValues = headers.map(function(h) { return rowObj[h] !== undefined ? rowObj[h] : ''; });
+    sheet.getRange(rowIndex, 1, 1, headers.length).setValues([rowValues]);
+
+    // Sinkronisasi otomatis ke announcement ticker jika aktif
+    if (statusVal === 'Aktif') {
+      try { saveAnnouncementSetting(judul + (ringkasan ? ' — ' + ringkasan : ''), true); } catch(e) {}
+    }
+
+    return {
+      status: 'success',
+      isEdit: true,
+      data: rowObj
+    };
+  } else {
+    // INSERT BARU
+    const rowObj = {
+      id: targetId,
+      judul: judul,
+      kategori: kategori,
+      tanggal: tanggal,
+      ringkasan: ringkasan,
+      isi: isi,
+      gambar: gambar,
+      is_popup: isPopupVal,
+      status: statusVal,
+      created_at: now,
+      updated_at: now
+    };
+    const rowValues = headers.map(function(h) { return rowObj[h] !== undefined ? rowObj[h] : ''; });
+    sheet.appendRow(rowValues);
+
+    // Sinkronisasi otomatis ke announcement ticker jika aktif
+    if (statusVal === 'Aktif') {
+      try { saveAnnouncementSetting(judul + (ringkasan ? ' — ' + ringkasan : ''), true); } catch(e) {}
+    }
+
+    return {
+      status: 'success',
+      isEdit: false,
+      data: rowObj
+    };
+  }
+}
+
+function deleteNotifikasiById(notifId) {
+  if (!notifId) throw new Error('ID Notifikasi harus disediakan');
+
+  const sheet = ensureNotifikasiSheet();
+  const data = sheet.getDataRange().getValues();
+  let found = false;
+
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][0]).trim() === String(notifId).trim()) {
+      sheet.deleteRow(i + 1);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    throw new Error('Notifikasi dengan ID ' + notifId + ' tidak ditemukan');
+  }
+
+  return { status: 'success', message: 'Notifikasi berhasil dihapus' };
 }
