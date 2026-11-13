@@ -641,7 +641,7 @@
         <div class="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
           <div class="bg-white rounded-3xl p-6 border border-emerald-100 shadow-xl overflow-hidden relative">
             <div class="relative rounded-2xl overflow-hidden shadow-md bg-emerald-950 aspect-[4/5] mb-5">
-              <img src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib" alt="Muthohar, S.Pd. - Kepala MTs YASUA Pilangwetan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
+              <img id="web-sambutan-kepala-img" src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib" alt="Kepala MTs YASUA Pilangwetan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <div class="absolute top-3 left-3 bg-brand-primary/90 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-sm">
@@ -651,8 +651,8 @@
 
               <div class="absolute bottom-3 left-3 right-3 text-white">
                 <span class="text-[10px] font-semibold text-brand-gold uppercase tracking-wider block">YAYASAN ISLAM SUADA</span>
-                <h3 class="text-lg font-black tracking-tight">Muthohar, S.Pd.</h3>
-                <p class="text-xs text-emerald-200">Kepala MTs YASUA Pilangwetan</p>
+                <h3 id="web-sambutan-kepala-nama" class="text-lg font-black tracking-tight">Muthohar, S.Pd.</h3>
+                <p id="web-sambutan-kepala-jabatan" class="text-xs text-emerald-200">Kepala MTs YASUA Pilangwetan</p>
               </div>
             </div>
 
@@ -777,7 +777,7 @@
               <div>
                 <span class="text-xs text-slate-500 block">Pilangwetan, Kebonagung, Demak</span>
                 <span class="font-black text-slate-900 text-sm mt-0.5 block">Kepala MTs YASUA Pilangwetan</span>
-                <p class="text-base font-extrabold text-brand-primary mt-3">Muthohar, S.Pd.</p>
+                <p id="web-sambutan-kepala-ttd-nama" class="text-base font-extrabold text-brand-primary mt-3">Muthohar, S.Pd.</p>
               </div>
 
               <!-- Other Section Navigation -->
@@ -1080,6 +1080,54 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeBrochureModal();
     });
+  
+
+    // Dynamic Profile Fetcher for sambutan.html
+    (async function initDynamicSambutan() {
+      const render = (data) => {
+        if (!data) return;
+        const raw = data.raw || {};
+        const kepala = data.kepala || {};
+
+        const nama = raw.profile_kepala_nama || kepala.nama;
+        const jabatan = raw.profile_kepala_jabatan || kepala.jabatan;
+        const foto = raw.profile_kepala_foto || kepala.foto;
+
+        if (nama) {
+          const elNama = document.getElementById('web-sambutan-kepala-nama');
+          if (elNama) elNama.textContent = nama;
+          const elTtd = document.getElementById('web-sambutan-kepala-ttd-nama');
+          if (elTtd) elTtd.textContent = nama;
+        }
+
+        if (jabatan) {
+          const elJab = document.getElementById('web-sambutan-kepala-jabatan');
+          if (elJab) elJab.textContent = jabatan;
+        }
+
+        if (foto) {
+          const elFoto = document.getElementById('web-sambutan-kepala-img');
+          if (elFoto) elFoto.src = foto;
+        }
+      };
+
+      try {
+        const cached = localStorage.getItem('yasua_cached_profile');
+        if (cached) render(JSON.parse(cached));
+      } catch(e) {}
+
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getProfile');
+        const json = await res.json();
+        if (json && (json.status === 'success' || json.success) && json.data) {
+          localStorage.setItem('yasua_cached_profile', JSON.stringify(json.data));
+          render(json.data);
+        }
+      } catch(e) {
+        console.warn('Sambutan sync background notice:', e);
+      }
+    })();
+
   </script>
 
 </body>

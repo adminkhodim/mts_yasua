@@ -652,7 +652,7 @@
           </div>
           <div>
             <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">NPSN Resmi</span>
-            <span class="text-sm sm:text-base font-black text-brand-primary font-mono">20364357</span>
+            <span id="web-profil-npsn" class="text-sm sm:text-base font-black text-brand-primary font-mono">20364357</span>
           </div>
         </div>
 
@@ -662,7 +662,7 @@
           </div>
           <div>
             <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Akreditasi</span>
-            <span class="text-sm sm:text-base font-black text-slate-900">Terakreditasi</span>
+            <span id="web-profil-akreditasi" class="text-sm sm:text-base font-black text-slate-900">Peringkat A (Unggul)</span>
           </div>
         </div>
 
@@ -672,7 +672,7 @@
           </div>
           <div>
             <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Badan Hukum</span>
-            <span class="text-sm sm:text-base font-black text-slate-900">YASUA (1974)</span>
+            <span id="web-profil-yayasan" class="text-sm sm:text-base font-black text-slate-900">YASUA (1974)</span>
           </div>
         </div>
 
@@ -714,7 +714,7 @@
                   <h3 class="text-xl font-black text-brand-dark">Visi Madrasah</h3>
                 </div>
               </div>
-              <blockquote class="italic text-slate-800 text-sm sm:text-[15px] leading-relaxed border-l-4 border-brand-accent pl-4 py-3 my-4 bg-amber-50/60 rounded-r-xl">
+              <blockquote id="web-profil-visi" class="italic text-slate-800 text-sm sm:text-[15px] leading-relaxed border-l-4 border-brand-accent pl-4 py-3 my-4 bg-amber-50/60 rounded-r-xl">
                 “Terwujudnya pendidikan yang islami, bermutu, memiliki sikap dan wawasan yang luas, beriman, bertaqwa, dan berahlakul karimah, menguasai ilmu pengetahuan dan tehnologi sesuai dengan perkembangan zaman.”
               </blockquote>
             </div>
@@ -737,7 +737,7 @@
                 </div>
               </div>
               
-              <ol class="space-y-3 text-xs sm:text-sm text-slate-700">
+              <ol id="web-profil-misi-list" class="space-y-3 text-xs sm:text-sm text-slate-700">
                 <li class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-emerald-50/50 transition-colors">
                   <span class="w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-sm">1</span>
                   <span class="leading-relaxed">Melaksanakan pendidikan dan pengajaran agama Islam ala <strong>Ahlus sunnah wal jama’ah</strong>.</span>
@@ -1321,6 +1321,65 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeBrochureModal();
     });
+  
+
+    // Dynamic Profile Fetcher for profil.html
+    (async function initDynamicProfile() {
+      const render = (data) => {
+        if (!data) return;
+        const raw = data.raw || {};
+        const identitas = data.identitas || {};
+        const visimisi = data.visimisi || {};
+
+        const setText = (id, val) => {
+          const el = document.getElementById(id);
+          if (el && val) el.textContent = val;
+        };
+
+        setText('web-profil-npsn', raw.profile_npsn || identitas.npsn);
+        setText('web-profil-akreditasi', raw.profile_akreditasi || identitas.akreditasi);
+        setText('web-profil-yayasan', raw.profile_yayasan || identitas.yayasan);
+
+        const visi = raw.profile_visi || visimisi.visi;
+        if (visi) {
+          const elVisi = document.getElementById('web-profil-visi');
+          if (elVisi) elVisi.textContent = '“' + visi + '”';
+        }
+
+        let misi = visimisi.misi;
+        if (!Array.isArray(misi) && typeof (raw.profile_misi || '') === 'string') {
+          misi = (raw.profile_misi || '').split('\n').map(s => s.trim()).filter(Boolean);
+        }
+        if (Array.isArray(misi) && misi.length > 0) {
+          const elMisi = document.getElementById('web-profil-misi-list');
+          if (elMisi) {
+            elMisi.innerHTML = misi.map((m, idx) => `
+              <li class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-emerald-50/50 transition-colors">
+                <span class="w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-sm">${idx + 1}</span>
+                <span class="leading-relaxed">${m.replace(/</g, '&lt;')}</span>
+              </li>
+            `).join('');
+          }
+        }
+      };
+
+      try {
+        const cached = localStorage.getItem('yasua_cached_profile');
+        if (cached) render(JSON.parse(cached));
+      } catch(e) {}
+
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getProfile');
+        const json = await res.json();
+        if (json && (json.status === 'success' || json.success) && json.data) {
+          localStorage.setItem('yasua_cached_profile', JSON.stringify(json.data));
+          render(json.data);
+        }
+      } catch(e) {
+        console.warn('Profile sync background notice:', e);
+      }
+    })();
+
   </script>
 
 </body>

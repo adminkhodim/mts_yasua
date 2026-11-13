@@ -1689,9 +1689,14 @@
             <p class="text-[10px] text-emerald-200 mt-0.5">Identitas, Sejarah, Visi Misi &amp; Pimpinan</p>
           </div>
         </div>
-        <span class="text-[9.5px] font-black uppercase px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 shadow-xs">
-          Akreditasi A Unggul
-        </span>
+        <div class="flex items-center gap-2">
+          <button onclick="loadAppDynamicProfile(true)" type="button" class="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer" title="Segarkan Data Profil">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          </button>
+          <span id="app-profil-badge-akreditasi" class="text-[9.5px] font-black uppercase px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 shadow-xs">
+            Akreditasi A Unggul
+          </span>
+        </div>
       </div>
 
       <!-- Kartu Identitas Resmi Legalitas -->
@@ -1707,19 +1712,19 @@
         <div class="grid grid-cols-2 gap-2 text-[10.5px]">
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-slate-500 block text-[9.5px] font-semibold">NPSN Resmi</span>
-            <span class="font-black text-slate-900 text-xs font-mono">20364357</span>
+            <span id="app-profil-npsn" class="font-black text-slate-900 text-xs font-mono">20364357</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-slate-500 block text-[9.5px] font-semibold">NSM (Nomor Statistik)</span>
-            <span class="font-black text-slate-900 text-xs font-mono">121233210034</span>
+            <span id="app-profil-nsm" class="font-black text-slate-900 text-xs font-mono">121233210034</span>
           </div>
           <div class="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
             <span class="text-emerald-700 block text-[9.5px] font-semibold">Status Akreditasi</span>
-            <span class="font-black text-emerald-900 text-xs">Peringkat A (Unggul)</span>
+            <span id="app-profil-akreditasi" class="font-black text-emerald-900 text-xs">Peringkat A (Unggul)</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-slate-500 block text-[9.5px] font-semibold">Naungan Yayasan</span>
-            <span class="font-black text-slate-900 text-xs">YASUA (Berdiri 1949)</span>
+            <span id="app-profil-yayasan" class="font-black text-slate-900 text-xs">YASUA (Berdiri 1949)</span>
           </div>
         </div>
       </div>
@@ -1728,21 +1733,21 @@
       <div style="background: linear-gradient(135deg, #088395 0%, #064e52 50%, #043b3e 100%); color: #ffffff;" class="p-4 rounded-2xl border-2 border-emerald-400/40 shadow-md space-y-3 relative overflow-hidden">
         <div class="flex items-center gap-3">
           <div class="w-14 h-14 rounded-2xl overflow-hidden bg-white/20 border-2 border-amber-400 shrink-0 shadow-md">
-            <img src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib" alt="Muthohar, S.Pd." class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/logo.png'">
+            <img id="app-profil-kepala-img" src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib" alt="Kepala Madrasah" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/logo.png'">
           </div>
           <div class="flex-1 min-w-0">
             <span class="inline-block px-2 py-0.5 rounded-md bg-amber-400 text-slate-950 font-black text-[8.5px] uppercase tracking-wider mb-0.5">
               Sambutan Kepala Madrasah
             </span>
-            <h3 class="text-xs sm:text-sm font-extrabold text-white leading-snug truncate">
+            <h3 id="app-profil-kepala-nama" class="text-xs sm:text-sm font-extrabold text-white leading-snug truncate">
               Muthohar, S.Pd.
             </h3>
-            <p class="text-[10px] text-emerald-200 line-clamp-1 mt-0.5">
+            <p id="app-profil-kepala-jabatan" class="text-[10px] text-emerald-200 line-clamp-1 mt-0.5">
               Kepala MTs YASUA Pilangwetan
             </p>
           </div>
         </div>
-        <blockquote class="text-[11px] text-emerald-100 italic bg-white/10 p-3 rounded-xl border border-white/15 leading-relaxed">
+        <blockquote id="app-profil-kepala-sambutan" class="text-[11px] text-emerald-100 italic bg-white/10 p-3 rounded-xl border border-white/15 leading-relaxed">
           &ldquo;Selamat datang di MTs YASUA Pilangwetan. Kami berikhtiar mendidik generasi muda yang kokoh aqidah Ahlus Sunnah Wal Jama'ah, berakhlak mulia, cerdas dalam ilmu pengetahuan, dan cakap teknologi.&rdquo;
         </blockquote>
       </div>
@@ -1757,16 +1762,16 @@
           <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[9px] font-extrabold">77+ Tahun</span>
         </div>
 
-        <p class="text-[11px] text-slate-700 leading-relaxed text-justify">
+        <p id="app-profil-sejarah-teks" class="text-[11px] text-slate-700 leading-relaxed text-justify">
           Madrasah didirikan atas kepedulian para sesepuh ulama dan tokoh masyarakat Pilangwetan pasca kemerdekaan RI. Beliau-beliau berikhtiar membimbing anak-anak menjadi muslim berilmu, bertaqwa, sholeh, dan bermanfaat bagi nusa, bangsa, serta agama.
         </p>
 
         <!-- 6 Tokoh Perintis Awal -->
         <div class="space-y-1.5 pt-1">
           <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 block">
-            6 Tokoh Perintis Awal (Muassis):
+            Tokoh Perintis Awal (Muassis):
           </span>
-          <div class="grid grid-cols-2 gap-1.5 text-[10.5px]">
+          <div id="app-profil-muassis-list" class="grid grid-cols-2 gap-1.5 text-[10.5px]">
             <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               <span>Bapak K. Ahmad</span>
@@ -1800,20 +1805,20 @@
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
             <i data-lucide="target" class="w-4 h-4 text-brand-primary"></i>
-            <span>Visi &amp; 5 Misi Strategis</span>
+            <span>Visi &amp; Misi Strategis</span>
           </h4>
         </div>
 
         <!-- Visi -->
         <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80">
           <span class="text-[9.5px] font-black uppercase tracking-wider text-amber-900 block mb-1">Visi Madrasah:</span>
-          <p class="text-xs text-slate-800 italic font-semibold leading-relaxed">
+          <p id="app-profil-visi" class="text-xs text-slate-800 italic font-semibold leading-relaxed">
             &ldquo;Terwujudnya pendidikan yang islami, bermutu, memiliki sikap dan wawasan yang luas, beriman, bertaqwa, dan berakhlakul karimah, menguasai ilmu pengetahuan dan teknologi sesuai dengan perkembangan zaman.&rdquo;
           </p>
         </div>
 
-        <!-- 5 Misi -->
-        <div class="space-y-2 pt-1 text-[11px] text-slate-700">
+        <!-- Misi List Container -->
+        <div id="app-profil-misi-list" class="space-y-2 pt-1 text-[11px] text-slate-700">
           <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 block">5 Misi Strategis:</span>
           <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
             <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
@@ -1847,34 +1852,34 @@
         <div class="grid grid-cols-2 gap-2 text-[10.5px]">
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-[9.5px] text-slate-500 font-semibold block">Kepala Madrasah</span>
-            <strong class="text-slate-900 font-black text-xs block truncate">Muthohar, S.Pd.</strong>
+            <strong id="app-profil-pimpinan-kepala" class="text-slate-900 font-black text-xs block truncate">Muthohar, S.Pd.</strong>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Kurikulum</span>
-            <strong class="text-slate-900 font-black text-xs block truncate">Hj. Thoibah R., S.Ag.</strong>
+            <strong id="app-profil-pimpinan-kurikulum" class="text-slate-900 font-black text-xs block truncate">Hj. Thoibah R., S.Ag.</strong>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Kesiswaan</span>
-            <strong class="text-slate-900 font-black text-xs block truncate">Aidiyah, S.Pd.</strong>
+            <strong id="app-profil-pimpinan-kesiswaan" class="text-slate-900 font-black text-xs block truncate">Aidiyah, S.Pd.</strong>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
             <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Sarpras</span>
-            <strong class="text-slate-900 font-black text-xs block truncate">Hj. Inna M., S.Ag.</strong>
+            <strong id="app-profil-pimpinan-sarpras" class="text-slate-900 font-black text-xs block truncate">Hj. Inna M., S.Ag.</strong>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 col-span-2">
             <span class="text-[9.5px] text-slate-500 font-semibold block">Waka Hubungan Masyarakat (Humas)</span>
-            <strong class="text-slate-900 font-black text-xs block truncate">Ahmad Wawahib, S.Pd.</strong>
+            <strong id="app-profil-pimpinan-humas" class="text-slate-900 font-black text-xs block truncate">Ahmad Wawahib, S.Pd.</strong>
           </div>
         </div>
       </div>
 
-      <!-- 6 Sarana & Fasilitas Unggulan -->
+      <!-- Sarana & Fasilitas Unggulan -->
       <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
         <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
           <i data-lucide="building-2" class="w-4 h-4 text-brand-primary"></i>
           <span>Fasilitas &amp; Sarana Prasarana</span>
         </h4>
-        <div class="grid grid-cols-2 gap-2 text-[10.5px]">
+        <div id="app-profil-fasilitas-list" class="grid grid-cols-2 gap-2 text-[10.5px]">
           <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
             <i data-lucide="monitor" class="w-4 h-4 text-emerald-600 shrink-0"></i>
             <span class="font-bold text-slate-800">Lab Komputer CBT &amp; ANBK</span>
@@ -1908,21 +1913,22 @@
           <i data-lucide="map-pin" class="w-4 h-4 text-rose-500"></i>
           <span>Lokasi &amp; Kontak Madrasah</span>
         </h4>
-        <p class="text-xs text-slate-700 leading-relaxed">
+        <p id="app-profil-alamat" class="text-xs text-slate-700 leading-relaxed">
           Jl. Raya Pilangwetan, RT 02 / RW 01, Desa Pilangwetan, Kecamatan Kebonagung, Kabupaten Demak, Jawa Tengah 59561.
         </p>
         <div class="pt-1 flex flex-wrap gap-2">
-          <a href="https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-bold text-xs shadow-xs transition-colors">
+          <a id="app-profil-maps-btn" href="https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-brand-primary hover:bg-emerald-800 text-white font-bold text-xs shadow-xs transition-colors">
             <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-300"></i>
             <span>Buka Google Maps</span>
           </a>
-          <a href="https://wa.me/6285649881966" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors">
+          <a id="app-profil-wa-btn" href="https://wa.me/6285649881966" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors">
             <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600"></i>
             <span>Hubungi Sekretariat</span>
           </a>
         </div>
       </div>
-    </div><!-- End #tab-profil -->
+    </div>
+    <!-- End #tab-profil -->
 
     <!-- ==================== TAB 10: GALERI FOTO ==================== -->
     <div id="tab-galeri" class="hidden space-y-3.5">
@@ -4674,7 +4680,9 @@
       }
 
       // Re-trigger dynamic fetch/render on first open
-      if (tabName === 'berita') {
+      if (tabName === 'profil') {
+        if (typeof loadAppDynamicProfile === 'function') loadAppDynamicProfile();
+      } else if (tabName === 'berita') {
         if (typeof fetchTabNews === 'function') fetchTabNews();
       } else if (tabName === 'kalender') {
         if (typeof renderCalendar === 'function') renderCalendar();
@@ -10831,6 +10839,199 @@ function openAdminModule(moduleName) {
 
     // Render ekskul awal
     renderEkskulList();
+
+  
+
+    // ==========================================
+    // DYNAMIC PROFILE CONTROLLER (APP SPA)
+    // ==========================================
+    let appProfileData = null;
+
+    function renderAppProfile(data) {
+      if (!data) return;
+      const raw = data.raw || {};
+      const identitas = data.identitas || {};
+      const kepala = data.kepala || {};
+      const sejarah = data.sejarah || {};
+      const visimisi = data.visimisi || {};
+      const pimpinan = data.pimpinan || {};
+      const fasilitas = data.fasilitas || [];
+      const kontak = data.kontak || {};
+
+      const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el && text !== undefined && text !== null && text !== '') {
+          el.textContent = text;
+        }
+      };
+
+      // 1. Identitas & Legalitas
+      const akredText = raw.profile_akreditasi || identitas.akreditasi;
+      if (akredText) {
+        setText('app-profil-badge-akreditasi', 'Akreditasi ' + akredText.replace(/^Peringkat\s+/i, ''));
+        setText('app-profil-akreditasi', akredText);
+      }
+      setText('app-profil-npsn', raw.profile_npsn || identitas.npsn);
+      setText('app-profil-nsm', raw.profile_nsm || identitas.nsm);
+      setText('app-profil-yayasan', raw.profile_yayasan || identitas.yayasan);
+
+      // 2. Kepala Madrasah & Sambutan
+      setText('app-profil-kepala-nama', raw.profile_kepala_nama || kepala.nama);
+      setText('app-profil-kepala-jabatan', raw.profile_kepala_jabatan || kepala.jabatan);
+      const sambutanText = raw.profile_kepala_sambutan || kepala.sambutan;
+      if (sambutanText) {
+        const elSambutan = document.getElementById('app-profil-kepala-sambutan');
+        if (elSambutan) {
+          elSambutan.innerHTML = '&ldquo;' + sambutanText.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '&rdquo;';
+        }
+      }
+      const fotoUrl = raw.profile_kepala_foto || kepala.foto;
+      if (fotoUrl) {
+        const elFoto = document.getElementById('app-profil-kepala-img');
+        if (elFoto) elFoto.src = fotoUrl;
+      }
+
+      // 3. Sejarah & Muassis
+      const sejarahTeks = raw.profile_sejarah || sejarah.teks;
+      if (sejarahTeks) {
+        setText('app-profil-sejarah-teks', sejarahTeks);
+      }
+      let muassisList = sejarah.muassis;
+      if (!Array.isArray(muassisList) && typeof (raw.profile_muassis || '') === 'string') {
+        muassisList = (raw.profile_muassis || '').split('\n').map(s => s.trim()).filter(Boolean);
+      }
+      if (Array.isArray(muassisList) && muassisList.length > 0) {
+        const elMuassis = document.getElementById('app-profil-muassis-list');
+        if (elMuassis) {
+          elMuassis.innerHTML = muassisList.map(item => `
+            <div class="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0"></span>
+              <span class="truncate">${item.replace(/</g, '&lt;')}</span>
+            </div>
+          `).join('');
+        }
+      }
+
+      // 4. Visi & Misi
+      const visiTeks = raw.profile_visi || visimisi.visi;
+      if (visiTeks) {
+        const elVisi = document.getElementById('app-profil-visi');
+        if (elVisi) {
+          elVisi.innerHTML = '&ldquo;' + visiTeks.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '&rdquo;';
+        }
+      }
+      let misiList = visimisi.misi;
+      if (!Array.isArray(misiList) && typeof (raw.profile_misi || '') === 'string') {
+        misiList = (raw.profile_misi || '').split('\n').map(s => s.trim()).filter(Boolean);
+      }
+      if (Array.isArray(misiList) && misiList.length > 0) {
+        const elMisi = document.getElementById('app-profil-misi-list');
+        if (elMisi) {
+          elMisi.innerHTML = `
+            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-800 block">${misiList.length} Misi Strategis:</span>
+            ${misiList.map((m, idx) => `
+              <div class="flex items-start gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
+                <span class="w-5 h-5 rounded-full bg-brand-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
+                <span class="leading-relaxed">${m.replace(/</g, '&lt;')}</span>
+              </div>
+            `).join('')}
+          `;
+        }
+      }
+
+      // 5. Pimpinan
+      setText('app-profil-pimpinan-kepala', raw.profile_kepala_nama || pimpinan.kepala);
+      setText('app-profil-pimpinan-kurikulum', raw.profile_waka_kurikulum || pimpinan.waka_kurikulum);
+      setText('app-profil-pimpinan-kesiswaan', raw.profile_waka_kesiswaan || pimpinan.waka_kesiswaan);
+      setText('app-profil-pimpinan-sarpras', raw.profile_waka_sarpras || pimpinan.waka_sarpras);
+      setText('app-profil-pimpinan-humas', raw.profile_waka_humas || pimpinan.waka_humas);
+
+      // 6. Fasilitas
+      let fasList = fasilitas;
+      if (!Array.isArray(fasList) && typeof (raw.profile_fasilitas || '') === 'string') {
+        fasList = (raw.profile_fasilitas || '').split('\n').map(s => s.trim()).filter(Boolean);
+      }
+      if (Array.isArray(fasList) && fasList.length > 0) {
+        const elFas = document.getElementById('app-profil-fasilitas-list');
+        if (elFas) {
+          const defaultIcons = ['monitor', 'book', 'home', 'activity', 'landmark', 'wifi', 'building', 'shield-check'];
+          elFas.innerHTML = fasList.map((f, idx) => {
+            const icon = defaultIcons[idx % defaultIcons.length];
+            return `
+              <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-2">
+                <i data-lucide="${icon}" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span class="font-bold text-slate-800 truncate">${f.replace(/</g, '&lt;')}</span>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 7. Kontak & Maps
+      const alamatTeks = raw.profile_alamat || kontak.alamat;
+      if (alamatTeks) setText('app-profil-alamat', alamatTeks);
+
+      const mapsUrl = raw.profile_maps_url || kontak.maps_url;
+      if (mapsUrl) {
+        const elMaps = document.getElementById('app-profil-maps-btn');
+        if (elMaps) elMaps.href = mapsUrl;
+      }
+
+      const waUrl = raw.profile_wa_sekretariat || kontak.wa_sekretariat;
+      if (waUrl) {
+        const elWa = document.getElementById('app-profil-wa-btn');
+        if (elWa) elWa.href = waUrl;
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    async function loadAppDynamicProfile(forceFetch = false) {
+      try {
+        const cached = localStorage.getItem('yasua_cached_profile');
+        if (cached) {
+          try {
+            appProfileData = JSON.parse(cached);
+            renderAppProfile(appProfileData);
+          } catch(e) {}
+        }
+
+        const lastFetch = parseInt(sessionStorage.getItem('yasua_profile_last_fetch') || '0', 10);
+        const now = Date.now();
+        if (!forceFetch && (now - lastFetch < 300000) && appProfileData) {
+          return;
+        }
+
+        const apiUrl = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL : 
+                       (typeof API_URL !== 'undefined') ? API_URL : 
+                       'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+        
+        const res = await fetch(`${apiUrl}?action=getProfile`);
+        const json = await res.json();
+        if (json && (json.status === 'success' || json.success) && json.data) {
+          appProfileData = json.data;
+          localStorage.setItem('yasua_cached_profile', JSON.stringify(appProfileData));
+          sessionStorage.setItem('yasua_profile_last_fetch', String(now));
+          renderAppProfile(appProfileData);
+        }
+      } catch(err) {
+        console.warn('Gagal memuat data profil dinamis:', err);
+      }
+    }
+
+    window.renderAppProfile = renderAppProfile;
+    window.loadAppDynamicProfile = loadAppDynamicProfile;
+
+    // Inisialisasi awal profil dari cache saat aplikasi dimuat
+    try {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(loadAppDynamicProfile, 100);
+        });
+      } else {
+        setTimeout(loadAppDynamicProfile, 100);
+      }
+    } catch(e) {}
 
   </script>
 
