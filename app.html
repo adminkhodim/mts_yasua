@@ -2412,8 +2412,8 @@
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Roster Belajar</span>
             </button>
 
-            <!-- 10. PPDB -->
-            <button type="button" onclick="switchAppTab('ppdb')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-orange-50/70 border border-slate-200/70 hover:border-orange-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <!-- 10. PPDB (Penerimaan Peserta Didik Baru) -->
+            <button type="button" onclick="openAdminModule('ppdb')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-orange-50/70 border border-slate-200/70 hover:border-orange-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-orange-100 text-orange-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
                 <i data-lucide="user-plus" class="w-4 h-4 text-orange-700"></i>
               </div>
@@ -4069,6 +4069,93 @@
                 <a href="/admin?tab=prestasi" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
                   <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                   <span>Buka Editor Prestasi Desktop</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subview 10: PPDB (Monitoring Pendaftar Calon Santri Baru) -->
+          <div id="admin-subview-ppdb" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center font-bold">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Monitoring PPDB Online 2026/2027</h4>
+                    <p class="text-[9.5px] text-slate-400">Verifikasi Berkas, Jalur &amp; Database Calon Siswa</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="fetchAdminPpdbList(true)" class="w-7 h-7 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="Segarkan Data PPDB">
+                    <i data-lucide="refresh-cw" id="admin-mob-ppdb-refresh-icon" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-orange-50 text-orange-700 rounded-full border border-orange-200">Database Live</span>
+                </div>
+              </div>
+
+              <!-- 4 Kartu KPI Metrik PPDB -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div class="p-2.5 rounded-xl bg-orange-50/70 border border-orange-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-orange-800 uppercase tracking-wider block">Total Pendaftar</span>
+                  <p id="admin-ppdb-total-stat" class="text-base font-black text-orange-950">0</p>
+                  <span class="text-[8.5px] text-orange-600 block">Calon Santri Baru</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Menunggu</span>
+                  <p id="admin-ppdb-pending-stat" class="text-base font-black text-amber-950">0</p>
+                  <span class="text-[8.5px] text-amber-700 block">Perlu Verifikasi</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Diterima</span>
+                  <p id="admin-ppdb-verified-stat" class="text-base font-black text-emerald-950">0</p>
+                  <span class="text-[8.5px] text-emerald-600 block">Lolos Seleksi</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Tahfidz &amp; Prestasi</span>
+                  <p id="admin-ppdb-tahfidz-stat" class="text-base font-black text-blue-950">0</p>
+                  <span class="text-[8.5px] text-blue-700 block">Jalur Unggulan</span>
+                </div>
+              </div>
+
+              <!-- Search Bar & Filter Status Pill Tabs -->
+              <div class="space-y-2 pt-1">
+                <div class="relative">
+                  <input type="text" id="admin-ppdb-search-input" oninput="searchAdminPpdb()" placeholder="Cari nama siswa, no registrasi, atau asal sekolah..." class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-orange-500 focus:bg-white transition">
+                  <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+                </div>
+
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px] font-bold">
+                  <button type="button" onclick="setAdminPpdbFilter('all')" id="btn-admin-ppdb-filter-all" class="px-3 py-1.5 rounded-xl bg-orange-600 text-white shrink-0 shadow-2xs transition">Semua</button>
+                  <button type="button" onclick="setAdminPpdbFilter('Menunggu Verifikasi')" id="btn-admin-ppdb-filter-pending" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Menunggu</button>
+                  <button type="button" onclick="setAdminPpdbFilter('Diterima')" id="btn-admin-ppdb-filter-accepted" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Diterima</button>
+                  <button type="button" onclick="setAdminPpdbFilter('Terverifikasi')" id="btn-admin-ppdb-filter-verified" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Terverifikasi</button>
+                </div>
+              </div>
+
+              <!-- Container Daftar Calon Santri -->
+              <div id="admin-ppdb-list-container" class="space-y-2.5 pt-1">
+                <!-- Diisi otomatis oleh renderAdminPpdbList() -->
+              </div>
+
+              <!-- Quick Action Links -->
+              <div class="space-y-2 pt-2 border-t border-slate-100">
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" onclick="closeAdminSubviews(); switchAppTab('ppdb');" class="py-2.5 px-3 rounded-xl border border-orange-200 bg-orange-50/70 hover:bg-orange-100 text-orange-900 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 cursor-pointer">
+                    <i data-lucide="clipboard-pen" class="w-3.5 h-3.5 text-orange-700"></i>
+                    <span>Form Pendaftaran</span>
+                  </button>
+
+                  <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=0" target="_blank" class="py-2.5 px-3 rounded-xl border border-emerald-200 bg-emerald-50/70 hover:bg-emerald-100 text-emerald-900 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-700"></i>
+                    <span>Buka Spreadsheet</span>
+                  </a>
+                </div>
+
+                <a href="https://wa.me/6285649881966?text=Halo%20Panitia%20PPDB%20MTs%20YASUA%20Pilangwetan" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-98 text-slate-800 text-xs font-bold flex items-center justify-center gap-2 transition">
+                  <i data-lucide="phone-call" class="w-4 h-4 text-emerald-600"></i>
+                  <span>Hubungi Hotline Panitia PPDB</span>
                 </a>
               </div>
             </div>
@@ -8448,7 +8535,7 @@ function openAdminModule(moduleName) {
       if (container) container.classList.remove('hidden');
 
       // 2. Sembunyikan Semua Subview Lain
-      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni', 'profil', 'galeri'];
+      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni', 'profil', 'galeri', 'ppdb'];
       allSubviews.forEach(s => {
         const el = document.getElementById('admin-subview-' + s);
         if (el) el.classList.add('hidden');
@@ -8478,6 +8565,7 @@ function openAdminModule(moduleName) {
         tahfidz: { title: "Mutaba'ah Tahfidz Al-Qur'an", icon: 'book-open', color: 'bg-emerald-50 text-emerald-600' },
         profil: { title: 'Manajemen Profil Madrasah', icon: 'school', color: 'bg-emerald-50 text-emerald-600' },
         galeri: { title: 'Pengelolaan Galeri & Dokumentasi', icon: 'images', color: 'bg-purple-50 text-purple-700' },
+        ppdb: { title: 'Penerimaan Peserta Didik Baru (PPDB)', icon: 'user-plus', color: 'bg-orange-50 text-orange-700' },
         jadwal: { title: 'Manajemen Jadwal KBM & Roster', icon: 'calendar-days', color: 'bg-sky-50 text-sky-700' }
       };
 
@@ -8529,6 +8617,9 @@ function openAdminModule(moduleName) {
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (targetViewName === 'ppdb' && typeof fetchAdminPpdbList === 'function') {
+        fetchAdminPpdbList();
+      }
       if (targetViewName === 'galeri' && typeof renderMobileAdminGallery === 'function') {
         renderMobileAdminGallery();
       }
@@ -11289,6 +11380,229 @@ function openAdminModule(moduleName) {
 
     window.setMobileAdminGalleryFilter = setMobileAdminGalleryFilter;
     window.renderMobileAdminGallery = renderMobileAdminGallery;
+
+  
+
+    // ========================================================
+    // MOBILE ADMIN PPDB CONTROLLER (MONITORING PENDAFTAR BARU)
+    // ========================================================
+    let adminPpdbData = [];
+    let currentAdminPpdbFilter = 'all';
+
+    async function fetchAdminPpdbList(forceFetch = false) {
+      const refreshIcon = document.getElementById('admin-mob-ppdb-refresh-icon');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      try {
+        const cached = localStorage.getItem('yasua_cached_ppdb_list');
+        if (cached && !forceFetch) {
+          try {
+            adminPpdbData = JSON.parse(cached);
+            renderAdminPpdbList();
+          } catch(e) {}
+        }
+
+        const apiUrl = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL : 
+                       (typeof API_URL !== 'undefined') ? API_URL : 
+                       'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+
+        const res = await fetch(`${apiUrl}?action=getPpdbList`);
+        const json = await res.json();
+        if (json && (json.status === 'success' || json.success) && Array.isArray(json.data)) {
+          adminPpdbData = json.data;
+          localStorage.setItem('yasua_cached_ppdb_list', JSON.stringify(adminPpdbData));
+          renderAdminPpdbList();
+        }
+      } catch(err) {
+        console.warn('Gagal memuat data pendaftar PPDB:', err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      }
+    }
+
+    function setAdminPpdbFilter(filter) {
+      currentAdminPpdbFilter = filter;
+      const filterMap = {
+        'all': 'btn-admin-ppdb-filter-all',
+        'Menunggu Verifikasi': 'btn-admin-ppdb-filter-pending',
+        'Diterima': 'btn-admin-ppdb-filter-accepted',
+        'Terverifikasi': 'btn-admin-ppdb-filter-verified'
+      };
+
+      Object.entries(filterMap).forEach(([fKey, btnId]) => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+          if (fKey === filter) {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-orange-600 text-white shrink-0 shadow-2xs transition';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition';
+          }
+        }
+      });
+
+      renderAdminPpdbList();
+    }
+
+    function searchAdminPpdb() {
+      renderAdminPpdbList();
+    }
+
+    function renderAdminPpdbList() {
+      const container = document.getElementById('admin-ppdb-list-container');
+      if (!container) return;
+
+      const data = Array.isArray(adminPpdbData) ? adminPpdbData : [];
+
+      // Update Metrik KPI
+      const total = data.length;
+      const pending = data.filter(p => (p.status_pendaftaran || '').toLowerCase().includes('menunggu')).length;
+      const diterima = data.filter(p => (p.status_pendaftaran || '').toLowerCase().includes('diterima') || (p.status_pendaftaran || '').toLowerCase().includes('terverifikasi')).length;
+      const tahfidz = data.filter(p => (p.jalur || '').toLowerCase().includes('tahfidz') || (p.program_pilihan || '').toLowerCase().includes('tahfidz') || (p.jalur || '').toLowerCase().includes('prestasi')).length;
+
+      const setElText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setElText('admin-ppdb-total-stat', total);
+      setElText('admin-ppdb-pending-stat', pending);
+      setElText('admin-ppdb-verified-stat', diterima);
+      setElText('admin-ppdb-tahfidz-stat', tahfidz);
+
+      // Filter & Pencarian
+      const searchInput = document.getElementById('admin-ppdb-search-input');
+      const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+      let filtered = data.filter(item => {
+        const status = item.status_pendaftaran || 'Menunggu Verifikasi';
+        const matchesFilter = (currentAdminPpdbFilter === 'all') || (status.toLowerCase() === currentAdminPpdbFilter.toLowerCase());
+        
+        const nama = (item.nama_lengkap || '').toLowerCase();
+        const id = String(item.id || '').toLowerCase();
+        const sekolah = (item.sekolah_asal || '').toLowerCase();
+        const matchesSearch = !q || nama.includes(q) || id.includes(q) || sekolah.includes(q);
+
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-xs">
+            <i data-lucide="user-x" class="w-6 h-6 mx-auto mb-1 text-slate-300"></i>
+            <p>Tidak ada data pendaftar yang cocok.</p>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const id = item.id || 'REG-2026';
+        const nama = item.nama_lengkap || 'Calon Santri';
+        const sekolah = item.sekolah_asal || 'SD/MI';
+        const jalur = item.jalur || 'Reguler';
+        const program = item.program_pilihan || 'Madrasah Digital';
+        const status = item.status_pendaftaran || 'Menunggu Verifikasi';
+        const wali = item.nama_wali || 'Wali Santri';
+        let wa = String(item.no_whatsapp || '').replace(/[^0-9]/g, '');
+        if (wa.startsWith('0')) wa = '62' + wa.substring(1);
+        if (wa.startsWith('8')) wa = '62' + wa;
+
+        let statusBadge = 'bg-amber-50 text-amber-800 border-amber-200';
+        if (status.toLowerCase().includes('diterima')) {
+          statusBadge = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+        } else if (status.toLowerCase().includes('terverifikasi')) {
+          statusBadge = 'bg-blue-50 text-blue-800 border-blue-200';
+        }
+
+        const gender = (item.jenis_kelamin || '').toLowerCase().includes('perempuan') ? 'P' : 'L';
+        const genderColor = gender === 'P' ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700';
+
+        const waText = encodeURIComponent(`Assalamu'alaikum Wr. Wb. Bapak/Ibu ${wali}, kami dari Panitia PPDB MTs YASUA Pilangwetan terkait pendaftaran ananda ${nama} (${id})...`);
+        const waLink = wa ? `https://wa.me/${wa}?text=${waText}` : null;
+
+        return `
+          <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200/80 hover:border-orange-200 transition-all space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="w-6 h-6 rounded-lg ${genderColor} flex items-center justify-center text-[10px] font-black shrink-0">${gender}</span>
+                <div class="min-w-0">
+                  <h5 class="text-xs font-black text-slate-900 leading-snug truncate">${nama}</h5>
+                  <span class="text-[9.5px] font-mono text-slate-400 block">${id} &bull; ${item.nisn ? ('NISN: ' + item.nisn) : 'Baru'}</span>
+                </div>
+              </div>
+              <span class="text-[9px] font-bold px-2 py-0.5 rounded-full border ${statusBadge} shrink-0">${status}</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-1.5 text-[10px] text-slate-600 bg-white p-2 rounded-xl border border-slate-100">
+              <div>
+                <span class="text-[8.5px] text-slate-400 block">Asal Sekolah:</span>
+                <span class="font-bold text-slate-800 truncate block">${sekolah}</span>
+              </div>
+              <div>
+                <span class="text-[8.5px] text-slate-400 block">Jalur &amp; Program:</span>
+                <span class="font-bold text-orange-700 truncate block">${jalur} &bull; ${program}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-0.5">
+              <span class="text-[9px] text-slate-400 truncate">Wali: ${wali}</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                ${waLink ? `
+                  <a href="${waLink}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] flex items-center gap-1 shadow-2xs transition">
+                    <i data-lucide="message-circle" class="w-3 h-3"></i>
+                    <span>Chat WA</span>
+                  </a>
+                ` : ''}
+                <button type="button" onclick="quickUpdatePpdbStatus('${id}', '${status}')" class="px-2.5 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-[10px] flex items-center gap-1 transition">
+                  <i data-lucide="check-circle" class="w-3 h-3 text-emerald-700"></i>
+                  <span>Status</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    async function quickUpdatePpdbStatus(regId, currentStatus) {
+      const nextStatus = currentStatus === 'Diterima' ? 'Menunggu Verifikasi' : 
+                         currentStatus === 'Menunggu Verifikasi' ? 'Terverifikasi' : 'Diterima';
+
+      const confirmMsg = `Ubah status pendaftaran ${regId} menjadi "${nextStatus}"?`;
+      if (!confirm(confirmMsg)) return;
+
+      try {
+        // Optimistic update
+        const item = adminPpdbData.find(p => p.id === regId);
+        if (item) {
+          item.status_pendaftaran = nextStatus;
+          renderAdminPpdbList();
+        }
+
+        const apiUrl = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL : 
+                       (typeof API_URL !== 'undefined') ? API_URL : 
+                       'https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec';
+
+        await fetch(apiUrl, {
+          method: 'POST',
+          body: JSON.stringify({
+            password: (typeof getAdminPassword === 'function') ? getAdminPassword() : '',
+            action: 'updatePpdbStatus',
+            id: regId,
+            status: nextStatus
+          })
+        });
+
+        localStorage.setItem('yasua_cached_ppdb_list', JSON.stringify(adminPpdbData));
+      } catch(err) {
+        console.warn('Gagal update status pendaftar:', err);
+      }
+    }
+
+    window.fetchAdminPpdbList = fetchAdminPpdbList;
+    window.setAdminPpdbFilter = setAdminPpdbFilter;
+    window.searchAdminPpdb = searchAdminPpdb;
+    window.renderAdminPpdbList = renderAdminPpdbList;
+    window.quickUpdatePpdbStatus = quickUpdatePpdbStatus;
 
   </script>
 

@@ -445,6 +445,15 @@ function doPost(e) {
         result = uploadPhotoToDrive(payload.filename, payload.base64, 'GALERI');
         return createJsonResponse({ status: 'success', data: result });
 
+      // PPDB Registrations
+      case 'updatePpdbStatus':
+        result = updatePpdbRegistrationStatus(
+          payload.id || (payload.data && payload.data.id),
+          payload.status || (payload.data && payload.data.status),
+          payload.catatan || (payload.data && payload.data.catatan)
+        );
+        return createJsonResponse({ status: 'success', data: result, message: 'Status pendaftar PPDB berhasil diperbarui' });
+
       // Berita & Pengumuman
       case 'addNews':
         result = addNewNews(payload.data);
