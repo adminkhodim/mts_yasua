@@ -5875,15 +5875,17 @@
     // Sanitasi XSS helper untuk konten dinamis
     function formatNewsDate(d) {
       if (!d) return '';
-      if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
+      const str = String(d).trim();
+      // Format ISO string atau YYYY-MM-DD
+      if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
         try {
-          const dt = new Date(d);
+          const dt = new Date(str);
           if (!isNaN(dt.getTime())) {
             return dt.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
           }
         } catch(e) {}
       }
-      return String(d);
+      return str;
     }
 
     function resolveNewsImageUrl(rawImg) {
@@ -6139,7 +6141,8 @@
           .slice(0, 4);
 
         relatedContainer.innerHTML = otherNews.map(n => {
-          const vCount = (Number(n.views) || 20).toLocaleString('id-ID');
+          const viewsNum = (n.views !== undefined && n.views !== null && n.views !== '' && !isNaN(Number(n.views))) ? Number(n.views) : 0;
+          const vCount = viewsNum.toLocaleString('id-ID');
           const imgSrc = resolveNewsImageUrl(n.image);
           const formattedDate = formatNewsDate(n.date);
 
@@ -6193,9 +6196,9 @@
                             n.kategori === 'Akademik' ? 'bg-blue-600 text-white' : 'bg-emerald-700 text-white';
 
               const slug = n.slug || (n.judul ? n.judul.toLowerCase().replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-') : n.id);
-              const viewsNum = Number(n.views) || 0;
+              const viewsNum = (n.views !== undefined && n.views !== null && n.views !== '' && !isNaN(Number(n.views))) ? Number(n.views) : 0;
               const readTimeStr = n.read_time || '2 menit baca';
-              const cleanDate = formatNewsDate(n.tanggal);
+              const cleanDate = formatNewsDate(n.tanggal || n.created_at);
 
               tabNewsDetails[n.id] = {
                 id: n.id,
@@ -6219,8 +6222,10 @@
                 const badgeBg = n.kategori === 'Prestasi' ? 'bg-emerald-100 text-emerald-800' :
                                 n.kategori === 'Pengumuman' ? 'bg-amber-100 text-amber-800' :
                                 n.kategori === 'Akademik' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800';
-                const vCount = (Number(n.views) || 1890).toLocaleString('id-ID');
+                const viewsNum = (n.views !== undefined && n.views !== null && n.views !== '' && !isNaN(Number(n.views))) ? Number(n.views) : 0;
+                const vCount = viewsNum.toLocaleString('id-ID');
                 const borderClass = idx > 0 ? 'border-t border-slate-100/70' : '';
+                const cleanDate = formatNewsDate(n.tanggal || n.created_at);
 
                 return '<div onclick="openNewsModal(\'' + n.id + '\')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50/50 transition-colors group cursor-pointer ' + borderClass + '">' +
                   '<div class="flex-1 min-w-0">' +
@@ -6233,7 +6238,7 @@
                     '<h4 class="font-bold text-slate-900 group-hover:text-brand-primary text-xs line-clamp-2 leading-snug transition-colors">' +
                       escapeHtml(n.judul) +
                     '</h4>' +
-                    '<span class="text-[10px] text-slate-400 mt-1 block">' + escapeHtml(n.tanggal) + '</span>' +
+                    '<span class="text-[10px] text-slate-400 mt-1 block">' + escapeHtml(cleanDate) + '</span>' +
                   '</div>' +
                   '<img src="' + escapeHtml(resolveNewsImageUrl(n.gambar_url)) + '" alt="' + escapeHtml(n.judul) + '" class="w-20 h-14 rounded-xl object-cover shrink-0 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.src=\'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst\'">'  +
                 '</div>';
@@ -6248,11 +6253,12 @@
               const img = document.getElementById('tabFeaturedImg');
               if (img) img.src = resolveNewsImageUrl(featured.gambar_url);
               const dateEl = document.getElementById('tabFeaturedDate');
-              if (dateEl) dateEl.textContent = featured.tanggal;
+              if (dateEl) dateEl.textContent = formatNewsDate(featured.tanggal || featured.created_at);
               const badgeEl = document.getElementById('tabFeaturedBadge');
               if (badgeEl) badgeEl.textContent = (featured.kategori || 'PENGUMUMAN').toUpperCase();
               const viewsEl = document.getElementById('tabFeaturedViews');
-              if (viewsEl) viewsEl.innerHTML = '<i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i><span>' + (Number(featured.views) || 2450).toLocaleString('id-ID') + ' pembaca</span>';
+              const featViews = (featured.views !== undefined && featured.views !== null && featured.views !== '' && !isNaN(Number(featured.views))) ? Number(featured.views) : 0;
+              if (viewsEl) viewsEl.innerHTML = '<i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i><span>' + featViews.toLocaleString('id-ID') + ' pembaca</span>';
               const readTimeEl = document.getElementById('tabFeaturedReadTime');
               if (readTimeEl) readTimeEl.innerHTML = '<i data-lucide="clock" class="w-3 h-3 text-slate-400"></i><span>' + (featured.read_time || '2 mnt baca') + '</span>';
               const titleEl = document.getElementById('tabFeaturedTitle');
@@ -6271,7 +6277,9 @@
                 const color = n.kategori === 'Prestasi' ? 'bg-emerald-100 text-emerald-800' :
                               n.kategori === 'Pengumuman' ? 'bg-amber-100 text-amber-800' :
                               n.kategori === 'Akademik' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800';
-                const vCount = (Number(n.views) || 1890).toLocaleString('id-ID');
+                const viewsNum = (n.views !== undefined && n.views !== null && n.views !== '' && !isNaN(Number(n.views))) ? Number(n.views) : 0;
+                const vCount = viewsNum.toLocaleString('id-ID');
+                const cleanDate = formatNewsDate(n.tanggal || n.created_at);
 
                 return '<div onclick="openNewsModal(\'' + n.id + '\')" class="bg-white p-3 rounded-2xl border border-emerald-100 shadow-2xs hover:border-emerald-300 transition-all cursor-pointer flex gap-3 items-center group">' +
                   '<div class="w-20 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0 relative">' +
@@ -6285,7 +6293,7 @@
                       '</span>' +
                     '</div>' +
                     '<h4 class="font-bold text-slate-900 text-xs leading-snug line-clamp-2 group-hover:text-brand-primary transition-colors">' + escapeHtml(n.judul) + '</h4>' +
-                    '<span class="text-[9.5px] text-slate-400 block">' + escapeHtml(n.tanggal) + '</span>' +
+                    '<span class="text-[9.5px] text-slate-400 block">' + escapeHtml(cleanDate) + '</span>' +
                   '</div>' +
                 '</div>';
               }).join('');
@@ -8854,7 +8862,10 @@ function openAdminModule(moduleName) {
       if (metricTotal) metricTotal.textContent = (currentAdminNewsData.length || 0) + ' Berita +';
       
       if (metricViews) {
-        const totalViews = (currentAdminNewsData || []).reduce((acc, n) => acc + (parseInt(n.views) || 2300), 0);
+        const totalViews = (currentAdminNewsData || []).reduce((acc, n) => {
+          const v = (n.views !== undefined && n.views !== null && n.views !== '' && !isNaN(Number(n.views))) ? Number(n.views) : 0;
+          return acc + v;
+        }, 0);
         metricViews.textContent = totalViews > 1000 ? (totalViews / 1000).toFixed(1) + 'k Views' : totalViews + ' Views';
       }
       if (metricKat) {
@@ -8910,7 +8921,7 @@ function openAdminModule(moduleName) {
                     ${news.kategori || 'Berita'}
                   </span>
                   ${headlinePill}
-                  <span class="text-[9.5px] text-slate-400">${news.tanggal || '-'}</span>
+                  <span class="text-[9.5px] text-slate-400">${formatNewsDate(news.tanggal || news.created_at) || '-'}</span>
                   <span class="text-[9.5px] text-slate-400 flex items-center gap-0.5">
                     <i data-lucide="eye" class="w-2.5 h-2.5"></i>
                     <span>${viewsCount} views</span>

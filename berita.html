@@ -1130,6 +1130,20 @@
   </div>
 
   <script>
+    function formatNewsDate(d) {
+      if (!d) return '';
+      const str = String(d).trim();
+      if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
+        try {
+          const dt = new Date(str);
+          if (!isNaN(dt.getTime())) {
+            return dt.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+          }
+        } catch(e) {}
+      }
+      return str;
+    }
+
     function resolveNewsImageUrl(rawImg) {
       if (!rawImg) return 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGst';
       if (typeof rawImg === 'string' && rawImg.startsWith('/https://')) rawImg = rawImg.substring(1);
@@ -1433,7 +1447,7 @@
                 <i data-lucide="bell" class="w-3.5 h-3.5"></i> ${escapeHtml(main.kategori.toUpperCase())}
               </span>
               <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 text-white font-semibold text-[11px] backdrop-blur-md">
-                <i data-lucide="calendar" class="w-3 h-3 text-brand-gold"></i> ${escapeHtml(main.tanggal)}
+                <i data-lucide="calendar" class="w-3 h-3 text-brand-gold"></i> ${escapeHtml(formatNewsDate(main.tanggal || main.created_at))}
               </span>
             </div>
             <div class="space-y-2">
@@ -1477,7 +1491,7 @@
                 </span>
               </div>
               <div class="flex items-center justify-between text-[10px] text-slate-400 font-medium mb-1">
-                <span>${escapeHtml(n.tanggal)}</span>
+                <span>${escapeHtml(formatNewsDate(n.tanggal || n.created_at))}</span>
                 <span class="inline-flex items-center gap-1 text-emerald-700 font-bold" title="Jumlah pembaca">
                   <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
                   <span>${viewsFormatted}</span>
@@ -1579,7 +1593,7 @@
                   <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1.5">
                     <div class="flex items-center gap-1.5">
                       <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-                      <span>${escapeHtml(n.tanggal)}</span>
+                      <span>${escapeHtml(formatNewsDate(n.tanggal || n.created_at))}</span>
                     </div>
                     <span class="inline-flex items-center gap-1 text-emerald-700 font-bold" title="Jumlah pembaca">
                       <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
@@ -1659,7 +1673,7 @@
         category.textContent = (data.kategori || 'WARTA').toUpperCase();
         category.className = `px-3.5 py-1 rounded-full text-xs font-black shadow-2xs ${data.badge_class || getCategoryBadgeClass(data.kategori)}`;
       }
-      if (date) date.textContent = data.tanggal;
+      if (date) date.textContent = formatNewsDate(data.tanggal || data.created_at);
       if (readTime) readTime.textContent = data.read_time || '2 menit baca';
       if (viewsEl) viewsEl.textContent = `${Number(data.views).toLocaleString('id-ID')} pembaca`;
       if (authorEl) authorEl.textContent = data.penulis || 'Warta Resmi MTs YASUA';
@@ -1682,7 +1696,7 @@
                   </span>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                  <span>${escapeHtml(r.tanggal)}</span>
+                  <span>${escapeHtml(formatNewsDate(r.tanggal || r.created_at))}</span>
                   <span class="inline-flex items-center gap-1 text-emerald-700 font-bold">
                     <i data-lucide="eye" class="w-3 h-3 text-emerald-600"></i>
                     <span>${rViews}</span>
