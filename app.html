@@ -3539,57 +3539,76 @@
 
           <!-- 5. Subview Santri & Siswa -->
           <div id="admin-subview-santri" class="hidden space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
                   <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
                     <i data-lucide="graduation-cap" class="w-4 h-4"></i>
                   </div>
                   <div>
-                    <h4 class="font-extrabold text-xs text-slate-800">Master Data Siswa</h4>
-                    <p class="text-[9.5px] text-slate-400">Total 276 Siswa &bull; 9 Rombongan Belajar</p>
+                    <h4 class="font-extrabold text-xs text-slate-800">Master Data Siswa Madrasah</h4>
+                    <p class="text-[9.5px] text-slate-400">Total 276 Siswa Aktif &bull; 9 Rombongan Belajar</p>
                   </div>
                 </div>
-                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">TA 2026/2027</span>
-              </div>
-
-              <!-- Distribusi Kelas -->
-              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1">
-                  <span class="text-[10px] font-bold text-purple-800">Kelas VII</span>
-                  <p class="text-base font-black text-purple-950">96</p>
-                  <span class="text-[8.5px] text-purple-600">3 Rombel (A, B, C)</span>
-                </div>
-                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1">
-                  <span class="text-[10px] font-bold text-purple-800">Kelas VIII</span>
-                  <p class="text-base font-black text-purple-950">92</p>
-                  <span class="text-[8.5px] text-purple-600">3 Rombel (A, B, C)</span>
-                </div>
-                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1">
-                  <span class="text-[10px] font-bold text-purple-800">Kelas IX</span>
-                  <p class="text-base font-black text-purple-950">88</p>
-                  <span class="text-[8.5px] text-purple-600">3 Rombel (A, B, C)</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">TA 2026/2027</span>
                 </div>
               </div>
 
-              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2 text-xs">
-                <div class="flex items-center justify-between font-bold text-slate-700">
-                  <span>Jalur Program Peminatan:</span>
-                  <span class="text-emerald-700">100% Terdistribusi</span>
+              <!-- 4 Kartu Metrik KPI Master Data Siswa -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-purple-800 uppercase tracking-wider block">Total Siswa</span>
+                  <p id="admin-siswa-total-stat" class="text-base font-black text-purple-950">276</p>
+                  <span class="text-[8.5px] text-purple-600 block">Siswa Aktif</span>
                 </div>
-                <div class="flex items-center justify-between text-[11px] text-slate-600">
-                  <span>&bull; Kelas Reguler Berbasis Digital:</span>
-                  <span class="font-bold">186 Siswa</span>
+                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Kelas VII</span>
+                  <p id="admin-siswa-vii-stat" class="text-base font-black text-blue-950">96</p>
+                  <span class="text-[8.5px] text-blue-600 block">3 Rombel (A, B, C)</span>
                 </div>
-                <div class="flex items-center justify-between text-[11px] text-slate-600">
-                  <span>&bull; Kelas Unggulan Tahfidz &amp; Kitab Salaf:</span>
-                  <span class="font-bold">90 Santri</span>
+                <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-indigo-800 uppercase tracking-wider block">Kelas VIII</span>
+                  <p id="admin-siswa-viii-stat" class="text-base font-black text-indigo-950">92</p>
+                  <span class="text-[8.5px] text-indigo-600 block">3 Rombel (A, B, C)</span>
                 </div>
+                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Kelas IX</span>
+                  <p id="admin-siswa-ix-stat" class="text-base font-black text-emerald-950">88</p>
+                  <span class="text-[8.5px] text-emerald-600 block">3 Rombel (A, B, C)</span>
+                </div>
+              </div>
+
+              <!-- Search Bar & Filter Rombel -->
+              <div class="space-y-2 pt-1">
+                <div class="relative">
+                  <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input type="text" id="admin-siswa-search-input" oninput="searchAdminSiswa()" placeholder="Cari nama siswa atau NISN..." class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:ring-1 focus:ring-purple-600 focus:outline-none">
+                </div>
+
+                <!-- Chips Filter Rombel -->
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px] font-bold no-scrollbar">
+                  <button type="button" onclick="filterAdminSiswaRombel('all')" id="btn-admin-siswa-all" class="px-3 py-1.5 rounded-xl bg-purple-700 text-white shrink-0 shadow-2xs transition cursor-pointer">Semua (276)</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('VII-A')" id="btn-admin-siswa-VII-A" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">VII-A</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('VII-B')" id="btn-admin-siswa-VII-B" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">VII-B</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('VII-C')" id="btn-admin-siswa-VII-C" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">VII-C</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('VIII-A')" id="btn-admin-siswa-VIII-A" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">VIII-A</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('VIII-B')" id="btn-admin-siswa-VIII-B" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">VIII-B</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('VIII-C')" id="btn-admin-siswa-VIII-C" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">VIII-C</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('IX-A')" id="btn-admin-siswa-IX-A" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">IX-A</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('IX-B')" id="btn-admin-siswa-IX-B" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">IX-B</button>
+                  <button type="button" onclick="filterAdminSiswaRombel('IX-C')" id="btn-admin-siswa-IX-C" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">IX-C</button>
+                </div>
+              </div>
+
+              <!-- Daftar Kartu Siswa Dinamis -->
+              <div id="admin-siswa-list-container" class="space-y-2 pt-1 max-h-[380px] overflow-y-auto pr-1">
+                <!-- Populated via renderAdminSiswaList() -->
               </div>
 
               <div class="pt-1 flex gap-2">
                 <a href="https://docs.google.com/spreadsheets/d/1m1uFzrLKoouVNAMwyWglJrYL_CWSVy-P2aScjM_KUjU/edit#gid=1774309740" target="_blank" class="flex-1 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i>
                   <span>Buka Spreadsheet Database Siswa</span>
                 </a>
               </div>
@@ -4174,10 +4193,14 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5">
-                  <button type="button" onclick="renderAdminPrestasiList()" class="w-7 h-7 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="Segarkan Data Prestasi">
+                  <button type="button" onclick="openAdminPrestasiModal()" class="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-[10.5px] flex items-center gap-1 shadow-2xs transition cursor-pointer">
+                    <i data-lucide="plus" class="w-3 h-3"></i>
+                    <span>Tambah</span>
+                  </button>
+                  <button type="button" onclick="fetchAdminPrestasiList(true)" class="w-7 h-7 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="Segarkan Data dari Cloud">
                     <i data-lucide="refresh-cw" id="admin-mob-prestasi-refresh-icon" class="w-3.5 h-3.5"></i>
                   </button>
-                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200">Rekap Juara</span>
+                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200">Live Sheets</span>
                 </div>
               </div>
 
@@ -4331,37 +4354,79 @@
 
           <!-- 9. Subview Alumni -->
           <div id="admin-subview-alumni" class="hidden space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
-                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                  <div class="w-8 h-8 rounded-lg bg-violet-100 text-violet-700 flex items-center justify-center font-bold">
+                    <i data-lucide="award" class="w-4 h-4"></i>
                   </div>
                   <div>
                     <h4 class="font-extrabold text-xs text-slate-800">Jejaring Alumni IKAMAS</h4>
-                    <p class="text-[9.5px] text-slate-400">Tracer Study &bull; 1.250+ Lulusan</p>
+                    <p class="text-[9.5px] text-slate-400">Tracer Study &bull; 1.250+ Lulusan Lintas Angkatan</p>
                   </div>
                 </div>
-                <button type="button" onclick="switchAppTab('alumni')" class="text-[10px] font-bold text-purple-700 hover:underline">Lihat di App &rarr;</button>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2 text-center text-xs">
-                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
-                  <span class="text-[9.5px] font-bold text-purple-800">Total Alumni</span>
-                  <p class="text-base font-black text-purple-950">1.250+</p>
-                  <span class="text-[8.5px] text-purple-600">Angkatan 1985 - 2026</span>
-                </div>
-                <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
-                  <span class="text-[9.5px] font-bold text-blue-800">Lanjut Studi</span>
-                  <p class="text-base font-black text-blue-950">98%</p>
-                  <span class="text-[8.5px] text-blue-600">MA, SMA &amp; Pesantren</span>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="renderAdminAlumniList()" class="w-7 h-7 rounded-lg bg-violet-50 hover:bg-violet-100 text-violet-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="Segarkan Data Alumni">
+                    <i data-lucide="refresh-cw" id="admin-mob-alumni-refresh-icon" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-violet-50 text-violet-700 rounded-full border border-violet-200">Tracer IKAMAS</span>
                 </div>
               </div>
 
-              <div class="pt-1 flex gap-2">
-                <a href="/admin?tab=alumni" class="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Buka Master Data Alumni Desktop</span>
+              <!-- 4 Kartu Metrik KPI Alumni -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div class="p-2.5 rounded-xl bg-violet-50/70 border border-violet-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-violet-800 uppercase tracking-wider block">Total Alumni</span>
+                  <p class="text-base font-black text-violet-950">1.250+</p>
+                  <span class="text-[8.5px] text-violet-600 block">1985 &ndash; 2026</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Kuliah &amp; Riset</span>
+                  <p class="text-base font-black text-blue-950">65%</p>
+                  <span class="text-[8.5px] text-blue-600 block">PTN / PTKIN</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Wirausaha/Kerja</span>
+                  <p class="text-base font-black text-emerald-950">35%</p>
+                  <span class="text-[8.5px] text-emerald-600 block">Industri &amp; Bisnis</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Profil Unggulan</span>
+                  <p id="admin-alumni-verified-stat" class="text-base font-black text-amber-950">6</p>
+                  <span class="text-[8.5px] text-amber-600 block">Terverifikasi Web</span>
+                </div>
+              </div>
+
+              <!-- Search Bar & Filter Alumni -->
+              <div class="space-y-2 pt-1">
+                <div class="relative">
+                  <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input type="text" id="admin-alumni-search-input" oninput="searchAdminAlumni()" placeholder="Cari nama alumni, angkatan, profesi, atau kampus..." class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:ring-1 focus:ring-violet-600 focus:outline-none">
+                </div>
+
+                <!-- Chips Filter Kategori Alumni -->
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px] font-bold no-scrollbar">
+                  <button type="button" onclick="setAdminAlumniFilter('all')" id="btn-admin-alumni-all" class="px-3 py-1.5 rounded-xl bg-violet-700 text-white shrink-0 shadow-2xs transition cursor-pointer">Semua Alumni</button>
+                  <button type="button" onclick="setAdminAlumniFilter('pendidikan')" id="btn-admin-alumni-pendidikan" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">Akademik / PTN</button>
+                  <button type="button" onclick="setAdminAlumniFilter('bisnis')" id="btn-admin-alumni-bisnis" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">Wirausaha</button>
+                  <button type="button" onclick="setAdminAlumniFilter('pesantren')" id="btn-admin-alumni-pesantren" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer">Pesantren / Ulama</button>
+                </div>
+              </div>
+
+              <!-- Container Kartu Alumni Dinamis -->
+              <div id="admin-alumni-list-container" class="space-y-2.5 pt-1 max-h-[380px] overflow-y-auto pr-1">
+                <!-- Diisi via renderAdminAlumniList() -->
+              </div>
+
+              <!-- Quick Links -->
+              <div class="pt-2 border-t border-slate-100 flex gap-2">
+                <button type="button" onclick="switchAppTab('alumni')" class="flex-1 py-2 px-3 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-800 text-xs font-bold flex items-center justify-center gap-1.5 transition border border-violet-200 cursor-pointer">
+                  <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                  <span>Buka Tab Alumni Publik</span>
+                </button>
+                <a href="/alumni.html" target="_blank" class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                  <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                  <span>Web alumni.html</span>
                 </a>
               </div>
             </div>
@@ -8786,8 +8851,15 @@ function openAdminModule(moduleName) {
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (targetViewName === 'prestasi' && typeof renderAdminPrestasiList === 'function') {
-        renderAdminPrestasiList();
+      if (targetViewName === 'prestasi') {
+        if (typeof fetchAdminPrestasiList === 'function') fetchAdminPrestasiList();
+        else if (typeof renderAdminPrestasiList === 'function') renderAdminPrestasiList();
+      }
+      if (targetViewName === 'santri' && typeof renderAdminSiswaList === 'function') {
+        renderAdminSiswaList();
+      }
+      if (targetViewName === 'alumni' && typeof renderAdminAlumniList === 'function') {
+        renderAdminAlumniList();
       }
       if ((targetViewName === 'ticker' || targetViewName === 'notifikasi') && typeof fetchAdminNotifikasiList === 'function') {
         fetchAdminNotifikasiList();
@@ -12163,8 +12235,419 @@ function openAdminModule(moduleName) {
     window.searchAdminPrestasi = searchAdminPrestasi;
     window.renderAdminPrestasiList = renderAdminPrestasiList;
 
+  
+    // =========================================================
+    // CONTROLLER MASTER DATA SISWA & ALUMNI & PRESTASI DINAMIS
+    // =========================================================
+
+    // --- A. MASTER DATA SISWA ---
+    let currentAdminSiswaRombel = 'all';
+    const appSiswaMaster = [
+      // Kelas VII-A
+      { nisn: '0129845001', nama: 'Ahmad Faiz Al-Faruq', rombel: 'VII-A', gender: 'L', status: 'Aktif' },
+      { nisn: '0129845002', nama: 'Aisyah Putri Rahmadani', rombel: 'VII-A', gender: 'P', status: 'Aktif' },
+      { nisn: '0129845003', nama: 'Alif Kurniawan Pratama', rombel: 'VII-A', gender: 'L', status: 'Aktif' },
+      { nisn: '0129845004', nama: 'Anisa Nurul Hidayah', rombel: 'VII-A', gender: 'P', status: 'Aktif' },
+      // Kelas VII-B
+      { nisn: '0129845005', nama: 'Bagus Tri Pamungkas', rombel: 'VII-B', gender: 'L', status: 'Aktif' },
+      { nisn: '0129845006', nama: 'Bilqis Maharani', rombel: 'VII-B', gender: 'P', status: 'Aktif' },
+      { nisn: '0129845007', nama: 'Bima Satria Ramadhan', rombel: 'VII-B', gender: 'L', status: 'Aktif' },
+      // Kelas VII-C
+      { nisn: '0129845008', nama: 'Citra Dewi Sartika', rombel: 'VII-C', gender: 'P', status: 'Aktif' },
+      { nisn: '0129845009', nama: 'Candra Danuarta', rombel: 'VII-C', gender: 'L', status: 'Aktif' },
+      // Kelas VIII-A
+      { nisn: '0118732001', nama: 'Danang Wahyu Triputra', rombel: 'VIII-A', gender: 'L', status: 'Aktif' },
+      { nisn: '0118732002', nama: 'Dina Maulida Az-Zahra', rombel: 'VIII-A', gender: 'P', status: 'Aktif' },
+      { nisn: '0118732003', nama: 'Dzaky Abdillah Hasyim', rombel: 'VIII-A', gender: 'L', status: 'Aktif' },
+      // Kelas VIII-B
+      { nisn: '0118732004', nama: 'Farhan Maulana Hakim', rombel: 'VIII-B', gender: 'L', status: 'Aktif' },
+      { nisn: '0118732005', nama: 'Fathiyah Hasna', rombel: 'VIII-B', gender: 'P', status: 'Aktif' },
+      // Kelas VIII-C
+      { nisn: '0118732006', nama: 'Gilang Ramadhan', rombel: 'VIII-C', gender: 'L', status: 'Aktif' },
+      { nisn: '0118732007', nama: 'Gita Permatasari', rombel: 'VIII-C', gender: 'P', status: 'Aktif' },
+      // Kelas IX-A
+      { nisn: '0107621001', nama: 'Habibullah Al-Kareem', rombel: 'IX-A', gender: 'L', status: 'Aktif' },
+      { nisn: '0107621002', nama: 'Hafizhah Khairunnisa', rombel: 'IX-A', gender: 'P', status: 'Aktif' },
+      // Kelas IX-B
+      { nisn: '0107621003', nama: 'Ibrahim Rasyid', rombel: 'IX-B', gender: 'L', status: 'Aktif' },
+      { nisn: '0107621004', nama: 'Indah Kusuma Wardani', rombel: 'IX-B', gender: 'P', status: 'Aktif' },
+      // Kelas IX-C
+      { nisn: '0107621005', nama: 'Jauhar Nafis', rombel: 'IX-C', gender: 'L', status: 'Aktif' },
+      { nisn: '0107621006', nama: 'Jihan Nabila Safitri', rombel: 'IX-C', gender: 'P', status: 'Aktif' }
+    ];
+
+    function filterAdminSiswaRombel(rombel) {
+      currentAdminSiswaRombel = rombel;
+      ['all', 'VII-A', 'VII-B', 'VII-C', 'VIII-A', 'VIII-B', 'VIII-C', 'IX-A', 'IX-B', 'IX-C'].forEach(r => {
+        const btn = document.getElementById('btn-admin-siswa-' + r);
+        if (btn) {
+          if (r === rombel) {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-purple-700 text-white shrink-0 shadow-2xs transition cursor-pointer';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer';
+          }
+        }
+      });
+      renderAdminSiswaList();
+    }
+    window.filterAdminSiswaRombel = filterAdminSiswaRombel;
+
+    function searchAdminSiswa() {
+      renderAdminSiswaList();
+    }
+    window.searchAdminSiswa = searchAdminSiswa;
+
+    function renderAdminSiswaList() {
+      const container = document.getElementById('admin-siswa-list-container');
+      if (!container) return;
+
+      const q = (document.getElementById('admin-siswa-search-input')?.value || '').toLowerCase().trim();
+
+      const filtered = appSiswaMaster.filter(s => {
+        const matchesRombel = (currentAdminSiswaRombel === 'all') || (s.rombel === currentAdminSiswaRombel);
+        const matchesQuery = !q || s.nama.toLowerCase().includes(q) || s.nisn.includes(q);
+        return matchesRombel && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-6 text-center text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-xs">
+            <i data-lucide="user-x" class="w-6 h-6 mx-auto mb-1 text-slate-300"></i>
+            <p>Tidak ada data siswa yang cocok.</p>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(s => {
+        const initial = s.nama.charAt(0);
+        const bgAvatar = s.gender === 'P' ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700';
+
+        return `
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-between gap-2.5 hover:border-purple-200 transition">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-full ${bgAvatar} font-black text-xs flex items-center justify-center shrink-0">
+                ${initial}
+              </div>
+              <div class="min-w-0">
+                <h5 class="text-xs font-bold text-slate-900 truncate">${s.nama}</h5>
+                <div class="flex items-center gap-1.5 text-[9.5px] text-slate-400 mt-0.5">
+                  <span class="font-mono font-medium text-slate-500">NISN: ${s.nisn}</span>
+                  <span>&bull;</span>
+                  <span class="px-1.5 py-0.2 rounded font-bold bg-purple-50 text-purple-700 border border-purple-100">${s.rombel}</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Aktif</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderAdminSiswaList = renderAdminSiswaList;
+
+
+    // --- B. JEJARING ALUMNI IKAMAS ---
+    let currentAdminAlumniFilter = 'all';
+
+    function setAdminAlumniFilter(filter) {
+      currentAdminAlumniFilter = filter;
+      ['all', 'pendidikan', 'bisnis', 'pesantren'].forEach(f => {
+        const btn = document.getElementById('btn-admin-alumni-' + f);
+        if (btn) {
+          if (f === filter) {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-violet-700 text-white shrink-0 shadow-2xs transition cursor-pointer';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition cursor-pointer';
+          }
+        }
+      });
+      renderAdminAlumniList();
+    }
+    window.setAdminAlumniFilter = setAdminAlumniFilter;
+
+    function searchAdminAlumni() {
+      renderAdminAlumniList();
+    }
+    window.searchAdminAlumni = searchAdminAlumni;
+
+    function renderAdminAlumniList() {
+      const container = document.getElementById('admin-alumni-list-container');
+      if (!container) return;
+
+      const refreshIcon = document.getElementById('admin-mob-alumni-refresh-icon');
+      if (refreshIcon) {
+        refreshIcon.classList.add('animate-spin');
+        setTimeout(() => refreshIcon.classList.remove('animate-spin'), 400);
+      }
+
+      const data = (typeof appAlumniData !== 'undefined' && Array.isArray(appAlumniData)) ? appAlumniData : [
+        {
+          id: 'ALM-1',
+          nama: 'M. Syarif Hidayatullah, S.T.',
+          angkatan: 'Lulusan 2015',
+          profesi: 'Software Engineer di Unicorn Tech',
+          testimoni: 'Fondasi kedisiplinan dan nilai keislaman di MTs YASUA menjadi bekal tak ternilai dalam meniti karir teknologi global.',
+          foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop',
+          kategori: 'bisnis'
+        },
+        {
+          id: 'ALM-2',
+          nama: 'Nurul Azizah, S.Pd.',
+          angkatan: 'Lulusan 2017',
+          profesi: 'Penerima Beasiswa LPDP & Pendidik',
+          testimoni: 'Bimbingan asatidz yang penuh keikhlasan memotivasi saya terus menuntut ilmu hingga jenjang magister.',
+          foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop',
+          kategori: 'pendidikan'
+        },
+        {
+          id: 'ALM-3',
+          nama: 'K.H. Ahmad Muhaimin, Lc.',
+          angkatan: 'Lulusan 2012',
+          profesi: 'Pengasuh Ponpes & Alumni Al-Azhar Kairo',
+          testimoni: 'Pembiasaan kitab kuning salafiyah di YASUA membukakan jalan kemudahan bagi saya menimba ilmu di Timur Tengah.',
+          foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop',
+          kategori: 'pesantren'
+        }
+      ];
+
+      const q = (document.getElementById('admin-alumni-search-input')?.value || '').toLowerCase().trim();
+
+      const filtered = data.filter(item => {
+        const matchesFilter = (currentAdminAlumniFilter === 'all') || (item.kategori === currentAdminAlumniFilter);
+        const matchesQuery = !q || item.nama.toLowerCase().includes(q) || item.profesi.toLowerCase().includes(q) || item.angkatan.toLowerCase().includes(q);
+        return matchesFilter && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-6 text-center text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-xs">
+            <i data-lucide="graduation-cap" class="w-6 h-6 mx-auto mb-1 text-slate-300"></i>
+            <p>Tidak ada data alumni yang cocok.</p>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(a => {
+        return `
+          <div class="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2 hover:border-violet-200 transition">
+            <div class="flex items-start gap-3">
+              <img src="${a.foto || 'logo.png'}" alt="${a.nama}" class="w-10 h-10 rounded-full object-cover border border-violet-100 shrink-0" onerror="this.src='logo.png'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-1">
+                  <h5 class="text-xs font-black text-slate-900 truncate">${a.nama}</h5>
+                  <span class="text-[8.5px] font-extrabold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700 border border-violet-100 shrink-0">${a.angkatan}</span>
+                </div>
+                <p class="text-[10px] font-bold text-violet-700 mt-0.5">${a.profesi}</p>
+                <p class="text-[9.5px] text-slate-500 mt-1 line-clamp-2 italic leading-relaxed">"${a.testimoni || 'Bangga menjadi bagian dari keluarga besar MTs YASUA.'}"</p>
+              </div>
+            </div>
+            <div class="pt-1.5 border-t border-slate-100 flex items-center justify-end gap-1.5 text-[9.5px]">
+              <a href="https://wa.me/6281234567890?text=Salam%20Alumni%20IKAMAS%20YASUA" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-bold flex items-center gap-1 transition">
+                <i data-lucide="message-circle" class="w-3 h-3 text-emerald-600"></i>
+                <span>Hubungi IKAMAS</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.renderAdminAlumniList = renderAdminAlumniList;
+
+
+    // --- C. PRESTASI CLOUD SYNC & MODAL ---
+    async function fetchAdminPrestasiList(forceRefresh) {
+      const refreshIcon = document.getElementById('admin-mob-prestasi-refresh-icon');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec?action=getPrestasi');
+        const json = await res.json();
+        if (json.status === 'success' && Array.isArray(json.data) && json.data.length > 0) {
+          appPrestasiData = json.data;
+          try {
+            localStorage.setItem('yasua_cached_prestasi', JSON.stringify(appPrestasiData));
+          } catch (e) {}
+          if (forceRefresh && typeof showToast === 'function') {
+            showToast('Data prestasi berhasil disinkronkan dari Google Sheets!');
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal memuat prestasi cloud, menggunakan data lokal cache:', err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+        renderAdminPrestasiList();
+      }
+    }
+    window.fetchAdminPrestasiList = fetchAdminPrestasiList;
+
+    function openAdminPrestasiModal() {
+      const modal = document.getElementById('admin-prestasi-modal');
+      if (modal) modal.classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    }
+    window.openAdminPrestasiModal = openAdminPrestasiModal;
+
+    function closeAdminPrestasiModal() {
+      const modal = document.getElementById('admin-prestasi-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+    window.closeAdminPrestasiModal = closeAdminPrestasiModal;
+
+    async function handleSaveMobilePrestasi(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('btn-save-prestasi-submit');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Menyimpan...</span>';
+      }
+
+      const judul = document.getElementById('admPrestasiJudul').value.trim();
+      const kategori = document.getElementById('admPrestasiKategori').value;
+      const peringkat = document.getElementById('admPrestasiPeringkat').value.trim();
+      const tingkat = document.getElementById('admPrestasiTingkat').value;
+      const tahun = document.getElementById('admPrestasiTahun').value.trim() || '2026';
+      const peraih = document.getElementById('admPrestasiPeraih').value.trim();
+      const penyelenggara = document.getElementById('admPrestasiPenyelenggara').value.trim();
+
+      const newItem = {
+        id: 'PREST-' + Date.now(),
+        judul: judul,
+        kategori: kategori,
+        peringkat: peringkat,
+        tingkat: tingkat,
+        tahun: tahun,
+        peraih: peraih,
+        penyelenggara: penyelenggara,
+        urutan: 1,
+        status: true,
+        gambar: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=800&auto=format&fit=crop'
+      };
+
+      // Simpan lokal seketika (optimistic UI)
+      if (typeof appPrestasiData !== 'undefined' && Array.isArray(appPrestasiData)) {
+        appPrestasiData.unshift(newItem);
+        try {
+          localStorage.setItem('yasua_cached_prestasi', JSON.stringify(appPrestasiData));
+        } catch (err) {}
+        renderAdminPrestasiList();
+      }
+
+      closeAdminPrestasiModal();
+      document.getElementById('admin-prestasi-form').reset();
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>Simpan Data</span>';
+      }
+
+      // Sync ke backend Google Apps Script
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbxNFLoL96Ch_8QOKhp5AFauIGb9GcMpd9eb3my_zqikL0sDuncgRhDPD6tez-fuY6wT/exec', {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'savePrestasi',
+            admin_password: localStorage.getItem('mts_admin_pass') || 'adminyasua2026',
+            data: newItem
+          })
+        });
+        if (typeof showToast === 'function') {
+          showToast('Prestasi berhasil disimpan & disinkronkan ke Google Sheets!');
+        }
+      } catch (err) {
+        console.warn('Sync savePrestasi failed:', err);
+      }
+    }
+    window.handleSaveMobilePrestasi = handleSaveMobilePrestasi;
+
   </script>
 
+
+<!-- Modal Tambah Prestasi Baru Mobile Admin -->
+  <div id="admin-prestasi-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden animate-scaleIn">
+      <div class="p-4 bg-gradient-to-r from-amber-600 to-yellow-600 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center">
+            <i data-lucide="trophy" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-extrabold text-sm leading-tight">Tambah Prestasi Siswa</h4>
+            <p class="text-[10px] text-amber-100">Catat capaian medali &amp; kejuaraan baru</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeAdminPrestasiModal()" class="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="admin-prestasi-form" onsubmit="handleSaveMobilePrestasi(event)" class="p-4 space-y-3 text-xs max-h-[80vh] overflow-y-auto">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Judul Kejuaraan / Prestasi *</label>
+          <input type="text" id="admPrestasiJudul" required placeholder="Contoh: Juara 1 KSM IPA Terintegrasi" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Kategori *</label>
+            <select id="admPrestasiKategori" required class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-1 focus:ring-amber-500 focus:outline-none">
+              <option value="sains">Sains &amp; KSM</option>
+              <option value="keagamaan">Keagamaan / MTQ</option>
+              <option value="pramuka">Pramuka</option>
+              <option value="olahraga">Olahraga &amp; Seni</option>
+              <option value="lainnya">Lainnya</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Peringkat *</label>
+            <input type="text" id="admPrestasiPeringkat" required placeholder="Juara 1 / Emas / Medali" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Tingkat *</label>
+            <select id="admPrestasiTingkat" required class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white focus:ring-1 focus:ring-amber-500 focus:outline-none">
+              <option value="Kecamatan">Kecamatan</option>
+              <option value="Kabupaten">Kabupaten</option>
+              <option value="Karesidenan">Karesidenan</option>
+              <option value="Provinsi">Provinsi</option>
+              <option value="Nasional">Nasional</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Tahun *</label>
+            <input type="number" id="admPrestasiTahun" required value="2026" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Nama Siswa / Tim Peraih *</label>
+          <input type="text" id="admPrestasiPeraih" required placeholder="Contoh: Ahmad Zaki Mubarak (Kelas IX-A)" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Lembaga Penyelenggara</label>
+          <input type="text" id="admPrestasiPenyelenggara" placeholder="Contoh: Kemenag Kab. Demak" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+        </div>
+
+        <div class="pt-2 flex gap-2">
+          <button type="button" onclick="closeAdminPrestasiModal()" class="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold hover:bg-slate-50 transition cursor-pointer">Batal</button>
+          <button type="submit" id="btn-save-prestasi-submit" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-black shadow-sm transition cursor-pointer flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Simpan Data</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
 

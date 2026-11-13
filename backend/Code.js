@@ -230,6 +230,10 @@ function doGet(e) {
         return createJsonResponse({ status: 'success', data: fetchAllGallery() });
       case 'initGallerySheet':
         return createJsonResponse(setupGalleryDatabase());
+      case 'getPrestasi':
+        return createJsonResponse({ status: 'success', data: fetchAllPrestasi() });
+      case 'initPrestasiSheet':
+        return createJsonResponse(setupPrestasiDatabase());
       case 'incrementViews':
         return createJsonResponse({ status: 'success', data: incrementNewsViewsBackend(e.parameter.id || e.parameter.slug) });
       case 'getSettings':
@@ -351,7 +355,7 @@ function doPost(e) {
       'addNews', 'updateNews', 'deleteNews', 'uploadNewsPhoto',
       'updateHeroSlide', 'saveAllHeroSlides', 'uploadHeroPhoto',
       'saveAllBanners', 'uploadBannerPhoto', 'saveAnnouncement',
-      'toggleGalleryStatus', 'deleteGallery', 'saveNotifikasi', 'deleteNotifikasi', 'uploadNotifikasiPhoto', 'saveProfile', 'uploadProfilePhoto'
+      'toggleGalleryStatus', 'deleteGallery', 'savePrestasi', 'addPrestasi', 'updatePrestasi', 'deletePrestasi', 'togglePrestasiStatus', 'saveNotifikasi', 'deleteNotifikasi', 'uploadNotifikasiPhoto', 'saveProfile', 'uploadProfilePhoto'
     ];
     const kesiswaanActions = [
       'addTeacher', 'updateTeacher', 'deleteTeacher', 'uploadTeacherPhoto',
@@ -441,6 +445,19 @@ function doPost(e) {
       case 'toggleGalleryStatus':
         result = toggleGalleryStatusById(payload.id, payload.status);
         return createJsonResponse({ status: 'success', data: result, message: 'Status foto galeri berhasil diperbarui' });
+
+      // Prestasi & Kejuaraan Siswa
+      case 'addPrestasi':
+      case 'savePrestasi':
+      case 'updatePrestasi':
+        result = saveOrUpdatePrestasi(payload.data || payload, payload.fileBase64, payload.fileName, payload.fileMime);
+        return createJsonResponse({ status: 'success', data: result, message: 'Data prestasi berhasil disimpan di database' });
+      case 'deletePrestasi':
+        result = deletePrestasiById(payload.id || (payload.data && payload.data.id));
+        return createJsonResponse({ status: 'success', message: 'Data prestasi berhasil dihapus dari database' });
+      case 'togglePrestasiStatus':
+        result = togglePrestasiStatusById(payload.id, payload.status);
+        return createJsonResponse({ status: 'success', data: result, message: 'Status prestasi berhasil diperbarui' });
       case 'uploadGalleryPhoto':
         result = uploadPhotoToDrive(payload.filename, payload.base64, 'GALERI');
         return createJsonResponse({ status: 'success', data: result });
@@ -2595,6 +2612,239 @@ function deleteGalleryById(id) {
 
 function toggleGalleryStatusById(id, status) {
   const sheet = ensureGallerySheet();
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][0]) === String(id)) {
+      const newStatus = (status === true || String(status).toLowerCase() === 'true');
+      sheet.getRange(i + 1, 11).setValue(newStatus);
+      sheet.getRange(i + 1, 14).setValue(new Date().toISOString());
+      return { id: id, status: newStatus };
+    }
+  }
+  return null;
+}
+
+// ==========================================
+// MODUL DATABASE PRESTASI & KEJUARAAN SISWA
+// ==========================================
+
+function ensurePrestasiSheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName('prestasi');
+  if (!sheet) {
+    sheet = ss.insertSheet('prestasi');
+    const headers = [
+      'id', 'judul', 'kategori', 'peringkat', 'tingkat', 
+      'tahun', 'peraih', 'penyelenggara', 'deskripsi', 
+      'urutan', 'status', 'gambar', 'created_at', 'updated_at'
+    ];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#FEF3C7');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function setupPrestasiDatabase() {
+  const sheet = ensurePrestasiSheet();
+  const existing = sheet.getDataRange().getValues();
+  if (existing.length > 1) {
+    return { status: 'info', message: 'Sheet prestasi sudah memiliki data' };
+  }
+
+  const initialPrestasi = [
+    [
+      'PREST-1',
+      'Juara 1 KSM Matematika Terintegrasi',
+      'sains',
+      'Juara 1',
+      'Kabupaten',
+      '2026',
+      'Ananda M. Fatih & Tim Sains YASUA',
+      'Kementerian Agama Kab. Demak',
+      'Kompetisi Sains Madrasah (KSM) bidang Matematika Terintegrasi jenjang MTs tingkat Kabupaten Demak.',
+      1,
+      true,
+      'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=800&auto=format&fit=crop',
+      new Date().toISOString(),
+      new Date().toISOString()
+    ],
+    [
+      'PREST-2',
+      'Juara 1 Lomba Drumband Tingkat Jateng',
+      'olahraga',
+      'Juara 1',
+      'Provinsi',
+      '2025',
+      'Gita Bahana MTs YASUA',
+      'PDBI Jawa Tengah',
+      'Festival & parade marching band divisi junior tingkat Provinsi Jawa Tengah.',
+      2,
+      true,
+      'https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=800&auto=format&fit=crop',
+      new Date().toISOString(),
+      new Date().toISOString()
+    ],
+    [
+      'PREST-3',
+      'Juara 2 Kaligrafi Kontemporer MTQ Pelajar',
+      'keagamaan',
+      'Juara 2',
+      'Kabupaten',
+      '2025',
+      'Ahmad Royhan (Kelas IX-B)',
+      'LPTQ Kabupaten Demak',
+      'Musabaqah Tilawatil Quran cabang Seni Kaligrafi Islam Kontemporer.',
+      3,
+      true,
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop',
+      new Date().toISOString(),
+      new Date().toISOString()
+    ],
+    [
+      'PREST-4',
+      'Juara 2 MHQ 3 Juz Putri Tingkat Karesidenan',
+      'keagamaan',
+      'Juara 2',
+      'Karesidenan',
+      '2025',
+      'Siti Aisyah (Kelas VIII-A)',
+      'Forum Komunikasi Tahfidz Semarang & Demak',
+      'Musabaqah Hifdzil Quran kategori 3 Juz dan Tilawah Putri.',
+      4,
+      true,
+      'https://images.unsplash.com/photo-1584286595398-a59f21d313f5?q=80&w=800&auto=format&fit=crop',
+      new Date().toISOString(),
+      new Date().toISOString()
+    ],
+    [
+      'PREST-5',
+      'Juara Umum LT-II Pramuka Penggalang',
+      'pramuka',
+      'Juara Umum',
+      'Kecamatan',
+      '2024',
+      'Regu Rajawali & Melati MTs YASUA',
+      'Kwartir Ranting Kebonagung',
+      'Lomba Tingkat II Pramuka Penggalang se-Kecamatan Kebonagung.',
+      5,
+      true,
+      'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop',
+      new Date().toISOString(),
+      new Date().toISOString()
+    ],
+    [
+      'PREST-6',
+      'Juara 3 Silat Pagar Nusa Kejurkab Demak',
+      'olahraga',
+      'Juara 3',
+      'Kabupaten',
+      '2024',
+      'Muhammad Rizqi Pratama (Kelas IX-C)',
+      'Pengcab IPSI / Pagar Nusa Kab. Demak',
+      'Kejuaraan Kabupaten Pencak Silat Remaja Kelas D Putra.',
+      6,
+      true,
+      'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop',
+      new Date().toISOString(),
+      new Date().toISOString()
+    ]
+  ];
+
+  sheet.getRange(2, 1, initialPrestasi.length, initialPrestasi[0].length).setValues(initialPrestasi);
+  return { status: 'success', message: 'Inisialisasi 6 data awal prestasi berhasil!', count: initialPrestasi.length };
+}
+
+function fetchAllPrestasi() {
+  const sheet = ensurePrestasiSheet();
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    setupPrestasiDatabase();
+  }
+  const data = sheet.getDataRange().getValues();
+  if (data.length <= 1) return [];
+
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  const list = rows.map(function(row) {
+    const item = {};
+    headers.forEach(function(h, idx) {
+      item[h] = row[idx];
+    });
+    item.status = (item.status === true || String(item.status).toLowerCase() === 'true');
+    item.urutan = Number(item.urutan) || 99;
+    item.tahun = String(item.tahun || '2026');
+    return item;
+  });
+
+  list.sort(function(a, b) { return a.urutan - b.urutan; });
+  return list;
+}
+
+function saveOrUpdatePrestasi(data, fileBase64, fileName, fileMime) {
+  const sheet = ensurePrestasiSheet();
+  let imgUrl = data.gambar || '';
+
+  if (fileBase64) {
+    const uploadRes = uploadPhotoToDrive(fileName || ('prestasi_' + Date.now() + '.jpg'), fileBase64, 'PRESTASI');
+    if (uploadRes && uploadRes.url) {
+      imgUrl = uploadRes.url;
+    }
+  }
+
+  const id = data.id || ('PREST-' + Date.now());
+  const nowStr = new Date().toISOString();
+
+  const values = sheet.getDataRange().getValues();
+  let rowIndex = -1;
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][0]) === String(id)) {
+      rowIndex = i + 1;
+      break;
+    }
+  }
+
+  const rowData = [
+    id,
+    data.judul || '',
+    (data.kategori || 'sains').toLowerCase(),
+    data.peringkat || 'Juara 1',
+    data.tingkat || 'Kabupaten',
+    String(data.tahun || new Date().getFullYear()),
+    data.peraih || '',
+    data.penyelenggara || '',
+    data.deskripsi || '',
+    Number(data.urutan) || 1,
+    (data.status === true || String(data.status).toLowerCase() === 'true'),
+    imgUrl,
+    rowIndex > 0 ? values[rowIndex - 1][12] : nowStr,
+    nowStr
+  ];
+
+  if (rowIndex > 0) {
+    sheet.getRange(rowIndex, 1, 1, rowData.length).setValues([rowData]);
+  } else {
+    sheet.appendRow(rowData);
+  }
+
+  return { id: id, judul: data.judul, status: 'success' };
+}
+
+function deletePrestasiById(id) {
+  const sheet = ensurePrestasiSheet();
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][0]) === String(id)) {
+      sheet.deleteRow(i + 1);
+      return true;
+    }
+  }
+  return false;
+}
+
+function togglePrestasiStatusById(id, status) {
+  const sheet = ensurePrestasiSheet();
   const values = sheet.getDataRange().getValues();
   for (let i = 1; i < values.length; i++) {
     if (String(values[i][0]) === String(id)) {
