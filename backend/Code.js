@@ -229,6 +229,10 @@ function doGet(e) {
         return createJsonResponse({ status: 'success', data: incrementNewsViewsBackend(e.parameter.id || e.parameter.slug) });
       case 'getSettings':
         return createJsonResponse({ status: 'success', data: fetchAllSettings() });
+      case 'getProfile':
+        return createJsonResponse({ status: 'success', data: fetchProfileData() });
+      case 'initProfileSettings':
+        return createJsonResponse(setupProfileDefaults());
       case 'initAuthSheets':
         return createJsonResponse(setupAuthDatabase());
       case 'cleanupJunkSheets':
@@ -342,7 +346,7 @@ function doPost(e) {
       'addNews', 'updateNews', 'deleteNews', 'uploadNewsPhoto',
       'updateHeroSlide', 'saveAllHeroSlides', 'uploadHeroPhoto',
       'saveAllBanners', 'uploadBannerPhoto', 'saveAnnouncement',
-      'toggleGalleryStatus', 'deleteGallery', 'saveNotifikasi', 'deleteNotifikasi', 'uploadNotifikasiPhoto'
+      'toggleGalleryStatus', 'deleteGallery', 'saveNotifikasi', 'deleteNotifikasi', 'uploadNotifikasiPhoto', 'saveProfile', 'uploadProfilePhoto'
     ];
     const kesiswaanActions = [
       'addTeacher', 'updateTeacher', 'deleteTeacher', 'uploadTeacherPhoto',
@@ -402,7 +406,15 @@ function doPost(e) {
         result = uploadPhotoToDrive(payload.filename, payload.base64, 'BANNER');
         return createJsonResponse({ status: 'success', data: result });
 
-            // Notifikasi & Pop-up Beranda (ala Asnawiyyah)
+                  // Profil Madrasah
+      case 'saveProfile':
+        result = saveProfileData(payload.data || payload);
+        return createJsonResponse(result);
+      case 'uploadProfilePhoto':
+        result = uploadPhotoToDrive(payload.filename, payload.base64, 'PROFIL');
+        return createJsonResponse({ status: 'success', data: result });
+
+      // Notifikasi & Pop-up Beranda (ala Asnawiyyah)
       case 'saveNotifikasi':
         result = saveOrUpdateNotifikasi(payload.data || payload);
         return createJsonResponse({ status: 'success', data: result, message: 'Notifikasi berhasil disimpan di database' });
@@ -2182,4 +2194,159 @@ function deleteNotifikasiById(notifId) {
   }
 
   return { status: 'success', message: 'Notifikasi berhasil dihapus' };
+}
+
+
+/**
+ * ===================================================================
+ * MODUL PROFIL MADRASAH (DYNAMIC SETTINGS CONTROLLER)
+ * ===================================================================
+ */
+const DEFAULT_PROFILE_CONFIG = {
+  profile_nama: 'MTs YASUA Pilangwetan',
+  profile_npsn: '20364357',
+  profile_nsm: '121233210034',
+  profile_akreditasi: 'Peringkat A (Unggul)',
+  profile_yayasan: 'YASUA (Berdiri 1949)',
+  profile_kepala_nama: 'Muthohar, S.Pd.',
+  profile_kepala_jabatan: 'Kepala MTs YASUA Pilangwetan',
+  profile_kepala_foto: 'https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib',
+  profile_kepala_sambutan: 'Selamat datang di MTs YASUA Pilangwetan. Kami berikhtiar mendidik generasi muda yang kokoh aqidah Ahlus Sunnah Wal Jama\'ah, berakhlak mulia, cerdas dalam ilmu pengetahuan, dan cakap teknologi.',
+  profile_sejarah: 'Madrasah didirikan atas kepedulian para sesepuh ulama dan tokoh masyarakat Pilangwetan pasca kemerdekaan RI (sejak 12 September 1949). Beliau-beliau berikhtiar membimbing anak-anak menjadi muslim berilmu, bertaqwa, sholeh, dan bermanfaat bagi nusa, bangsa, serta agama.',
+  profile_muassis: 'Bapak K. Ahmad, Bapak Moh. Syuhadi, Bapak H. Nuruddin, Bapak H. Amin, Bapak Shodiqun, Bapak Muridan',
+  profile_visi: 'Terwujudnya pendidikan yang islami, bermutu, memiliki sikap dan wawasan yang luas, beriman, bertaqwa, dan berakhlakul karimah, menguasai ilmu pengetahuan dan teknologi sesuai dengan perkembangan zaman.',
+  profile_misi: 'Melaksanakan pendidikan dan pengajaran agama Islam ala Ahlus Sunnah Wal Jama’ah.\nMemberikan pelayanan dan pengabdian tulus terhadap masyarakat, nusa, bangsa, dan NKRI.\nMeningkatkan pembelajaran aktif, kreatif, inovatif, dan menyenangkan penghasil lulusan bermutu.\nMempersiapkan insan beriman, bertaqwa, berakhlak mulia, berpengetahuan luas, dan terampil.\nMemenuhi kebutuhan pendidikan masyarakat sekitar sehingga menjadi madrasah idola dan terpercaya.',
+  profile_waka_kurikulum: 'Hj. Thoibah R., S.Ag.',
+  profile_waka_kesiswaan: 'Aidiyah, S.Pd.',
+  profile_waka_sarpras: 'Hj. Inna M., S.Ag.',
+  profile_waka_humas: 'Ahmad Wawahib, S.Pd.',
+  profile_fasilitas: 'Lab Komputer CBT & ANBK, Perpustakaan & Kitab Klasik, Masjid Jami\' Asnawiyyah, Lapangan Olahraga Luas, Asrama Santri PPTQ Asnawiyyah, Free WiFi Edukasi Madrasah',
+  profile_alamat: 'Jl. Raya Pilangwetan, RT 02 / RW 01, Desa Pilangwetan, Kecamatan Kebonagung, Kabupaten Demak, Jawa Tengah 59561.',
+  profile_maps_url: 'https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak',
+  profile_wa_sekretariat: 'https://wa.me/6285649881966',
+  profile_telepon: '085649881966'
+};
+
+function ensureProfileSettings(ss) {
+  const targetSs = ss || SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = targetSs.getSheetByName(CONFIG.SHEET_SETTINGS);
+  if (!sheet) {
+    sheet = targetSs.insertSheet(CONFIG.SHEET_SETTINGS);
+    sheet.appendRow(['key', 'value', 'description']);
+    sheet.getRange(1, 1, 1, 3).setFontWeight('bold').setBackground('#022c1f').setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const existingKeys = {};
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0]) existingKeys[String(data[i][0]).trim()] = true;
+  }
+
+  for (const key in DEFAULT_PROFILE_CONFIG) {
+    if (!existingKeys[key]) {
+      sheet.appendRow([key, DEFAULT_PROFILE_CONFIG[key], 'Konfigurasi Profil Madrasah']);
+    }
+  }
+  return sheet;
+}
+
+function setupProfileDefaults() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  ensureProfileSettings(ss);
+  return {
+    status: 'success',
+    message: 'Konfigurasi profil madrasah berhasil diinisialisasi di tabel settings',
+    data: fetchProfileData()
+  };
+}
+
+function fetchProfileData() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  const sheet = ensureProfileSettings(ss);
+  const data = sheet.getDataRange().getValues();
+
+  const raw = Object.assign({}, DEFAULT_PROFILE_CONFIG);
+  for (let i = 1; i < data.length; i++) {
+    const k = String(data[i][0] || '').trim();
+    if (k && k !== 'admin_password') {
+      raw[k] = data[i][1];
+    }
+  }
+
+  return {
+    raw: raw,
+    identitas: {
+      nama: raw.profile_nama || 'MTs YASUA Pilangwetan',
+      npsn: raw.profile_npsn || '20364357',
+      nsm: raw.profile_nsm || '121233210034',
+      akreditasi: raw.profile_akreditasi || 'Peringkat A (Unggul)',
+      yayasan: raw.profile_yayasan || 'YASUA (Berdiri 1949)'
+    },
+    kepala: {
+      nama: raw.profile_kepala_nama || 'Muthohar, S.Pd.',
+      jabatan: raw.profile_kepala_jabatan || 'Kepala MTs YASUA Pilangwetan',
+      foto: raw.profile_kepala_foto || 'https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib',
+      sambutan: raw.profile_kepala_sambutan || ''
+    },
+    sejarah: {
+      teks: raw.profile_sejarah || '',
+      muassis: String(raw.profile_muassis || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean)
+    },
+    visimisi: {
+      visi: raw.profile_visi || '',
+      misi: String(raw.profile_misi || '').split('\n').map(function(s) { return s.trim(); }).filter(Boolean)
+    },
+    pimpinan: {
+      kepala: raw.profile_kepala_nama || 'Muthohar, S.Pd.',
+      kurikulum: raw.profile_waka_kurikulum || 'Hj. Thoibah R., S.Ag.',
+      kesiswaan: raw.profile_waka_kesiswaan || 'Aidiyah, S.Pd.',
+      sarpras: raw.profile_waka_sarpras || 'Hj. Inna M., S.Ag.',
+      humas: raw.profile_waka_humas || 'Ahmad Wawahib, S.Pd.'
+    },
+    fasilitas: String(raw.profile_fasilitas || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
+    kontak: {
+      alamat: raw.profile_alamat || '',
+      maps_url: raw.profile_maps_url || 'https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak',
+      wa_sekretariat: raw.profile_wa_sekretariat || 'https://wa.me/6285649881966',
+      telepon: raw.profile_telepon || '085649881966'
+    }
+  };
+}
+
+function saveProfileData(payloadData) {
+  if (!payloadData) throw new Error('Data profil tidak boleh kosong');
+
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  const sheet = ensureProfileSettings(ss);
+
+  if (payloadData.file && payloadData.file.base64) {
+    const uploadRes = uploadPhotoToDrive(payloadData.file.name || 'kepala_madrasah.jpg', payloadData.file.base64, 'KEPALA');
+    payloadData.profile_kepala_foto = uploadRes.direct_url;
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const rowIndexMap = {};
+  for (let i = 1; i < data.length; i++) {
+    const k = String(data[i][0] || '').trim();
+    if (k) rowIndexMap[k] = i + 1;
+  }
+
+  for (const key in payloadData) {
+    if (key === 'file' || key === 'password' || key === 'action') continue;
+    const val = String(payloadData[key] !== undefined ? payloadData[key] : '');
+
+    if (rowIndexMap[key]) {
+      sheet.getRange(rowIndexMap[key], 2).setValue(val);
+    } else {
+      sheet.appendRow([key, val, 'Konfigurasi Profil Madrasah']);
+      rowIndexMap[key] = sheet.getLastRow();
+    }
+  }
+
+  return {
+    status: 'success',
+    message: 'Profil madrasah berhasil diperbarui di database',
+    data: fetchProfileData()
+  };
 }
