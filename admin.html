@@ -228,18 +228,41 @@
           </button>
         </div>
 
-        <!-- Section 3 -->
+        <!-- Section 3: Web Builder & Konten -->
         <div class="space-y-1">
           <span id="sectionHeaderWebBuilder" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400/80 px-3">WEB BUILDER &amp; KONTEN</span>
-          <!-- Tab 4: Banner & Beranda -->
-          <button onclick="switchAdminView('banners')" id="navBtnBanners"
+          
+          <!-- Menu 1: Hero Slider Desktop -->
+          <button onclick="switchAdminView('hero')" id="navBtnHero"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
+            <span class="flex items-center gap-3">
+              <i data-lucide="image" class="w-4 h-4 text-emerald-400"></i>
+              <span>Hero Slider Desktop</span>
+            </span>
+            <span id="sidebarHeroCount" class="text-[10px] bg-emerald-900/80 text-emerald-200 px-2 py-0.5 rounded-full font-bold">5 Foto</span>
+          </button>
+
+          <!-- Menu 2: Banner Promo Mobile (3:1) -->
+          <button onclick="switchAdminView('promo')" id="navBtnPromo"
             class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
             <span class="flex items-center gap-3">
               <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i>
-              <span>Hero &amp; Banner Beranda</span>
+              <span>Banner Promo Mobile</span>
             </span>
-            <span id="sidebarBannerCount" class="text-[10px] bg-emerald-900/80 px-2 py-0.5 rounded-full font-bold">5 Hero • 3 Banner</span>
+            <span id="sidebarBannerCount" class="text-[10px] bg-emerald-900/80 text-emerald-200 px-2 py-0.5 rounded-full font-bold">3 Slide</span>
           </button>
+
+          <!-- Menu 3: Teks Pengumuman & PPDB -->
+          <button onclick="switchAdminView('announcement')" id="navBtnAnnouncement"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
+            <span class="flex items-center gap-3">
+              <i data-lucide="megaphone" class="w-4 h-4 text-emerald-400"></i>
+              <span>Teks Pengumuman &amp; PPDB</span>
+            </span>
+            <span class="text-[10px] bg-emerald-900/80 text-emerald-200 px-2 py-0.5 rounded-full font-bold">Live Ticker</span>
+          </button>
+
+          <!-- Menu 4: Mobile App PWA Link -->
           <a href="/app" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-colors">
             <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
             <span>Mobile App PWA</span>
@@ -3047,6 +3070,9 @@
       const btnPrestasi = document.getElementById('navBtnPrestasi');
       const btnAlumni = document.getElementById('navBtnAlumni');
       const btnBanners = document.getElementById('navBtnBanners');
+      const btnHero = document.getElementById('navBtnHero');
+      const btnPromo = document.getElementById('navBtnPromo');
+      const btnAnnouncement = document.getElementById('navBtnAnnouncement');
       const btnNews = document.getElementById('navBtnNews');
       const btnGallery = document.getElementById('navBtnGallery');
 
@@ -3058,6 +3084,9 @@
         if (secKesiswaan) secKesiswaan.classList.add('hidden');
 
         if (btnBanners) btnBanners.classList.remove('hidden');
+        if (btnHero) btnHero.classList.remove('hidden');
+        if (btnPromo) btnPromo.classList.remove('hidden');
+        if (btnAnnouncement) btnAnnouncement.classList.remove('hidden');
         if (btnNews) btnNews.classList.remove('hidden');
         if (btnGallery) btnGallery.classList.remove('hidden');
         if (secWeb) secWeb.classList.remove('hidden');
@@ -3067,6 +3096,9 @@
       } else if (role === 'kesiswaan') {
         // Kesiswaan: Hanya Guru, Prestasi, Alumni
         if (btnBanners) btnBanners.classList.add('hidden');
+        if (btnHero) btnHero.classList.add('hidden');
+        if (btnPromo) btnPromo.classList.add('hidden');
+        if (btnAnnouncement) btnAnnouncement.classList.add('hidden');
         if (btnNews) btnNews.classList.add('hidden');
         if (btnGallery) btnGallery.classList.add('hidden');
         if (secWeb) secWeb.classList.add('hidden');
@@ -3080,7 +3112,7 @@
         switchAdminView('teachers');
       } else {
         // Superadmin: Tampilkan semua
-        [btnTeachers, btnPrestasi, btnAlumni, btnBanners, btnNews, btnGallery].forEach(b => { if (b) b.classList.remove('hidden'); });
+        [btnTeachers, btnPrestasi, btnAlumni, btnBanners, btnHero, btnPromo, btnAnnouncement, btnNews, btnGallery].forEach(b => { if (b) b.classList.remove('hidden'); });
         [secKesiswaan, secWeb, secPublikasi].forEach(s => { if (s) s.classList.remove('hidden'); });
       }
     }
@@ -3197,6 +3229,9 @@
       const navBtnTeachers = document.getElementById('navBtnTeachers');
       const navBtnPrestasi = document.getElementById('navBtnPrestasi');
       const navBtnBanners = document.getElementById('navBtnBanners');
+      const navBtnHero = document.getElementById('navBtnHero');
+      const navBtnPromo = document.getElementById('navBtnPromo');
+      const navBtnAnnouncement = document.getElementById('navBtnAnnouncement');
       const navBtnNews = document.getElementById('navBtnNews');
       const navBtnGallery = document.getElementById('navBtnGallery');
       const navBtnAlumni = document.getElementById('navBtnAlumni');
@@ -3225,6 +3260,9 @@
       if (navBtnTeachers) navBtnTeachers.className = inactiveClass;
       if (navBtnPrestasi) navBtnPrestasi.className = inactiveClass;
       if (navBtnBanners) navBtnBanners.className = inactiveClass;
+      if (navBtnHero) navBtnHero.className = inactiveClass;
+      if (navBtnPromo) navBtnPromo.className = inactiveClass;
+      if (navBtnAnnouncement) navBtnAnnouncement.className = inactiveClass;
       if (navBtnNews) navBtnNews.className = inactiveClass;
       if (navBtnGallery) navBtnGallery.className = inactiveClass;
       if (navBtnAlumni) navBtnAlumni.className = inactiveClass;
@@ -3258,16 +3296,34 @@
         webPublikLabel.textContent = 'Web Publik (alumni.html)';
 
         renderAlumniGrid();
+      } else if (view === 'hero') {
+        if (viewBanners) viewBanners.classList.remove('hidden');
+        if (navBtnHero) navBtnHero.className = activeClass;
+        breadcrumbCat.textContent = 'Web Builder & Konten';
+        breadcrumbPage.textContent = 'Hero Slider Desktop (5 Foto Web)';
+        webPublikBtn.href = 'index.html';
+        webPublikLabel.textContent = 'Lihat Beranda (index.html)';
+        switchBannerSubTab('hero');
+      } else if (view === 'promo') {
+        if (viewBanners) viewBanners.classList.remove('hidden');
+        if (navBtnPromo) navBtnPromo.className = activeClass;
+        breadcrumbCat.textContent = 'Web Builder & Konten';
+        breadcrumbPage.textContent = 'Banner Promo Mobile (3:1)';
+        webPublikBtn.href = '/app';
+        webPublikLabel.textContent = 'Lihat di Mobile App (/app)';
+        switchBannerSubTab('promo');
+      } else if (view === 'announcement') {
+        if (viewBanners) viewBanners.classList.remove('hidden');
+        if (navBtnAnnouncement) navBtnAnnouncement.className = activeClass;
+        breadcrumbCat.textContent = 'Web Builder & Konten';
+        breadcrumbPage.textContent = 'Teks Pengumuman & PPDB';
+        webPublikBtn.href = 'index.html';
+        webPublikLabel.textContent = 'Lihat Beranda (index.html)';
+        switchBannerSubTab('announcement');
       } else if (view === 'banners') {
         if (viewBanners) viewBanners.classList.remove('hidden');
         if (navBtnBanners) navBtnBanners.className = activeClass;
-
-        breadcrumbCat.textContent = 'Web Builder & Konten';
-        breadcrumbPage.textContent = 'Hero & Banner Beranda';
-        webPublikBtn.href = 'index.html';
-        webPublikLabel.textContent = 'Lihat Beranda (index.html)';
-
-        switchBannerSubTab(currentBannerSubTab);
+        switchBannerSubTab(currentBannerSubTab || 'hero');
       } else if (view === 'news') {
         if (viewNews) viewNews.classList.remove('hidden');
         if (navBtnNews) navBtnNews.className = activeClass;
@@ -3716,6 +3772,37 @@
       const btnHero = document.getElementById('subTabHeroBtn');
       const btnPromo = document.getElementById('subTabPromoBtn');
       const btnAnnouncement = document.getElementById('subTabAnnouncementBtn');
+
+      // Sinkronkan active state menu di sidebar Web Builder & Konten
+      const navBtnHero = document.getElementById('navBtnHero');
+      const navBtnPromo = document.getElementById('navBtnPromo');
+      const navBtnAnnouncement = document.getElementById('navBtnAnnouncement');
+      const breadcrumbCat = document.getElementById('breadcrumbCategory');
+      const breadcrumbPage = document.getElementById('breadcrumbPage');
+      const webPublikBtn = document.getElementById('topbarWebPublikBtn');
+      const webPublikLabel = document.getElementById('topbarWebPublikLabel');
+      const sInactive = 'w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium';
+      const sActive = 'w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-brand-primary text-white font-bold shadow-sm text-left transition-all cursor-pointer';
+
+      if (navBtnHero) navBtnHero.className = (tab === 'hero') ? sActive : sInactive;
+      if (navBtnPromo) navBtnPromo.className = (tab === 'promo') ? sActive : sInactive;
+      if (navBtnAnnouncement) navBtnAnnouncement.className = (tab === 'announcement') ? sActive : sInactive;
+
+      if (breadcrumbCat) breadcrumbCat.textContent = 'Web Builder & Konten';
+      if (breadcrumbPage) {
+        if (tab === 'hero') breadcrumbPage.textContent = 'Hero Slider Desktop (5 Foto Web)';
+        else if (tab === 'promo') breadcrumbPage.textContent = 'Banner Promo Mobile (3:1)';
+        else breadcrumbPage.textContent = 'Teks Pengumuman & PPDB';
+      }
+      if (webPublikBtn && webPublikLabel) {
+        if (tab === 'promo') {
+          webPublikBtn.href = '/app';
+          webPublikLabel.textContent = 'Lihat di Mobile App (/app)';
+        } else {
+          webPublikBtn.href = 'index.html';
+          webPublikLabel.textContent = 'Lihat Beranda (index.html)';
+        }
+      }
 
       if (tab === 'hero') {
         if (subViewHero) subViewHero.classList.remove('hidden');
