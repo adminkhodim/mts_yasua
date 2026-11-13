@@ -1073,21 +1073,22 @@
               <form id="adminNotifikasiForm" onsubmit="handleAdminNotifikasiSubmit(event)" class="space-y-4">
                 <input type="hidden" id="admin-notif-id" value="">
                 <input type="hidden" id="admin-notif-old-gambar" value="">
+                <input type="hidden" id="admin-notif-gambar-url" value="">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <!-- Judul -->
-                  <div class="md:col-span-2">
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
-                      Judul Notifikasi / Warta <span class="text-rose-500">*</span>
-                    </label>
-                    <input type="text" id="admin-notif-judul" required
-                      placeholder="Contoh: Pengumuman Libur Hari Raya Santri 1447 H"
-                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition">
-                  </div>
+                <!-- 1. Judul Notifikasi / Warta -->
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Judul Notifikasi / Warta <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-notif-judul" required
+                    placeholder="Contoh: Pengumuman Libur Hari Raya Santri 1447 H"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition">
+                </div>
 
-                  <!-- Kategori -->
+                <!-- 2. Kategori & Tanggal Publikasi (2 Kolom Rapi) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
                       Kategori <span class="text-rose-500">*</span>
                     </label>
                     <select id="admin-notif-kategori" required
@@ -1101,137 +1102,130 @@
                     </select>
                   </div>
 
-                  <!-- Tanggal -->
                   <div>
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
                       Tanggal Publikasi
                     </label>
                     <input type="date" id="admin-notif-tanggal"
-                      class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:ring-2 focus:ring-rose-500 focus:outline-none transition font-semibold text-slate-700">
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:ring-2 focus:ring-rose-500 focus:outline-none transition font-semibold text-slate-700">
+                  </div>
+                </div>
+
+                <!-- 3. Ringkasan / Headline Singkat -->
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Ringkasan / Headline Singkat <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-notif-ringkasan" required
+                    placeholder="Teks singkat yang muncul pada daftar notifikasi dan pop-up..."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition">
+                </div>
+
+                <!-- 4. Upload Foto / Poster Pengumuman (Tanpa Kolom URL, Fokus Upload Berkas) -->
+                <div class="bg-slate-50/90 p-4 rounded-2xl border border-slate-200 space-y-3">
+                  <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                      <i class="fa-solid fa-image text-rose-500"></i>
+                      <span>Poster / Foto Pengumuman (Opsional)</span>
+                    </label>
+                    <span class="text-[10px] font-bold text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded-full shadow-2xs">Rasio 4:5 (Pop-up Modal)</span>
                   </div>
 
-                  <!-- Ringkasan / Headline -->
-                  <div class="md:col-span-2">
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
-                      Ringkasan / Headline Singkat <span class="text-rose-500">*</span>
-                    </label>
-                    <input type="text" id="admin-notif-ringkasan" required
-                      placeholder="Teks singkat yang muncul pada daftar notifikasi dan pop-up..."
-                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition">
-                  </div>
-
-                  <!-- Gambar / Poster (File atau URL) dengan Pratinjau Luas & Jelas -->
-                  <div class="md:col-span-2">
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
-                      Gambar / Poster Pengumuman (Opsional)
-                    </label>
-                    <div class="flex flex-col md:flex-row gap-4 items-start bg-slate-50/80 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80">
-                      <!-- Kolom Input (URL & File) -->
-                      <div class="flex-1 space-y-3 w-full">
-                        <div>
-                          <label class="text-[10px] font-bold text-slate-600 uppercase flex items-center gap-1.5 mb-1">
-                            <i class="fa-solid fa-link text-rose-500 text-xs"></i>
-                            <span>URL Gambar Langsung atau Google Drive</span>
-                          </label>
-                          <input type="text" id="admin-notif-gambar-url"
-                            oninput="updateNotifImagePreviewFromUrl()"
-                            placeholder="https://... atau tempel URL share Google Drive"
-                            class="w-full px-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition font-mono">
-                          <p class="text-[10px] text-slate-400 mt-1">Tautan Google Drive (drive.google.com/file/d/...) otomatis diubah ke tautan gambar langsung.</p>
+                  <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <!-- Frame Pratinjau Poster -->
+                    <div class="w-32 h-40 sm:w-36 sm:h-44 rounded-2xl border-2 border-dashed border-slate-300 bg-white overflow-hidden relative flex items-center justify-center shrink-0 shadow-xs group">
+                      <img id="admin-notif-preview-img" src="" alt="Pratinjau Poster"
+                        class="w-full h-full object-cover hidden transition duration-300 group-hover:scale-105">
+                      <div id="admin-notif-preview-placeholder" class="text-center p-3 text-slate-400 space-y-1">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-base">
+                          <i class="fa-regular fa-image"></i>
                         </div>
-
-                        <div>
-                          <label class="text-[10px] font-bold text-slate-600 uppercase flex items-center gap-1.5 mb-1">
-                            <i class="fa-solid fa-cloud-arrow-up text-rose-500 text-xs"></i>
-                            <span>Atau Unggah Poster dari Perangkat</span>
-                          </label>
-                          <input type="file" id="admin-notif-file" accept="image/*"
-                            onchange="previewAdminNotifImage(event)"
-                            class="w-full text-xs text-slate-500 file:mr-2.5 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-rose-100 file:text-rose-700 hover:file:bg-rose-200 cursor-pointer">
-                        </div>
-
-                        <div class="flex items-center gap-2 pt-1 border-t border-slate-200/60">
-                          <button type="button" onclick="clearAdminNotifImage()"
-                            class="px-3 py-1.5 text-[11px] font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition border border-rose-200 flex items-center gap-1.5 cursor-pointer">
-                            <i class="fa-solid fa-trash-can text-[10px]"></i>
-                            <span>Hapus Gambar</span>
-                          </button>
-                          <button type="button" onclick="previewCurrentAdminNotifikasiForm()"
-                            class="px-3 py-1.5 text-[11px] font-bold text-slate-700 bg-white hover:bg-slate-100 rounded-xl transition border border-slate-200 flex items-center gap-1.5 cursor-pointer shadow-2xs">
-                            <i class="fa-solid fa-eye text-rose-500 text-[10px]"></i>
-                            <span>Pratinjau Pop-up Modal</span>
-                          </button>
-                          <span class="text-[10px] text-slate-400 hidden sm:inline ml-auto">Rekomendasi rasio poster: 4:5 Instagram.</span>
-                        </div>
+                        <p class="text-[10px] font-bold text-slate-500 leading-tight">Belum Ada Poster</p>
+                        <p class="text-[9px] text-slate-400 leading-tight">Klik tombol upload</p>
                       </div>
 
-                      <!-- Kotak Pratinjau Poster yang Jelas & Proporsional -->
-                      <div class="w-full md:w-44 shrink-0 flex flex-col items-center">
-                        <div class="flex items-center justify-between w-full mb-1">
-                          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Pratinjau Poster</span>
-                          <span class="text-[9px] font-bold text-slate-400 bg-slate-200/70 px-1.5 py-0.5 rounded">Rasio 4:5</span>
-                        </div>
-                        <div class="w-36 h-44 sm:w-40 sm:h-48 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-100/80 overflow-hidden relative flex items-center justify-center shadow-xs group">
-                          <!-- Gambar Preview -->
-                          <img id="admin-notif-preview-img" src="" alt="Pratinjau Poster"
-                            class="w-full h-full object-cover hidden transition-all duration-300 group-hover:scale-105">
+                      <!-- Hover Zoom / Pratinjau Dialog Button -->
+                      <button type="button" id="admin-notif-preview-zoom-btn" onclick="previewCurrentAdminNotifikasiForm()"
+                        class="absolute inset-0 bg-black/60 text-white font-bold text-xs flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition backdrop-blur-2xs cursor-pointer hidden"
+                        title="Lihat Pratinjau Modal">
+                        <i class="fa-solid fa-magnifying-glass-plus text-base mb-1 text-amber-300"></i>
+                        <span>Lihat Pop-up</span>
+                      </button>
+                    </div>
 
-                          <!-- Placeholder jika belum ada gambar -->
-                          <div id="admin-notif-preview-placeholder" class="text-center p-3 text-slate-400 space-y-1.5">
-                            <div class="w-10 h-10 rounded-full bg-slate-200/80 text-slate-400 flex items-center justify-center mx-auto text-lg">
-                              <i class="fa-regular fa-image"></i>
-                            </div>
-                            <p class="text-[10px] font-bold text-slate-500 leading-tight">Belum Ada Poster</p>
-                            <p class="text-[9px] text-slate-400 leading-tight">Tempel URL atau pilih file foto</p>
-                          </div>
+                    <!-- Tombol Upload & Kontrol -->
+                    <div class="flex-1 space-y-2.5 text-center sm:text-left w-full">
+                      <div>
+                        <h4 class="text-xs font-bold text-slate-800">Unggah Gambar Poster Pengumuman</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed mt-0.5">
+                          Pilih foto atau desain poster dari komputer / HP Anda (JPG, PNG, WEBP). Gambar otomatis dioptimalkan untuk dialog pop-up beranda.
+                        </p>
+                      </div>
 
-                          <!-- Zoom / Pratinjau Overlay Button -->
-                          <button type="button" id="admin-notif-preview-zoom-btn" onclick="previewCurrentAdminNotifikasiForm()"
-                            class="absolute inset-0 bg-black/50 text-white font-bold text-xs flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200 backdrop-blur-2xs cursor-pointer hidden"
-                            title="Klik untuk melihat pratinjau dialog pop-up">
-                            <i class="fa-solid fa-magnifying-glass-plus text-base mb-1 text-amber-300"></i>
-                            <span>Buka Pop-up</span>
-                          </button>
-                        </div>
+                      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+                        <!-- Custom Upload File Button -->
+                        <label class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer active:scale-95">
+                          <i class="fa-solid fa-cloud-arrow-up"></i>
+                          <span>Pilih Foto Poster</span>
+                          <input type="file" id="admin-notif-file" accept="image/*"
+                            onchange="previewAdminNotifImage(event)" class="hidden">
+                        </label>
+
+                        <button type="button" id="admin-notif-remove-img-btn" onclick="clearAdminNotifImage()"
+                          class="px-3 py-2 bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer hidden">
+                          <i class="fa-solid fa-trash-can text-xs"></i>
+                          <span>Hapus Poster</span>
+                        </button>
+
+                        <button type="button" onclick="previewCurrentAdminNotifikasiForm()"
+                          class="px-3 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-2xs">
+                          <i class="fa-solid fa-eye text-rose-500 text-xs"></i>
+                          <span>Uji Pop-up Modal</span>
+                        </button>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Toggle Pop-up Beranda & Status -->
-                  <div class="p-3 bg-rose-50/60 border border-rose-100 rounded-2xl flex items-center justify-between">
-                    <div>
-                      <label class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 cursor-pointer">
+                <!-- 5. Opsi Penayangan (Pop-up Beranda & Status Notifikasi) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <!-- Toggle Pop-up Beranda -->
+                  <div class="p-3.5 bg-rose-50/70 border border-rose-100 rounded-2xl flex items-center justify-between">
+                    <div class="pr-2">
+                      <label for="admin-notif-is-popup" class="text-xs font-bold text-slate-800 flex items-center space-x-1.5 cursor-pointer">
                         <i class="fa-solid fa-window-restore text-rose-600"></i>
                         <span>Jadikan Pop-up Beranda</span>
                       </label>
-                      <p class="text-[10px] text-slate-500">Otomatis muncul sebagai dialog poster saat santri/wali membuka beranda.</p>
+                      <p class="text-[10px] text-slate-500 mt-0.5">Otomatis muncul sebagai dialog poster saat santri/wali membuka beranda.</p>
                     </div>
-                    <input type="checkbox" id="admin-notif-is-popup" class="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 cursor-pointer">
+                    <input type="checkbox" id="admin-notif-is-popup" class="w-5 h-5 rounded text-rose-600 focus:ring-rose-500 cursor-pointer shrink-0">
                   </div>
 
-                  <div class="p-3 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between">
-                    <div>
+                  <!-- Status Notifikasi -->
+                  <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center justify-between">
+                    <div class="pr-2">
                       <label class="text-xs font-bold text-slate-800">Status Notifikasi</label>
-                      <p class="text-[10px] text-slate-400">Tampilkan atau sembunyikan dari feed publik.</p>
+                      <p class="text-[10px] text-slate-400 mt-0.5">Tampilkan atau sembunyikan warta.</p>
                     </div>
-                    <select id="admin-notif-status" class="px-3 py-1 text-xs rounded-xl border border-slate-200 bg-white font-bold text-slate-700">
+                    <select id="admin-notif-status" class="px-3.5 py-1.5 text-xs rounded-xl border border-slate-200 bg-white font-bold text-slate-700 focus:ring-2 focus:ring-rose-500 shrink-0">
                       <option value="Aktif">Aktif</option>
                       <option value="Nonaktif">Nonaktif</option>
                     </select>
                   </div>
-
-                  <!-- Isi Lengkap -->
-                  <div class="md:col-span-2">
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">
-                      Isi Lengkap Warta / Pengumuman <span class="text-rose-500">*</span>
-                    </label>
-                    <textarea id="admin-notif-isi" rows="4" required
-                      placeholder="Tuliskan isi pengumuman atau surat edaran lengkap di sini..."
-                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition resize-y"></textarea>
-                  </div>
                 </div>
 
-                <div class="flex items-center justify-end space-x-2 pt-2">
+                <!-- 6. Isi Lengkap Warta / Pengumuman -->
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Isi Lengkap Warta / Pengumuman <span class="text-rose-500">*</span>
+                  </label>
+                  <textarea id="admin-notif-isi" rows="4" required
+                    placeholder="Tuliskan isi pengumuman atau surat edaran lengkap di sini..."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-rose-500 focus:outline-none transition resize-y"></textarea>
+                </div>
+
+                <!-- 7. Tombol Aksi Formulir -->
+                <div class="flex items-center justify-end space-x-2 pt-2 border-t border-slate-100">
                   <button type="button" onclick="previewCurrentAdminNotifikasiForm()"
                     class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 active:scale-95 cursor-pointer"
                     title="Pratinjau tampilan pop-up / warta sebelum disimpan">
@@ -5347,16 +5341,20 @@
 
       const previewImg = document.getElementById('admin-notif-preview-img');
       const previewPlaceholder = document.getElementById('admin-notif-preview-placeholder');
-      if (item.gambar) {
+      if (item.gambar && String(item.gambar).trim().length > 5) {
         if (previewImg) { previewImg.src = item.gambar; previewImg.classList.remove('hidden'); }
         if (previewPlaceholder) previewPlaceholder.classList.add('hidden');
         const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
         if (zoomBtn) zoomBtn.classList.remove('hidden');
+        const removeBtn = document.getElementById('admin-notif-remove-img-btn');
+        if (removeBtn) removeBtn.classList.remove('hidden');
       } else {
         if (previewImg) { previewImg.src = ''; previewImg.classList.add('hidden'); }
         if (previewPlaceholder) previewPlaceholder.classList.remove('hidden');
         const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
         if (zoomBtn) zoomBtn.classList.add('hidden');
+        const removeBtn = document.getElementById('admin-notif-remove-img-btn');
+        if (removeBtn) removeBtn.classList.add('hidden');
       }
 
       const title = document.getElementById('admin-notif-form-title');
@@ -5389,84 +5387,53 @@
     }
 
     
-    function updateNotifImagePreviewFromUrl() {
-      const urlInput = document.getElementById('admin-notif-gambar-url');
-      if (!urlInput) return;
-      let url = urlInput.value.trim();
-      const previewImg = document.getElementById('admin-notif-preview-img');
-      const placeholder = document.getElementById('admin-notif-preview-placeholder');
-      const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
-
-      if (url) {
-        // Otomatis ubah Google Drive link ke direct lh3 link
-        if (url.includes('drive.google.com') || url.includes('docs.google.com')) {
-          const match = url.match(/(?:id=|d\/|open\?id=)([a-zA-Z0-9_-]{25,})/);
-          if (match && match[1]) {
-            url = 'https://lh3.googleusercontent.com/d/' + match[1];
-            urlInput.value = url;
-          }
-        }
-
-        if (previewImg) {
-          previewImg.src = url;
-          previewImg.classList.remove('hidden');
-        }
-        if (placeholder) placeholder.classList.add('hidden');
-        if (zoomBtn) zoomBtn.classList.remove('hidden');
-      } else {
-        const oldGambar = document.getElementById('admin-notif-old-gambar');
-        if (oldGambar && oldGambar.value) {
-          if (previewImg) {
-            previewImg.src = oldGambar.value;
-            previewImg.classList.remove('hidden');
-          }
-          if (placeholder) placeholder.classList.add('hidden');
-          if (zoomBtn) zoomBtn.classList.remove('hidden');
-        } else {
-          if (previewImg) {
-            previewImg.src = '';
-            previewImg.classList.add('hidden');
-          }
-          if (placeholder) placeholder.classList.remove('hidden');
-          if (zoomBtn) zoomBtn.classList.add('hidden');
-        }
-      }
-    }
-
-    function clearAdminNotifImage() {
-      const urlInput = document.getElementById('admin-notif-gambar-url');
-      const fileInput = document.getElementById('admin-notif-file');
-      const oldGambar = document.getElementById('admin-notif-old-gambar');
-      const previewImg = document.getElementById('admin-notif-preview-img');
-      const placeholder = document.getElementById('admin-notif-preview-placeholder');
-      const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
-
-      if (urlInput) urlInput.value = '';
-      if (fileInput) fileInput.value = '';
-      if (oldGambar) oldGambar.value = '';
-      if (previewImg) {
-        previewImg.src = '';
-        previewImg.classList.add('hidden');
-      }
-      if (placeholder) placeholder.classList.remove('hidden');
-      if (zoomBtn) zoomBtn.classList.add('hidden');
-    }
-
-    function previewAdminNotifImage(event) {
+        function previewAdminNotifImage(event) {
       const file = event.target.files && event.target.files[0];
       const previewImg = document.getElementById('admin-notif-preview-img');
       const previewPlaceholder = document.getElementById('admin-notif-preview-placeholder');
+      const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+      const removeBtn = document.getElementById('admin-notif-remove-img-btn');
 
       if (file) {
+        if (file.size > 8 * 1024 * 1024) {
+          alert('Ukuran file gambar maksimal 8 MB.');
+          event.target.value = '';
+          return;
+        }
         const reader = new FileReader();
         reader.onload = function (e) {
           if (previewImg) { previewImg.src = e.target.result; previewImg.classList.remove('hidden'); }
           if (previewPlaceholder) previewPlaceholder.classList.add('hidden');
-          const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
           if (zoomBtn) zoomBtn.classList.remove('hidden');
+          if (removeBtn) removeBtn.classList.remove('hidden');
         };
         reader.readAsDataURL(file);
       }
+    }
+
+    function clearAdminNotifImage() {
+      const fileInput = document.getElementById('admin-notif-file');
+      const oldGambar = document.getElementById('admin-notif-old-gambar');
+      const urlInput = document.getElementById('admin-notif-gambar-url');
+      const previewImg = document.getElementById('admin-notif-preview-img');
+      const previewPlaceholder = document.getElementById('admin-notif-preview-placeholder');
+      const zoomBtn = document.getElementById('admin-notif-preview-zoom-btn');
+      const removeBtn = document.getElementById('admin-notif-remove-img-btn');
+
+      if (fileInput) fileInput.value = '';
+      if (oldGambar) oldGambar.value = '';
+      if (urlInput) urlInput.value = '';
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.classList.add('hidden');
+      }
+      if (previewPlaceholder) previewPlaceholder.classList.remove('hidden');
+      if (zoomBtn) zoomBtn.classList.add('hidden');
+      if (removeBtn) removeBtn.classList.add('hidden');
+    }
+
+    function updateNotifImagePreviewFromUrl() {
+      // Kept for backward compatibility
     }
 
     async function handleAdminNotifikasiSubmit(event) {
