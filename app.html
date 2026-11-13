@@ -1441,7 +1441,7 @@
           <div id="ppdbReceiptView" class="hidden space-y-4 py-2">
             <div class="text-center space-y-1">
               <div class="w-14 h-14 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2 shadow-inner">
-                <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-600"></i>
+                <i data-lucide="check-circle" class="w-8 h-8 text-emerald-600"></i>
               </div>
               <h4 class="text-sm font-black text-slate-900">Alhamdulillah! Pendaftaran Berhasil Dikirim</h4>
               <p class="text-xs text-slate-500">Data Anda telah resmi tersimpan di database seleksi PPDB MTs YASUA.</p>
@@ -2731,31 +2731,11 @@
 
           <!-- 2. Subview Banners: KHUSUS BANNER PROMO MOBILE (3:1) -->
           <div id="admin-subview-banners" class="hidden space-y-4">
-            <!-- Header Kartu Ringkasan Banner Promo Mobile -->
-            <div style="background: linear-gradient(135deg, #b45309 0%, #78350f 100%);" class="text-white p-4 rounded-2xl shadow-md border border-amber-600/40 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-200">BANNER PROMO MOBILE (3:1)</span>
-                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-white/20 text-white">Aplikasi Mobile PWA</span>
-              </div>
-              <h3 class="text-base font-black text-white">Banner Promo Mobile App (3:1)</h3>
-              <p class="text-xs text-amber-100/90 leading-relaxed">
-                Kelola 3 slide spanduk visual rasio 3:1 dan kartu aksi cepat (PPDB &amp; QRIS) yang tayang langsung di beranda aplikasi mobile MTs YASUA.
-              </p>
-              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
-                <button type="button" onclick="switchAppTab('beranda')" class="px-3 py-1.5 rounded-xl bg-white text-amber-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-amber-50 transition cursor-pointer">
-                  <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-700"></i>
-                  <span>Lihat Tampilan di Beranda App</span>
-                </button>
-                <button type="button" onclick="switchAppTab('ppdb')" class="px-3 py-1.5 rounded-xl bg-amber-500/40 hover:bg-amber-500/60 text-white font-bold flex items-center gap-1.5 border border-white/30 transition cursor-pointer">
-                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-                  <span>Buka Form PPDB</span>
-                </button>
-              </div>
-            </div>
 
-            <!-- 4 Kartu KPI Banner Promo Mobile -->
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
             <div class="grid grid-cols-2 gap-2.5">
-              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
                   <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">BANNER SLIDE</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
@@ -2763,29 +2743,66 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">3 Slide</h3>
-                  <p class="text-[10px] text-amber-100 font-medium mt-1">Rasio 3:1 Widescreen</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">3 Slide</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Rasio 3:1 Widescreen Mobile</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Penempatan</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Beranda Mobile</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Penempatan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Beranda App</span>
                 </div>
               </div>
 
-              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KARTU AKSI CEPAT</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">STATUS TAYANG</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">Aktif Live</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Tayang Langsung di PWA</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Platform</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Mobile App</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KARTU AKSI</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="layers" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">2 Tombol</h3>
-                  <p class="text-[10px] text-emerald-100 font-medium mt-1">PPDB &amp; Infaq QRIS</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">2 Tombol</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">PPDB & Infaq QRIS</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Integrasi</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">100% Direct SPA</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Integrasi</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Direct SPA</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">RASIO VISUAL</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">3:1 HD</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Resolusi Tajam & Ringan</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Format</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Optimized WebP</span>
                 </div>
               </div>
             </div>
@@ -2883,61 +2900,78 @@
 
           <!-- 2B. Subview Slider: KHUSUS HERO SLIDER DESKTOP (5 FOTO WEB - index.html) -->
           <div id="admin-subview-slider" class="hidden space-y-4">
-            <!-- Header Kartu Ringkasan Hero Slider Desktop -->
-            <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 50%, #043b3e 100%);" class="text-white p-4 rounded-2xl shadow-md border border-emerald-600/40 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-200">HERO SLIDER DESKTOP (5 FOTO WEB)</span>
-                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-amber-400 text-amber-950 font-black">Live Web (index.html)</span>
-              </div>
-              <h3 class="text-base font-black text-white">Hero Slider Desktop (5 Foto Web)</h3>
-              <p class="text-xs text-emerald-100/90 leading-relaxed">
-                Kelola 5 foto dokumentasi madrasah, judul, deskripsi, dan badge yang tampil berputar di beranda utama website (index.html).
-              </p>
-              <div class="pt-2 flex flex-wrap gap-2 text-[10px]">
-                <a href="index.html" target="_blank" class="px-3 py-1.5 rounded-xl bg-white text-emerald-950 font-bold flex items-center gap-1.5 shadow-xs hover:bg-emerald-50 transition">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 text-emerald-700"></i>
-                  <span>Lihat Beranda Web (index.html)</span>
-                </a>
-                <a href="/admin?tab=banners" class="px-3 py-1.5 rounded-xl bg-emerald-500/30 hover:bg-emerald-500/50 text-white font-bold flex items-center gap-1.5 border border-white/30 transition">
-                  <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
-                  <span>Editor Slider Desktop</span>
-                </a>
-              </div>
-            </div>
 
-            <!-- 4 Kartu KPI Hero Slider Desktop -->
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
             <div class="grid grid-cols-2 gap-2.5">
-              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL FOTO</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL SLIDE</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="image" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">5 Foto</h3>
-                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Dokumentasi Kampus</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">6 Foto</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Showcase Unggulan Web</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Rasio Tampilan</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">16:11 / 4:3 Web</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Penempatan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Hero Beranda</span>
                 </div>
               </div>
 
-              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2">
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">ROTASI OTOMATIS</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">STATUS WEB</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">Live Web</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">index.html Beranda Depan</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Visibilitas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Publik 100%</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">DURASI PUTAR</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="timer" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">5 Detik</h3>
-                  <p class="text-[10px] text-sky-100 font-medium mt-1">Transisi Slider Web</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">5 Detik</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Transisi Halus Dinamis</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[9px]">
-                  <span class="text-white/80">Status Web</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">index.html Aktif</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Efek</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Fade & Slide</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">NAVIGASI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">Dot & Panah</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Touch & Click Support</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Kontrol</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Dua Arah</span>
                 </div>
               </div>
             </div>
@@ -3117,6 +3151,82 @@
 
           <!-- 3. Subview Ticker Pengumuman -->
           <div id="admin-subview-ticker" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL WARTA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="mob-notif-kpi-total" class="text-xl font-black tracking-tight leading-none text-white">0 Warta</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Pengumuman & Notifikasi</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Status</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Terintegrasi</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">WARTA AKTIF</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="mob-notif-kpi-active" class="text-xl font-black tracking-tight leading-none text-white">0 Aktif</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Tayang di Beranda App</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Visibilitas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Tayang Live</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">POP-UP BERANDA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="layout-template" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="mob-notif-kpi-popup" class="text-xl font-black tracking-tight leading-none text-white">0 Pop-up</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Dialog Poster Otomatis</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Format</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Modal Dialog</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">ARSIP NONAKTIF</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="archive" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="mob-notif-kpi-inactive" class="text-xl font-black tracking-tight leading-none text-white">0 Arsip</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Selesai / Ditangguhkan</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Penyimpanan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Tersimpan</span>
+                </div>
+              </div>
+            </div>
+
             <!-- 1. Header Notifikasi & Pop-up Beranda Mobile -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
@@ -3134,49 +3244,6 @@
                     <i data-lucide="refresh-cw" id="admin-mob-notif-refresh-icon" class="w-3.5 h-3.5"></i>
                   </button>
                   <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-rose-50 text-rose-700 rounded-full border border-rose-200">Live Sync</span>
-                </div>
-              </div>
-
-              <!-- 4 Kartu KPI Metrik Notifikasi (Ala Asnawiyyah) -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <!-- 1. Total Warta -->
-                <div style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);" class="text-white p-3 rounded-xl shadow-xs flex flex-col justify-between space-y-1">
-                  <div class="flex items-center justify-between opacity-90">
-                    <span class="text-[8.5px] font-black uppercase tracking-wider">Total Warta</span>
-                    <i data-lucide="megaphone" class="w-3.5 h-3.5"></i>
-                  </div>
-                  <h4 class="text-base font-black text-white"><span id="mob-notif-kpi-total">0</span> <span class="text-[9px] font-normal opacity-90">Warta</span></h4>
-                  <span class="text-[8px] text-white/80 border-t border-white/20 pt-0.5">Semua notifikasi</span>
-                </div>
-
-                <!-- 2. Warta Aktif -->
-                <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);" class="text-white p-3 rounded-xl shadow-xs flex flex-col justify-between space-y-1">
-                  <div class="flex items-center justify-between opacity-90">
-                    <span class="text-[8.5px] font-black uppercase tracking-wider">Warta Aktif</span>
-                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
-                  </div>
-                  <h4 class="text-base font-black text-white"><span id="mob-notif-kpi-active">0</span> <span class="text-[9px] font-normal opacity-90">Aktif</span></h4>
-                  <span class="text-[8px] text-white/80 border-t border-white/20 pt-0.5">Tayang di aplikasi</span>
-                </div>
-
-                <!-- 3. Pop-up Modal -->
-                <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);" class="text-white p-3 rounded-xl shadow-xs flex flex-col justify-between space-y-1">
-                  <div class="flex items-center justify-between opacity-90">
-                    <span class="text-[8.5px] font-black uppercase tracking-wider">Pop-up Modal</span>
-                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                  </div>
-                  <h4 class="text-base font-black text-white"><span id="mob-notif-kpi-popup">0</span> <span class="text-[9px] font-normal opacity-90">Pop-up</span></h4>
-                  <span class="text-[8px] text-white/80 border-t border-white/20 pt-0.5">Auto dialog beranda</span>
-                </div>
-
-                <!-- 4. Nonaktif -->
-                <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);" class="text-white p-3 rounded-xl shadow-xs flex flex-col justify-between space-y-1">
-                  <div class="flex items-center justify-between opacity-90">
-                    <span class="text-[8.5px] font-black uppercase tracking-wider">Nonaktif</span>
-                    <i data-lucide="archive" class="w-3.5 h-3.5"></i>
-                  </div>
-                  <h4 class="text-base font-black text-white"><span id="mob-notif-kpi-inactive">0</span> <span class="text-[9px] font-normal opacity-90">Arsip</span></h4>
-                  <span class="text-[8px] text-white/80 border-t border-white/20 pt-0.5">Selesai tayang</span>
                 </div>
               </div>
 
@@ -3291,10 +3358,10 @@
 
           <div id="admin-subview-guru" class="hidden space-y-4">
 
-            <!-- 1. CARDS RINGKASAN DATA GURU (SOLID GRADIENT PROFESSIONAL) -->
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
             <div class="grid grid-cols-2 gap-2.5">
-              <!-- Total Guru -->
-              <div style="background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
                   <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL PENDIDIK</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
@@ -3303,7 +3370,7 @@
                 </div>
                 <div>
                   <h3 id="admMetricTotalGuru" class="text-xl font-black tracking-tight leading-none text-white">9 Asatidz +</h3>
-                  <p class="text-[10px] text-blue-100 font-medium mt-1">Dewan Guru &amp; Tendik</p>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Dewan Guru & Tendik</p>
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
                   <span class="text-white/80 font-medium">Status Pengajar</span>
@@ -3311,8 +3378,8 @@
                 </div>
               </div>
 
-              <!-- Sertifikasi / SIMPATIKA -->
-              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
                   <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">SIMPATIKA KEMENAG</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
@@ -3321,7 +3388,7 @@
                 </div>
                 <div>
                   <h3 id="admMetricVerifGuru" class="text-xl font-black tracking-tight leading-none text-white">Terverifikasi</h3>
-                  <p class="text-[10px] text-emerald-100 font-medium mt-1">NIP &amp; NUPTK Resmi</p>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">NIP & NUPTK Resmi</p>
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
                   <span class="text-white/80 font-medium">Validasi Data</span>
@@ -3329,7 +3396,7 @@
                 </div>
               </div>
 
-              <!-- Rumpun Mapel -->
+              <!-- 3. Amber / Orange Solid Gradient -->
               <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
                   <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">RUMPUN KEILMUAN</span>
@@ -3343,11 +3410,11 @@
                 </div>
                 <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
                   <span class="text-white/80 font-medium">Kurikulum</span>
-                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Merdeka &amp; Salaf</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Merdeka & Salaf</span>
                 </div>
               </div>
 
-              <!-- Kualifikasi Akademik -->
+              <!-- 4. Purple / Violet Solid Gradient -->
               <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
                   <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KUALIFIKASI</span>
@@ -3539,6 +3606,82 @@
 
           <!-- 5. Subview Santri & Siswa -->
           <div id="admin-subview-santri" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL SISWA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-siswa-total-stat" class="text-xl font-black tracking-tight leading-none text-white">276 Siswa</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Siswa Aktif Terdaftar</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Tahun Ajaran</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">2026/2027</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KELAS VII</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-siswa-vii-stat" class="text-xl font-black tracking-tight leading-none text-white">96 Siswa</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">3 Rombel (VII-A, B, C)</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Rombongan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">3 Kelas</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KELAS VIII</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-siswa-viii-stat" class="text-xl font-black tracking-tight leading-none text-white">92 Siswa</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">3 Rombel (VIII-A, B, C)</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Rombongan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">3 Kelas</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KELAS IX</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-siswa-ix-stat" class="text-xl font-black tracking-tight leading-none text-white">88 Siswa</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">3 Rombel (IX-A, B, C)</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Rombongan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">3 Kelas</span>
+                </div>
+              </div>
+            </div>
+
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
@@ -3552,30 +3695,6 @@
                 </div>
                 <div class="flex items-center gap-1.5">
                   <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">TA 2026/2027</span>
-                </div>
-              </div>
-
-              <!-- 4 Kartu Metrik KPI Master Data Siswa -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-purple-800 uppercase tracking-wider block">Total Siswa</span>
-                  <p id="admin-siswa-total-stat" class="text-base font-black text-purple-950">276</p>
-                  <span class="text-[8.5px] text-purple-600 block">Siswa Aktif</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Kelas VII</span>
-                  <p id="admin-siswa-vii-stat" class="text-base font-black text-blue-950">96</p>
-                  <span class="text-[8.5px] text-blue-600 block">3 Rombel (A, B, C)</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-indigo-800 uppercase tracking-wider block">Kelas VIII</span>
-                  <p id="admin-siswa-viii-stat" class="text-base font-black text-indigo-950">92</p>
-                  <span class="text-[8.5px] text-indigo-600 block">3 Rombel (A, B, C)</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Kelas IX</span>
-                  <p id="admin-siswa-ix-stat" class="text-base font-black text-emerald-950">88</p>
-                  <span class="text-[8.5px] text-emerald-600 block">3 Rombel (A, B, C)</span>
                 </div>
               </div>
 
@@ -3618,6 +3737,82 @@
           <!-- 6. Subview Presensi Pendidik -->
           <!-- Subview Galeri & Dokumentasi (Mobile Admin Control) -->
           <div id="admin-subview-galeri" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL DOKUMENTASI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="images" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-galeri-total-stat" class="text-xl font-black tracking-tight leading-none text-white">6 Foto</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Foto & Video Dokumentasi</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Arsip Kampus</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Terverifikasi</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KEGIATAN SANTRI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-galeri-kegiatan-stat" class="text-xl font-black tracking-tight leading-none text-white">3 Dokumentasi</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Pembiasaan, Upacara & Acara</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Kategori</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Aktivitas Santri</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">SARANA & FASILITAS</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="building-2" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-galeri-sarpras-stat" class="text-xl font-black tracking-tight leading-none text-white">2 Sarana</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Gedung, Lab & Lingkungan</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Fasilitas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Sarpras Madrasah</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">STATUS PUBLIK</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-galeri-aktif-stat" class="text-xl font-black tracking-tight leading-none text-white">6 Aktif</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Tampil di Web & Mobile App</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Visibilitas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Live Publik</span>
+                </div>
+              </div>
+            </div>
+
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
@@ -3634,30 +3829,6 @@
                     <i data-lucide="refresh-cw" id="admin-mob-galeri-refresh-icon" class="w-3.5 h-3.5"></i>
                   </button>
                   <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">Live Sync</span>
-                </div>
-              </div>
-
-              <!-- 4 KPI Card Galeri -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-purple-800 uppercase tracking-wider block">Total Foto</span>
-                  <p id="admin-galeri-total-stat" class="text-base font-black text-purple-950">6</p>
-                  <span class="text-[8.5px] text-purple-600 block">Foto &amp; Video Arsip</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-indigo-800 uppercase tracking-wider block">Kegiatan</span>
-                  <p id="admin-galeri-kegiatan-stat" class="text-base font-black text-indigo-950">3</p>
-                  <span class="text-[8.5px] text-indigo-600 block">Pembiasaan &amp; Acara</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Sarana</span>
-                  <p id="admin-galeri-sarpras-stat" class="text-base font-black text-emerald-950">2</p>
-                  <span class="text-[8.5px] text-emerald-600 block">Fasilitas Madrasah</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Aktif Publik</span>
-                  <p id="admin-galeri-aktif-stat" class="text-base font-black text-amber-950">6</p>
-                  <span class="text-[8.5px] text-amber-700 block">Tayang di Web &amp; App</span>
                 </div>
               </div>
 
@@ -3775,6 +3946,82 @@
 
           <!-- Subview Profil Madrasah (Mobile Admin Control) -->
           <div id="admin-subview-profil" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">AKREDITASI RESMI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-mob-profil-akreditasi" class="text-xl font-black tracking-tight leading-none text-white">Peringkat A</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Unggul BAN-PDM Nasional</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Standar Mutu</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Akreditasi A</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">NSM KEMENAG</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">121233210034</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Nomor Statistik Madrasah</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Kementerian Agama</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Resmi Kemenag</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">NPSN NASIONAL</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="hash" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-mob-profil-npsn" class="text-xl font-black tracking-tight leading-none text-white">20364357</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Kemendikbudristek RI</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Data Pokok</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Dapodik Aktif</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">STATUS LEMBAGA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="school" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">Madrasah Tsanawiyah</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Terpadu Salaf & Modern</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Jenjang</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">SMP / MTs</span>
+                </div>
+              </div>
+            </div>
+
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
@@ -3787,20 +4034,6 @@
                   </div>
                 </div>
                 <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">Live Sync</span>
-              </div>
-
-              <!-- Quick Status Cards -->
-              <div class="grid grid-cols-2 gap-2 text-center text-xs">
-                <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
-                  <span class="text-[9.5px] font-bold text-emerald-800">Akreditasi Resmi</span>
-                  <p id="admin-mob-profil-akreditasi" class="text-sm font-black text-emerald-950">Peringkat A (Unggul)</p>
-                  <span class="text-[8.5px] text-emerald-600">Badan Akreditasi Nasional</span>
-                </div>
-                <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
-                  <span class="text-[9.5px] font-bold text-amber-800">NPSN / NSM</span>
-                  <p id="admin-mob-profil-npsn" class="text-xs font-mono font-black text-amber-950">20364357</p>
-                  <span class="text-[8.5px] text-amber-700">121233210034</span>
-                </div>
               </div>
 
               <!-- Info Kepala Madrasah Aktif -->
@@ -3877,77 +4110,77 @@
               </div>
             </div>
 
-            <!-- 2. 4 Kartu KPI Metrik KBM (Grid 2x2 High-Contrast Solid Madrasah) -->
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
             <div class="grid grid-cols-2 gap-2.5">
-              <!-- Card 1: Total Rombel -->
-              <div class="bg-gradient-to-br from-[#0a9396] to-[#005f73] text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[9.5px] font-bold text-emerald-100 uppercase tracking-wider">TOTAL ROMBEL</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL ROMBEL</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="layers" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">9 Rombel</h3>
-                  <p class="text-[9.5px] text-emerald-100 font-medium mt-0.5">VII-A s.d. IX-C Terpadu</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">9 Rombel</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">VII-A s.d. IX-C Terpadu</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
-                  <span class="text-white/80">Struktur</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">3 Tingkatan</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Struktur Kelas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">3 Tingkatan</span>
                 </div>
               </div>
 
-              <!-- Card 2: Beban Harian -->
-              <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[9.5px] font-bold text-blue-100 uppercase tracking-wider">BEBAN HARIAN</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">BEBAN HARIAN</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="clock" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">8 JP / Hari</h3>
-                  <p class="text-[9.5px] text-blue-100 font-medium mt-0.5">07.00 - 13.50 WIB</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">8 JP / Hari</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">07.00 - 13.50 WIB Efektif</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
-                  <span class="text-white/80">Hari Efektif</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Senin - Sabtu</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Hari Efektif</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Senin - Sabtu</span>
                 </div>
               </div>
 
-              <!-- Card 3: Durasi KBM -->
-              <div class="bg-gradient-to-br from-purple-600 to-pink-700 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[9.5px] font-bold text-purple-100 uppercase tracking-wider">DURASI KBM</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">DURASI BELAJAR</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="hourglass" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">40 Menit</h3>
-                  <p class="text-[9.5px] text-purple-100 font-medium mt-0.5">Standar Kurikulum Kemenag</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">40 Menit</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Standar Kurikulum Kemenag</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
-                  <span class="text-white/80">Alokasi</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Per JP</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Alokasi</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Per Jam Tatap Muka</span>
                 </div>
               </div>
 
-              <!-- Card 4: Seragam Harian -->
-              <div class="bg-gradient-to-br from-amber-500 to-orange-600 text-white p-3.5 rounded-2xl shadow-sm flex flex-col justify-between space-y-2">
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
                 <div class="flex items-start justify-between">
-                  <span class="text-[9.5px] font-bold text-amber-100 uppercase tracking-wider">SERAGAM HARIAN</span>
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">SERAGAM HARIAN</span>
                   <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
                     <i data-lucide="shirt" class="w-3.5 h-3.5"></i>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-black text-white">6 Hari</h3>
-                  <p class="text-[9.5px] text-amber-100 font-medium mt-0.5">Senin s.d. Sabtu Wajib</p>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">6 Hari</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Senin s.d. Sabtu Terjadwal</p>
                 </div>
-                <div class="pt-1.5 border-t border-white/20 flex items-center justify-between text-[8.5px]">
-                  <span class="text-white/80">Jadwal</span>
-                  <span class="px-1.5 py-0.5 rounded bg-white/25 font-bold">Terjadwal Resmi</span>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Ketentuan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Wajib Madrasah</span>
                 </div>
               </div>
             </div>
@@ -4181,6 +4414,82 @@
 
           <!-- 8. Subview Prestasi -->
           <div id="admin-subview-prestasi" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL JUARA</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-prestasi-total-stat" class="text-xl font-black tracking-tight leading-none text-white">6 Juara</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Prestasi Resmi Madrasah</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Basis Data</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Google Sheets</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">SAINS & KSM</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-prestasi-sains-stat" class="text-xl font-black tracking-tight leading-none text-white">1 Juara</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Akademik & Sains Terpadu</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Kompetisi</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Tingkat Kabupaten</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KEAGAMAAN</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-prestasi-agama-stat" class="text-xl font-black tracking-tight leading-none text-white">2 Juara</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Tahfidz & MTQ Kemenag</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Bidang</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Salafiyah</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">OLAHRAGA & SENI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-prestasi-olahraga-stat" class="text-xl font-black tracking-tight leading-none text-white">3 Juara</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Pagar Nusa & Drumband</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Ekstrakurikuler</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Juara 1 & 2</span>
+                </div>
+              </div>
+            </div>
+
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
@@ -4201,30 +4510,6 @@
                     <i data-lucide="refresh-cw" id="admin-mob-prestasi-refresh-icon" class="w-3.5 h-3.5"></i>
                   </button>
                   <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200">Live Sheets</span>
-                </div>
-              </div>
-
-              <!-- 4 Kartu Metrik KPI Prestasi -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Total Juara</span>
-                  <p id="admin-prestasi-total-stat" class="text-base font-black text-amber-950">6</p>
-                  <span class="text-[8.5px] text-amber-700 block">Prestasi Madrasah</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Sains &amp; KSM</span>
-                  <p id="admin-prestasi-sains-stat" class="text-base font-black text-blue-950">1</p>
-                  <span class="text-[8.5px] text-blue-600 block">Akademik Terintegrasi</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Keagamaan</span>
-                  <p id="admin-prestasi-agama-stat" class="text-base font-black text-emerald-950">2</p>
-                  <span class="text-[8.5px] text-emerald-600 block">Tahfidz &amp; Kaligrafi</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-purple-800 uppercase tracking-wider block">Olahraga &amp; Seni</span>
-                  <p id="admin-prestasi-olahraga-stat" class="text-base font-black text-purple-950">3</p>
-                  <span class="text-[8.5px] text-purple-600 block">Silat &amp; Drumband</span>
                 </div>
               </div>
 
@@ -4267,6 +4552,82 @@
           </div>
 
           <div id="admin-subview-ppdb" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL PENDAFTAR</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-ppdb-total-stat" class="text-xl font-black tracking-tight leading-none text-white">0 Calon</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Santri Baru TA 2026/2027</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Status Formulir</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Database Live</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">LOLOS SELEKSI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-ppdb-verified-stat" class="text-xl font-black tracking-tight leading-none text-white">0 Santri</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">Lolos Verifikasi & Diterima</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Hasil Seleksi</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Terverifikasi</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">MENUNGGU VERIFIKASI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-ppdb-pending-stat" class="text-xl font-black tracking-tight leading-none text-white">0 Berkas</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Perlu Konfirmasi Panitia</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Antrean</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Pending Review</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">JALUR PRESTASI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-ppdb-tahfidz-stat" class="text-xl font-black tracking-tight leading-none text-white">0 Berkas</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Tahfidz & Minat Bakat</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Peminatan</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Jalur Unggulan</span>
+                </div>
+              </div>
+            </div>
+
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
@@ -4283,30 +4644,6 @@
                     <i data-lucide="refresh-cw" id="admin-mob-ppdb-refresh-icon" class="w-3.5 h-3.5"></i>
                   </button>
                   <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-orange-50 text-orange-700 rounded-full border border-orange-200">Database Live</span>
-                </div>
-              </div>
-
-              <!-- 4 Kartu KPI Metrik PPDB -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <div class="p-2.5 rounded-xl bg-orange-50/70 border border-orange-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-orange-800 uppercase tracking-wider block">Total Pendaftar</span>
-                  <p id="admin-ppdb-total-stat" class="text-base font-black text-orange-950">0</p>
-                  <span class="text-[8.5px] text-orange-600 block">Calon Santri Baru</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Menunggu</span>
-                  <p id="admin-ppdb-pending-stat" class="text-base font-black text-amber-950">0</p>
-                  <span class="text-[8.5px] text-amber-700 block">Perlu Verifikasi</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Diterima</span>
-                  <p id="admin-ppdb-verified-stat" class="text-base font-black text-emerald-950">0</p>
-                  <span class="text-[8.5px] text-emerald-600 block">Lolos Seleksi</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Tahfidz &amp; Prestasi</span>
-                  <p id="admin-ppdb-tahfidz-stat" class="text-base font-black text-blue-950">0</p>
-                  <span class="text-[8.5px] text-blue-700 block">Jalur Unggulan</span>
                 </div>
               </div>
 
@@ -4354,6 +4691,82 @@
 
           <!-- 9. Subview Alumni -->
           <div id="admin-subview-alumni" class="hidden space-y-4">
+
+            <!-- 1. CARDS RINGKASAN DATA METRIK (GRID 2x2 STANDAR EMAS BERITA) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- 1. Emerald / Teal Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0d9488 0%, #088395 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">TOTAL ALUMNI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">1.250+ Alumni</h3>
+                  <p class="text-[10px] text-emerald-100 font-medium mt-1">Lulusan Sejak Tahun 1985</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Jejaring</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">IKAMAS YASUA</span>
+                </div>
+              </div>
+
+              <!-- 2. Sky / Blue Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">KULIAH & RISET</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">65% Alumni</h3>
+                  <p class="text-[10px] text-sky-100 font-medium mt-1">PTN & PTKIN Favorit</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Pendidikan Lanjut</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Perguruan Tinggi</span>
+                </div>
+              </div>
+
+              <!-- 3. Amber / Orange Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">WIRAUSAHA & INDUSTRI</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3  class="text-xl font-black tracking-tight leading-none text-white">35% Alumni</h3>
+                  <p class="text-[10px] text-amber-100 font-medium mt-1">Wirausaha Mandiri & Profesional</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Sektor Karir</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Dunia Kerja</span>
+                </div>
+              </div>
+
+              <!-- 4. Purple / Violet Solid Gradient -->
+              <div style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);" class="text-white p-3.5 rounded-2xl shadow-md flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start justify-between">
+                  <span class="text-[10px] font-bold text-white/90 uppercase tracking-wider">PROFIL UNGGULAN</span>
+                  <div class="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-xs">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <div>
+                  <h3 id="admin-alumni-verified-stat" class="text-xl font-black tracking-tight leading-none text-white">6 Tokoh</h3>
+                  <p class="text-[10px] text-purple-100 font-medium mt-1">Alumni Teladan Terverifikasi</p>
+                </div>
+                <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[9px] text-white">
+                  <span class="text-white/80 font-medium">Tracer Study</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white/25 font-bold text-[8.5px] tracking-wide">Live Profil</span>
+                </div>
+              </div>
+            </div>
+
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
@@ -4370,30 +4783,6 @@
                     <i data-lucide="refresh-cw" id="admin-mob-alumni-refresh-icon" class="w-3.5 h-3.5"></i>
                   </button>
                   <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-violet-50 text-violet-700 rounded-full border border-violet-200">Tracer IKAMAS</span>
-                </div>
-              </div>
-
-              <!-- 4 Kartu Metrik KPI Alumni -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <div class="p-2.5 rounded-xl bg-violet-50/70 border border-violet-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-violet-800 uppercase tracking-wider block">Total Alumni</span>
-                  <p class="text-base font-black text-violet-950">1.250+</p>
-                  <span class="text-[8.5px] text-violet-600 block">1985 &ndash; 2026</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Kuliah &amp; Riset</span>
-                  <p class="text-base font-black text-blue-950">65%</p>
-                  <span class="text-[8.5px] text-blue-600 block">PTN / PTKIN</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Wirausaha/Kerja</span>
-                  <p class="text-base font-black text-emerald-950">35%</p>
-                  <span class="text-[8.5px] text-emerald-600 block">Industri &amp; Bisnis</span>
-                </div>
-                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
-                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Profil Unggulan</span>
-                  <p id="admin-alumni-verified-stat" class="text-base font-black text-amber-950">6</p>
-                  <span class="text-[8.5px] text-amber-600 block">Terverifikasi Web</span>
                 </div>
               </div>
 
