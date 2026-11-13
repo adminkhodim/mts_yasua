@@ -101,7 +101,7 @@
       <div id="appBannerTrack" class="flex transition-transform duration-500 ease-out">
         <!-- Slide 1: Madrasah Digital -->
         <div class="w-full shrink-0 relative aspect-[3/1] overflow-hidden flex items-center cursor-pointer" onclick="switchAppTab('program')">
-          <img src="https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGb_" alt="Unggul Teknologi & Kurikulum Terpadu" class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
+          <img src="https://lh3.googleusercontent.com/d/1PG3dr3WVNxTiIJSMzL2ks_oPn7_xNzfU" alt="Unggul Teknologi & Kurikulum Terpadu" class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
           <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-transparent"></div>
           <div class="relative z-10 p-3 sm:p-4 max-w-[75%] sm:max-w-[70%] text-white space-y-0.5">
             <span class="inline-block px-1.5 py-0.5 rounded bg-emerald-500/90 text-white font-extrabold text-[8px] sm:text-[9px] uppercase tracking-wider">
@@ -8229,7 +8229,7 @@ function openAdminModule(moduleName) {
         badge: "Madrasah Digital",
         badge_color: "emerald",
         deskripsi: "Lab CBT modern, literasi digital Islami, & pembelajaran interaktif.",
-        gambar_url: "https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGb_",
+        gambar_url: "https://lh3.googleusercontent.com/d/1PG3dr3WVNxTiIJSMzL2ks_oPn7_xNzfU",
         link_url: "/app/program",
         status_aktif: true
       },
@@ -8309,7 +8309,7 @@ function openAdminModule(moduleName) {
 
         return `
           <div class="w-full shrink-0 relative aspect-[3/1] overflow-hidden flex items-center" ${clickAction}>
-            <img src="${b.gambar_url || 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGb_'}" alt="${b.judul || 'Banner'}" class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
+            <img src="${b.gambar_url || 'https://lh3.googleusercontent.com/d/1PG3dr3WVNxTiIJSMzL2ks_oPn7_xNzfU'}" alt="${b.judul || 'Banner'}" class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-transparent"></div>
             <div class="relative z-10 p-3 sm:p-4 max-w-[75%] sm:max-w-[70%] text-white space-y-0.5">
               <span class="inline-block px-1.5 py-0.5 rounded ${badgeBg} text-[8px] sm:text-[9px] uppercase tracking-wider">
@@ -8455,7 +8455,7 @@ function openAdminModule(moduleName) {
         return `
           <div class="p-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 hover:bg-white transition flex flex-col sm:flex-row gap-3">
             <div class="w-full sm:w-36 h-20 rounded-xl overflow-hidden bg-slate-900 shrink-0 relative">
-              <img src="${b.gambar_url || 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGb_'}" alt="${b.judul}" class="w-full h-full object-cover">
+              <img src="${b.gambar_url || 'https://lh3.googleusercontent.com/d/1PG3dr3WVNxTiIJSMzL2ks_oPn7_xNzfU'}" alt="${b.judul}" class="w-full h-full object-cover">
               <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-black/60 text-white font-mono font-bold text-[8px]">SLIDE #${b.urutan}</span>
             </div>
             <div class="min-w-0 flex-1 space-y-1.5">
@@ -8526,7 +8526,7 @@ function openAdminModule(moduleName) {
         if (badgeColorInput) badgeColorInput.value = 'amber';
         if (judulInput) judulInput.value = '';
         if (descInput) descInput.value = '';
-        if (imgInput) imgInput.value = 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGb_';
+        if (imgInput) imgInput.value = 'https://lh3.googleusercontent.com/d/1PG3dr3WVNxTiIJSMzL2ks_oPn7_xNzfU';
         if (linkInput) linkInput.value = '/app/program';
         if (urutanInput) urutanInput.value = adminBannerData.length + 1;
         if (aktifInput) aktifInput.checked = true;
@@ -8571,7 +8571,7 @@ function openAdminModule(moduleName) {
       const color = document.getElementById('adminBannerBadgeColor').value || 'emerald';
       const judul = document.getElementById('adminBannerJudul').value || 'Judul Slide Banner';
       const desc = document.getElementById('adminBannerDeskripsi').value || 'Penjelasan singkat slide banner...';
-      const img = document.getElementById('adminBannerGambarUrl').value || 'https://lh3.googleusercontent.com/d/10KhqYEIkTXwHJVY1DY5W1qS_zvbBgGb_';
+      const img = document.getElementById('adminBannerGambarUrl').value || 'https://lh3.googleusercontent.com/d/1PG3dr3WVNxTiIJSMzL2ks_oPn7_xNzfU';
 
       const previewImg = document.getElementById('adminBannerModalPreviewImg');
       const previewBadge = document.getElementById('adminBannerModalPreviewBadge');
