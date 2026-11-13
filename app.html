@@ -4506,9 +4506,21 @@
             <input type="text" id="adminBannerDeskripsi" oninput="updateAdminBannerModalPreview()" placeholder="Penjelasan 1 baris..." class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-amber-500">
           </div>
 
-          <div>
-            <label class="block text-[10.5px] font-bold text-slate-700 mb-1">URL Gambar (Rasio 3:1) <span class="text-rose-500">*</span></label>
-            <input type="url" id="adminBannerGambarUrl" required oninput="updateAdminBannerModalPreview()" placeholder="https://lh3.googleusercontent.com/..." class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-amber-500 font-mono text-[10.5px]">
+          <div class="space-y-1.5">
+            <label class="block text-[10.5px] font-bold text-slate-700">Gambar Banner (Rasio 3:1) <span class="text-rose-500">*</span></label>
+            
+            <!-- Upload Foto dari Perangkat / Galeri -->
+            <div class="p-2.5 rounded-2xl border border-dashed border-amber-300 bg-amber-50/60 flex flex-col gap-1.5">
+              <span class="text-[10.5px] text-amber-900 font-extrabold flex items-center gap-1.5">
+                <i data-lucide="upload" class="w-3.5 h-3.5 text-amber-600"></i>
+                <span>Upload Foto dari Perangkat:</span>
+              </span>
+              <input type="file" id="adminBannerFileInput" accept="image/*" onchange="handleAdminBannerFileSelected(event)"
+                class="w-full text-[11px] text-slate-600 file:mr-2.5 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-600 cursor-pointer bg-white p-1 rounded-xl border border-slate-200/90 shadow-2xs">
+            </div>
+
+            <span class="text-[10px] text-slate-500 font-semibold block pt-0.5">Atau Gunakan URL Gambar Langsung:</span>
+            <input type="text" id="adminBannerGambarUrl" required oninput="updateAdminBannerModalPreview()" placeholder="https://lh3.googleusercontent.com/... atau data:image/..." class="w-full bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:ring-2 focus:ring-amber-500 font-mono text-[10.5px]">
           </div>
 
           <div class="grid grid-cols-2 gap-2">
@@ -8359,10 +8371,34 @@ function openAdminModule(moduleName) {
         if (aktifInput) aktifInput.checked = true;
       }
 
+      const fileInput = document.getElementById('adminBannerFileInput');
+      if (fileInput) fileInput.value = '';
+
       updateAdminBannerModalPreview();
       modal.classList.remove('hidden');
       if (window.lucide) window.lucide.createIcons();
     }
+
+    function handleAdminBannerFileSelected(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 3 * 1024 * 1024) {
+        alert('Ukuran file foto melebihi 3 MB. Silakan pilih foto yang lebih kecil.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Url = e.target.result;
+        const previewImg = document.getElementById('adminBannerModalPreviewImg');
+        const urlInput = document.getElementById('adminBannerGambarUrl');
+        if (previewImg) previewImg.src = base64Url;
+        if (urlInput) urlInput.value = base64Url;
+      };
+      reader.readAsDataURL(file);
+    }
+    window.handleAdminBannerFileSelected = handleAdminBannerFileSelected;
 
     function closeAdminModalBanner() {
       const modal = document.getElementById('modalAdminBanner');
