@@ -927,9 +927,18 @@
               </div>
             </div>
 
-            <!-- 3 Slide Cards Grid -->
+            <!-- Slide Cards Grid -->
             <div class="space-y-3">
-              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Kelola 3 Slide Banner Promosi</h3>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Kelola Slide Banner Promosi (3:1)</h3>
+                  <p class="text-[11px] text-slate-400">Atur spanduk visual rasio 3:1 untuk smartphone santri &amp; beranda web</p>
+                </div>
+                <button type="button" onclick="openModalAddBanner()" class="px-3.5 py-2 rounded-xl bg-brand-primary hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  <span>Tambah Slide Banner</span>
+                </button>
+              </div>
               <div id="bannersGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Dynamically populated with 3 cards -->
               </div>
@@ -4170,6 +4179,11 @@
                   <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
                   <span>Edit Slide</span>
                 </button>
+                <button onclick="deleteBanner('${b.id}')"
+                  class="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-600"></i>
+                  <span>Hapus</span>
+                </button>
               </div>
             </div>
           </div>
@@ -4225,6 +4239,49 @@
           dot.className = (i === previewSlideIdx) ? 'w-4 h-1.5 rounded-full bg-amber-400 transition-all duration-300' : 'w-1.5 h-1.5 rounded-full bg-white/60 transition-all duration-300';
         });
       }, 4000);
+    }
+
+    function openModalAddBanner() {
+      document.getElementById('bannerId').value = '';
+      document.getElementById('bannerModalTitle').textContent = 'Tambah Slide Banner Baru';
+      document.getElementById('bannerBadge').value = 'Pengumuman';
+      document.getElementById('bannerBadgeColor').value = 'amber';
+      document.getElementById('bannerJudul').value = '';
+      document.getElementById('bannerDeskripsi').value = '';
+      document.getElementById('bannerLinkUrl').value = 'program.html';
+      document.getElementById('bannerGambarUrl').value = 'https://lh3.googleusercontent.com/d/1gTY7QA9OU17KAVaWu0S_ZeNQAPMCyIEU';
+      document.getElementById('bannerStatusAktif').checked = true;
+
+      uploadedBannerBase64 = null;
+      updateBannerModalPreview();
+      document.getElementById('bannerModal').classList.remove('hidden');
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    async function deleteBanner(id) {
+      if (!confirm('Apakah Anda yakin ingin menghapus slide banner ini?')) return;
+      allBanners = allBanners.filter(b => String(b.id) !== String(id));
+      renderBanners();
+      renderAdminPreviewSlider();
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            password: getAdminPassword(),
+            action: 'saveAllBanners',
+            banners: allBanners
+          })
+        });
+        const json = await res.json();
+        if (json.status === 'success') {
+          showToast('Slide banner berhasil dihapus!');
+        } else {
+          showToast('Gagal menghapus: ' + (json.message || 'error'), 'error');
+        }
+      } catch (err) {
+        showToast('Koneksi terputus saat menghapus banner.', 'error');
+      }
     }
 
     function openModalEditBanner(id) {
@@ -4339,14 +4396,28 @@
         status_aktif: document.getElementById('bannerStatusAktif').checked
       };
 
+      if (id) {
+        const idx = allBanners.findIndex(b => String(b.id) === String(id));
+        if (idx !== -1) {
+          allBanners[idx] = { ...allBanners[idx], ...payload };
+        }
+      } else {
+        const nextUrutan = allBanners.length + 1;
+        const newBanner = {
+          id: 'BANNER-' + Date.now(),
+          urutan: nextUrutan,
+          ...payload
+        };
+        allBanners.push(newBanner);
+      }
+
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
           body: JSON.stringify({
             password: getAdminPassword(),
-            action: 'updateBanner',
-            id: id,
-            data: payload
+            action: 'saveAllBanners',
+            banners: allBanners
           })
         });
         const json = await res.json();
