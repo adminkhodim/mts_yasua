@@ -3469,7 +3469,12 @@
                     <p class="text-[9.5px] text-slate-400">Arsip Kegiatan Santri &amp; Fasilitas Kampus</p>
                   </div>
                 </div>
-                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">Live Web &amp; App</span>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="fetchAppGallery(true)" class="w-7 h-7 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="Segarkan Data Galeri">
+                    <i data-lucide="refresh-cw" id="admin-mob-galeri-refresh-icon" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">Live Sync</span>
+                </div>
               </div>
 
               <!-- 4 KPI Card Galeri -->
@@ -5490,6 +5495,8 @@
         })
         .finally(() => {
           if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+        const mobRefreshIcon = document.getElementById('admin-mob-galeri-refresh-icon');
+        if (mobRefreshIcon) mobRefreshIcon.classList.remove('animate-spin');
         });
     }
 
@@ -5656,6 +5663,9 @@
     }
 
     function fetchAppGallery(force = false) {
+      const mobRefreshIcon = document.getElementById('admin-mob-galeri-refresh-icon');
+      if (mobRefreshIcon) mobRefreshIcon.classList.add('animate-spin');
+
       const refreshIcon = document.getElementById('galleryAppRefreshIcon');
       if (refreshIcon) refreshIcon.classList.add('animate-spin');
 

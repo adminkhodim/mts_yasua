@@ -27,6 +27,7 @@ const CONFIG = {
   SHEET_EKSKUL: 'ekskul_list',
   SHEET_EKSKUL_REG: 'ekskul_registrations',
   SHEET_NOTIFIKASI: 'notifikasi',
+  SHEET_GALLERY: 'gallery',
   DEFAULT_ADMIN_PASS: 'adminyasua2026'
 };
 
@@ -225,6 +226,10 @@ function doGet(e) {
         return createJsonResponse({ status: 'success', data: fetchAllNotifikasi() });
       case 'initNotifikasiSheet':
         return createJsonResponse(setupNotifikasiDatabase());
+      case 'getGallery':
+        return createJsonResponse({ status: 'success', data: fetchAllGallery() });
+      case 'initGallerySheet':
+        return createJsonResponse(setupGalleryDatabase());
       case 'incrementViews':
         return createJsonResponse({ status: 'success', data: incrementNewsViewsBackend(e.parameter.id || e.parameter.slug) });
       case 'getSettings':
@@ -423,6 +428,21 @@ function doPost(e) {
         return createJsonResponse({ status: 'success', message: 'Notifikasi berhasil dihapus dari database' });
       case 'uploadNotifikasiPhoto':
         result = uploadPhotoToDrive(payload.filename, payload.base64, 'NOTIF');
+        return createJsonResponse({ status: 'success', data: result });
+
+      // Galeri & Dokumentasi Madrasah
+      case 'addGallery':
+      case 'updateGallery':
+        result = saveOrUpdateGallery(payload.data || payload, payload.fileBase64, payload.fileName, payload.fileMime);
+        return createJsonResponse({ status: 'success', data: result, message: 'Foto galeri berhasil disimpan di database' });
+      case 'deleteGallery':
+        result = deleteGalleryById(payload.id || (payload.data && payload.data.id));
+        return createJsonResponse({ status: 'success', message: 'Foto galeri berhasil dihapus dari database' });
+      case 'toggleGalleryStatus':
+        result = toggleGalleryStatusById(payload.id, payload.status);
+        return createJsonResponse({ status: 'success', data: result, message: 'Status foto galeri berhasil diperbarui' });
+      case 'uploadGalleryPhoto':
+        result = uploadPhotoToDrive(payload.filename, payload.base64, 'GALERI');
         return createJsonResponse({ status: 'success', data: result });
 
       // Berita & Pengumuman
@@ -2349,4 +2369,231 @@ function saveProfileData(payloadData) {
     message: 'Profil madrasah berhasil diperbarui di database',
     data: fetchProfileData()
   };
+}
+
+
+/**
+ * ===================================================================
+ * MODUL GALERI & DOKUMENTASI MADRASAH (DATABASE CONTROLLER)
+ * ===================================================================
+ */
+
+function ensureGallerySheet() {
+  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_GALLERY);
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_GALLERY);
+    sheet.appendRow([
+      'id', 'judul', 'kategori', 'kategoriLabel', 'tanggal', 'lokasi',
+      'platform', 'platformUrl', 'deskripsi', 'urutan', 'status', 'gambar',
+      'created_at', 'updated_at'
+    ]);
+    sheet.getRange(1, 1, 1, 14).setBackground('#5B21B6').setFontColor('#FFFFFF').setFontWeight('bold');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function setupGalleryDatabase() {
+  const sheet = ensureGallerySheet();
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    const defaultData = [
+      {
+        id: "gal_1",
+        judul: "Gedung Pembelajaran Terpadu MTs YASUA",
+        kategori: "sarpras",
+        kategoriLabel: "Fasilitas Kampus",
+        tanggal: "2024-08-10",
+        lokasi: "Pilangwetan, Demak",
+        platform: "instagram",
+        platformUrl: "https://www.instagram.com/mts.yasua_pilangwetan/",
+        deskripsi: "Suasana kampus madrasah yang asri, hijau, bersih, dan berwawasan islami di Desa Pilangwetan, Kebonagung, Demak.",
+        urutan: 1,
+        status: true,
+        gambar: "https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6"
+      },
+      {
+        id: "gal_2",
+        judul: "Apel Pagi & Pembinaan Siswa di Lapangan",
+        kategori: "kegiatan",
+        kategoriLabel: "Kedisiplinan",
+        tanggal: "2024-08-15",
+        lokasi: "Lapangan Madrasah",
+        platform: "tiktok",
+        platformUrl: "https://www.tiktok.com/@mts.yasua_pilangwetan",
+        deskripsi: "Pembinaan karakter dan kedisiplinan santri secara rutin dalam apel pagi madrasah.",
+        urutan: 2,
+        status: true,
+        gambar: "https://lh3.googleusercontent.com/d/1eqhhEb_0y9aCZeLRajc0NuzARTc9owV0"
+      },
+      {
+        id: "gal_3",
+        judul: "Laboratorium Komputer & CBT Center",
+        kategori: "sarpras",
+        kategoriLabel: "Literasi Digital",
+        tanggal: "2024-09-02",
+        lokasi: "Lab Komputer Terpadu",
+        platform: "instagram",
+        platformUrl: "https://www.instagram.com/mts.yasua_pilangwetan/",
+        deskripsi: "Fasilitas ruang CBT modern ber-AC dengan koneksi internet cepat untuk ujian digital dan pengenalan IT.",
+        urutan: 3,
+        status: true,
+        gambar: "https://lh3.googleusercontent.com/d/1bWp0K3Wp6_n57z3j2z8G34nK0sQc1uW9"
+      },
+      {
+        id: "gal_4",
+        judul: "Pembiasaan Shalat Dhuha & Istighosah Bersama",
+        kategori: "kegiatan",
+        kategoriLabel: "Pembiasaan Ibadah",
+        tanggal: "2024-09-12",
+        lokasi: "Masjid Jami' Asnawiyyah",
+        platform: "instagram",
+        platformUrl: "https://www.instagram.com/mts.yasua_pilangwetan/",
+        deskripsi: "Penanaman spiritualitas santri lewat shalat dhuha berjamaah dan pembacaan istighosah rutin.",
+        urutan: 4,
+        status: true,
+        gambar: "https://lh3.googleusercontent.com/d/1v6HkW3d7y8g4j9k2l1m0n3b4v5c6x7z8"
+      },
+      {
+        id: "gal_5",
+        judul: "Kunjungan & Bimbingan Belajar Siswa Berprestasi",
+        kategori: "kegiatan",
+        kategoriLabel: "Akademik & Info",
+        tanggal: "2024-09-20",
+        lokasi: "Ruang Kelas Digital",
+        platform: "tiktok",
+        platformUrl: "https://www.tiktok.com/@mts.yasua_pilangwetan",
+        deskripsi: "Bimbingan intensif persiapan kompetisi sains madrasah dan olimpiade keagamaan tingkat kabupaten/provinsi.",
+        urutan: 5,
+        status: true,
+        gambar: "https://lh3.googleusercontent.com/d/1xyiEwouAo5sUvDhAwfjoUi0vBbw-pfeN"
+      },
+      {
+        id: "gal_6",
+        judul: "Gedung Asrama PPTQ Asnawiyyah Pilangwetan",
+        kategori: "sarpras",
+        kategoriLabel: "Fasilitas Pesantren",
+        tanggal: "2024-10-01",
+        lokasi: "Kompleks Pesantren",
+        platform: "instagram",
+        platformUrl: "https://www.instagram.com/mts.yasua_pilangwetan/",
+        deskripsi: "Pondok Pesantren Tahfidzul Qur'an terintegrasi dengan MTs YASUA untuk pembinaan 24 jam.",
+        urutan: 6,
+        status: true,
+        gambar: "https://lh3.googleusercontent.com/d/1O64dLuEv6Z1nAo_rNyLdHW4GTfSLasn6"
+      }
+    ];
+
+    const nowStr = new Date().toISOString();
+    defaultData.forEach(function(item) {
+      sheet.appendRow([
+        item.id, item.judul, item.kategori, item.kategoriLabel, item.tanggal, item.lokasi,
+        item.platform, item.platformUrl, item.deskripsi, item.urutan, item.status, item.gambar,
+        nowStr, nowStr
+      ]);
+    });
+  }
+  return { status: 'success', message: 'Tabel gallery berhasil diinisialisasi dengan data default' };
+}
+
+function fetchAllGallery() {
+  const sheet = ensureGallerySheet();
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    setupGalleryDatabase();
+  }
+  const data = sheet.getDataRange().getValues();
+  if (data.length <= 1) return [];
+
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  const list = rows.map(function(row) {
+    const item = {};
+    headers.forEach(function(h, idx) {
+      item[h] = row[idx];
+    });
+    item.status = (item.status === true || String(item.status).toLowerCase() === 'true');
+    item.urutan = Number(item.urutan) || 99;
+    return item;
+  });
+
+  list.sort(function(a, b) { return a.urutan - b.urutan; });
+  return list;
+}
+
+function saveOrUpdateGallery(data, fileBase64, fileName, fileMime) {
+  const sheet = ensureGallerySheet();
+  let imgUrl = data.gambar || '';
+
+  if (fileBase64) {
+    const uploadRes = uploadPhotoToDrive(fileName || ('galeri_' + Date.now() + '.jpg'), fileBase64, 'GALERI');
+    if (uploadRes && uploadRes.url) {
+      imgUrl = uploadRes.url;
+    }
+  }
+
+  const id = data.id || ('gal_' + Date.now());
+  const nowStr = new Date().toISOString();
+
+  const values = sheet.getDataRange().getValues();
+  let rowIndex = -1;
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][0]) === String(id)) {
+      rowIndex = i + 1;
+      break;
+    }
+  }
+
+  const rowData = [
+    id,
+    data.judul || '',
+    (data.kategori || 'kegiatan').toLowerCase(),
+    data.kategoriLabel || 'Dokumentasi',
+    data.tanggal || '',
+    data.lokasi || 'Pilangwetan, Demak',
+    (data.platform || 'instagram').toLowerCase(),
+    data.platformUrl || 'https://www.instagram.com/mts.yasua_pilangwetan/',
+    data.deskripsi || '',
+    Number(data.urutan) || 1,
+    (data.status === true || String(data.status).toLowerCase() === 'true'),
+    imgUrl,
+    rowIndex > 0 ? values[rowIndex - 1][12] : nowStr,
+    nowStr
+  ];
+
+  if (rowIndex > 0) {
+    sheet.getRange(rowIndex, 1, 1, rowData.length).setValues([rowData]);
+  } else {
+    sheet.appendRow(rowData);
+  }
+
+  return { id: id, gambar: imgUrl };
+}
+
+function deleteGalleryById(id) {
+  const sheet = ensureGallerySheet();
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][0]) === String(id)) {
+      sheet.deleteRow(i + 1);
+      return true;
+    }
+  }
+  return false;
+}
+
+function toggleGalleryStatusById(id, status) {
+  const sheet = ensureGallerySheet();
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][0]) === String(id)) {
+      const newStatus = (status === true || String(status).toLowerCase() === 'true');
+      sheet.getRange(i + 1, 11).setValue(newStatus);
+      sheet.getRange(i + 1, 14).setValue(new Date().toISOString());
+      return { id: id, status: newStatus };
+    }
+  }
+  return null;
 }
