@@ -2394,13 +2394,13 @@
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Log Harian</span>
             </button>
 
-            <!-- 8. Tahfidz -->
-            <button type="button" onclick="openAdminModule('tahfidz')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+            <!-- 8. Profil Madrasah (Pengganti Menu Tahfidz) -->
+            <button type="button" onclick="openAdminModule('profil')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/70 hover:border-emerald-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
               <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="book-open" class="w-4 h-4 text-emerald-700"></i>
+                <i data-lucide="school" class="w-4 h-4 text-emerald-700"></i>
               </div>
-              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Tahfidz</span>
-              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Mutaba'ah</span>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Profil</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Identitas &amp; Visi</span>
             </button>
 
             <!-- 9. Jadwal KBM -->
@@ -3530,6 +3530,70 @@
                   <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                   <span>Buka Buku Mutaba'ah Tahfidz Spreadsheet</span>
                 </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subview Profil Madrasah (Mobile Admin Control) -->
+          <div id="admin-subview-profil" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                    <i data-lucide="school" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Manajemen Profil Madrasah</h4>
+                    <p class="text-[9.5px] text-slate-400">Identitas, Sambutan Kepala &amp; Visi Misi</p>
+                  </div>
+                </div>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">Live Sync</span>
+              </div>
+
+              <!-- Quick Status Cards -->
+              <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9.5px] font-bold text-emerald-800">Akreditasi Resmi</span>
+                  <p id="admin-mob-profil-akreditasi" class="text-sm font-black text-emerald-950">Peringkat A (Unggul)</p>
+                  <span class="text-[8.5px] text-emerald-600">Badan Akreditasi Nasional</span>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
+                  <span class="text-[9.5px] font-bold text-amber-800">NPSN / NSM</span>
+                  <p id="admin-mob-profil-npsn" class="text-xs font-mono font-black text-amber-950">20364357</p>
+                  <span class="text-[8.5px] text-amber-700">121233210034</span>
+                </div>
+              </div>
+
+              <!-- Info Kepala Madrasah Aktif -->
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl overflow-hidden bg-slate-200 shrink-0 border border-slate-300">
+                  <img id="admin-mob-profil-foto" src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib" alt="Kepala Madrasah" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='/logo.png'">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <span class="text-[9px] font-extrabold uppercase text-emerald-700 block">Kepala Madrasah</span>
+                  <h4 id="admin-mob-profil-nama" class="text-xs font-black text-slate-900 truncate">Muthohar, S.Pd.</h4>
+                  <p id="admin-mob-profil-jabatan" class="text-[10px] text-slate-500 truncate">Kepala MTs YASUA Pilangwetan</p>
+                </div>
+              </div>
+
+              <!-- Quick Action Links -->
+              <div class="space-y-2 pt-1">
+                <a href="/admin" class="w-full py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:scale-98 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-xs">
+                  <i data-lucide="edit-3" class="w-4 h-4"></i>
+                  <span>Buka Form Edit Profil di Portal Admin</span>
+                </a>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" onclick="closeAdminSubviews(); switchAppTab('profil');" class="py-2.5 px-3 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100 text-emerald-900 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 cursor-pointer">
+                    <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-700"></i>
+                    <span>Lihat di Tab Profil</span>
+                  </button>
+
+                  <a href="/profil.html" target="_blank" class="py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98">
+                    <i data-lucide="globe" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Web profil.html</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -8300,7 +8364,7 @@ function openAdminModule(moduleName) {
       if (container) container.classList.remove('hidden');
 
       // 2. Sembunyikan Semua Subview Lain
-      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni'];
+      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni', 'profil'];
       allSubviews.forEach(s => {
         const el = document.getElementById('admin-subview-' + s);
         if (el) el.classList.add('hidden');
@@ -8328,6 +8392,7 @@ function openAdminModule(moduleName) {
         santri: { title: 'Master Data Siswa', icon: 'graduation-cap', color: 'bg-purple-50 text-purple-600' },
         presensi: { title: 'Presensi Guru & Pegawai', icon: 'user-check', color: 'bg-indigo-50 text-indigo-600' },
         tahfidz: { title: "Mutaba'ah Tahfidz Al-Qur'an", icon: 'book-open', color: 'bg-emerald-50 text-emerald-600' },
+        profil: { title: 'Manajemen Profil Madrasah', icon: 'school', color: 'bg-emerald-50 text-emerald-600' },
         jadwal: { title: 'Manajemen Jadwal KBM & Roster', icon: 'calendar-days', color: 'bg-sky-50 text-sky-700' }
       };
 
@@ -10848,6 +10913,19 @@ function openAdminModule(moduleName) {
     let appProfileData = null;
 
     function renderAppProfile(data) {
+      if (!data) return;
+      // Sync info ke Mobile Admin Subview Profil
+      const _raw = data.raw || {};
+      const _kepala = data.kepala || {};
+      const _identitas = data.identitas || {};
+      const _setEl = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+      _setEl('admin-mob-profil-akreditasi', _raw.profile_akreditasi || _identitas.akreditasi);
+      _setEl('admin-mob-profil-npsn', _raw.profile_npsn || _identitas.npsn);
+      _setEl('admin-mob-profil-nama', _raw.profile_kepala_nama || _kepala.nama);
+      _setEl('admin-mob-profil-jabatan', _raw.profile_kepala_jabatan || _kepala.jabatan);
+      const _fotoEl = document.getElementById('admin-mob-profil-foto');
+      if (_fotoEl && (_raw.profile_kepala_foto || _kepala.foto)) _fotoEl.src = _raw.profile_kepala_foto || _kepala.foto;
+
       if (!data) return;
       const raw = data.raw || {};
       const identitas = data.identitas || {};
