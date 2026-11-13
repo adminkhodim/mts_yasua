@@ -2385,13 +2385,13 @@
               <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Master Data</span>
             </button>
 
-            <!-- 7. Presensi -->
-            <button type="button" onclick="openAdminModule('presensi')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-indigo-50/70 border border-slate-200/70 hover:border-indigo-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
-              <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
-                <i data-lucide="user-check" class="w-4 h-4 text-indigo-700"></i>
+            <!-- 7. Galeri Dokumentasi (Pengganti Menu Presensi) -->
+            <button type="button" onclick="openAdminModule('galeri')" class="p-2.5 rounded-xl bg-slate-50/90 hover:bg-purple-50/70 border border-slate-200/70 hover:border-purple-200 flex flex-col items-center group transition cursor-pointer shadow-2xs active:scale-95">
+              <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center mb-1 group-hover:scale-105 transition shadow-2xs">
+                <i data-lucide="images" class="w-4 h-4 text-purple-700"></i>
               </div>
-              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Presensi</span>
-              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Log Harian</span>
+              <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Galeri</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">Dokumentasi</span>
             </button>
 
             <!-- 8. Profil Madrasah (Pengganti Menu Tahfidz) -->
@@ -3456,6 +3456,80 @@
           </div>
 
           <!-- 6. Subview Presensi Pendidik -->
+          <!-- Subview Galeri & Dokumentasi (Mobile Admin Control) -->
+          <div id="admin-subview-galeri" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                    <i data-lucide="images" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Galeri &amp; Dokumentasi Madrasah</h4>
+                    <p class="text-[9.5px] text-slate-400">Arsip Kegiatan Santri &amp; Fasilitas Kampus</p>
+                  </div>
+                </div>
+                <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-purple-50 text-purple-700 rounded-full border border-purple-200">Live Web &amp; App</span>
+              </div>
+
+              <!-- 4 KPI Card Galeri -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-purple-800 uppercase tracking-wider block">Total Foto</span>
+                  <p id="admin-galeri-total-stat" class="text-base font-black text-purple-950">6</p>
+                  <span class="text-[8.5px] text-purple-600 block">Foto &amp; Video Arsip</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-indigo-800 uppercase tracking-wider block">Kegiatan</span>
+                  <p id="admin-galeri-kegiatan-stat" class="text-base font-black text-indigo-950">3</p>
+                  <span class="text-[8.5px] text-indigo-600 block">Pembiasaan &amp; Acara</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Sarana</span>
+                  <p id="admin-galeri-sarpras-stat" class="text-base font-black text-emerald-950">2</p>
+                  <span class="text-[8.5px] text-emerald-600 block">Fasilitas Madrasah</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Aktif Publik</span>
+                  <p id="admin-galeri-aktif-stat" class="text-base font-black text-amber-950">6</p>
+                  <span class="text-[8.5px] text-amber-700 block">Tayang di Web &amp; App</span>
+                </div>
+              </div>
+
+              <!-- Filter Kategori Tabs -->
+              <div class="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 scrollbar-none text-[11px] font-bold">
+                <button type="button" onclick="setMobileAdminGalleryFilter('all')" id="btn-admin-gal-filter-all" class="px-3 py-1.5 rounded-xl bg-purple-700 text-white shrink-0 shadow-2xs transition">Semua</button>
+                <button type="button" onclick="setMobileAdminGalleryFilter('kegiatan')" id="btn-admin-gal-filter-kegiatan" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Kegiatan</button>
+                <button type="button" onclick="setMobileAdminGalleryFilter('sarpras')" id="btn-admin-gal-filter-sarpras" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Sarana &amp; Fasilitas</button>
+              </div>
+
+              <!-- Daftar Foto Dokumentasi Grid -->
+              <div id="admin-mobile-gallery-list" class="space-y-2.5 pt-1">
+                <!-- Diisi dinamis oleh renderMobileAdminGallery() -->
+              </div>
+
+              <!-- Tombol Aksi Cepat -->
+              <div class="space-y-2 pt-2 border-t border-slate-100">
+                <a href="/admin" class="w-full py-2.5 px-3 rounded-xl bg-purple-700 hover:bg-purple-800 active:scale-98 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-xs">
+                  <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                  <span>Kelola &amp; Tambah Foto di Portal Admin</span>
+                </a>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" onclick="closeAdminSubviews(); switchAppTab('galeri');" class="py-2.5 px-3 rounded-xl border border-purple-200 bg-purple-50/60 hover:bg-purple-100 text-purple-900 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 cursor-pointer">
+                    <i data-lucide="eye" class="w-3.5 h-3.5 text-purple-700"></i>
+                    <span>Buka Tab Galeri</span>
+                  </button>
+
+                  <a href="/galeri.html" target="_blank" class="py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98">
+                    <i data-lucide="globe" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Web galeri.html</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div id="admin-subview-presensi" class="hidden space-y-4">
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2">
@@ -8364,7 +8438,7 @@ function openAdminModule(moduleName) {
       if (container) container.classList.remove('hidden');
 
       // 2. Sembunyikan Semua Subview Lain
-      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni', 'profil'];
+      const allSubviews = ['news', 'banners', 'slider', 'ticker', 'guru', 'santri', 'presensi', 'tahfidz', 'jadwal', 'prestasi', 'alumni', 'profil', 'galeri'];
       allSubviews.forEach(s => {
         const el = document.getElementById('admin-subview-' + s);
         if (el) el.classList.add('hidden');
@@ -8393,6 +8467,7 @@ function openAdminModule(moduleName) {
         presensi: { title: 'Presensi Guru & Pegawai', icon: 'user-check', color: 'bg-indigo-50 text-indigo-600' },
         tahfidz: { title: "Mutaba'ah Tahfidz Al-Qur'an", icon: 'book-open', color: 'bg-emerald-50 text-emerald-600' },
         profil: { title: 'Manajemen Profil Madrasah', icon: 'school', color: 'bg-emerald-50 text-emerald-600' },
+        galeri: { title: 'Pengelolaan Galeri & Dokumentasi', icon: 'images', color: 'bg-purple-50 text-purple-700' },
         jadwal: { title: 'Manajemen Jadwal KBM & Roster', icon: 'calendar-days', color: 'bg-sky-50 text-sky-700' }
       };
 
@@ -8444,6 +8519,9 @@ function openAdminModule(moduleName) {
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (targetViewName === 'galeri' && typeof renderMobileAdminGallery === 'function') {
+        renderMobileAdminGallery();
+      }
       if (window.lucide) window.lucide.createIcons();
     }
     window.openAdminModule = openAdminModule;
@@ -11110,6 +11188,97 @@ function openAdminModule(moduleName) {
         setTimeout(loadAppDynamicProfile, 100);
       }
     } catch(e) {}
+
+  
+
+    // ========================================================
+    // MOBILE ADMIN GALLERY CONTROLLER
+    // ========================================================
+    let currentMobileAdminGalFilter = 'all';
+
+    function setMobileAdminGalleryFilter(filter) {
+      currentMobileAdminGalFilter = filter;
+      ['all', 'kegiatan', 'sarpras'].forEach(f => {
+        const btn = document.getElementById('btn-admin-gal-filter-' + f);
+        if (btn) {
+          if (f === filter) {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-purple-700 text-white shrink-0 shadow-2xs transition';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition';
+          }
+        }
+      });
+      renderMobileAdminGallery();
+    }
+
+    function renderMobileAdminGallery() {
+      const container = document.getElementById('admin-mobile-gallery-list');
+      if (!container) return;
+
+      const data = (typeof appGalleryData !== 'undefined' && Array.isArray(appGalleryData)) ? appGalleryData : [];
+
+      // Update KPI
+      const total = data.length;
+      const kegiatan = data.filter(g => (g.kategori || '').toLowerCase() === 'kegiatan').length;
+      const sarpras = data.filter(g => (g.kategori || '').toLowerCase() === 'sarpras').length;
+      const aktif = data.filter(g => g.status !== false && g.status !== 'false').length;
+
+      const setElText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setElText('admin-galeri-total-stat', total);
+      setElText('admin-galeri-kegiatan-stat', kegiatan);
+      setElText('admin-galeri-sarpras-stat', sarpras);
+      setElText('admin-galeri-aktif-stat', aktif);
+
+      // Filter list
+      let filtered = data;
+      if (currentMobileAdminGalFilter !== 'all') {
+        filtered = data.filter(g => (g.kategori || '').toLowerCase() === currentMobileAdminGalFilter);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-xs">
+            <i data-lucide="image-off" class="w-6 h-6 mx-auto mb-1 text-slate-300"></i>
+            <p>Belum ada dokumentasi untuk kategori ini.</p>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const platformBadge = item.platform === 'tiktok' 
+          ? '<span class="px-2 py-0.5 rounded-md bg-slate-900 text-white text-[8px] font-bold uppercase"><i class="fa-brands fa-tiktok mr-1"></i>TikTok</span>'
+          : '<span class="px-2 py-0.5 rounded-md bg-gradient-to-r from-purple-600 to-pink-500 text-white text-[8px] font-bold uppercase"><i class="fa-brands fa-instagram mr-1"></i>Instagram</span>';
+
+        return `
+          <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200/80 hover:border-purple-200 transition-all space-y-2.5">
+            <div class="flex items-start gap-3">
+              <div class="w-20 h-14 rounded-xl overflow-hidden bg-slate-200 shrink-0 border border-slate-200 shadow-2xs relative">
+                <img src="${item.gambar || '/logo.png'}" alt="${item.judul || 'Dokumentasi'}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='/logo.png'">
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                  ${platformBadge}
+                  <span class="text-[8.5px] font-extrabold px-1.5 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-100 truncate">${item.kategoriLabel || 'Dokumentasi'}</span>
+                  <span class="text-[8.5px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100 ml-auto">Aktif</span>
+                </div>
+                <h5 class="text-xs font-black text-slate-900 line-clamp-1 leading-snug">${item.judul || 'Dokumentasi MTs YASUA'}</h5>
+                <p class="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5 truncate">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-slate-400 shrink-0"></i>
+                  <span>${item.lokasi || 'Pilangwetan, Demak'}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    window.setMobileAdminGalleryFilter = setMobileAdminGalleryFilter;
+    window.renderMobileAdminGallery = renderMobileAdminGallery;
 
   </script>
 
