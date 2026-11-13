@@ -2355,7 +2355,7 @@
                 <i data-lucide="sparkles" class="w-4 h-4 text-cyan-700"></i>
               </div>
               <span class="text-[10.5px] font-extrabold text-slate-800 leading-tight">Slider</span>
-              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">5 Foto</span>
+              <span class="text-[8px] font-semibold text-slate-400 mt-0.5">6 Foto</span>
             </button>
 
             <!-- 4. Notifikasi & Pop-up Beranda (Ala Asnawiyyah) -->
@@ -4162,60 +4162,87 @@
 
           <!-- 8. Subview Prestasi -->
           <div id="admin-subview-prestasi" class="hidden space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                  <div class="w-8 h-8 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold">
                     <i data-lucide="trophy" class="w-4 h-4"></i>
                   </div>
                   <div>
-                    <h4 class="font-extrabold text-xs text-slate-800">Kejuaraan &amp; Prestasi Santri</h4>
-                    <p class="text-[9.5px] text-slate-400">Rekap Capaian Prestasi Madrasah</p>
+                    <h4 class="font-extrabold text-xs text-slate-800">Kejuaraan &amp; Rekap Prestasi Siswa</h4>
+                    <p class="text-[9.5px] text-slate-400">Pencapaian Sains, Tahfidz, Olahraga &amp; Seni</p>
                   </div>
                 </div>
-                <button type="button" onclick="switchAppTab('prestasi')" class="text-[10px] font-bold text-amber-700 hover:underline">Lihat di App &rarr;</button>
-              </div>
-
-              <!-- Daftar Prestasi Terkini -->
-              <div class="space-y-2 pt-1 text-xs">
-                <div class="p-3 rounded-xl border border-amber-200/70 bg-amber-50/50 flex items-start gap-2.5">
-                  <span class="text-amber-600 font-black text-base shrink-0">🥇</span>
-                  <div class="min-w-0 flex-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded">SAINS &bull; 2026</span>
-                    <h5 class="font-bold text-slate-900 mt-0.5">Juara 1 KSM Matematika Terintegrasi</h5>
-                    <p class="text-[10px] text-slate-500">Tingkat Kabupaten Demak &bull; Ananda M. Fatih</p>
-                  </div>
-                </div>
-
-                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-start gap-2.5">
-                  <span class="text-emerald-600 font-black text-base shrink-0">🥈</span>
-                  <div class="min-w-0 flex-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded">TAHFIDZ &bull; 2026</span>
-                    <h5 class="font-bold text-slate-900 mt-0.5">Juara 2 MHQ 5 Juz Tingkat Karesidenan</h5>
-                    <p class="text-[10px] text-slate-500">Karesidenan Semarang &bull; Ananda Siti Aisyah</p>
-                  </div>
-                </div>
-
-                <div class="p-3 rounded-xl border border-slate-200/80 bg-slate-50/50 flex items-start gap-2.5">
-                  <span class="text-blue-600 font-black text-base shrink-0">🥇</span>
-                  <div class="min-w-0 flex-1">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-blue-800 bg-blue-100 px-1.5 py-0.5 rounded">OLAHRAGA BELADIRI &bull; 2026</span>
-                    <h5 class="font-bold text-slate-900 mt-0.5">Juara 1 Kejurda Pencak Silat Pagar Nusa</h5>
-                    <p class="text-[10px] text-slate-500">Tingkat Jawa Tengah &bull; Kontingen Santri YASUA</p>
-                  </div>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="renderAdminPrestasiList()" class="w-7 h-7 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="Segarkan Data Prestasi">
+                    <i data-lucide="refresh-cw" id="admin-mob-prestasi-refresh-icon" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <span class="text-[9.5px] font-extrabold px-2 py-0.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200">Rekap Juara</span>
                 </div>
               </div>
 
-              <div class="pt-1 flex gap-2">
-                <a href="/admin?tab=prestasi" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  <span>Buka Editor Prestasi Desktop</span>
-                </a>
+              <!-- 4 Kartu Metrik KPI Prestasi -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-amber-800 uppercase tracking-wider block">Total Juara</span>
+                  <p id="admin-prestasi-total-stat" class="text-base font-black text-amber-950">6</p>
+                  <span class="text-[8.5px] text-amber-700 block">Prestasi Madrasah</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-blue-800 uppercase tracking-wider block">Sains &amp; KSM</span>
+                  <p id="admin-prestasi-sains-stat" class="text-base font-black text-blue-950">1</p>
+                  <span class="text-[8.5px] text-blue-600 block">Akademik Terintegrasi</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-emerald-800 uppercase tracking-wider block">Keagamaan</span>
+                  <p id="admin-prestasi-agama-stat" class="text-base font-black text-emerald-950">2</p>
+                  <span class="text-[8.5px] text-emerald-600 block">Tahfidz &amp; Kaligrafi</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 space-y-0.5">
+                  <span class="text-[9px] font-bold text-purple-800 uppercase tracking-wider block">Olahraga &amp; Seni</span>
+                  <p id="admin-prestasi-olahraga-stat" class="text-base font-black text-purple-950">3</p>
+                  <span class="text-[8.5px] text-purple-600 block">Silat &amp; Drumband</span>
+                </div>
+              </div>
+
+              <!-- Filter Kategori & Search Bar -->
+              <div class="space-y-2 pt-1">
+                <div class="relative">
+                  <input type="text" id="admin-prestasi-search-input" oninput="searchAdminPrestasi()" placeholder="Cari nama peraih, kejuaraan, atau tingkat..." class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                  <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+                </div>
+
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px] font-bold">
+                  <button type="button" onclick="setAdminPrestasiFilter('all')" id="btn-admin-prestasi-filter-all" class="px-3 py-1.5 rounded-xl bg-amber-600 text-white shrink-0 shadow-2xs transition">Semua</button>
+                  <button type="button" onclick="setAdminPrestasiFilter('sains')" id="btn-admin-prestasi-filter-sains" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Sains</button>
+                  <button type="button" onclick="setAdminPrestasiFilter('keagamaan')" id="btn-admin-prestasi-filter-keagamaan" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Keagamaan</button>
+                  <button type="button" onclick="setAdminPrestasiFilter('pramuka')" id="btn-admin-prestasi-filter-pramuka" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Pramuka &amp; Drumband</button>
+                  <button type="button" onclick="setAdminPrestasiFilter('olahraga')" id="btn-admin-prestasi-filter-olahraga" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition">Olahraga</button>
+                </div>
+              </div>
+
+              <!-- Container Rekap Kejuaraan Dinamis -->
+              <div id="admin-prestasi-list-container" class="space-y-2.5 pt-1">
+                <!-- Diisi otomatis oleh renderAdminPrestasiList() -->
+              </div>
+
+              <!-- Quick Action Links -->
+              <div class="space-y-2 pt-2 border-t border-slate-100">
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" onclick="closeAdminSubviews(); switchAppTab('prestasi');" class="py-2.5 px-3 rounded-xl border border-amber-200 bg-amber-50/70 hover:bg-amber-100 text-amber-900 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 cursor-pointer">
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-amber-700"></i>
+                    <span>Lihat di Tab Prestasi</span>
+                  </button>
+
+                  <a href="/admin?tab=prestasi" target="_blank" class="py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98">
+                    <i data-lucide="edit-3" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Editor Desktop</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Subview 10: PPDB (Monitoring Pendaftar Calon Santri Baru) -->
           <div id="admin-subview-ppdb" class="hidden space-y-4">
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-3.5">
               <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
@@ -8696,7 +8723,7 @@ function openAdminModule(moduleName) {
       const meta = {
         news: { title: 'Manajemen Berita & Publikasi', icon: 'newspaper', color: 'bg-emerald-50 text-emerald-600' },
         banners: { title: 'Banner Promosi & Quick Action', icon: 'image', color: 'bg-amber-50 text-amber-600' },
-        slider: { title: 'Hero Slider Beranda Depan', icon: 'sparkles', color: 'bg-cyan-50 text-cyan-600' },
+        slider: { title: 'Hero Slider Beranda Depan (6 Foto)', icon: 'sparkles', color: 'bg-cyan-50 text-cyan-600' },
         ticker: { title: 'Manajemen Notifikasi & Pop-up Beranda', icon: 'bell', color: 'bg-rose-50 text-rose-600' },
         notifikasi: { title: 'Manajemen Notifikasi & Pop-up Beranda', icon: 'bell', color: 'bg-rose-50 text-rose-600' },
         guru: { title: 'Dewan Guru & Asatidz', icon: 'users', color: 'bg-blue-50 text-blue-600' },
@@ -8759,6 +8786,9 @@ function openAdminModule(moduleName) {
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (targetViewName === 'prestasi' && typeof renderAdminPrestasiList === 'function') {
+        renderAdminPrestasiList();
+      }
       if ((targetViewName === 'ticker' || targetViewName === 'notifikasi') && typeof fetchAdminNotifikasiList === 'function') {
         fetchAdminNotifikasiList();
       }
@@ -12021,6 +12051,117 @@ function openAdminModule(moduleName) {
     window.resetMobNotifikasiForm = resetMobNotifikasiForm;
     window.handleMobNotifikasiSubmit = handleMobNotifikasiSubmit;
     window.deleteMobNotifikasi = deleteMobNotifikasi;
+
+  
+
+    // ========================================================
+    // MOBILE ADMIN PRESTASI CONTROLLER (REKAP JUARA DINAMIS)
+    // ========================================================
+    let currentAdminPrestasiFilter = 'all';
+
+    function setAdminPrestasiFilter(filter) {
+      currentAdminPrestasiFilter = filter;
+      ['all', 'sains', 'keagamaan', 'pramuka', 'olahraga'].forEach(f => {
+        const btn = document.getElementById('btn-admin-prestasi-filter-' + f);
+        if (btn) {
+          if (f === filter) {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-amber-600 text-white shrink-0 shadow-2xs transition';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition';
+          }
+        }
+      });
+      renderAdminPrestasiList();
+    }
+
+    function searchAdminPrestasi() {
+      renderAdminPrestasiList();
+    }
+
+    function renderAdminPrestasiList() {
+      const container = document.getElementById('admin-prestasi-list-container');
+      if (!container) return;
+
+      const data = (typeof appPrestasiData !== 'undefined' && Array.isArray(appPrestasiData)) ? appPrestasiData : [];
+
+      // Update Metrik KPI
+      const total = data.length;
+      const sains = data.filter(p => (p.kategori || '').toLowerCase() === 'sains').length;
+      const agama = data.filter(p => (p.kategori || '').toLowerCase() === 'keagamaan').length;
+      const olahraga = data.filter(p => ['olahraga', 'pramuka'].includes((p.kategori || '').toLowerCase())).length;
+
+      const setElText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setElText('admin-prestasi-total-stat', total);
+      setElText('admin-prestasi-sains-stat', sains);
+      setElText('admin-prestasi-agama-stat', agama);
+      setElText('admin-prestasi-olahraga-stat', olahraga);
+
+      // Filter & Pencarian
+      const searchInput = document.getElementById('admin-prestasi-search-input');
+      const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+      let filtered = data.filter(item => {
+        const kat = (item.kategori || '').toLowerCase();
+        let matchesFilter = (currentAdminPrestasiFilter === 'all') || (kat === currentAdminPrestasiFilter.toLowerCase());
+
+        const judul = (item.judul || '').toLowerCase();
+        const peraih = (item.peraih || '').toLowerCase();
+        const tingkat = (item.tingkat || '').toLowerCase();
+        const matchesSearch = !q || judul.includes(q) || peraih.includes(q) || tingkat.includes(q);
+
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-6 text-center text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-xs">
+            <i data-lucide="award" class="w-6 h-6 mx-auto mb-1 text-slate-300"></i>
+            <p>Tidak ada data prestasi untuk kategori ini.</p>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const peringkat = item.peringkat || 'Juara';
+        let medal = '🥇';
+        if (peringkat.includes('2')) medal = '🥈';
+        else if (peringkat.includes('3')) medal = '🥉';
+        else if (peringkat.includes('Umum')) medal = '🏆';
+
+        const kategori = (item.kategori || 'Prestasi').toUpperCase();
+        const tahun = item.tahun || '2024';
+        const tingkat = item.tingkat || 'Kabupaten';
+        const peraih = item.peraih || 'Santri MTs YASUA';
+
+        return `
+          <div class="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs space-y-2">
+            <div class="flex items-start gap-2.5">
+              <span class="text-xl shrink-0">${medal}</span>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5 flex-wrap mb-0.5">
+                  <span class="text-[8.5px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-200">${kategori} &bull; ${tahun}</span>
+                  <span class="text-[8.5px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">Tingkat ${tingkat}</span>
+                </div>
+                <h5 class="text-xs font-black text-slate-900 leading-snug">${item.judul || 'Kejuaraan'}</h5>
+                <p class="text-[10.5px] font-bold text-amber-800 mt-0.5 flex items-center gap-1">
+                  <i data-lucide="user" class="w-3 h-3 text-amber-600 shrink-0"></i>
+                  <span>${peraih}</span>
+                </p>
+                <p class="text-[9.5px] text-slate-500 mt-0.5 truncate">${item.penyelenggara ? ('Penyelenggara: ' + item.penyelenggara) : ''}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    window.setAdminPrestasiFilter = setAdminPrestasiFilter;
+    window.searchAdminPrestasi = searchAdminPrestasi;
+    window.renderAdminPrestasiList = renderAdminPrestasiList;
 
   </script>
 
