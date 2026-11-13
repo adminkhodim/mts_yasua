@@ -779,26 +779,6 @@
         <!-- ================================================================= -->
         <div id="viewBanners" class="space-y-6 hidden">
           
-          <!-- Sub-Tab Navigation Bar -->
-          <div class="bg-white rounded-2xl p-2 border border-slate-200 shadow-2xs flex items-center gap-2 overflow-x-auto custom-scrollbar">
-            <button onclick="switchBannerSubTab('hero')" id="subTabHeroBtn"
-              class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-brand-primary text-white shadow-xs flex items-center gap-2 shrink-0">
-              <i data-lucide="image" class="w-4 h-4 text-brand-gold"></i>
-              <span>Hero Slider Desktop (5 Foto Web)</span>
-              <span class="px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-200 text-[10px]">5 Foto</span>
-            </button>
-            <button onclick="switchBannerSubTab('promo')" id="subTabPromoBtn"
-              class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0">
-              <i data-lucide="sliders" class="w-4 h-4 text-slate-400"></i>
-              <span>Banner Promo Mobile (3:1)</span>
-              <span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 text-[10px]">3 Slide</span>
-            </button>
-            <button onclick="switchBannerSubTab('announcement')" id="subTabAnnouncementBtn"
-              class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0">
-              <i data-lucide="megaphone" class="w-4 h-4 text-slate-400"></i>
-              <span>Teks Pengumuman &amp; PPDB</span>
-            </button>
-          </div>
 
           <!-- SUB-VIEW 1: HERO SLIDER DESKTOP (5 Foto Web) -->
           <div id="subViewHero" class="space-y-6">
@@ -3769,9 +3749,6 @@
       const subViewHero = document.getElementById('subViewHero');
       const subViewPromo = document.getElementById('subViewPromo');
       const subViewAnnouncement = document.getElementById('subViewAnnouncement');
-      const btnHero = document.getElementById('subTabHeroBtn');
-      const btnPromo = document.getElementById('subTabPromoBtn');
-      const btnAnnouncement = document.getElementById('subTabAnnouncementBtn');
 
       // Sinkronkan active state menu di sidebar Web Builder & Konten
       const navBtnHero = document.getElementById('navBtnHero');
@@ -3809,9 +3786,6 @@
         if (subViewPromo) subViewPromo.classList.add('hidden');
         if (subViewAnnouncement) subViewAnnouncement.classList.add('hidden');
 
-        if (btnHero) btnHero.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-brand-primary text-white shadow-xs flex items-center gap-2 shrink-0';
-        if (btnPromo) btnPromo.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0';
-        if (btnAnnouncement) btnAnnouncement.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0';
 
         renderHeroDesktopPreview();
         renderHeroSlides();
@@ -3820,9 +3794,6 @@
         if (subViewPromo) subViewPromo.classList.remove('hidden');
         if (subViewAnnouncement) subViewAnnouncement.classList.add('hidden');
 
-        if (btnHero) btnHero.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0';
-        if (btnPromo) btnPromo.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-brand-primary text-white shadow-xs flex items-center gap-2 shrink-0';
-        if (btnAnnouncement) btnAnnouncement.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0';
 
         renderAdminPreviewSlider();
         renderBanners();
@@ -3831,9 +3802,6 @@
         if (subViewPromo) subViewPromo.classList.add('hidden');
         if (subViewAnnouncement) subViewAnnouncement.classList.remove('hidden');
 
-        if (btnHero) btnHero.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0';
-        if (btnPromo) btnPromo.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center gap-2 shrink-0';
-        if (btnAnnouncement) btnAnnouncement.className = 'px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-brand-primary text-white shadow-xs flex items-center gap-2 shrink-0';
       }
 
       if (window.lucide) window.lucide.createIcons();
