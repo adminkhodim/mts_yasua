@@ -39,6 +39,8 @@
 
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Font Awesome 6 (Ikon Pro-grade Asnawiyyah) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Search & PWA Controller -->
   <script src="/search.js" defer></script>
   <script src="/pwa.js?v=4.5" defer></script>
@@ -4569,6 +4571,61 @@
         </form>
       </div>
     </div>
+    <!-- =================================================================== -->
+    <!-- MODAL POP-UP POSTER BERANDA (PERSIS ASNAWIYYAH)                     -->
+    <!-- =================================================================== -->
+    <div id="homePosterModal" onclick="if(event.target === this) closeHomePoster(true)"
+      class="fixed inset-0 bg-black/80 backdrop-blur-xs z-[10000] flex items-center justify-center p-4 sm:p-6 hidden transition-opacity duration-300">
+      <div class="relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[390px] rounded-3xl overflow-hidden shadow-2xl border border-white/20 transform transition-all duration-300 scale-95 opacity-0 bg-transparent group"
+        id="homePosterContent">
+        <!-- Close button top-right (X) -->
+        <button type="button" onclick="closeHomePoster(true)"
+          class="absolute top-3 right-3 z-30 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-black/65 hover:bg-black/85 text-white rounded-full transition active:scale-90 shadow-xl border border-white/30 backdrop-blur-xs cursor-pointer"
+          title="Tutup">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+
+        <!-- Poster Image Container (Rasio Postingan Instagram 4:5) -->
+        <div id="home-poster-img-wrapper"
+          class="relative w-full aspect-[4/5] bg-slate-900 overflow-hidden cursor-pointer rounded-3xl"
+          onclick="openNotifFromPoster()" title="Ketuk untuk buka warta lengkap">
+          <img id="home-poster-img" src="" alt="Poster Pengumuman"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+
+          <!-- Hint Bar di bagian bawah poster -->
+          <div class="absolute inset-x-0 bottom-0 py-2.5 px-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex items-center justify-center text-white/95 text-[11px] font-bold tracking-wide space-x-1.5 backdrop-blur-2xs">
+            <i class="fa-solid fa-bullhorn text-amber-400 text-xs"></i>
+            <span>Buka Warta Pengumuman</span>
+          </div>
+        </div>
+
+        <!-- Announcement Text Card Container (Jika tidak ada gambar poster) -->
+        <div id="home-poster-text-wrapper"
+          class="hidden relative w-full bg-white rounded-3xl p-6 text-slate-800 space-y-4 shadow-2xl border border-slate-100 cursor-pointer"
+          onclick="openNotifFromPoster()" title="Ketuk untuk buka warta lengkap">
+          <div class="flex items-center space-x-2">
+            <span id="home-poster-badge"
+              class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-rose-100 text-rose-800">Pengumuman</span>
+            <span class="text-[10px] text-slate-400 flex items-center gap-1">
+              <i class="fa-solid fa-star text-[9px] text-amber-500"></i>Warta Utama
+            </span>
+          </div>
+          <div class="space-y-1.5">
+            <h3 id="home-poster-title" class="text-base font-bold text-slate-900 leading-snug">
+              Judul Pengumuman
+            </h3>
+            <p id="home-poster-summary" class="text-xs text-slate-600 leading-relaxed line-clamp-4">
+              Isi warta pengumuman...
+            </p>
+          </div>
+          <button type="button"
+            class="w-full py-2.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer">
+            <span>Buka Warta Pengumuman</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   </main>
 
 <!-- ==================== MOBILE APP SPA ROUTER & ENGINES ==================== -->
@@ -5870,7 +5927,120 @@
       if (typeof fetchTabNews === 'function') {
         fetchTabNews();
       }
+      // Munculkan Pop-up Notifikasi Beranda ala Asnawiyyah jika ada poster aktif
+      setTimeout(() => {
+        checkHomePosterPopup();
+      }, 600);
     });
+
+    // ===================================================================
+    // POP-UP POSTER BERANDA ENGINE (PERSIS ASNAWIYYAH)
+    // ===================================================================
+    let dismissedPosterThisSession = false;
+
+    function checkHomePosterPopup(force = false) {
+      try {
+        let list = [];
+        const cached = localStorage.getItem('yasua_cached_notifikasi');
+        if (cached) {
+          try {
+            list = JSON.parse(cached);
+          } catch(e) {}
+        }
+        if (!Array.isArray(list) || list.length === 0) {
+          list = [
+            {
+              id: 'NOTIF-001',
+              judul: 'Pendaftaran Santri Baru (PPDB Online) Tahun Ajaran 2026/2027',
+              kategori: 'PPDB',
+              tanggal: '2026-11-13',
+              ringkasan: 'Pendaftaran Santri Baru MTs YASUA Pilangwetan telah dibuka. Dapatkan fasilitas beasiswa santri berprestasi!',
+              isi: 'Mari bergabung dengan keluarga besar MTs YASUA Pilangwetan. Layanan pendaftaran dapat dilakukan online maupun langsung di sekretariat madrasah.',
+              gambar: 'https://lh3.googleusercontent.com/d/1mzADFLjLjb0KerlSO1LsX_B9xbDjYbNd',
+              is_popup: true,
+              status: 'Aktif'
+            }
+          ];
+        }
+
+        const popupNotif = list.find(n => 
+          (n.status || 'Aktif') === 'Aktif' && 
+          (n.is_popup === true || n.is_popup === 1 || String(n.is_popup) === '1' || String(n.is_popup).toLowerCase() === 'true' ||
+           n.isPopup === true || n.isPopup === 1 || String(n.isPopup) === '1' || String(n.isPopup).toLowerCase() === 'true')
+        );
+        if (!popupNotif) return;
+
+        if (!force) {
+          if (dismissedPosterThisSession) return;
+          if (sessionStorage.getItem('yasua_dismissed_popup_' + popupNotif.id)) return;
+        }
+
+        const modal = document.getElementById('homePosterModal');
+        const content = document.getElementById('homePosterContent');
+        const imgWrapper = document.getElementById('home-poster-img-wrapper');
+        const imgEl = document.getElementById('home-poster-img');
+        const textWrapper = document.getElementById('home-poster-text-wrapper');
+        const titleEl = document.getElementById('home-poster-title');
+        const summaryEl = document.getElementById('home-poster-summary');
+        const badgeEl = document.getElementById('home-poster-badge');
+
+        const hasValidImg = popupNotif.gambar && !String(popupNotif.gambar).includes('brand-header.png') && String(popupNotif.gambar).trim().length > 5;
+
+        if (hasValidImg) {
+          if (imgEl) imgEl.src = popupNotif.gambar;
+          if (imgWrapper) imgWrapper.classList.remove('hidden');
+          if (textWrapper) textWrapper.classList.add('hidden');
+        } else {
+          if (titleEl) titleEl.textContent = popupNotif.judul;
+          if (summaryEl) summaryEl.textContent = popupNotif.ringkasan || popupNotif.isi || '';
+          if (badgeEl) badgeEl.textContent = popupNotif.kategori || 'Pengumuman';
+          if (imgWrapper) imgWrapper.classList.add('hidden');
+          if (textWrapper) textWrapper.classList.remove('hidden');
+        }
+
+        if (modal && content) {
+          modal.dataset.notifId = popupNotif.id;
+          modal.classList.remove('hidden');
+          setTimeout(() => {
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+          }, 50);
+        }
+      } catch(e) {
+        console.warn('Gagal memuat popup beranda:', e);
+      }
+    }
+
+    function closeHomePoster(dismiss = true) {
+      const modal = document.getElementById('homePosterModal');
+      const content = document.getElementById('homePosterContent');
+      if (content) {
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+      }
+      if (dismiss) {
+        dismissedPosterThisSession = true;
+        if (modal && modal.dataset.notifId) {
+          try {
+            sessionStorage.setItem('yasua_dismissed_popup_' + modal.dataset.notifId, 'true');
+          } catch(e) {}
+        }
+      }
+      setTimeout(() => {
+        if (modal) modal.classList.add('hidden');
+      }, 250);
+    }
+
+    function openNotifFromPoster() {
+      closeHomePoster(true);
+      if (typeof switchAppTab === 'function') {
+        switchAppTab('berita');
+      }
+    }
+
+    window.checkHomePosterPopup = checkHomePosterPopup;
+    window.closeHomePoster = closeHomePoster;
+    window.openNotifFromPoster = openNotifFromPoster;
 
     // Sanitasi XSS helper untuk konten dinamis
     function formatNewsDate(d) {
