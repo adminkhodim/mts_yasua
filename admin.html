@@ -265,7 +265,17 @@
             <span id="sidebarNotifCount" class="text-[10px] bg-rose-950/80 text-rose-300 px-2 py-0.5 rounded-full font-bold">Pop-up &amp; Warta</span>
           </button>
 
-          <!-- Menu 4: Mobile App PWA Link -->
+                    <!-- Menu 4: Manajemen Profil Madrasah -->
+          <button onclick="switchAdminView('profil')" id="navBtnProfil"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-all text-left cursor-pointer font-medium">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-school text-emerald-400 text-sm"></i>
+              <span>Profil Madrasah</span>
+            </span>
+            <span class="text-[10px] bg-emerald-900/80 text-emerald-200 px-2 py-0.5 rounded-full font-bold">Identitas &amp; Visi</span>
+          </button>
+
+          <!-- Menu 5: Mobile App PWA Link -->
           <a href="/app" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-900/50 transition-colors">
             <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
             <span>Mobile App PWA</span>
@@ -1294,6 +1304,391 @@
         </div>
 
         <!-- ================================================================= -->
+        
+        <!-- ================================================================= -->
+        <!-- VIEW: PROFIL MADRASAH (Web Builder & Konten Module)               -->
+        <!-- ================================================================= -->
+        <div id="viewProfil" class="space-y-5 hidden">
+          <!-- Header Bar Profil -->
+          <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border border-emerald-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-sm text-lg">
+                <i class="fa-solid fa-school text-brand-gold"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-sm sm:text-base font-black text-slate-900">Manajemen Profil Madrasah</h2>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-[10px]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Live Web &amp; Mobile
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 mt-0.5">Kelola sambutan kepala, identitas legalitas, visi misi, jajaran pimpinan, fasilitas, dan kontak madrasah.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <button type="button" onclick="loadAdminProfile(true)"
+                class="px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs">
+                <i class="fa-solid fa-arrows-rotate text-emerald-600 text-xs" id="admin-profile-refresh-icon"></i>
+                <span>Segarkan</span>
+              </button>
+              <a href="profil.html" target="_blank"
+                class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-300"></i>
+                <span class="hidden sm:inline">Web Publik</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Tab Bar Navigasi Seksi Profil -->
+          <div class="bg-white p-1.5 rounded-2xl border border-slate-200 shadow-2xs flex items-center gap-1.5 overflow-x-auto">
+            <button type="button" onclick="switchProfileTab('sambutan')" id="tabBtnProfileSambutan"
+              class="profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-700 text-white shadow-xs shrink-0 cursor-pointer">
+              <i class="fa-solid fa-user-tie"></i>
+              <span>Sambutan Kepala</span>
+            </button>
+            <button type="button" onclick="switchProfileTab('identitas')" id="tabBtnProfileIdentitas"
+              class="profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100 shrink-0 cursor-pointer">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Identitas &amp; Legalitas</span>
+            </button>
+            <button type="button" onclick="switchProfileTab('visimisi')" id="tabBtnProfileVisimisi"
+              class="profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100 shrink-0 cursor-pointer">
+              <i class="fa-solid fa-bullseye"></i>
+              <span>Visi &amp; Misi</span>
+            </button>
+            <button type="button" onclick="switchProfileTab('pimpinan')" id="tabBtnProfilePimpinan"
+              class="profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100 shrink-0 cursor-pointer">
+              <i class="fa-solid fa-users"></i>
+              <span>Struktur Pimpinan</span>
+            </button>
+            <button type="button" onclick="switchProfileTab('sejarah')" id="tabBtnProfileSejarah"
+              class="profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100 shrink-0 cursor-pointer">
+              <i class="fa-solid fa-landmark"></i>
+              <span>Sejarah, Fasilitas &amp; Kontak</span>
+            </button>
+          </div>
+
+          <!-- FORMULIR PROFIL MADRASAH -->
+          <form id="adminProfileForm" onsubmit="handleAdminProfileSubmit(event)" class="space-y-5">
+            <input type="hidden" id="admin-profile-old-foto" value="">
+
+            <!-- TAB 1: SAMBUTAN KEPALA MADRASAH -->
+            <div id="subtabProfileSambutan" class="space-y-4">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <!-- Kolom Input Data Sambutan -->
+                <div class="lg:col-span-7 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+                  <div class="border-b border-slate-100 pb-2">
+                    <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                      <i class="fa-solid fa-user-tie text-emerald-600"></i>
+                      <span>Data Kepala Madrasah &amp; Kutipan Sambutan</span>
+                    </h3>
+                  </div>
+
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                      Nama Lengkap Kepala Madrasah &amp; Gelar <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="admin-profile-kepala-nama" required
+                      placeholder="Contoh: Muthohar, S.Pd."
+                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                  </div>
+
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                      Jabatan Resmi <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="admin-profile-kepala-jabatan" required
+                      placeholder="Contoh: Kepala MTs YASUA Pilangwetan"
+                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                  </div>
+
+                  <!-- Upload Foto Kepala Madrasah -->
+                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                      <i class="fa-solid fa-camera text-emerald-600"></i>
+                      <span>Unggah Foto Resmi Kepala Madrasah</span>
+                    </label>
+                    <div class="flex flex-wrap items-center gap-3">
+                      <label class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer active:scale-95">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Pilih Foto Kepala</span>
+                        <input type="file" id="admin-profile-kepala-file" accept="image/*"
+                          onchange="previewAdminKepalaPhoto(event)" class="hidden">
+                      </label>
+                      <span class="text-[11px] text-slate-500">Foto otomatis tersimpan ke Google Drive resmi. Format JPG, PNG (Max 5MB).</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                      Kutipan Sambutan Kepala Madrasah <span class="text-rose-500">*</span>
+                    </label>
+                    <textarea id="admin-profile-kepala-sambutan" rows="4" required
+                      oninput="syncProfileLivePreview()"
+                      placeholder="Tuliskan kata sambutan singkat kepala madrasah yang tampil di beranda dan profil aplikasi..."
+                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition leading-relaxed"></textarea>
+                  </div>
+                </div>
+
+                <!-- Kolom Live Spotlight Preview -->
+                <div class="lg:col-span-5 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pratinjau Kartu Spotlight (Mobile &amp; Web)</span>
+                    <span class="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">Live Preview</span>
+                  </div>
+
+                  <!-- Kartu Spotlight Persis Tampilan App -->
+                  <div style="background: linear-gradient(135deg, #088395 0%, #064e52 50%, #043b3e 100%); color: #ffffff;"
+                    class="p-4 sm:p-5 rounded-2xl border-2 border-emerald-400/40 shadow-lg space-y-3.5 relative overflow-hidden">
+                    <div class="flex items-center gap-3">
+                      <div class="w-14 h-14 rounded-2xl overflow-hidden bg-white/20 border-2 border-amber-400 shrink-0 shadow-md">
+                        <img id="admin-profile-preview-kepala-img"
+                          src="https://lh3.googleusercontent.com/d/1RP0vQ-n3Vk9C31K8H7sjB1ffhlYWQ7Ib"
+                          alt="Kepala Madrasah" class="w-full h-full object-cover object-top"
+                          onerror="this.src='/logo.png'">
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <span class="inline-block px-2 py-0.5 rounded-md bg-amber-400 text-slate-950 font-black text-[8.5px] uppercase tracking-wider mb-0.5">
+                          Sambutan Kepala Madrasah
+                        </span>
+                        <h3 id="admin-profile-preview-kepala-nama" class="text-xs sm:text-sm font-extrabold text-white leading-snug truncate">
+                          Muthohar, S.Pd.
+                        </h3>
+                        <p id="admin-profile-preview-kepala-jabatan" class="text-[10px] text-emerald-200 line-clamp-1 mt-0.5">
+                          Kepala MTs YASUA Pilangwetan
+                        </p>
+                      </div>
+                    </div>
+                    <blockquote id="admin-profile-preview-kepala-quote"
+                      class="text-[11px] text-emerald-100 italic bg-white/10 p-3 rounded-xl border border-white/15 leading-relaxed">
+                      &ldquo;Selamat datang di MTs YASUA Pilangwetan. Kami berikhtiar mendidik generasi muda yang kokoh aqidah Ahlus Sunnah Wal Jama'ah, berakhlak mulia, cerdas dalam ilmu pengetahuan, dan cakap teknologi.&rdquo;
+                    </blockquote>
+                  </div>
+
+                  <p class="text-[11px] text-slate-400 italic">Perubahan teks sambutan dan nama kepala madrasah akan langsung tercermin pada kartu pratinjau di atas secara real-time.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: IDENTITAS & LEGALITAS -->
+            <div id="subtabProfileIdentitas" class="hidden bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+              <div class="border-b border-slate-100 pb-2">
+                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                  <span>Identitas Resmi &amp; Akreditasi Madrasah</span>
+                </h3>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Nama Lembaga Madrasah <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-nama" required
+                    placeholder="MTs YASUA Pilangwetan"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Status Akreditasi <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-akreditasi" required
+                    placeholder="Peringkat A (Unggul)"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    NPSN (Nomor Pokok Sekolah Nasional) <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-npsn" required
+                    placeholder="20364357"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-mono font-bold text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    NSM (Nomor Statistik Madrasah) <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-nsm" required
+                    placeholder="121233210034"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-mono font-bold text-slate-800">
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Yayasan Naungan &amp; Tahun Berdiri <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-yayasan" required
+                    placeholder="YASUA (Berdiri 1949)"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: VISI & MISI -->
+            <div id="subtabProfileVisimisi" class="hidden bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+              <div class="border-b border-slate-100 pb-2">
+                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-bullseye text-emerald-600"></i>
+                  <span>Visi &amp; Misi Strategis Madrasah</span>
+                </h3>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                  Visi Madrasah <span class="text-rose-500">*</span>
+                </label>
+                <textarea id="admin-profile-visi" rows="3" required
+                  placeholder="Tuliskan rumusan visi madrasah..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition leading-relaxed"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                  Misi Strategis Madrasah (Setiap Baris = 1 Poin Misi) <span class="text-rose-500">*</span>
+                </label>
+                <textarea id="admin-profile-misi" rows="6" required
+                  placeholder="Tuliskan butir-butir misi madrasah, pisahkan masing-masing poin dengan baris baru (Enter)..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition leading-relaxed"></textarea>
+                <p class="text-[10px] text-slate-400 mt-1">Gunakan baris baru (Enter) untuk memisahkan setiap poin misi. Sistem otomatis memberi nomor urut di tampilan web/aplikasi.</p>
+              </div>
+            </div>
+
+            <!-- TAB 4: STRUKTUR PIMPINAN -->
+            <div id="subtabProfilePimpinan" class="hidden bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+              <div class="border-b border-slate-100 pb-2">
+                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-users text-emerald-600"></i>
+                  <span>Struktur Pimpinan &amp; Wakil Kepala Madrasah</span>
+                </h3>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Waka Kurikulum <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-waka-kurikulum" required
+                    placeholder="Hj. Thoibah R., S.Ag."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Waka Kesiswaan <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-waka-kesiswaan" required
+                    placeholder="Aidiyah, S.Pd."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Waka Sarana &amp; Prasarana (Sarpras) <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-waka-sarpras" required
+                    placeholder="Hj. Inna M., S.Ag."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Waka Hubungan Masyarakat (Humas) <span class="text-rose-500">*</span>
+                  </label>
+                  <input type="text" id="admin-profile-waka-humas" required
+                    placeholder="Ahmad Wawahib, S.Pd."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition font-semibold text-slate-800">
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 5: SEJARAH, FASILITAS & KONTAK -->
+            <div id="subtabProfileSejarah" class="hidden bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+              <div class="border-b border-slate-100 pb-2">
+                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-landmark text-emerald-600"></i>
+                  <span>Sejarah Pendirian, Fasilitas &amp; Kontak Resmi</span>
+                </h3>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                  Narasi Sejarah Berdirinya Madrasah
+                </label>
+                <textarea id="admin-profile-sejarah" rows="3"
+                  placeholder="Tuliskan sejarah berdirinya madrasah sejak 12 September 1949..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition leading-relaxed"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                  Tokoh Perintis Awal / Muassis (Pisahkan dengan tanda koma)
+                </label>
+                <input type="text" id="admin-profile-muassis"
+                  placeholder="Contoh: Bapak K. Ahmad, Bapak Moh. Syuhadi, Bapak H. Nuruddin, ..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition text-slate-800">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                  Fasilitas &amp; Sarana Prasarana Unggulan (Pisahkan dengan tanda koma)
+                </label>
+                <input type="text" id="admin-profile-fasilitas"
+                  placeholder="Contoh: Lab Komputer CBT & ANBK, Perpustakaan, Lapangan, Masjid, ..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition text-slate-800">
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Alamat Lengkap Madrasah
+                  </label>
+                  <input type="text" id="admin-profile-alamat"
+                    placeholder="Jl. Raya Pilangwetan, RT 02 / RW 01, Desa Pilangwetan, Demak"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition text-slate-800">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Tautan Google Maps
+                  </label>
+                  <input type="text" id="admin-profile-maps-url"
+                    placeholder="https://maps.google.com/?q=..."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition text-slate-800 font-mono">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Nomor WhatsApp Sekretariat
+                  </label>
+                  <input type="text" id="admin-profile-wa-sekretariat"
+                    placeholder="https://wa.me/6285649881966"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs md:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition text-slate-800 font-mono">
+                </div>
+              </div>
+            </div>
+
+            <!-- BAR AKSI SIMPAN PROFIL -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between gap-3">
+              <span class="text-xs text-slate-500 hidden sm:inline">Pastikan data yang diisi telah benar sebelum menekan tombol simpan.</span>
+              <div class="flex items-center gap-2 ml-auto">
+                <button type="button" onclick="loadAdminProfile()"
+                  class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition active:scale-95 cursor-pointer">
+                  Muat Ulang
+                </button>
+                <button type="submit" id="admin-profile-submit-btn"
+                  class="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition flex items-center gap-2 shadow-md active:scale-95 cursor-pointer">
+                  <i id="admin-profile-submit-icon" class="fa-solid fa-floppy-disk"></i>
+                  <span id="admin-profile-submit-text">Simpan Profil Madrasah</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
         <!-- VIEW 3: BERITA & PENGUMUMAN (Portal & Publikasi Module)           -->
         <!-- ================================================================= -->
         <div id="viewNews" class="space-y-6 hidden">
@@ -3610,6 +4005,7 @@
       const viewGallery = document.getElementById('viewGallery');
       const viewAlumni = document.getElementById('viewAlumni');
       const viewJadwal = document.getElementById('viewJadwal');
+      const viewProfil = document.getElementById('viewProfil');
 
       const navBtnDashboard = document.getElementById('navBtnDashboard');
       const navBtnTeachers = document.getElementById('navBtnTeachers');
@@ -3623,6 +4019,7 @@
       const navBtnGallery = document.getElementById('navBtnGallery');
       const navBtnAlumni = document.getElementById('navBtnAlumni');
       const navBtnJadwal = document.getElementById('navBtnJadwal');
+      const navBtnProfil = document.getElementById('navBtnProfil');
 
       const breadcrumbCat = document.getElementById('breadcrumbCategory');
       const breadcrumbPage = document.getElementById('breadcrumbPage');
@@ -3641,6 +4038,7 @@
       if (viewGallery) viewGallery.classList.add('hidden');
       if (viewAlumni) viewAlumni.classList.add('hidden');
       if (viewJadwal) viewJadwal.classList.add('hidden');
+      if (viewProfil) viewProfil.classList.add('hidden');
 
       // Reset all buttons
       if (navBtnDashboard) navBtnDashboard.className = inactiveClass;
@@ -3655,6 +4053,7 @@
       if (navBtnGallery) navBtnGallery.className = inactiveClass;
       if (navBtnAlumni) navBtnAlumni.className = inactiveClass;
       if (navBtnJadwal) navBtnJadwal.className = inactiveClass;
+      if (navBtnProfil) navBtnProfil.className = inactiveClass;
 
       if (view === 'teachers') {
         if (viewTeachers) viewTeachers.classList.remove('hidden');
@@ -3684,6 +4083,18 @@
         webPublikLabel.textContent = 'Web Publik (alumni.html)';
 
         renderAlumniGrid();
+            } else if (view === 'profil') {
+        if (viewProfil) viewProfil.classList.remove('hidden');
+        if (navBtnProfil) navBtnProfil.className = activeClass;
+
+        breadcrumbCat.textContent = 'Web Builder & Konten';
+        breadcrumbPage.textContent = 'Manajemen Profil Madrasah';
+        webPublikBtn.href = 'profil.html';
+        webPublikLabel.textContent = 'Web Publik (profil.html)';
+
+        if (typeof loadAdminProfile === 'function') {
+          loadAdminProfile();
+        }
       } else if (view === 'hero') {
         if (viewBanners) viewBanners.classList.remove('hidden');
         if (navBtnHero) navBtnHero.className = activeClass;
@@ -9694,6 +10105,227 @@
       }
     }
     window.handleSaveDesktopSeragam = handleSaveDesktopSeragam;
+
+    
+    // ===================================================================
+    // MODUL MANAJEMEN PROFIL MADRASAH
+    // ===================================================================
+    let adminProfileData = null;
+    let adminSelectedKepalaFile = null;
+
+    function switchProfileTab(subtab) {
+      const tabs = ['sambutan', 'identitas', 'visimisi', 'pimpinan', 'sejarah'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tabBtnProfile' + t.charAt(0).toUpperCase() + t.slice(1));
+        const view = document.getElementById('subtabProfile' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) {
+          if (t === subtab) {
+            btn.className = 'profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-700 text-white shadow-xs shrink-0 cursor-pointer';
+          } else {
+            btn.className = 'profile-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100 shrink-0 cursor-pointer';
+          }
+        }
+        if (view) {
+          if (t === subtab) view.classList.remove('hidden');
+          else view.classList.add('hidden');
+        }
+      });
+    }
+
+    function syncProfileLivePreview() {
+      const nama = (document.getElementById('admin-profile-kepala-nama') ? document.getElementById('admin-profile-kepala-nama').value : '') || 'Muthohar, S.Pd.';
+      const jabatan = (document.getElementById('admin-profile-kepala-jabatan') ? document.getElementById('admin-profile-kepala-jabatan').value : '') || 'Kepala MTs YASUA Pilangwetan';
+      const quote = (document.getElementById('admin-profile-kepala-sambutan') ? document.getElementById('admin-profile-kepala-sambutan').value : '') || '';
+
+      const prevNama = document.getElementById('admin-profile-preview-kepala-nama');
+      const prevJabatan = document.getElementById('admin-profile-preview-kepala-jabatan');
+      const prevQuote = document.getElementById('admin-profile-preview-kepala-quote');
+
+      if (prevNama) prevNama.textContent = nama;
+      if (prevJabatan) prevJabatan.textContent = jabatan;
+      if (prevQuote) prevQuote.innerHTML = '&ldquo;' + (quote || 'Selamat datang di MTs YASUA Pilangwetan...') + '&rdquo;';
+    }
+
+    function previewAdminKepalaPhoto(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 8 * 1024 * 1024) {
+        alert('Ukuran file foto maksimal 8 MB.');
+        event.target.value = '';
+        return;
+      }
+
+      adminSelectedKepalaFile = file;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const prevImg = document.getElementById('admin-profile-preview-kepala-img');
+        if (prevImg) prevImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function loadAdminProfile(forceFetch = false) {
+      const refreshIcon = document.getElementById('admin-profile-refresh-icon');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
+
+      try {
+        let cached = localStorage.getItem('yasua_cached_profile');
+        if (cached && !forceFetch) {
+          try {
+            adminProfileData = JSON.parse(cached);
+            populateProfileForm(adminProfileData);
+          } catch(e) {}
+        }
+
+        const res = await fetch(`${API_URL}?action=getProfile`);
+        const json = await res.json();
+        if (json && (json.status === 'success' || json.success) && json.data) {
+          adminProfileData = json.data;
+          localStorage.setItem('yasua_cached_profile', JSON.stringify(adminProfileData));
+          populateProfileForm(adminProfileData);
+        }
+      } catch(err) {
+        console.warn('Gagal memuat profil madrasah:', err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+      }
+    }
+
+    function populateProfileForm(data) {
+      if (!data) return;
+      const raw = data.raw || {};
+
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && val !== undefined && val !== null) el.value = val;
+      };
+
+      setVal('admin-profile-nama', raw.profile_nama || 'MTs YASUA Pilangwetan');
+      setVal('admin-profile-npsn', raw.profile_npsn || '20364357');
+      setVal('admin-profile-nsm', raw.profile_nsm || '121233210034');
+      setVal('admin-profile-akreditasi', raw.profile_akreditasi || 'Peringkat A (Unggul)');
+      setVal('admin-profile-yayasan', raw.profile_yayasan || 'YASUA (Berdiri 1949)');
+
+      setVal('admin-profile-kepala-nama', raw.profile_kepala_nama || 'Muthohar, S.Pd.');
+      setVal('admin-profile-kepala-jabatan', raw.profile_kepala_jabatan || 'Kepala MTs YASUA Pilangwetan');
+      setVal('admin-profile-kepala-sambutan', raw.profile_kepala_sambutan || '');
+      setVal('admin-profile-old-foto', raw.profile_kepala_foto || '');
+
+      const prevImg = document.getElementById('admin-profile-preview-kepala-img');
+      if (prevImg && raw.profile_kepala_foto) {
+        prevImg.src = raw.profile_kepala_foto;
+      }
+
+      setVal('admin-profile-visi', raw.profile_visi || '');
+      setVal('admin-profile-misi', raw.profile_misi || '');
+
+      setVal('admin-profile-waka-kurikulum', raw.profile_waka_kurikulum || 'Hj. Thoibah R., S.Ag.');
+      setVal('admin-profile-waka-kesiswaan', raw.profile_waka_kesiswaan || 'Aidiyah, S.Pd.');
+      setVal('admin-profile-waka-sarpras', raw.profile_waka_sarpras || 'Hj. Inna M., S.Ag.');
+      setVal('admin-profile-waka-humas', raw.profile_waka_humas || 'Ahmad Wawahib, S.Pd.');
+
+      setVal('admin-profile-sejarah', raw.profile_sejarah || '');
+      setVal('admin-profile-muassis', raw.profile_muassis || '');
+      setVal('admin-profile-fasilitas', raw.profile_fasilitas || '');
+
+      setVal('admin-profile-alamat', raw.profile_alamat || '');
+      setVal('admin-profile-maps-url', raw.profile_maps_url || 'https://maps.google.com/?q=MTs+YASUA+Pilangwetan+Demak');
+      setVal('admin-profile-wa-sekretariat', raw.profile_wa_sekretariat || 'https://wa.me/6285649881966');
+
+      syncProfileLivePreview();
+    }
+
+    async function handleAdminProfileSubmit(event) {
+      event.preventDefault();
+
+      const btn = document.getElementById('admin-profile-submit-btn');
+      const icon = document.getElementById('admin-profile-submit-icon');
+      const text = document.getElementById('admin-profile-submit-text');
+
+      btn.disabled = true;
+      if (icon) icon.className = 'fa-solid fa-spinner fa-spin';
+      if (text) text.textContent = 'Menyimpan Profil...';
+
+      try {
+        const payload = {
+          profile_nama: document.getElementById('admin-profile-nama').value.trim(),
+          profile_npsn: document.getElementById('admin-profile-npsn').value.trim(),
+          profile_nsm: document.getElementById('admin-profile-nsm').value.trim(),
+          profile_akreditasi: document.getElementById('admin-profile-akreditasi').value.trim(),
+          profile_yayasan: document.getElementById('admin-profile-yayasan').value.trim(),
+
+          profile_kepala_nama: document.getElementById('admin-profile-kepala-nama').value.trim(),
+          profile_kepala_jabatan: document.getElementById('admin-profile-kepala-jabatan').value.trim(),
+          profile_kepala_sambutan: document.getElementById('admin-profile-kepala-sambutan').value.trim(),
+          profile_kepala_foto: document.getElementById('admin-profile-old-foto').value.trim(),
+
+          profile_visi: document.getElementById('admin-profile-visi').value.trim(),
+          profile_misi: document.getElementById('admin-profile-misi').value.trim(),
+
+          profile_waka_kurikulum: document.getElementById('admin-profile-waka-kurikulum').value.trim(),
+          profile_waka_kesiswaan: document.getElementById('admin-profile-waka-kesiswaan').value.trim(),
+          profile_waka_sarpras: document.getElementById('admin-profile-waka-sarpras').value.trim(),
+          profile_waka_humas: document.getElementById('admin-profile-waka-humas').value.trim(),
+
+          profile_sejarah: document.getElementById('admin-profile-sejarah').value.trim(),
+          profile_muassis: document.getElementById('admin-profile-muassis').value.trim(),
+          profile_fasilitas: document.getElementById('admin-profile-fasilitas').value.trim(),
+
+          profile_alamat: document.getElementById('admin-profile-alamat').value.trim(),
+          profile_maps_url: document.getElementById('admin-profile-maps-url').value.trim(),
+          profile_wa_sekretariat: document.getElementById('admin-profile-wa-sekretariat').value.trim()
+        };
+
+        // Jika user memilih file foto baru
+        const fileInput = document.getElementById('admin-profile-kepala-file');
+        const prevImg = document.getElementById('admin-profile-preview-kepala-img');
+        if (fileInput && fileInput.files && fileInput.files[0] && prevImg && prevImg.src && prevImg.src.startsWith('data:')) {
+          payload.file = {
+            name: fileInput.files[0].name,
+            mimeType: fileInput.files[0].type || 'image/jpeg',
+            base64: prevImg.src
+          };
+        }
+
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            password: getAdminPassword(),
+            action: 'saveProfile',
+            data: payload
+          })
+        });
+
+        const json = await res.json();
+        if (json && (json.status === 'success' || json.success)) {
+          if (json.data) {
+            adminProfileData = json.data;
+            localStorage.setItem('yasua_cached_profile', JSON.stringify(adminProfileData));
+            populateProfileForm(adminProfileData);
+          }
+          if (typeof showToast === 'function') {
+            showToast('Profil madrasah berhasil diperbarui di database Google Sheets!', 'success');
+          } else {
+            alert('Profil madrasah berhasil diperbarui!');
+          }
+        } else {
+          throw new Error((json && json.message) || 'Gagal menyimpan profil');
+        }
+      } catch(err) {
+        alert('Gagal menyimpan profil: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        if (icon) icon.className = 'fa-solid fa-floppy-disk';
+        if (text) text.textContent = 'Simpan Profil Madrasah';
+      }
+    }
+
+    window.switchProfileTab = switchProfileTab;
+    window.syncProfileLivePreview = syncProfileLivePreview;
+    window.previewAdminKepalaPhoto = previewAdminKepalaPhoto;
+    window.loadAdminProfile = loadAdminProfile;
+    window.handleAdminProfileSubmit = handleAdminProfileSubmit;
 
     // Render awal modul Jadwal & Seragam agar DOM siap seketika
     try {
